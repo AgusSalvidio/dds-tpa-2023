@@ -36,6 +36,10 @@ public class User {
     return username;
   }
 
+  private String password() {
+    return password;
+  }
+
   private UserDetails details() {
     return details;
   }
