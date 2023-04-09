@@ -18,4 +18,13 @@ public class UserDetails {
   public String email(){
       return this.email;
   }
+  public static UserDetails composedBy(String aName, String aLastname, String anEmail) throws Exception {
+      /*
+        Implemented this way because its needed an AssertionChecker class that will be implemented
+        in another issue later on. Also should be necesary to specify the field thats empty -asalvidio
+      */
+      if(aName.isEmpty() || aLastname.isEmpty() || anEmail.isEmpty())
+        throw new Exception("Los campos no pueden estar en blanco.");
+      return new UserDetails(aName,aLastname,anEmail);
+  }
 }

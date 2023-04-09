@@ -6,6 +6,16 @@ public class User {
   String password;
   UserDetails details;
 
+  public static User composedBy(String aUsername,String aPassword,UserDetails aUserDetails)throws Exception{
+    /*
+        Implemented this way because its needed an AssertionChecker class that will be implemented
+        in another issue later on. Also should be necesary to specify the field thats empty -asalvidio
+      */
+    if(aUsername.isEmpty() || aPassword.isEmpty())
+      throw new Exception("Los campos no pueden estar en blanco.");
+    return new User(aUsername,aPassword,aUserDetails);
+
+  }
   public User(String aUsername,String aPassword,UserDetails aUserDetails){
     this.username = aUsername;
     this.password = aPassword;
@@ -14,9 +24,6 @@ public class User {
 
   public String username(){
     return username;
-  }
-  public String password(){
-    return password;
   }
   private UserDetails details(){
     return details;
