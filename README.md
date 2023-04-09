@@ -5,6 +5,8 @@
 Service Status Monitoring of public transport and establishments support System for Communities with
 Reduced Mobility developed on Java.
 
+[![Unit Tests](https://github.com/dds-utn/2023-tpa-mi-no-grupo-15/actions/workflows/classroom.yml/badge.svg)](https://github.com/dds-utn/2023-tpa-mi-no-grupo-15/actions/workflows/classroom.yml/badge.svg)
+
 ## Quick links 🚀
 
 - [**Explore the docs**](docs/)
