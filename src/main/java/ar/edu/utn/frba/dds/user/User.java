@@ -1,40 +1,54 @@
 package ar.edu.utn.frba.dds.user;
-import ar.edu.utn.frba.dds.userDetails.UserDetails;
+
+import ar.edu.utn.frba.dds.userdetails.UserDetails;
 
 public class User {
   String username;
   String password;
   UserDetails details;
 
-  public static User composedBy(String aUsername,String aPassword,UserDetails aUserDetails)throws Exception{
+  /**
+   * Another instance creation method but can make assertions.
+   */
+  public static User composedBy(String username, String password, UserDetails userDetails)
+      throws Exception {
     /*
-        Implemented this way because its needed an AssertionChecker class that will be implemented
-        in another issue later on. Also should be necesary to specify the field thats empty -asalvidio
+        Implemented this way because its needed an AssertionChecker that will be implemented
+        in another issue later on. Also should be necessary to specify the field thats empty.
       */
-    if(aUsername.isEmpty() || aPassword.isEmpty())
+    if (username.isEmpty() || password.isEmpty()) {
       throw new Exception("Los campos no pueden estar en blanco.");
-    return new User(aUsername,aPassword,aUserDetails);
+    }
+    return new User(username, password, userDetails);
 
   }
-  public User(String aUsername,String aPassword,UserDetails aUserDetails){
-    this.username = aUsername;
-    this.password = aPassword;
-    this.details = aUserDetails;
+
+  /**
+   * User class composed with username,password.
+   */
+  public User(String username, String password, UserDetails userDetails) {
+    this.username = username;
+    this.password = password;
+    this.details = userDetails;
   }
 
-  public String username(){
+  public String username() {
     return username;
   }
-  private UserDetails details(){
+
+  private UserDetails details() {
     return details;
   }
-  public String name(){
+
+  public String name() {
     return this.details().name();
   }
-  public String lastname(){
+
+  public String lastname() {
     return this.details().lastname();
   }
-  public String email(){
+
+  public String email() {
     return this.details().email();
   }
 
