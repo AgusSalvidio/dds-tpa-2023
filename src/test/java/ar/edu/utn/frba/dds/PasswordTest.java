@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds;
 
 import static org.mockito.Mockito.*;
 
+import ar.edu.utn.frba.dds.passwordvalidator.NoRepeatingCharactersPasswordValidation;
 import ar.edu.utn.frba.dds.passwordvalidator.PasswordValidation;
 import ar.edu.utn.frba.dds.passwordvalidator.PasswordValidator;
 import ar.edu.utn.frba.dds.passwordvalidator.RarePasswordValidation;
@@ -25,6 +26,7 @@ public class PasswordTest {
     List<PasswordValidation> validations = new ArrayList<>();
     validations.add(new StrongPasswordValidation());
     validations.add(new RarePasswordValidation(new TopCommonPasswordsFileReader()));
+    validations.add(new NoRepeatingCharactersPasswordValidation());
 
     passwordValidator = new PasswordValidator(validations);
   }
