@@ -40,4 +40,9 @@ public class PasswordTest {
   public void passwordWithoutUpperCaseLetterIsNotStrongEnough() {
     doThrow(new RuntimeException("The password is not strong enough.")).when(passwordValidator).validateIfPasswordIsAllowed("ap2674#@");
   }
+
+  @Test
+  public void passwordWithoutSpecialCharacterIsNotStrongEnough() {
+    doThrow(new RuntimeException("The password is not strong enough.")).when(passwordValidator).validateIfPasswordIsAllowed("ap2674Pd");
+  }
 }
