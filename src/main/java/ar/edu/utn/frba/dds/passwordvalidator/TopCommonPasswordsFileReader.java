@@ -1,8 +1,10 @@
 package ar.edu.utn.frba.dds.passwordvalidator;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
 public class TopCommonPasswordsFileReader {
@@ -13,7 +15,7 @@ public class TopCommonPasswordsFileReader {
     BufferedReader buffer = null;
 
     try {
-      buffer = new BufferedReader(new FileReader(filePath));
+      buffer = new BufferedReader(new FileReader(filePath, StandardCharsets.UTF_8));
       String line = buffer.readLine();
 
       while (line != null) {
