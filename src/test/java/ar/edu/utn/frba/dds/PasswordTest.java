@@ -45,4 +45,9 @@ public class PasswordTest {
   public void passwordWithoutSpecialCharacterIsNotStrongEnough() {
     doThrow(new RuntimeException("The password is not strong enough.")).when(passwordValidator).validateIfPasswordIsAllowed("ap2674Pd");
   }
+
+  @Test
+  public void passwordWithLessThan8CharactersIsNotStrongEnough() {
+    doThrow(new RuntimeException("The password is not strong enough.")).when(passwordValidator).validateIfPasswordIsAllowed("ap26#P");
+  }
 }
