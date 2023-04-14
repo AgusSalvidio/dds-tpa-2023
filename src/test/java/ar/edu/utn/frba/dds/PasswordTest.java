@@ -35,4 +35,9 @@ public class PasswordTest {
   public void passwordIsInTheTop10000MostCommonPasswordsFile() {
     doThrow(new RuntimeException("The password is not strong enough.")).when(passwordValidator).validateIfPasswordIsAllowed("123456");
   }
+
+  @Test
+  public void passwordWithoutUpperCaseLetterIsNotStrongEnough() {
+    doThrow(new RuntimeException("The password is not strong enough.")).when(passwordValidator).validateIfPasswordIsAllowed("ap2674#@");
+  }
 }
