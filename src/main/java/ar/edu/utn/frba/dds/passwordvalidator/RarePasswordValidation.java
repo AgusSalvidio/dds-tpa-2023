@@ -1,9 +1,9 @@
-package ar.edu.utn.frba.dds.passwordValidator;
+package ar.edu.utn.frba.dds.passwordvalidator;
 
 import java.io.IOException;
 
 public class RarePasswordValidation implements PasswordValidation {
-  private TopCommonPasswordsFileReader passwordsFileReader;
+  private final TopCommonPasswordsFileReader passwordsFileReader;
 
   public RarePasswordValidation(TopCommonPasswordsFileReader passwordsFileReader) {
     this.passwordsFileReader = passwordsFileReader;

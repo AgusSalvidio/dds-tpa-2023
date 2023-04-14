@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.dds.passwordValidator;
+package ar.edu.utn.frba.dds.passwordvalidator;
 
 import java.util.List;
 

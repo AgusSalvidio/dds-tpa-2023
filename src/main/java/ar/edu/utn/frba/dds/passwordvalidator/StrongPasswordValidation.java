@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.dds.passwordValidator;
+package ar.edu.utn.frba.dds.passwordvalidator;
 
 public class StrongPasswordValidation implements PasswordValidation {
 

@@ -2,11 +2,11 @@ package ar.edu.utn.frba.dds;
 
 import static org.mockito.Mockito.*;
 
-import ar.edu.utn.frba.dds.passwordValidator.PasswordValidation;
-import ar.edu.utn.frba.dds.passwordValidator.PasswordValidator;
-import ar.edu.utn.frba.dds.passwordValidator.RarePasswordValidation;
-import ar.edu.utn.frba.dds.passwordValidator.StrongPasswordValidation;
-import ar.edu.utn.frba.dds.passwordValidator.TopCommonPasswordsFileReader;
+import ar.edu.utn.frba.dds.passwordvalidator.PasswordValidation;
+import ar.edu.utn.frba.dds.passwordvalidator.PasswordValidator;
+import ar.edu.utn.frba.dds.passwordvalidator.RarePasswordValidation;
+import ar.edu.utn.frba.dds.passwordvalidator.StrongPasswordValidation;
+import ar.edu.utn.frba.dds.passwordvalidator.TopCommonPasswordsFileReader;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
