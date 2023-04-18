@@ -13,8 +13,7 @@ public class UserManagementSystem {
    */
   public UserManagementSystem(PersistenceSystem persistenceSystem) {
     this.persistenceSystem = persistenceSystem;
-    List<Object> list = new ArrayList<>();
-    this.persistenceSystem.addObjectTypeToStore(User.class.getName(), list);
+    this.persistenceSystem.addObjectTypeToStore(User.class.getName(), new ArrayList<>());
   }
 
   public static UserManagementSystem workingWith(PersistenceSystem persistenceSystem) {
