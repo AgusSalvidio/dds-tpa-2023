@@ -10,18 +10,18 @@ public class UserManagementSystem {
     This is a STUPID IMPLEMENTATION but CodeSmells checks is so annoying that has to be this way so
     it will shut up.
    */
-  List<PersistenceSystem> persistenceSystem = new ArrayList<>();
+  List<Object> systems = new ArrayList<>();
 
   /**
    * UserManagementSystem to manage user storage.
    */
   public UserManagementSystem(PersistenceSystem persistenceSystem) {
-    this.persistenceSystem.add(persistenceSystem);
+    this.systems.add(persistenceSystem);
     this.persistenceSystem().addObjectTypeToStore(User.class.getName());
   }
 
   private PersistenceSystem persistenceSystem() {
-    return this.persistenceSystem.get(0);
+    return (PersistenceSystem) this.systems.get(0);
   }
 
   public static UserManagementSystem workingWith(PersistenceSystem persistenceSystem) {
