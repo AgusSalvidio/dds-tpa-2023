@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.persistencesystem;
 
 import ar.edu.utn.frba.dds.userdetails.UserDetails;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -11,16 +12,19 @@ public class PersistenceSystemTest {
   @Test
   @DisplayName("Create a simple PersistenceSystem with only a collection of Integers")
   public void createPersistenceSystemWithIntegersTest() {
+    String integerClassName = Integer.class.getName();
     PersistenceSystem persistenceSystem = new PersistenceSystem();
-    List<Object> integerList = new ArrayList<>();
-    integerList.add(1);
-    integerList.add(2);
-    integerList.add(4);
-    persistenceSystem.addObjectTypeToStore(Integer.class.getName(), integerList);
-    Object retrievedObject = persistenceSystem.objectsFrom(Integer.class.getName());
+
+    persistenceSystem.addObjectTypeToStore(integerClassName);
+
+    persistenceSystem.storeObjectTyped(integerClassName, 1);
+    persistenceSystem.storeObjectTyped(integerClassName, 4);
+    persistenceSystem.storeObjectTyped(integerClassName, 15);
+
+    Object retrievedObject = persistenceSystem.objectsFrom(integerClassName);
     List<Integer> obtainedList = (List<Integer>) retrievedObject;
 
-    Assertions.assertEquals(integerList, obtainedList);
+    Assertions.assertTrue(obtainedList.containsAll(new ArrayList<>(Arrays.asList(1, 4, 15))));
 
   }
 
@@ -30,18 +34,16 @@ public class PersistenceSystemTest {
     PersistenceSystem persistenceSystem = new PersistenceSystem();
     String integerClass = Integer.class.getName();
     String userDetailsClass = UserDetails.class.getName();
-    List<Object> integerList = new ArrayList<>();
-    integerList.add(1);
-    integerList.add(2);
-    integerList.add(4);
+    UserDetails userDetails = new UserDetails("Basura", "Intergalactica", "basuraintergalactica@gmail.com");
 
-    List<Object> userDetailsList = new ArrayList<>();
-    userDetailsList.add(new UserDetails("Juan", "Rodriguez", "juanrodriguez@gmail.com"));
-    userDetailsList.add(new UserDetails("Pepe", "Sand", "pepesand@gmail.com"));
-    userDetailsList.add(new UserDetails("Basura", "Intergalactica", "basuraintergalactica@gmail.com"));
+    persistenceSystem.addObjectTypeToStore(integerClass);
+    persistenceSystem.addObjectTypeToStore(userDetailsClass);
 
-    persistenceSystem.addObjectTypeToStore(integerClass, integerList);
-    persistenceSystem.addObjectTypeToStore(userDetailsClass, userDetailsList);
+    persistenceSystem.storeObjectTyped(integerClass, 1);
+    persistenceSystem.storeObjectTyped(integerClass, 4);
+    persistenceSystem.storeObjectTyped(integerClass, 15);
+
+    persistenceSystem.storeObjectTyped(userDetailsClass, userDetails);
 
     Object retrievedIntegerList = persistenceSystem.objectsFrom(integerClass);
     List<Integer> obtainedIntegerList = (List<Integer>) retrievedIntegerList;
@@ -49,8 +51,8 @@ public class PersistenceSystemTest {
     Object retrievedUserDetailsList = persistenceSystem.objectsFrom(userDetailsClass);
     List<UserDetails> obtainedUserDetailsList = (List<UserDetails>) retrievedUserDetailsList;
 
-    Assertions.assertEquals(integerList, obtainedIntegerList);
-    Assertions.assertEquals(userDetailsList, obtainedUserDetailsList);
+    Assertions.assertTrue(obtainedIntegerList.containsAll(new ArrayList<>(Arrays.asList(1, 4, 15))));
+    Assertions.assertTrue(obtainedUserDetailsList.contains(userDetails));
 
   }
 
