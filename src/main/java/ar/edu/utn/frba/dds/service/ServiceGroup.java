@@ -1,24 +1,17 @@
-package ar.edu.utn.frba.dds.publicservice;
+package ar.edu.utn.frba.dds.service;
 
-import ar.edu.utn.frba.dds.service.Service;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
-import lombok.Setter;
 
-public class Station {
-  @Setter
-  @Getter
-  private String name;
-  @Setter
-  @Getter
-  private Location location;
+public class ServiceGroup extends Service{
   @Getter
   private List<Service> services;
 
-  public Station() {
+  public ServiceGroup() {
     this.services = new ArrayList<>();
   }
+
   public void addNewService(Service newService) {
     this.services.add(newService);
   }
