@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.dds.userdetails;
+package ar.edu.utn.frba.dds.user;
 
 public class UserDetails {
   String name;

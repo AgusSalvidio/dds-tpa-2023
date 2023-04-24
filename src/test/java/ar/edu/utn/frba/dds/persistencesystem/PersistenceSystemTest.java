@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds.persistencesystem;
 
-import ar.edu.utn.frba.dds.userdetails.UserDetails;
+import ar.edu.utn.frba.dds.user.UserDetails;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

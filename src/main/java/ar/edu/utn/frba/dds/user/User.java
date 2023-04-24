@@ -1,7 +1,5 @@
 package ar.edu.utn.frba.dds.user;
 
-import ar.edu.utn.frba.dds.userdetails.UserDetails;
-
 public class User {
   String username;
   String password;
