@@ -23,14 +23,29 @@ public class PersistenceSystem {
     selectedStorageAssignment.store(anObject);
   }
 
+  public void removeObjectTyped(String anObjectClassName, Object anObject) {
+    StorageAssignment storageAssignment = this.storageAssignmentFor(anObjectClassName);
+    storageAssignment.remove(anObject);
+
+  }
+
+  public Object findObjectTyped(String anObjectClassName, Object anObject) {
+    List<Object> obtainedObject = this.objectsFrom(anObjectClassName);
+    return obtainedObject.get(obtainedObject.indexOf(anObject));
+
+  }
+
+
   /**
    * This is an object created to comply with the CodeSmells check.
    * Why is so irritating?
    */
   public StorageAssignment storageAssignmentFor(String anObjectClassName) {
     List<Object> obtainedStorageAssignmentList =
-        this.memoryStorage.stream().filter(storageAssignment -> storageAssignment.className()
-            .equals(anObjectClassName)).collect(Collectors.toList());
+        this.memoryStorage.stream()
+            .filter(storageAssignment -> storageAssignment.className()
+                .equals(anObjectClassName))
+            .collect(Collectors.toList());
     return (StorageAssignment) obtainedStorageAssignmentList.get(0);
   }
 

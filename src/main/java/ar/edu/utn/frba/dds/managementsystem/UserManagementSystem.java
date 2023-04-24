@@ -34,23 +34,25 @@ public class UserManagementSystem {
    * Should improve this later.
    */
   public User user(User anUser) {
-    Object obtainedUserList = this.persistenceSystem().objectsFrom(anUser.getClass().getName());
-    List<User> castedUserList = (List<User>) obtainedUserList;
-    return this.findIn(anUser, castedUserList);
+    return (User) this.persistenceSystem().findObjectTyped(anUser.getClass().getName(), anUser);
   }
 
-  private User findIn(User anUser, List<User> anUserList) {
-    return anUserList.get(anUserList.indexOf(anUser));
+  public List<Object> users() {
+    return this.persistenceSystem().objectsFrom(User.class.getName());
   }
 
   public void startManaging(User anUser) {
     this.persistenceSystem().storeObjectTyped(User.class.getName(), anUser);
   }
-  /*public void stopManaging(User anUser){
-    this.persistenceSystem.removeObjectTyped(this.getClass().getName(),anUser);
+
+  public void stopManaging(User anUser) {
+    this.persistenceSystem().removeObjectTyped(anUser.getClass().getName(), anUser);
   }
-  public void updateWith(User currentUser, User updatedUser){
-    this.persistenceSystem.updateObjectTypedWith(this.getClass().getName(),currentUser,updatedUser);
+
+  public void updateWith(User currentUser, User updatedUser) {
+    User obtainedUser = (User) this.persistenceSystem()
+        .findObjectTyped(currentUser.getClass().getName(), currentUser);
+    obtainedUser.synchronizeWith(updatedUser);
   }
-*/
+
 }

@@ -25,4 +25,8 @@ public class StorageAssignment {
     this.objectList.add(anObject);
   }
 
+  public void remove(Object anObject) {
+    this.objectList.remove(anObject);
+  }
+
 }

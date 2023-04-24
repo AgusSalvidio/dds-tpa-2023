@@ -32,6 +32,12 @@ public class User {
     this.details = userDetails;
   }
 
+  public void synchronizeWith(User anUpdatedUser) {
+    this.username = anUpdatedUser.username();
+    this.password = anUpdatedUser.password();
+    this.details = anUpdatedUser.details();
+  }
+
   public String username() {
     return username;
   }
