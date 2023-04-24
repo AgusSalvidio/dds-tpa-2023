@@ -12,9 +12,6 @@ public class UserManagementSystem {
    */
   List<Object> systems = new ArrayList<>();
 
-  /**
-   * UserManagementSystem to manage user storage.
-   */
   public UserManagementSystem(PersistenceSystem persistenceSystem) {
     this.systems.add(persistenceSystem);
     this.persistenceSystem().addObjectTypeToStore(User.class.getName());
@@ -28,11 +25,6 @@ public class UserManagementSystem {
     return new UserManagementSystem(persistenceSystem);
   }
 
-  /**
-   * This is weak implementation, could use some stream or others things....
-   * Also should add some check if the desire object is not found.
-   * Should improve this later.
-   */
   public User user(User anUser) {
     return (User) this.persistenceSystem().findObjectTyped(anUser.getClass().getName(), anUser);
   }

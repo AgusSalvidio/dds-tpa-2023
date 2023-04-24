@@ -7,9 +7,6 @@ public class User {
   String password;
   UserDetails details;
 
-  /**
-   * Another instance creation method but can make assertions.
-   */
   public static User composedBy(String username, String password, UserDetails userDetails)
       throws Exception {
     /*
@@ -23,9 +20,6 @@ public class User {
 
   }
 
-  /**
-   * User class composed with username,password.
-   */
   public User(String username, String password, UserDetails userDetails) {
     this.username = username;
     this.password = password;

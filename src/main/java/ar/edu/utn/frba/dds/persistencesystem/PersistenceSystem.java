@@ -15,9 +15,6 @@ public class PersistenceSystem {
     this.memoryStorage.add(new StorageAssignment(anObjectClassName));
   }
 
-  /**
-   * Storing different typed objects.
-   */
   public void storeObjectTyped(String anObjectClassName, Object anObject) {
     StorageAssignment selectedStorageAssignment = this.storageAssignmentFor(anObjectClassName);
     selectedStorageAssignment.store(anObject);
@@ -35,11 +32,6 @@ public class PersistenceSystem {
 
   }
 
-
-  /**
-   * This is an object created to comply with the CodeSmells check.
-   * Why is so irritating?
-   */
   public StorageAssignment storageAssignmentFor(String anObjectClassName) {
     List<Object> obtainedStorageAssignmentList =
         this.memoryStorage.stream()
