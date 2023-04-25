@@ -5,7 +5,7 @@ public class NoRepeatingCharactersPasswordValidation implements PasswordValidati
   public void validatePassword(String password) {
     if (
         !password.matches(
-            "^(?=([A-Za-z0-9])(?!.\\1))")) {
+            "^(?!.*(\\w)\\1+).+$")) {
       throw new RuntimeException("The password is not strong enough.");
     }
   }
