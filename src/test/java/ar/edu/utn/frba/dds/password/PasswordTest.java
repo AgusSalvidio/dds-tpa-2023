@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.dds;
+package ar.edu.utn.frba.dds.password;
 
 import ar.edu.utn.frba.dds.passwordvalidator.NoRepeatingCharactersPasswordValidation;
 import ar.edu.utn.frba.dds.passwordvalidator.PasswordValidation;
