@@ -1,34 +1,26 @@
 package ar.edu.utn.frba.dds.passwordvalidator;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.Objects;
+import java.util.Scanner;
 
 public class TopCommonPasswordsFileReader {
-  private static final String TOP10000 = "./top10000";
 
-  public void findPassword(String password) throws IOException {
-    String filePath = Objects.requireNonNull(getClass().getResource(TOP10000)).getFile();
-    BufferedReader buffer = null;
+  public boolean findPassword(String password) throws IOException {
 
-    try {
-      buffer = new BufferedReader(new FileReader(filePath, StandardCharsets.UTF_8));
-      String line = buffer.readLine();
+    File file = new File("src\\main\\resources\\top10000.txt");
 
-      while (line != null) {
-        if (line.equals(password)) {
-          throw new RuntimeException("The password is not strong enough.");
-        }
-        line = buffer.readLine();
+    Scanner scanner = new Scanner(file, StandardCharsets.UTF_8);
+    String line = scanner.nextLine();
+
+    while (scanner.hasNextLine()) {
+      if (line.equals(password)) {
+        return false;
       }
-    } catch (IOException error) {
-      throw new RuntimeException(
-          "An error occurred while reading the file. Message: " + error.getMessage());
-    } finally {
-      assert buffer != null;
-      buffer.close();
+      line = scanner.nextLine();
     }
+
+    return true;
   }
 }
