@@ -9,6 +9,10 @@ public class PasswordValidator {
     this.validations = validations;
   }
 
+  public List<PasswordValidation> validations() {
+    return this.validations;
+  }
+
   public boolean validateIfPasswordIsAllowed(String password) {
 
     return validations.stream().allMatch(validation -> validation.validatePassword(password));

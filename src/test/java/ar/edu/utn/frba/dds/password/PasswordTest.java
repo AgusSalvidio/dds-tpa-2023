@@ -15,11 +15,26 @@ import java.util.List;
 public class PasswordTest {
 
   @Test
-  @DisplayName("Passwords in the top 10000 most common password are not strong enough.")
-  public void passwordIsInTheTop10000MostCommonPasswordsFileTest() {
-    RarePasswordValidation rarePasswordValidation = new RarePasswordValidation(new TopCommonPasswordsFileReader());
+  @DisplayName("Create password validator.")
+  public void createPasswordValidatorTest() {
+    List<PasswordValidation> validations = new ArrayList<>();
+    validations.add(new StrongPasswordValidation());
+    validations.add(new RarePasswordValidation(new TopCommonPasswordsFileReader()));
+    validations.add(new NoRepeatingCharactersPasswordValidation());
 
-    Assertions.assertFalse(rarePasswordValidation.validatePassword("password"));
+    PasswordValidator validator = new PasswordValidator(validations);
+
+    Assertions.assertFalse(validator.validations().isEmpty());
+  }
+
+  @Test
+  @DisplayName("If file is not found an exception is thrown.")
+  public void fileNotFoundTest() {
+    RarePasswordValidation rarePasswordValidation =
+        new RarePasswordValidation(new TopCommonPasswordsFileReader());
+
+    Assertions.assertThrows(RuntimeException.class, () ->
+        rarePasswordValidation.validatePassword("password"));
   }
 
   @Test

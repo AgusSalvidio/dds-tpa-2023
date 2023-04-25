@@ -1,26 +1,31 @@
 package ar.edu.utn.frba.dds.passwordvalidator;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 public class TopCommonPasswordsFileReader {
 
   public boolean findPassword(String password) throws IOException {
 
-    File file = new File("src\\main\\resources\\top10000.txt");
+    File file = new File("top10000.txt");
+    if (!file.exists()) {
+      throw new FileNotFoundException();
+    } else {
+      String filePath = file.getAbsolutePath();
 
-    Scanner scanner = new Scanner(file, StandardCharsets.UTF_8);
-    String line = scanner.nextLine();
+      Scanner scanner = new Scanner(filePath);
+      String line = scanner.nextLine();
 
-    while (scanner.hasNextLine()) {
-      if (line.equals(password)) {
-        return false;
+      while (scanner.hasNextLine()) {
+        if (line.equals(password)) {
+          return false;
+        }
+        line = scanner.nextLine();
       }
-      line = scanner.nextLine();
-    }
 
-    return true;
+      return true;
+    }
   }
 }
