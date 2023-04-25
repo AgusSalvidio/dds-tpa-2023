@@ -77,7 +77,7 @@ public class CommunityManagementSystemTest {
     Community updatedCommunity = this.community();
     Service service = new Service("Transporte");
     community.addService(service);
-    User user = User.composedBy("ibarranetaYPF", "theBestPassword", this.userDetails());
+    User user = User.composedOf("ibarranetaYPF", "theBestPassword", this.userDetails());
     community.addModerator(user);
 
     communityManagementSystem.updateWith(community, updatedCommunity);

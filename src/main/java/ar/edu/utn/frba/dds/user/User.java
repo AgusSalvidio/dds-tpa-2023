@@ -5,7 +5,7 @@ public class User {
   String password;
   UserDetails details;
 
-  public static User composedBy(String username, String password, UserDetails userDetails)
+  public static User composedOf(String username, String password, UserDetails userDetails)
       throws Exception {
     /*
         Implemented this way because its needed an AssertionChecker that will be implemented

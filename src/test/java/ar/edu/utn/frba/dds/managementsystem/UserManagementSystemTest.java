@@ -26,7 +26,7 @@ public class UserManagementSystemTest {
   public void startManagingAnUserTest() throws Exception {
 
     UserManagementSystem userManagementSystem = UserManagementSystem.workingWith(this.persistenceSystem());
-    User user = User.composedBy("ibarranetaYPF", "theBestPassword", this.userDetails());
+    User user = User.composedOf("ibarranetaYPF", "theBestPassword", this.userDetails());
 
     userManagementSystem.startManaging(user);
 
@@ -39,7 +39,7 @@ public class UserManagementSystemTest {
   public void stopManagingAnUserTest() throws Exception {
 
     UserManagementSystem userManagementSystem = UserManagementSystem.workingWith(this.persistenceSystem());
-    User user = User.composedBy("ibarranetaYPF", "theBestPassword", this.userDetails());
+    User user = User.composedOf("ibarranetaYPF", "theBestPassword", this.userDetails());
 
     userManagementSystem.startManaging(user);
 
@@ -57,8 +57,8 @@ public class UserManagementSystemTest {
   public void updateAnUserTest() throws Exception {
 
     UserManagementSystem userManagementSystem = UserManagementSystem.workingWith(this.persistenceSystem());
-    User user = User.composedBy("ibarranetaYPF", "theBestPassword", this.userDetails());
-    User updatedUser = User.composedBy("almironeta", "theBestPassword", this.userDetails());
+    User user = User.composedOf("ibarranetaYPF", "theBestPassword", this.userDetails());
+    User updatedUser = User.composedOf("almironeta", "theBestPassword", this.userDetails());
     userManagementSystem.startManaging(user);
 
     Assertions.assertEquals(userManagementSystem.user(user), user);

@@ -14,7 +14,7 @@ public class UserTest {
   @DisplayName("Create an user")
   public void createUser() throws Exception {
 
-    User user = User.composedBy("ibarranetaYPF", "theBestPassword", this.userDetails());
+    User user = User.composedOf("ibarranetaYPF", "theBestPassword", this.userDetails());
 
     Assertions.assertEquals("ibarranetaYPF", user.username());
     Assertions.assertEquals("Hugo", user.name());
@@ -26,8 +26,8 @@ public class UserTest {
   @Test
   @DisplayName("When creating an user with any field empty should raise error")
   public void cannotCreateUserWhenAnyFieldIsEmpty() throws Exception {
-    Assertions.assertThrows(Exception.class, () -> User.composedBy("", "theBestPassword", this.userDetails()), "Los campos no pueden estar en blanco.");
-    Assertions.assertThrows(Exception.class, () -> User.composedBy("ibarranetaYPF", "", this.userDetails()), "Los campos no pueden estar en blanco.");
+    Assertions.assertThrows(Exception.class, () -> User.composedOf("", "theBestPassword", this.userDetails()), "Los campos no pueden estar en blanco.");
+    Assertions.assertThrows(Exception.class, () -> User.composedOf("ibarranetaYPF", "", this.userDetails()), "Los campos no pueden estar en blanco.");
   }
 
 }

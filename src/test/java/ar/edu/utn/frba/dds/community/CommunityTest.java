@@ -37,7 +37,7 @@ public class CommunityTest {
     Assertions.assertTrue(community.moderators().isEmpty());
     Assertions.assertTrue(community.services().isEmpty());
 
-    User user = User.composedBy("ibarranetaYPF", "theBestPassword", this.userDetails());
+    User user = User.composedOf("ibarranetaYPF", "theBestPassword", this.userDetails());
     community.addUser(user);
 
     Assertions.assertTrue(community.members().stream().anyMatch(member -> member.user().equals(user)));
@@ -56,7 +56,7 @@ public class CommunityTest {
     Assertions.assertTrue(community.moderators().isEmpty());
     Assertions.assertTrue(community.services().isEmpty());
 
-    User user = User.composedBy("ibarranetaYPF", "theBestPassword", this.userDetails());
+    User user = User.composedOf("ibarranetaYPF", "theBestPassword", this.userDetails());
     community.addModerator(user);
 
     Assertions.assertTrue(community.members().stream().anyMatch(member -> member.user().equals(user)));
@@ -94,7 +94,7 @@ public class CommunityTest {
     Assertions.assertTrue(community.moderators().isEmpty());
     Assertions.assertTrue(community.services().isEmpty());
 
-    User user = User.composedBy("ibarranetaYPF", "theBestPassword", this.userDetails());
+    User user = User.composedOf("ibarranetaYPF", "theBestPassword", this.userDetails());
     community.addUser(user);
 
     Assertions.assertTrue(community.members().stream().anyMatch(member -> member.user().equals(user)));

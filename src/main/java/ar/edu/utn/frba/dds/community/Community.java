@@ -16,11 +16,13 @@ public class Community {
         .collect(Collectors.toList());
   }
 
+  /*Made this way to pass codeSmells check*/
   public List<Service> services() {
     return this.services.stream()
         .collect(Collectors.toList());
   }
 
+  /*Made this way to pass codeSmells check*/
   public List<Member> moderators() {
     return this.members().stream()
         .filter(member -> member.role()
@@ -28,7 +30,7 @@ public class Community {
         .collect(Collectors.toList());
   }
 
-  private void removeMemberComposedBy(User anUser) {
+  private void removeMemberComposedOf(User anUser) {
     Member foundMember = this.members.stream()
         .filter(member -> member.user().equals(anUser))
         .collect(Collectors.toList()).get(0);
@@ -37,21 +39,21 @@ public class Community {
 
   }
 
-  private void addMemberComposedBy(User anUser, String role) {
-    Member newMember = Member.composedBy(anUser, role);
+  private void addMemberComposedOf(User anUser, String role) {
+    Member newMember = Member.composedOf(anUser, role);
     this.members.add(newMember);
   }
 
   public void addModerator(User anUser) {
-    this.addMemberComposedBy(anUser, "Moderador");
+    this.addMemberComposedOf(anUser, "Moderador");
   }
 
   public void addUser(User anUser) {
-    this.addMemberComposedBy(anUser, "Suscriptor");
+    this.addMemberComposedOf(anUser, "Suscriptor");
   }
 
   public void removeUser(User anUser) {
-    this.removeMemberComposedBy(anUser);
+    this.removeMemberComposedOf(anUser);
   }
 
   public void addService(Service service) {

@@ -11,7 +11,7 @@ public class AuthorizationRole {
     this.role = role;
   }
 
-  public static AuthorizationRole composedBy(User anUser, String role) {
+  public static AuthorizationRole composedOf(User anUser, String role) {
     return new AuthorizationRole(anUser, role);
   }
 

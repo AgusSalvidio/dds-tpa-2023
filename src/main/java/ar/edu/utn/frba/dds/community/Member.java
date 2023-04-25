@@ -11,7 +11,7 @@ public class Member {
     this.role = role;
   }
 
-  public static Member composedBy(User anUser, String role) {
+  public static Member composedOf(User anUser, String role) {
     return new Member(anUser, role);
   }
 

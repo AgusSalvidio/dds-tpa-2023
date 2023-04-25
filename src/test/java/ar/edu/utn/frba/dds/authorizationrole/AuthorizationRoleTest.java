@@ -16,8 +16,8 @@ public class AuthorizationRoleTest {
   @DisplayName("Create an authorization role")
   public void createAnAuthorizatioRoleTest() throws Exception {
 
-    User user = User.composedBy("ibarranetaYPF", "theBestPassword", this.userDetails());
-    AuthorizationRole authorizationRole = AuthorizationRole.composedBy(user, "Administrador");
+    User user = User.composedOf("ibarranetaYPF", "theBestPassword", this.userDetails());
+    AuthorizationRole authorizationRole = AuthorizationRole.composedOf(user, "Administrador");
 
     Assertions.assertEquals(authorizationRole.user(), user);
     Assertions.assertEquals(authorizationRole.role(), "Administrador");

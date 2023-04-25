@@ -16,8 +16,8 @@ public class MemberTest {
   @DisplayName("Create a member")
   public void createAMemberTest() throws Exception {
 
-    User user = User.composedBy("ibarranetaYPF", "theBestPassword", this.userDetails());
-    Member member = Member.composedBy(user, "Suscriptor");
+    User user = User.composedOf("ibarranetaYPF", "theBestPassword", this.userDetails());
+    Member member = Member.composedOf(user, "Suscriptor");
 
     Assertions.assertEquals(member.user(), user);
     Assertions.assertEquals(member.role(), "Suscriptor");
@@ -28,8 +28,8 @@ public class MemberTest {
   @DisplayName("Create a moderator member")
   public void createAModeratorMemberTest() throws Exception {
 
-    User user = User.composedBy("ibarranetaYPF", "theBestPassword", this.userDetails());
-    Member member = Member.composedBy(user, "Moderador");
+    User user = User.composedOf("ibarranetaYPF", "theBestPassword", this.userDetails());
+    Member member = Member.composedOf(user, "Moderador");
 
     Assertions.assertEquals(member.user(), user);
     Assertions.assertEquals(member.role(), "Moderador");

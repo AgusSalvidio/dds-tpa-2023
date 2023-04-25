@@ -23,7 +23,7 @@ public class UserDetails {
     return this.email;
   }
 
-  public static UserDetails composedBy(String name, String lastname, String anEmail)
+  public static UserDetails composedOf(String name, String lastname, String anEmail)
       throws Exception {
     /*
         Implemented this way because its needed an AssertionChecker class that will be implemented
