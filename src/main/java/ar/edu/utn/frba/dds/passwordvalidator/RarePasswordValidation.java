@@ -10,11 +10,13 @@ public class RarePasswordValidation implements PasswordValidation {
   }
 
   @Override
-  public void validatePassword(String password) {
+  public boolean validatePassword(String password) {
+
     try {
-      passwordsFileReader.findPassword(password);
-    } catch (IOException error) {
-      throw new RuntimeException("An error occurred while reading the file.");
+      return passwordsFileReader.findPassword(password);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
     }
+
   }
 }

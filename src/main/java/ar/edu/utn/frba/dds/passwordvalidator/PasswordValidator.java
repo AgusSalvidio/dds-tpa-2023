@@ -9,7 +9,8 @@ public class PasswordValidator {
     this.validations = validations;
   }
 
-  public void validateIfPasswordIsAllowed(String password) {
-    validations.forEach(validation -> validation.validatePassword(password));
+  public boolean validateIfPasswordIsAllowed(String password) {
+
+    return validations.stream().allMatch(validation -> validation.validatePassword(password));
   }
 }
