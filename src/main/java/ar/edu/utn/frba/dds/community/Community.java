@@ -28,6 +28,15 @@ public class Community {
         .collect(Collectors.toList());
   }
 
+  private void removeMemberComposedBy(User anUser) {
+    Member foundMember = this.members.stream()
+        .filter(member -> member.user().equals(anUser))
+        .collect(Collectors.toList()).get(0);
+
+    members.remove(foundMember);
+
+  }
+
   private void addMemberComposedBy(User anUser, String role) {
     Member newMember = Member.composedBy(anUser, role);
     this.members.add(newMember);
@@ -39,6 +48,10 @@ public class Community {
 
   public void addUser(User anUser) {
     this.addMemberComposedBy(anUser, "Suscriptor");
+  }
+
+  public void removeUser(User anUser) {
+    this.removeMemberComposedBy(anUser);
   }
 
   public void addService(Service service) {
