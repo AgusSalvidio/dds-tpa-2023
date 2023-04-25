@@ -1,8 +1,6 @@
 package ar.edu.utn.frba.dds.persistencesystem;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /*
   This implementation is not the best especially with all the casting made to store objects.
