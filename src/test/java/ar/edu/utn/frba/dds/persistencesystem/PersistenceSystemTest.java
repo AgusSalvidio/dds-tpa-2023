@@ -56,4 +56,31 @@ public class PersistenceSystemTest {
 
   }
 
+  @Test
+  @DisplayName("When PersistenceSystem has no objects and a system looks for an specific object, should raise error")
+  public void whenPersistenceSystemHasNoObjectsStoredAndAnySystemLooksForAnObjectShouldRaiseExceptionTest() {
+    PersistenceSystem persistenceSystem = new PersistenceSystem();
+    String integerClass = Integer.class.getName();
+
+    persistenceSystem.addObjectTypeToStore(integerClass);
+
+    Object retrievedIntegerList = persistenceSystem.objectsFrom(integerClass);
+    List<Integer> obtainedIntegerList = (List<Integer>) retrievedIntegerList;
+
+    Assertions.assertTrue(obtainedIntegerList.isEmpty());
+
+    Assertions.assertThrows(RuntimeException.class, () -> persistenceSystem.findObjectTyped(integerClass, 1));
+
+  }
+
+  @Test
+  @DisplayName("When PersistenceSystem does not have a StorageAssignment for a system and a system looks for an specific object, should raise error")
+  public void whenPersistenceSystemHasNoStorageAssignmentAndAnySystemLooksForAnObjectShouldRaiseExceptionTest() {
+    PersistenceSystem persistenceSystem = new PersistenceSystem();
+    String integerClass = Integer.class.getName();
+
+    Assertions.assertThrows(RuntimeException.class, () -> persistenceSystem.objectsFrom(integerClass));
+
+  }
+
 }
