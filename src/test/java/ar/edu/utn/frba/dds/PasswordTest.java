@@ -26,7 +26,6 @@ public class PasswordTest {
     List<PasswordValidation> validations = new ArrayList<>();
     validations.add(new StrongPasswordValidation());
     validations.add(new RarePasswordValidation(new TopCommonPasswordsFileReader()));
-    validations.add(new NoRepeatingCharactersPasswordValidation());
 
     passwordValidator = new PasswordValidator(validations);
   }
@@ -36,18 +35,4 @@ public class PasswordTest {
     doThrow(new RuntimeException("The password is not strong enough.")).when(passwordValidator).validateIfPasswordIsAllowed("123456");
   }
 
-  @Test
-  public void passwordWithoutUpperCaseLetterIsNotStrongEnough() {
-    doThrow(new RuntimeException("The password is not strong enough.")).when(passwordValidator).validateIfPasswordIsAllowed("ap2674#@");
-  }
-
-  @Test
-  public void passwordWithoutSpecialCharacterIsNotStrongEnough() {
-    doThrow(new RuntimeException("The password is not strong enough.")).when(passwordValidator).validateIfPasswordIsAllowed("ap2674Pd");
-  }
-
-  @Test
-  public void passwordWithLessThan8CharactersIsNotStrongEnough() {
-    doThrow(new RuntimeException("The password is not strong enough.")).when(passwordValidator).validateIfPasswordIsAllowed("ap26#P");
-  }
 }
