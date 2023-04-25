@@ -45,4 +45,9 @@ public class Community {
     this.services.add(service);
   }
 
+  public void synchronizeWith(Community anUpdatedCommunity) {
+    this.members = anUpdatedCommunity.members;
+    this.services = anUpdatedCommunity.services;
+  }
+
 }

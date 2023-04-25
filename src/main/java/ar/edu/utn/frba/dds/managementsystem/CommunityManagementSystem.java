@@ -6,7 +6,7 @@ import ar.edu.utn.frba.dds.user.User;
 import java.util.ArrayList;
 import java.util.List;
 
-/*public class CommunityManagementSystem implements ManagementSystem {
+public class CommunityManagementSystem implements ManagementSystem {
 
   List<Object> systems = new ArrayList<>();
 
@@ -19,7 +19,7 @@ import java.util.List;
     return "Sistema de Administración de Comunidades";
   }
 
-  /*private PersistenceSystem persistenceSystem() {
+  private PersistenceSystem persistenceSystem() {
     return (PersistenceSystem) this.systems.get(0);
   }
 
@@ -27,21 +27,29 @@ import java.util.List;
     return new CommunityManagementSystem(persistenceSystem);
   }
 
-  public List<Object> members() {
-    return this.persistenceSystem().objectsFrom(User.class.getName());
+  public void startManaging(Object community) {
+    this.persistenceSystem().storeObjectTyped(community.getClass().getName(), community);
   }
 
-  public void startManaging(Object anUser) {
-    this.persistenceSystem().storeObjectTyped(User.class.getName(), anUser);
+  public void stopManaging(Object community) {
+    this.persistenceSystem().removeObjectTyped(community.getClass().getName(), community);
   }
 
-  public void stopManaging(Object anUser) {
-    this.persistenceSystem().removeObjectTyped(anUser.getClass().getName(), anUser);
+  public Community community(Community community) {
+    return (Community) this.persistenceSystem()
+        .findObjectTyped(community.getClass().getName(), community);
   }
 
-  public void updateWith(Object currentUser, Object updatedUser) {
-    User obtainedUser = (User) this.persistenceSystem()
-        .findObjectTyped(currentUser.getClass().getName(), currentUser);
-    obtainedUser.synchronizeWith((User) updatedUser);
-  }*/
+  public List<Object> communities() {
+    return this.persistenceSystem().objectsFrom(Community.class.getName());
+  }
+
+  public void updateWith(Object currentCommunity, Object updatedCommunity) {
+    Community obtainedCommunity = (Community) this.persistenceSystem()
+        .findObjectTyped(currentCommunity.getClass().getName(), currentCommunity);
+    obtainedCommunity.synchronizeWith((Community) updatedCommunity);
+  }
+
+
+}
 
