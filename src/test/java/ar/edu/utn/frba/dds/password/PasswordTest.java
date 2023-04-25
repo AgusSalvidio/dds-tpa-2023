@@ -7,6 +7,7 @@ import ar.edu.utn.frba.dds.passwordvalidator.RarePasswordValidation;
 import ar.edu.utn.frba.dds.passwordvalidator.StrongPasswordValidation;
 import ar.edu.utn.frba.dds.passwordvalidator.TopCommonPasswordsFileReader;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,49 +15,56 @@ import java.util.List;
 public class PasswordTest {
 
   @Test
-  public void passwordIsInTheTop10000MostCommonPasswordsFile() {
+  @DisplayName("Passwords in the top 10000 most common password are not strong enough.")
+  public void passwordIsInTheTop10000MostCommonPasswordsFileTest() {
     RarePasswordValidation rarePasswordValidation = new RarePasswordValidation(new TopCommonPasswordsFileReader());
 
     Assertions.assertFalse(rarePasswordValidation.validatePassword("password"));
   }
 
   @Test
-  public void passwordWithoutUnderCaseLettersIsNotStrongEnough() {
+  @DisplayName("Password without under case letters is not strong enough.")
+  public void passwordWithoutUnderCaseLettersIsNotStrongEnoughTest() {
     StrongPasswordValidation strongPasswordValidation = new StrongPasswordValidation();
 
     Assertions.assertFalse(strongPasswordValidation.validatePassword("QPN|156#"));
   }
 
   @Test
-  public void passwordWithoutUpperCaseLettersIsNotStrongEnough() {
+  @DisplayName("Password without upper case letters is not strong enough.")
+  public void passwordWithoutUpperCaseLettersIsNotStrongEnoughTest() {
     StrongPasswordValidation strongPasswordValidation = new StrongPasswordValidation();
 
     Assertions.assertFalse(strongPasswordValidation.validatePassword("qpn|156#"));
   }
 
   @Test
-  public void passwordWithoutSpecialCharactersIsNotStrongEnough() {
+  @DisplayName("Password without special characters is not strong enough.")
+  public void passwordWithoutSpecialCharactersIsNotStrongEnoughTest() {
     StrongPasswordValidation strongPasswordValidation = new StrongPasswordValidation();
 
     Assertions.assertFalse(strongPasswordValidation.validatePassword("QpNx1560"));
   }
 
   @Test
-  public void passwordWithLessThan8CharactersIsNotStrongEnough() {
+  @DisplayName("Password with less than 8 characters is not strong enough.")
+  public void passwordWithLessThan8CharactersIsNotStrongEnoughTest() {
     StrongPasswordValidation strongPasswordValidation = new StrongPasswordValidation();
 
     Assertions.assertFalse(strongPasswordValidation.validatePassword("QpN|156"));
   }
 
   @Test
-  public void passwordWithWhiteSpacesIsNotStrongEnough() {
+  @DisplayName("Password with spaces is not strong enough.")
+  public void passwordWithWhiteSpacesIsNotStrongEnoughTest() {
     StrongPasswordValidation strongPasswordValidation = new StrongPasswordValidation();
 
     Assertions.assertFalse(strongPasswordValidation.validatePassword("QpN| 15#6"));
   }
 
   @Test
-  public void passwordWithRepeatingCharactersIsNotStrongEnough() {
+  @DisplayName("Password with consecutive repeating characters is not strong enough.")
+  public void passwordWithRepeatingCharactersIsNotStrongEnoughTest() {
     NoRepeatingCharactersPasswordValidation noRepeatingCharactersPasswordValidation =
         new NoRepeatingCharactersPasswordValidation();
 
@@ -64,7 +72,8 @@ public class PasswordTest {
   }
 
   @Test
-  public void passwordIsNotStrongEnough() {
+  @DisplayName("Password validator.")
+  public void passwordValidatorTest() {
     List<PasswordValidation> validations = new ArrayList<>();
     validations.add(new StrongPasswordValidation());
     validations.add(new RarePasswordValidation(new TopCommonPasswordsFileReader()));
@@ -76,13 +85,15 @@ public class PasswordTest {
   }
 
   @Test
-  public void passwordIsStrongEnough() {
+  @DisplayName("Strong password.")
+  public void strongPasswordTest() {
     StrongPasswordValidation strongPasswordValidation = new StrongPasswordValidation();
     Assertions.assertTrue(strongPasswordValidation.validatePassword("QpN|15#6"));
   }
 
   @Test
-  public void passwordWithoutRepeatingCharactersIsStrongEnough() {
+  @DisplayName("Password without consecutive repeating characters is strong enough.")
+  public void passwordWithoutRepeatingCharactersIsStrongEnoughTest() {
     NoRepeatingCharactersPasswordValidation noRepeatingCharactersPasswordValidation =
         new NoRepeatingCharactersPasswordValidation();
 
