@@ -5,7 +5,7 @@ import ar.edu.utn.frba.dds.user.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserManagementSystem {
+public class UserManagementSystem implements ManagementSystem {
   /*
     This is a STUPID IMPLEMENTATION but CodeSmells checks is so annoying that has to be this way so
     it will shut up.
@@ -15,6 +15,10 @@ public class UserManagementSystem {
   public UserManagementSystem(PersistenceSystem persistenceSystem) {
     this.systems.add(persistenceSystem);
     this.persistenceSystem().addObjectTypeToStore(User.class.getName());
+  }
+
+  public String typeDescription() {
+    return "Sistema de Administración de Usuarios";
   }
 
   private PersistenceSystem persistenceSystem() {
@@ -33,18 +37,18 @@ public class UserManagementSystem {
     return this.persistenceSystem().objectsFrom(User.class.getName());
   }
 
-  public void startManaging(User anUser) {
+  public void startManaging(Object anUser) {
     this.persistenceSystem().storeObjectTyped(User.class.getName(), anUser);
   }
 
-  public void stopManaging(User anUser) {
+  public void stopManaging(Object anUser) {
     this.persistenceSystem().removeObjectTyped(anUser.getClass().getName(), anUser);
   }
 
-  public void updateWith(User currentUser, User updatedUser) {
+  public void updateWith(Object currentUser, Object updatedUser) {
     User obtainedUser = (User) this.persistenceSystem()
         .findObjectTyped(currentUser.getClass().getName(), currentUser);
-    obtainedUser.synchronizeWith(updatedUser);
+    obtainedUser.synchronizeWith((User) updatedUser);
   }
 
 }
