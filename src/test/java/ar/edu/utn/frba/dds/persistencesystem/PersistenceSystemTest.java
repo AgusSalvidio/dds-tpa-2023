@@ -9,11 +9,19 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class PersistenceSystemTest {
+  private PersistenceSystem persistenceSystem() {
+    return this.memoryBasedPersistenceSystem();
+  }
+
+  private MemoryBasedPersistenceSystem memoryBasedPersistenceSystem() {
+    return new MemoryBasedPersistenceSystem();
+  }
+
   @Test
   @DisplayName("Create a simple PersistenceSystem with only a collection of Integers")
   public void createPersistenceSystemWithIntegersTest() {
     String integerClassName = Integer.class.getName();
-    PersistenceSystem persistenceSystem = new PersistenceSystem();
+    PersistenceSystem persistenceSystem = this.persistenceSystem();
 
     persistenceSystem.addObjectTypeToStore(integerClassName);
 
@@ -31,7 +39,7 @@ public class PersistenceSystemTest {
   @Test
   @DisplayName("Create a more complex PersistenceSystem with more types of objects")
   public void createPersistenceSystemWithMultipleTypeObjectsTest() {
-    PersistenceSystem persistenceSystem = new PersistenceSystem();
+    PersistenceSystem persistenceSystem = this.persistenceSystem();
     String integerClass = Integer.class.getName();
     String userDetailsClass = UserDetails.class.getName();
     UserDetails userDetails = new UserDetails("Basura", "Intergalactica", "basuraintergalactica@gmail.com");
@@ -59,7 +67,7 @@ public class PersistenceSystemTest {
   @Test
   @DisplayName("When PersistenceSystem has no objects and a system looks for an specific object, should raise error")
   public void whenPersistenceSystemHasNoObjectsStoredAndAnySystemLooksForAnObjectShouldRaiseExceptionTest() {
-    PersistenceSystem persistenceSystem = new PersistenceSystem();
+    PersistenceSystem persistenceSystem = this.persistenceSystem();
     String integerClass = Integer.class.getName();
 
     persistenceSystem.addObjectTypeToStore(integerClass);
@@ -76,7 +84,7 @@ public class PersistenceSystemTest {
   @Test
   @DisplayName("When PersistenceSystem does not have a StorageAssignment for a system and a system looks for an specific object, should raise error")
   public void whenPersistenceSystemHasNoStorageAssignmentAndAnySystemLooksForAnObjectShouldRaiseExceptionTest() {
-    PersistenceSystem persistenceSystem = new PersistenceSystem();
+    PersistenceSystem persistenceSystem = this.persistenceSystem();
     String integerClass = Integer.class.getName();
 
     Assertions.assertThrows(RuntimeException.class, () -> persistenceSystem.objectsFrom(integerClass));
