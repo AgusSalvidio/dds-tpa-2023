@@ -1,13 +1,10 @@
-package ar.edu.utn.frba.dds.userdetails;
+package ar.edu.utn.frba.dds.user;
 
 public class UserDetails {
   String name;
   String lastname;
   String email;
 
-  /**
-   * UserDetails contains more info for the User.
-   */
   public UserDetails(String name, String lastname, String anEmail) {
     this.name = name;
     this.lastname = lastname;
@@ -26,9 +23,6 @@ public class UserDetails {
     return this.email;
   }
 
-  /**
-   * Another instance creation method but can make assertions.
-   */
   public static UserDetails composedBy(String name, String lastname, String anEmail)
       throws Exception {
     /*

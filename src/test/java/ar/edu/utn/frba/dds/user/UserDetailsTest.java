@@ -1,5 +1,6 @@
-package ar.edu.utn.frba.dds.userdetails;
+package ar.edu.utn.frba.dds.user;
 
+import ar.edu.utn.frba.dds.user.UserDetails;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 

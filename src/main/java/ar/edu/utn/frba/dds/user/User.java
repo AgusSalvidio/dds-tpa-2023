@@ -1,15 +1,10 @@
 package ar.edu.utn.frba.dds.user;
 
-import ar.edu.utn.frba.dds.userdetails.UserDetails;
-
 public class User {
   String username;
   String password;
   UserDetails details;
 
-  /**
-   * Another instance creation method but can make assertions.
-   */
   public static User composedBy(String username, String password, UserDetails userDetails)
       throws Exception {
     /*
@@ -23,13 +18,16 @@ public class User {
 
   }
 
-  /**
-   * User class composed with username,password.
-   */
   public User(String username, String password, UserDetails userDetails) {
     this.username = username;
     this.password = password;
     this.details = userDetails;
+  }
+
+  public void synchronizeWith(User anUpdatedUser) {
+    this.username = anUpdatedUser.username();
+    this.password = anUpdatedUser.password();
+    this.details = anUpdatedUser.details();
   }
 
   public String username() {
