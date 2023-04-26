@@ -18,6 +18,7 @@ public abstract class Service {
   public Service() {
     this.sections = new ArrayList<>();
   }
+
   public void addNewSection(Section newSection) {
     this.sections.add(newSection);
   }

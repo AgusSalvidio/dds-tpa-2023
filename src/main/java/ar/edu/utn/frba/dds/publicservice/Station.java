@@ -19,6 +19,7 @@ public class Station {
   public Station() {
     this.services = new ArrayList<>();
   }
+
   public void addNewService(Service newService) {
     this.services.add(newService);
   }

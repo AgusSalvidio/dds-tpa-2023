@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ServiceGroup extends Service{
+public class ServiceGroup extends Service {
   private List<Service> services;
 
   public ServiceGroup() {
