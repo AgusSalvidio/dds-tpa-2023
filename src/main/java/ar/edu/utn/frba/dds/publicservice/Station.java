@@ -13,7 +13,7 @@ public class Station {
   private String name;
   @Setter
   @Getter
-  private Location location;
+  public Location location;
   private List<Service> services;
 
   public Station() {
