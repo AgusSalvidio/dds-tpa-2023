@@ -1,13 +1,7 @@
 package ar.edu.utn.frba.dds.publicservice;
 
-import ar.edu.utn.frba.dds.service.Elevator;
-import ar.edu.utn.frba.dds.service.Section;
-import ar.edu.utn.frba.dds.service.Service;
-import ar.edu.utn.frba.dds.service.ServiceGroup;
-import ar.edu.utn.frba.dds.service.Toilet;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class TransportLineTest {
