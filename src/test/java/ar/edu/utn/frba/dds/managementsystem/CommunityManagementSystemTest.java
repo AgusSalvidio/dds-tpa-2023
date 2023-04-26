@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.managementsystem;
 import ar.edu.utn.frba.dds.community.Community;
 import ar.edu.utn.frba.dds.persistencesystem.MemoryBasedPersistenceSystem;
 import ar.edu.utn.frba.dds.persistencesystem.PersistenceSystem;
+import ar.edu.utn.frba.dds.publicservice.TransportLine;
 import ar.edu.utn.frba.dds.service.Service;
 import ar.edu.utn.frba.dds.user.User;
 import ar.edu.utn.frba.dds.user.UserDetails;
@@ -75,8 +76,8 @@ public class CommunityManagementSystemTest {
     Assertions.assertEquals(communityManagementSystem.community(community), community);
 
     Community updatedCommunity = this.community();
-    Service service = new Service("Transporte");
-    community.addService(service);
+    TransportLine transportLine = new TransportLine();
+    community.addTransportLine(transportLine);
     User user = User.composedOf("ibarranetaYPF", "theBestPassword", this.userDetails());
     community.addModerator(user);
 

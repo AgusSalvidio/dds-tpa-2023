@@ -22,4 +22,3 @@ public abstract class Service {
     this.sections.add(newSection);
   }
 }
->>>>>>> 1-2-8-add-transportation-service-and-station-class

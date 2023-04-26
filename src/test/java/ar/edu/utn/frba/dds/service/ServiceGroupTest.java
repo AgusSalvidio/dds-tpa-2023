@@ -1,6 +1,5 @@
 package ar.edu.utn.frba.dds.service;
 
-import ar.edu.utn.frba.dds.service.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,6 +18,8 @@ public class ServiceGroupTest {
 
     @BeforeEach
     public void init() {
+        this.serviceGroup = new ServiceGroup();
+
         this.elevator = new Elevator();
         this.elevator.setName("Ascensor Principal");
         this.sectionElevatorA = new Section();

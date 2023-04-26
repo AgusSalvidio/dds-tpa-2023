@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.community;
 
+import ar.edu.utn.frba.dds.publicservice.TransportLine;
 import ar.edu.utn.frba.dds.service.Service;
 import ar.edu.utn.frba.dds.user.User;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.stream.Collectors;
 public class Community {
   List<Member> members = new ArrayList<>();
   List<Service> services = new ArrayList<>();
+  List<TransportLine> transportLines = new ArrayList<>();
 
   public List<Member> members() {
     return this.members.stream()
@@ -19,6 +21,11 @@ public class Community {
   /*Made this way to pass codeSmells check*/
   public List<Service> services() {
     return this.services.stream()
+        .collect(Collectors.toList());
+  }
+
+  public List<TransportLine> transportLines() {
+    return this.transportLines.stream()
         .collect(Collectors.toList());
   }
 
@@ -58,6 +65,10 @@ public class Community {
 
   public void addService(Service service) {
     this.services.add(service);
+  }
+
+  public void addTransportLine(TransportLine transportLine) {
+    this.transportLines.add(transportLine);
   }
 
   public void synchronizeWith(Community anUpdatedCommunity) {

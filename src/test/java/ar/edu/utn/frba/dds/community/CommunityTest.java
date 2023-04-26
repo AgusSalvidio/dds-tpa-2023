@@ -1,6 +1,9 @@
 package ar.edu.utn.frba.dds.community;
 
+import ar.edu.utn.frba.dds.publicservice.TransportLine;
+import ar.edu.utn.frba.dds.service.Elevator;
 import ar.edu.utn.frba.dds.service.Service;
+import ar.edu.utn.frba.dds.service.Toilet;
 import ar.edu.utn.frba.dds.user.User;
 import ar.edu.utn.frba.dds.user.UserDetails;
 import java.util.ArrayList;
@@ -66,8 +69,8 @@ public class CommunityTest {
   }
 
   @Test
-  @DisplayName("Add a service to community")
-  public void addServiceToCommunityTest() throws Exception {
+  @DisplayName("Add a transport line to community")
+  public void addTransportLineToCommunityTest() throws Exception {
 
     Community community = new Community();
 
@@ -75,13 +78,13 @@ public class CommunityTest {
     Assertions.assertTrue(community.moderators().isEmpty());
     Assertions.assertTrue(community.services().isEmpty());
 
-    Service service = new Service("Transporte");
-    community.addService(service);
+    TransportLine transportLine = new TransportLine();
+    community.addTransportLine(transportLine);
+
 
     Assertions.assertTrue(community.members().isEmpty());
     Assertions.assertTrue(community.moderators().isEmpty());
-    Assertions.assertTrue(community.services().contains(service));
-
+    Assertions.assertTrue(community.transportLines().contains(transportLine));
   }
 
   @Test
@@ -119,15 +122,13 @@ public class CommunityTest {
     Assertions.assertTrue(community.moderators().isEmpty());
     Assertions.assertTrue(community.services().isEmpty());
 
-    Service service = new Service("Transporte");
-
-    community.addService(service);
-
-    Assertions.assertTrue(community.services().contains(service));
+    TransportLine transportLine = new TransportLine();
+    community.addTransportLine(transportLine);
+    Assertions.assertTrue(community.transportLines().contains(transportLine));
 
     Community updtedCommunity = new Community();
-    Service anotherService = new Service("Baños");
-    Service otherService = new Service("Local");
+    Service anotherService = new Toilet();
+    Service otherService = new Elevator();
 
     updtedCommunity.addService(anotherService);
     updtedCommunity.addService(otherService);
