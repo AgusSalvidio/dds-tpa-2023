@@ -9,20 +9,20 @@ import lombok.Setter;
 public class TransportLine {
   @Setter
   @Getter
-  private String name;
+  public String name;
   @Setter
   @Getter
-  private TransportType type;
+  public TransportType type;
   @Setter
   @Getter
-  private Station departure;
+  public Station departure;
   @Setter
   @Getter
-  private Station arrival;
+  public Station arrival;
   private List<Station> stations;
   @Setter
   @Getter
-  private Direction direction;
+  public Direction direction;
 
   public TransportLine() {
     this.stations = new ArrayList();
