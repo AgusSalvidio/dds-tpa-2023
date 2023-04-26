@@ -1,16 +1,25 @@
 package ar.edu.utn.frba.dds.service;
 
-/*This is a simple implementation to complain Check Code
- * Full Implementation in another branch*/
-public class Service {
-  String name;
+import java.util.ArrayList;
+import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
 
-  public Service(String name) {
-    this.name = name;
+public abstract class Service {
+  @Setter
+  @Getter
+  private String name;
+  @Setter
+  @Getter
+  private Boolean inService;
+  @Getter
+  private List<Section> sections;
+
+  public Service() {
+    this.sections = new ArrayList<>();
   }
-
-  public String name() {
-    return this.name;
+  public void addNewSection(Section newSection) {
+    this.sections.add(newSection);
   }
-
 }
+>>>>>>> 1-2-8-add-transportation-service-and-station-class
