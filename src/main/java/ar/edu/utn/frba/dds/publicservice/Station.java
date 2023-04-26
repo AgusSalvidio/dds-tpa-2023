@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.publicservice;
 import ar.edu.utn.frba.dds.service.Service;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,7 +14,6 @@ public class Station {
   @Setter
   @Getter
   private Location location;
-  @Getter
   private List<Service> services;
 
   public Station() {
@@ -21,5 +21,9 @@ public class Station {
   }
   public void addNewService(Service newService) {
     this.services.add(newService);
+  }
+
+  public List<Service> getServices() {
+    return this.services.stream().collect(Collectors.toList());
   }
 }

@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.publicservice;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,7 +19,6 @@ public class TransportLine {
   @Setter
   @Getter
   private Station arrival;
-  @Getter
   private List<Station> stations;
   @Setter
   @Getter
@@ -30,5 +30,9 @@ public class TransportLine {
 
   public void addNewStation(Station newStation) {
     this.stations.add(newStation);
+  }
+
+  public List<Station> getStations() {
+    return this.stations.stream().collect(Collectors.toList());
   }
 }
