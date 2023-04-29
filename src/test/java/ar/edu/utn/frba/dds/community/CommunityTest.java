@@ -6,8 +6,10 @@ import ar.edu.utn.frba.dds.service.Service;
 import ar.edu.utn.frba.dds.service.Toilet;
 import ar.edu.utn.frba.dds.user.User;
 import ar.edu.utn.frba.dds.user.UserDetails;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,21 +22,31 @@ public class CommunityTest {
 
   @Test
   @DisplayName("Create a community")
-  public void createACommunityTest() {
+  public void createACommunityTest() throws Exception {
 
-    Community community = new Community();
+    Community community = Community.composedOf("Comunidad 1", "Comunidad de prueba");
 
+    Assertions.assertEquals(community.name(), "Comunidad 1");
+    Assertions.assertEquals(community.description(), "Comunidad de prueba");
     Assertions.assertTrue(community.members().isEmpty());
     Assertions.assertTrue(community.moderators().isEmpty());
     Assertions.assertTrue(community.services().isEmpty());
+    Assertions.assertTrue(community.services().isEmpty());
 
+  }
+
+  @Test
+  @DisplayName("When creating a community with any field empty should raise error")
+  public void cannotCreateCommunityWhenAnyFieldIsEmpty() throws Exception {
+    Assertions.assertThrows(Exception.class, () -> Community.composedOf("", "Comunidad de prueba"), "Los campos no pueden estar en blanco.");
+    Assertions.assertThrows(Exception.class, () -> Community.composedOf("Comunidad 1", ""), "Los campos no pueden estar en blanco.");
   }
 
   @Test
   @DisplayName("Add a member to community")
   public void addMemberToCommunityTest() throws Exception {
 
-    Community community = new Community();
+    Community community = Community.composedOf("Comunidad 1", "Comunidad de prueba");
 
     Assertions.assertTrue(community.members().isEmpty());
     Assertions.assertTrue(community.moderators().isEmpty());
@@ -53,7 +65,7 @@ public class CommunityTest {
   @DisplayName("Add a moderator member to community")
   public void addModeratorToCommunityTest() throws Exception {
 
-    Community community = new Community();
+    Community community = Community.composedOf("Comunidad 1", "Comunidad de prueba");
 
     Assertions.assertTrue(community.members().isEmpty());
     Assertions.assertTrue(community.moderators().isEmpty());
@@ -72,7 +84,7 @@ public class CommunityTest {
   @DisplayName("Add a transport line to community")
   public void addTransportLineToCommunityTest() throws Exception {
 
-    Community community = new Community();
+    Community community = Community.composedOf("Comunidad 1", "Comunidad de prueba");
 
     Assertions.assertTrue(community.members().isEmpty());
     Assertions.assertTrue(community.moderators().isEmpty());
@@ -91,7 +103,7 @@ public class CommunityTest {
   @DisplayName("Remove member from community")
   public void removeMemberCommunityTest() throws Exception {
 
-    Community community = new Community();
+    Community community = Community.composedOf("Comunidad 1", "Comunidad de prueba");
 
     Assertions.assertTrue(community.members().isEmpty());
     Assertions.assertTrue(community.moderators().isEmpty());
@@ -114,9 +126,9 @@ public class CommunityTest {
 
   @Test
   @DisplayName("Update community services")
-  public void updateCommunityServicesTest() {
+  public void updateCommunityServicesTest() throws Exception {
 
-    Community community = new Community();
+    Community community = Community.composedOf("Comunidad 1", "Comunidad de prueba");
 
     Assertions.assertTrue(community.members().isEmpty());
     Assertions.assertTrue(community.moderators().isEmpty());
@@ -126,7 +138,7 @@ public class CommunityTest {
     community.addTransportLine(transportLine);
     Assertions.assertTrue(community.transportLines().contains(transportLine));
 
-    Community updtedCommunity = new Community();
+    Community updtedCommunity = Community.composedOf("Comunidad 2", "Comunidad de prueba");
     Service anotherService = new Toilet();
     Service otherService = new Elevator();
 
