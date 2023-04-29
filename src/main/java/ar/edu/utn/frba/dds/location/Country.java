@@ -1,10 +1,10 @@
-package ar.edu.utn.frba.dds.publicservice;
+package ar.edu.utn.frba.dds.location;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class TransportType {
+public class Country {
   public String name;
 }

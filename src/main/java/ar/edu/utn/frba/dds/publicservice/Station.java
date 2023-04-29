@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.publicservice;
 
+import ar.edu.utn.frba.dds.location.Location;
 import ar.edu.utn.frba.dds.service.Service;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,11 +11,11 @@ import lombok.Setter;
 public class Station {
   @Setter
   @Getter
-  private String name;
+  public String name;
   @Setter
   @Getter
   public Location location;
-  private List<Service> services;
+  public List<Service> services;
 
   public Station() {
     this.services = new ArrayList<>();

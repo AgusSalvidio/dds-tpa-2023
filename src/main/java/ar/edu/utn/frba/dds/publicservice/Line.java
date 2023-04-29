@@ -5,6 +5,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class TransportType {
+public class Line {
   public String name;
 }

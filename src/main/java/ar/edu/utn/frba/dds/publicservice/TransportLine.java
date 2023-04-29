@@ -9,7 +9,7 @@ import lombok.Setter;
 public class TransportLine {
   @Setter
   @Getter
-  public String name;
+  public Line line;
   @Setter
   @Getter
   public TransportType type;
@@ -19,7 +19,7 @@ public class TransportLine {
   @Setter
   @Getter
   public Station arrival;
-  private List<Station> stations;
+  public List<Station> stations;
   @Setter
   @Getter
   public Direction direction;

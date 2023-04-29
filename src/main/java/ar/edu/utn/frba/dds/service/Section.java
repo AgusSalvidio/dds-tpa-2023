@@ -6,5 +6,5 @@ import lombok.Setter;
 public class Section {
   @Setter
   @Getter
-  private String name;
+  public String name;
 }
