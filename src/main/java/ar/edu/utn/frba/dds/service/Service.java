@@ -9,11 +9,14 @@ import lombok.Setter;
 public abstract class Service {
   @Setter
   @Getter
-  private String name;
+  public String name;
   @Setter
   @Getter
-  private Boolean inService;
-  private List<Section> sections;
+  public String description;
+  @Setter
+  @Getter
+  public Boolean inService;
+  public List<Section> sections;
 
   public Service() {
     this.sections = new ArrayList<>();
