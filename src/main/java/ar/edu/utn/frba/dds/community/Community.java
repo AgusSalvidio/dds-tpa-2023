@@ -9,9 +9,38 @@ import java.util.stream.Collectors;
 
 
 public class Community {
+
+  String name;
+  String description;
   List<Member> members = new ArrayList<>();
   List<Service> services = new ArrayList<>();
   List<TransportLine> transportLines = new ArrayList<>();
+
+  public static Community composedOf(String name, String description)
+      throws Exception {
+    /*
+        Implemented this way because its needed an AssertionChecker that will be implemented
+        in another issue later on. Also should be necessary to specify the field thats empty.
+      */
+    if (name.isEmpty() || description.isEmpty()) {
+      throw new Exception("Los campos no pueden estar en blanco.");
+    }
+    return new Community(name, description);
+
+  }
+
+  public Community(String name, String description) {
+    this.name = name;
+    this.description = description;
+  }
+
+  public String name() {
+    return this.name;
+  }
+
+  public String description() {
+    return this.description;
+  }
 
   public List<Member> members() {
     return this.members.stream()

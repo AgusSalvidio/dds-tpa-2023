@@ -24,13 +24,13 @@ public class CommunityManagementSystemTest {
     return new MemoryBasedPersistenceSystem();
   }
 
-  private Community community() {
-    return new Community();
+  private Community community() throws Exception {
+    return Community.composedOf("Comunidad 1", "Comunidad de prueba");
   }
 
   @Test
   @DisplayName("Start managing a community")
-  public void startManagingACommunityTest() {
+  public void startManagingACommunityTest() throws Exception{
 
     CommunityManagementSystem communityManagementSystem = CommunityManagementSystem.workingWith(this.persistenceSystem());
     Community community = this.community();
@@ -45,7 +45,7 @@ public class CommunityManagementSystemTest {
 
   @Test
   @DisplayName("Stop managing a community")
-  public void stopManagingACommunityTest() {
+  public void stopManagingACommunityTest() throws Exception{
 
     CommunityManagementSystem communityManagementSystem = CommunityManagementSystem.workingWith(this.persistenceSystem());
     Community community = this.community();
