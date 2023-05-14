@@ -132,5 +132,37 @@ public class UserPreferencesTest {
 
   }
 
+  @Test
+  @DisplayName("Add location to user preferences")
+  public void addLocationToUserPreferences() {
+    UserPreferences userPreferences = new UserPreferences();
+    Location location = this.location();
+
+    Assertions.assertTrue(userPreferences.services().isEmpty());
+    Assertions.assertTrue(userPreferences.transports().isEmpty());
+    Assertions.assertTrue(userPreferences.locations().isEmpty());
+
+    userPreferences.addLocation(location);
+
+    Assertions.assertTrue(userPreferences.locations().contains(location));
+  }
+
+  @Test
+  @DisplayName("Remove location to user preferences")
+  public void removeLocationToUserPreferences() {
+    UserPreferences userPreferences = new UserPreferences();
+    Location location = this.location();
+
+    Assertions.assertTrue(userPreferences.services().isEmpty());
+    Assertions.assertTrue(userPreferences.transports().isEmpty());
+    Assertions.assertTrue(userPreferences.locations().isEmpty());
+
+    userPreferences.addLocation(location);
+
+    Assertions.assertTrue(userPreferences.locations().contains(location));
+
+    userPreferences.removeLocation(location);
+    Assertions.assertTrue(userPreferences.locations().isEmpty());
+  }
 
 }

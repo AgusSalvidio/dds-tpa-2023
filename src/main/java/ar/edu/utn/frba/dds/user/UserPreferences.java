@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.user;
 
+import ar.edu.utn.frba.dds.location.Location;
 import ar.edu.utn.frba.dds.publicservice.TransportLine;
 import ar.edu.utn.frba.dds.service.Service;
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.stream.Collectors;
 public class UserPreferences {
   List<Service> services = new ArrayList<>();
   List<TransportLine> transports = new ArrayList<>();
+  List<Location> locations = new ArrayList<>();
 
   public List<Service> services() {
     return this.services.stream()
@@ -39,6 +41,19 @@ public class UserPreferences {
   public void synchronizeWith(UserPreferences anUpdaterUserPreference) {
     this.services = anUpdaterUserPreference.services();
     this.transports = anUpdaterUserPreference.transports();
+  }
+
+  public List<Location> locations() {
+    return this.locations.stream()
+        .collect(Collectors.toList());
+  }
+
+  public void addLocation(Location location) {
+    this.locations.add(location);
+  }
+
+  public void removeLocation(Location location) {
+    this.locations.remove(location);
   }
 
 
