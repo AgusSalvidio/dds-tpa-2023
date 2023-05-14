@@ -1,14 +1,21 @@
 package ar.edu.utn.frba.dds.user;
 
+import ar.edu.utn.frba.dds.publicservice.TransportLine;
+import ar.edu.utn.frba.dds.service.Service;
+import java.util.List;
+
 public class UserDetails {
   String name;
   String lastname;
   String email;
 
+  UserPreferences userPreferences;
+
   public UserDetails(String name, String lastname, String anEmail) {
     this.name = name;
     this.lastname = lastname;
     this.email = anEmail;
+    this.userPreferences = new UserPreferences();
   }
 
   public String name() {
@@ -33,5 +40,13 @@ public class UserDetails {
       throw new Exception("Los campos no pueden estar en blanco.");
     }
     return new UserDetails(name, lastname, anEmail);
+  }
+
+  public List<Service> services() {
+    return this.userPreferences.services();
+  }
+
+  public List<TransportLine> transports() {
+    return this.userPreferences.transports();
   }
 }
