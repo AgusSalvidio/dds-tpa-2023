@@ -2,8 +2,7 @@ package ar.edu.utn.frba.dds.services.georef.entities;
 
 import java.util.List;
 
-public class ProvinceCollection {
-
+public class DepartmentCollection {
   /*
     We have to keep the API parameters names in spanish to avoid fails.
     However, implemented accessors in English to avoid becoming BuggyTrade. -asalvidio*/
@@ -12,7 +11,7 @@ public class ProvinceCollection {
   public int total;
   public Parameter parametros;
 
-  public List<Province> provincias;
+  public List<Department> departamentos;
 
   public int quantity() {
     return this.cantidad;
@@ -30,7 +29,7 @@ public class ProvinceCollection {
     return this.parametros;
   }
 
-  public List<Province> provinces() {
-    return this.provincias;
+  public List<Department> departments() {
+    return this.departamentos;
   }
 }
