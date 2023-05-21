@@ -10,6 +10,8 @@ public class ElevatorTest {
     private Elevator elevator;
     private Section sectionA;
     private Section sectionB;
+    private State stateA;
+    private State stateB;
 
     @BeforeEach
     public void init() {
@@ -19,6 +21,10 @@ public class ElevatorTest {
         this.sectionA.setName("Acceso Principal a Molinetes");
         this.sectionB = new Section();
         this.sectionB.setName("Acceso a Plataforma");
+        this.stateA = new State();
+        this.stateA.setName("IN_SERVICE");
+        this.stateB = new State();
+        this.stateB.setName("NOT_IN_SERVICE");
     }
 
     @Test
@@ -27,5 +33,19 @@ public class ElevatorTest {
         this.elevator.addNewSection(sectionA);
         this.elevator.addNewSection(sectionB);
         Assertions.assertEquals(2, this.elevator.getSections().size());
+    }
+
+    @Test
+    @DisplayName("Elevator is in service")
+    public void elevatorIsInService() {
+        this.elevator.setState(stateA);
+        Assertions.assertEquals("IN_SERVICE", elevator.getState().getName());
+    }
+
+    @Test
+    @DisplayName("Elevator is not in service")
+    public void elevatorIsNotInService() {
+        this.elevator.setState(stateB);
+        Assertions.assertEquals("NOT_IN_SERVICE", elevator.getState().getName());
     }
 }
