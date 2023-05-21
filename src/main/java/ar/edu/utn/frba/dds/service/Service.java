@@ -15,7 +15,7 @@ public abstract class Service {
   public String description;
   @Setter
   @Getter
-  public Boolean inService;
+  public State state;
   public List<Section> sections;
 
   public Service() {
