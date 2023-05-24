@@ -3,6 +3,8 @@ package ar.edu.utn.frba.dds.filereader;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.IOException;
+
 @Setter @Getter
 public class DataFile {
     FileSource fileSource;
@@ -13,8 +15,9 @@ public class DataFile {
         return;
     }
 
-    public boolean populate() {
-        //TODO
+    public boolean populate() throws IOException {
+        //Load File Data
+        //this.fileSource.Load();
         return true;
     }
 
