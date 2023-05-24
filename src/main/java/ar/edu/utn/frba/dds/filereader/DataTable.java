@@ -15,15 +15,4 @@ public class DataTable {
         //TODO
         return;
     }
-
-    public Boolean add(DataRow row) {
-        //TODO
-        return null;
-    }
-
-    public Boolean remove(Integer id) {
-        //TODO
-        return null;
-    }
-
 }

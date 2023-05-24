@@ -4,11 +4,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Setter @Getter
-public class FileParser {
+public class DataFile {
     FileSource fileSource;
     DataTable dataTable;
 
-    public FileParser() {
+    public DataFile() {
         //TODO
         return;
     }
