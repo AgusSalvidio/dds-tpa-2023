@@ -1,19 +1,19 @@
 package ar.edu.utn.frba.dds.managementsystem;
 
+import ar.edu.utn.frba.dds.addons.communitycreationaddon.CommunityCreationAddOn;
+import ar.edu.utn.frba.dds.addons.usercreationaddon.UserCreationAddOn;
 import ar.edu.utn.frba.dds.community.Community;
 import ar.edu.utn.frba.dds.persistencesystem.MemoryBasedPersistenceSystem;
 import ar.edu.utn.frba.dds.persistencesystem.PersistenceSystem;
 import ar.edu.utn.frba.dds.publicservice.TransportLine;
-import ar.edu.utn.frba.dds.service.Service;
 import ar.edu.utn.frba.dds.user.User;
-import ar.edu.utn.frba.dds.user.UserDetails;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class CommunityManagementSystemTest {
-  private UserDetails userDetails() {
-    return new UserDetails("Hugo", "Ibarra", "ibarraneta@gmail.com");
+  private User ibarraneta() throws Exception {
+    return new UserCreationAddOn().ibarraneta();
   }
 
   private PersistenceSystem persistenceSystem() {
@@ -25,12 +25,12 @@ public class CommunityManagementSystemTest {
   }
 
   private Community community() throws Exception {
-    return Community.composedOf("Comunidad 1", "Comunidad de prueba");
+    return new CommunityCreationAddOn().firstCommunity();
   }
 
   @Test
   @DisplayName("Start managing a community")
-  public void startManagingACommunityTest() throws Exception{
+  public void startManagingACommunityTest() throws Exception {
 
     CommunityManagementSystem communityManagementSystem = CommunityManagementSystem.workingWith(this.persistenceSystem());
     Community community = this.community();
@@ -45,7 +45,7 @@ public class CommunityManagementSystemTest {
 
   @Test
   @DisplayName("Stop managing a community")
-  public void stopManagingACommunityTest() throws Exception{
+  public void stopManagingACommunityTest() throws Exception {
 
     CommunityManagementSystem communityManagementSystem = CommunityManagementSystem.workingWith(this.persistenceSystem());
     Community community = this.community();
@@ -77,9 +77,8 @@ public class CommunityManagementSystemTest {
 
     Community updatedCommunity = this.community();
     TransportLine transportLine = new TransportLine();
-    community.addTransportLine(transportLine);
-    User user = User.composedOf("ibarranetaYPF", "theBestPassword", this.userDetails());
-    community.addModerator(user);
+
+    updatedCommunity.addTransportLine(transportLine);
 
     communityManagementSystem.updateWith(community, updatedCommunity);
 

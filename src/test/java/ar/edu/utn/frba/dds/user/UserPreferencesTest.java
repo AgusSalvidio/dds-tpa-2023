@@ -1,13 +1,10 @@
 package ar.edu.utn.frba.dds.user;
 
-import ar.edu.utn.frba.dds.location.City;
-import ar.edu.utn.frba.dds.location.Country;
-import ar.edu.utn.frba.dds.publicservice.Line;
-import ar.edu.utn.frba.dds.publicservice.Station;
+import ar.edu.utn.frba.dds.addons.locationcreationaddon.LocationCreationAddOn;
+import ar.edu.utn.frba.dds.addons.servicescreationaddon.publicservicecreationaddon.TransportLineCreationAddOn;
+import ar.edu.utn.frba.dds.addons.servicescreationaddon.servicecreationaddon.ElevatorCreationAddOn;
 import ar.edu.utn.frba.dds.publicservice.TransportLine;
-import ar.edu.utn.frba.dds.publicservice.TransportType;
 import ar.edu.utn.frba.dds.service.Elevator;
-import ar.edu.utn.frba.dds.service.Section;
 import ar.edu.utn.frba.dds.location.Location;
 
 import org.junit.jupiter.api.DisplayName;
@@ -15,69 +12,17 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
 public class UserPreferencesTest {
-  private Section section() {
-    Section section = new Section();
-    section.setName("Acceso Principal a Molinetes");
-    return section;
+
+  private Location location() {
+    return new LocationCreationAddOn().locationA();
   }
 
   private Elevator elevator() {
-    Elevator elevator = new Elevator();
-    elevator.setName("Ascensor Principal");
-    elevator.addNewSection(this.section());
-    return elevator;
-  }
-
-  private Line line() {
-    Line line = new Line();
-    line.setName("SUBTE H");
-    return line;
-  }
-
-  private TransportType transportType() {
-    TransportType transportType = new TransportType();
-    transportType.setName("SUBWAY");
-    return transportType;
-  }
-
-  private City city() {
-    City city = new City();
-    city.setName("CABA");
-    return city;
-  }
-
-  private Country country() {
-    Country country = new Country();
-    country.setName("ARGENTINA");
-    return country;
-  }
-
-  private Location location() {
-    Location location = new Location();
-    location.setStreet("AV. FIGUEROA ALCORTA Y AV. PUEYRREDON");
-    location.setLatitude(-34.58306);
-    location.setLongitude(-58.39106);
-    location.setCity(this.city());
-    location.setCountry(this.country());
-    return location;
-  }
-
-  private Station station() {
-    Station station = new Station();
-    station.setName("FACULTAD DE DERECHO");
-    station.setLocation(this.location());
-    return station;
+    return new ElevatorCreationAddOn().elevator();
   }
 
   private TransportLine transport() {
-    TransportLine transport = new TransportLine();
-    transport.setLine(this.line());
-    transport.setType(this.transportType());
-    Station station = this.station();
-    transport.addNewStation(station);
-    transport.setDeparture(station);
-    transport.setArrival(station);
-    return transport;
+    return new TransportLineCreationAddOn().transportA();
   }
 
   @Test
