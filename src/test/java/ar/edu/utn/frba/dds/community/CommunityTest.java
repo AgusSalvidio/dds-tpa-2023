@@ -1,11 +1,11 @@
 package ar.edu.utn.frba.dds.community;
 
+import ar.edu.utn.frba.dds.addons.usercreationaddon.UserCreationAddOn;
 import ar.edu.utn.frba.dds.publicservice.TransportLine;
 import ar.edu.utn.frba.dds.service.Elevator;
 import ar.edu.utn.frba.dds.service.Service;
 import ar.edu.utn.frba.dds.service.Toilet;
 import ar.edu.utn.frba.dds.user.User;
-import ar.edu.utn.frba.dds.user.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,8 +15,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class CommunityTest {
-  private UserDetails userDetails() {
-    return new UserDetails("Hugo", "Ibarra", "ibarraneta@gmail.com");
+  private User ibarraneta() throws Exception {
+    return new UserCreationAddOn().ibarraneta();
 
   }
 
@@ -47,12 +47,12 @@ public class CommunityTest {
   public void addMemberToCommunityTest() throws Exception {
 
     Community community = Community.composedOf("Comunidad 1", "Comunidad de prueba");
+    User user = this.ibarraneta();
 
     Assertions.assertTrue(community.members().isEmpty());
     Assertions.assertTrue(community.moderators().isEmpty());
     Assertions.assertTrue(community.services().isEmpty());
 
-    User user = User.composedOf("ibarranetaYPF", "theBestPassword", this.userDetails());
     community.addUser(user);
 
     Assertions.assertTrue(community.members().stream().anyMatch(member -> member.user().equals(user)));
@@ -66,12 +66,12 @@ public class CommunityTest {
   public void addModeratorToCommunityTest() throws Exception {
 
     Community community = Community.composedOf("Comunidad 1", "Comunidad de prueba");
+    User user = this.ibarraneta();
 
     Assertions.assertTrue(community.members().isEmpty());
     Assertions.assertTrue(community.moderators().isEmpty());
     Assertions.assertTrue(community.services().isEmpty());
 
-    User user = User.composedOf("ibarranetaYPF", "theBestPassword", this.userDetails());
     community.addModerator(user);
 
     Assertions.assertTrue(community.members().stream().anyMatch(member -> member.user().equals(user)));
@@ -93,7 +93,6 @@ public class CommunityTest {
     TransportLine transportLine = new TransportLine();
     community.addTransportLine(transportLine);
 
-
     Assertions.assertTrue(community.members().isEmpty());
     Assertions.assertTrue(community.moderators().isEmpty());
     Assertions.assertTrue(community.transportLines().contains(transportLine));
@@ -104,12 +103,12 @@ public class CommunityTest {
   public void removeMemberCommunityTest() throws Exception {
 
     Community community = Community.composedOf("Comunidad 1", "Comunidad de prueba");
+    User user = this.ibarraneta();
 
     Assertions.assertTrue(community.members().isEmpty());
     Assertions.assertTrue(community.moderators().isEmpty());
     Assertions.assertTrue(community.services().isEmpty());
 
-    User user = User.composedOf("ibarranetaYPF", "theBestPassword", this.userDetails());
     community.addUser(user);
 
     Assertions.assertTrue(community.members().stream().anyMatch(member -> member.user().equals(user)));

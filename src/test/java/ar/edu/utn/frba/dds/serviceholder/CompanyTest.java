@@ -1,16 +1,14 @@
 package ar.edu.utn.frba.dds.serviceholder;
 
+import ar.edu.utn.frba.dds.addons.usercreationaddon.UserCreationAddOn;
 import ar.edu.utn.frba.dds.user.User;
-import ar.edu.utn.frba.dds.user.UserDetails;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class CompanyTest {
-
-  private UserDetails userDetails() {
-    return new UserDetails("Hugo", "Ibarra", "ibarraneta@gmail.com");
-
+  private User ibarraneta() throws Exception {
+    return new UserCreationAddOn().ibarraneta();
   }
 
   @Test
@@ -39,12 +37,12 @@ public class CompanyTest {
   public void addModeratorToCompanyTest() throws Exception {
 
     Company company = Company.composedOf("Taranga & Compania", "Empresa de servicios");
+    User user = this.ibarraneta();
 
     Assertions.assertTrue(company.members().isEmpty());
     Assertions.assertTrue(company.moderators().isEmpty());
     Assertions.assertTrue(company.analysts().isEmpty());
 
-    User user = User.composedOf("ibarranetaYPF", "theBestPassword", this.userDetails());
     company.addModerator(user);
 
     Assertions.assertTrue(company.members().stream().anyMatch(member -> member.user().equals(user)));
@@ -58,12 +56,13 @@ public class CompanyTest {
   public void removeMemberCompanyTest() throws Exception {
 
     Company company = Company.composedOf("Taranga & Compania", "Empresa de servicios");
+    User user = this.ibarraneta();
 
     Assertions.assertTrue(company.members().isEmpty());
     Assertions.assertTrue(company.moderators().isEmpty());
     Assertions.assertTrue(company.analysts().isEmpty());
 
-    User user = User.composedOf("ibarranetaYPF", "theBestPassword", this.userDetails());
+
     company.addAnalyst(user);
 
     Assertions.assertTrue(company.analysts().stream().anyMatch(member -> member.user().equals(user)));
