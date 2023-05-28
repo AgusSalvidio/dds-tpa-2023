@@ -1,15 +1,15 @@
 package ar.edu.utn.frba.dds.serviceholder;
 
+import ar.edu.utn.frba.dds.addons.usercreationaddon.UserCreationAddOn;
 import ar.edu.utn.frba.dds.user.User;
-import ar.edu.utn.frba.dds.user.UserDetails;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class GovermentDepartmentTest {
 
-  private UserDetails userDetails() {
-    return new UserDetails("Hugo", "Ibarra", "ibarraneta@gmail.com");
+  private User ibarraneta() throws Exception{
+    return new UserCreationAddOn().ibarraneta();
 
   }
 
@@ -39,12 +39,12 @@ public class GovermentDepartmentTest {
   public void addModeratorToGovermentDepartmentTest() throws Exception {
 
     Company govermentDepartment = Company.composedOf("CNRT", "Comisión Nacional de Regulación del Transporte");
+    User user = this.ibarraneta();
 
     Assertions.assertTrue(govermentDepartment.members().isEmpty());
     Assertions.assertTrue(govermentDepartment.moderators().isEmpty());
     Assertions.assertTrue(govermentDepartment.analysts().isEmpty());
 
-    User user = User.composedOf("ibarranetaYPF", "theBestPassword", this.userDetails());
     govermentDepartment.addModerator(user);
 
     Assertions.assertTrue(govermentDepartment.members().stream().anyMatch(member -> member.user().equals(user)));
@@ -58,12 +58,12 @@ public class GovermentDepartmentTest {
   public void removeMemberGovermentDepartmentTest() throws Exception {
 
     GovermentDepartment govermentDepartment = GovermentDepartment.composedOf("CNRT", "Comisión Nacional de Regulación del Transporte");
+    User user = this.ibarraneta();
 
     Assertions.assertTrue(govermentDepartment.members().isEmpty());
     Assertions.assertTrue(govermentDepartment.moderators().isEmpty());
     Assertions.assertTrue(govermentDepartment.analysts().isEmpty());
 
-    User user = User.composedOf("ibarranetaYPF", "theBestPassword", this.userDetails());
     govermentDepartment.addAnalyst(user);
 
     Assertions.assertTrue(govermentDepartment.analysts().stream().anyMatch(member -> member.user().equals(user)));
