@@ -15,7 +15,7 @@ public class UserDetailsTest {
     Assertions.assertEquals("Ibarra", userDetails.lastname());
     Assertions.assertEquals("ibarraneta@gmail.com", userDetails.email());
     Assertions.assertTrue(userDetails.services().isEmpty());
-    Assertions.assertTrue(userDetails.transports().isEmpty());
+    Assertions.assertTrue(userDetails.entities().isEmpty());
   }
 
   @Test

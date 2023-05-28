@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds.community;
 
-import ar.edu.utn.frba.dds.publicservice.TransportLine;
+import ar.edu.utn.frba.dds.entity.Entity;
 import ar.edu.utn.frba.dds.service.Service;
 import ar.edu.utn.frba.dds.user.User;
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ public class Community {
   String description;
   List<Member> members = new ArrayList<>();
   List<Service> services = new ArrayList<>();
-  List<TransportLine> transportLines = new ArrayList<>();
+  List<Entity> entities = new ArrayList<>();
 
   public static Community composedOf(String name, String description)
       throws Exception {
@@ -53,8 +53,8 @@ public class Community {
         .collect(Collectors.toList());
   }
 
-  public List<TransportLine> transportLines() {
-    return this.transportLines.stream()
+  public List<Entity> entities() {
+    return this.entities.stream()
         .collect(Collectors.toList());
   }
 
@@ -96,8 +96,8 @@ public class Community {
     this.services.add(service);
   }
 
-  public void addTransportLine(TransportLine transportLine) {
-    this.transportLines.add(transportLine);
+  public void addTransportLine(Entity entity) {
+    this.entities.add(entity);
   }
 
   public void synchronizeWith(Community anUpdatedCommunity) {

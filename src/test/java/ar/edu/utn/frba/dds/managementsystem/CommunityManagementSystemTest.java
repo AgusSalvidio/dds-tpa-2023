@@ -1,10 +1,9 @@
 package ar.edu.utn.frba.dds.managementsystem;
 
 import ar.edu.utn.frba.dds.community.Community;
+import ar.edu.utn.frba.dds.entity.TransportLine;
 import ar.edu.utn.frba.dds.persistencesystem.MemoryBasedPersistenceSystem;
 import ar.edu.utn.frba.dds.persistencesystem.PersistenceSystem;
-import ar.edu.utn.frba.dds.publicservice.TransportLine;
-import ar.edu.utn.frba.dds.service.Service;
 import ar.edu.utn.frba.dds.user.User;
 import ar.edu.utn.frba.dds.user.UserDetails;
 import org.junit.jupiter.api.Assertions;

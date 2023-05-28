@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds.community;
 
-import ar.edu.utn.frba.dds.publicservice.TransportLine;
+import ar.edu.utn.frba.dds.entity.TransportLine;
 import ar.edu.utn.frba.dds.service.Elevator;
 import ar.edu.utn.frba.dds.service.Service;
 import ar.edu.utn.frba.dds.service.Toilet;
@@ -96,7 +96,7 @@ public class CommunityTest {
 
     Assertions.assertTrue(community.members().isEmpty());
     Assertions.assertTrue(community.moderators().isEmpty());
-    Assertions.assertTrue(community.transportLines().contains(transportLine));
+    Assertions.assertTrue(community.entities.contains(transportLine));
   }
 
   @Test
@@ -136,7 +136,7 @@ public class CommunityTest {
 
     TransportLine transportLine = new TransportLine();
     community.addTransportLine(transportLine);
-    Assertions.assertTrue(community.transportLines().contains(transportLine));
+    Assertions.assertTrue(community.entities.contains(transportLine));
 
     Community updtedCommunity = Community.composedOf("Comunidad 2", "Comunidad de prueba");
     Service anotherService = new Toilet();

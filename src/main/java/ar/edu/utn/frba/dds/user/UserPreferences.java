@@ -1,7 +1,7 @@
 package ar.edu.utn.frba.dds.user;
 
+import ar.edu.utn.frba.dds.entity.Entity;
 import ar.edu.utn.frba.dds.location.Location;
-import ar.edu.utn.frba.dds.publicservice.TransportLine;
 import ar.edu.utn.frba.dds.service.Service;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class UserPreferences {
   List<Service> services = new ArrayList<>();
-  List<TransportLine> transports = new ArrayList<>();
+  List<Entity> entities = new ArrayList<>();
   List<Location> locations = new ArrayList<>();
 
   public List<Service> services() {
@@ -17,8 +17,8 @@ public class UserPreferences {
         .collect(Collectors.toList());
   }
 
-  public List<TransportLine> transports() {
-    return this.transports.stream()
+  public List<Entity> entities() {
+    return this.entities.stream()
         .collect(Collectors.toList());
   }
 
@@ -26,21 +26,21 @@ public class UserPreferences {
     this.services.add(service);
   }
 
-  public void addTransport(TransportLine transport) {
-    this.transports.add(transport);
+  public void addEntity(Entity entity) {
+    this.entities.add(entity);
   }
 
   public void removeService(Service service) {
     this.services.remove(service);
   }
 
-  public void removeTransport(TransportLine transport) {
-    this.transports.remove(transport);
+  public void removeEntity(Entity entity) {
+    this.entities.remove(entity);
   }
 
   public void synchronizeWith(UserPreferences anUpdaterUserPreference) {
     this.services = anUpdaterUserPreference.services();
-    this.transports = anUpdaterUserPreference.transports();
+    this.entities = anUpdaterUserPreference.entities();
   }
 
   public List<Location> locations() {
