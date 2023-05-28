@@ -3,7 +3,7 @@ package ar.edu.utn.frba.dds.user;
 import ar.edu.utn.frba.dds.addons.locationcreationaddon.LocationCreationAddOn;
 import ar.edu.utn.frba.dds.addons.servicescreationaddon.publicservicecreationaddon.TransportLineCreationAddOn;
 import ar.edu.utn.frba.dds.addons.servicescreationaddon.servicecreationaddon.ElevatorCreationAddOn;
-import ar.edu.utn.frba.dds.publicservice.TransportLine;
+import ar.edu.utn.frba.dds.entity.TransportLine;
 import ar.edu.utn.frba.dds.service.Elevator;
 import ar.edu.utn.frba.dds.location.Location;
 
@@ -31,7 +31,7 @@ public class UserPreferencesTest {
     UserPreferences userPreferences = new UserPreferences();
 
     Assertions.assertTrue(userPreferences.services().isEmpty());
-    Assertions.assertTrue(userPreferences.transports().isEmpty());
+    Assertions.assertTrue(userPreferences.entities().isEmpty());
   }
 
   @Test
@@ -42,13 +42,13 @@ public class UserPreferencesTest {
     TransportLine transport = this.transport();
 
     Assertions.assertTrue(userPreferences.services().isEmpty());
-    Assertions.assertTrue(userPreferences.transports().isEmpty());
+    Assertions.assertTrue(userPreferences.entities.isEmpty());
 
     userPreferences.addService(elevator);
-    userPreferences.addTransport(transport);
+    userPreferences.addEntity(transport);
 
     Assertions.assertTrue(userPreferences.services().contains(elevator));
-    Assertions.assertTrue(userPreferences.transports().contains(transport));
+    Assertions.assertTrue(userPreferences.entities.contains(transport));
 
 
   }
@@ -61,18 +61,18 @@ public class UserPreferencesTest {
     TransportLine transport = this.transport();
 
     Assertions.assertTrue(userPreferences.services().isEmpty());
-    Assertions.assertTrue(userPreferences.transports().isEmpty());
+    Assertions.assertTrue(userPreferences.entities.isEmpty());
 
     userPreferences.addService(elevator);
-    userPreferences.addTransport(transport);
+    userPreferences.addEntity(transport);
 
     Assertions.assertTrue(userPreferences.services().contains(elevator));
-    Assertions.assertTrue(userPreferences.transports().contains(transport));
+    Assertions.assertTrue(userPreferences.entities.contains(transport));
 
     userPreferences.removeService(elevator);
 
     Assertions.assertTrue(userPreferences.services().isEmpty());
-    Assertions.assertTrue(userPreferences.transports().contains(transport));
+    Assertions.assertTrue(userPreferences.entities.contains(transport));
 
 
   }
@@ -84,7 +84,7 @@ public class UserPreferencesTest {
     Location location = this.location();
 
     Assertions.assertTrue(userPreferences.services().isEmpty());
-    Assertions.assertTrue(userPreferences.transports().isEmpty());
+    Assertions.assertTrue(userPreferences.entities.isEmpty());
     Assertions.assertTrue(userPreferences.locations().isEmpty());
 
     userPreferences.addLocation(location);
@@ -99,7 +99,7 @@ public class UserPreferencesTest {
     Location location = this.location();
 
     Assertions.assertTrue(userPreferences.services().isEmpty());
-    Assertions.assertTrue(userPreferences.transports().isEmpty());
+    Assertions.assertTrue(userPreferences.entities.isEmpty());
     Assertions.assertTrue(userPreferences.locations().isEmpty());
 
     userPreferences.addLocation(location);

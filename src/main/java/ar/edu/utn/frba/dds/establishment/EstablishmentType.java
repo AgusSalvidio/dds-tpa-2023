@@ -1,10 +1,10 @@
-package ar.edu.utn.frba.dds.publicservice;
+package ar.edu.utn.frba.dds.establishment;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class Line {
+public class EstablishmentType {
   public String name;
 }

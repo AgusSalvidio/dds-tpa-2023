@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds.user;
 
-import ar.edu.utn.frba.dds.publicservice.TransportLine;
+import ar.edu.utn.frba.dds.entity.Entity;
 import ar.edu.utn.frba.dds.service.Service;
 import java.util.List;
 
@@ -46,7 +46,7 @@ public class UserDetails {
     return this.userPreferences.services();
   }
 
-  public List<TransportLine> transports() {
-    return this.userPreferences.transports();
+  public List<Entity> entities() {
+    return this.userPreferences.entities();
   }
 }

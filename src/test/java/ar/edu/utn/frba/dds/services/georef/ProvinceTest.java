@@ -1,8 +1,6 @@
 package ar.edu.utn.frba.dds.services.georef;
 
 import ar.edu.utn.frba.dds.services.georef.entities.Province;
-import ar.edu.utn.frba.dds.services.georef.entities.ProvinceCollection;
-import java.io.IOException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

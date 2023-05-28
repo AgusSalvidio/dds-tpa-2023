@@ -1,21 +1,18 @@
 package ar.edu.utn.frba.dds.addons.servicescreationaddon.publicservicecreationaddon;
 
-import ar.edu.utn.frba.dds.publicservice.Line;
-import ar.edu.utn.frba.dds.publicservice.Station;
-import ar.edu.utn.frba.dds.publicservice.TransportLine;
+import ar.edu.utn.frba.dds.entity.TransportLine;
 
 public class TransportLineCreationAddOn {
-
-  private StationCreationAddOn stationCreationAddOn = new StationCreationAddOn();
+  private EstablishmentCreationAddOn establishmentCreationAddOn = new EstablishmentCreationAddOn();
 
   public TransportLine transportA() {
     TransportLine transport = new TransportLine();
-    transport.setLine(new LineCreationAddOn().subwayHLine());
-    transport.setType(new TransportTypeCreationAddOn().subway());
+    transport.setName(new EntityNameCreationAddOn().subwayHLine());
+    transport.setType(new EntityTypeCreationAddOn().subway());
 
-    transport.addNewStation(this.stationCreationAddOn.lawSchoolStation());
-    transport.setDeparture(this.stationCreationAddOn.lawSchoolStation());
-    transport.setArrival(this.stationCreationAddOn.lasHerasStation());
+    transport.addNewEstablishment(this.establishmentCreationAddOn.lawSchoolStation());
+    transport.setDeparture(this.establishmentCreationAddOn.lawSchoolStation());
+    transport.setArrival(this.establishmentCreationAddOn.lasHerasStation());
     return transport;
   }
 }
