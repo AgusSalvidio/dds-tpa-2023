@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.community;
 
+import ar.edu.utn.frba.dds.addons.usercreationaddon.UserDetailsCreationAddOn;
 import ar.edu.utn.frba.dds.user.User;
 import ar.edu.utn.frba.dds.user.UserDetails;
 import org.junit.jupiter.api.Assertions;
@@ -7,9 +8,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class MemberTest {
-  private UserDetails userDetails() {
-    return new UserDetails("Hugo", "Ibarra", "ibarraneta@gmail.com");
-
+  private UserDetails userDetails() throws Exception {
+    return new UserDetailsCreationAddOn().ibarra();
   }
 
   @Test

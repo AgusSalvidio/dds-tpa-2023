@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.community;
 
+import ar.edu.utn.frba.dds.addons.usercreationaddon.UserDetailsCreationAddOn;
 import ar.edu.utn.frba.dds.publicservice.TransportLine;
 import ar.edu.utn.frba.dds.service.Elevator;
 import ar.edu.utn.frba.dds.service.Service;
@@ -15,8 +16,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class CommunityTest {
-  private UserDetails userDetails() {
-    return new UserDetails("Hugo", "Ibarra", "ibarraneta@gmail.com");
+  private UserDetails userDetails() throws Exception {
+    return new UserDetailsCreationAddOn().ibarra();
 
   }
 
