@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.location;
 
+import ar.edu.utn.frba.dds.services.georef.entities.Municipality;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,14 +9,9 @@ import lombok.Setter;
 public class Location {
   public String street;
   public Integer number;
-  public City city;
-  public Country country;
-  public Double latitude;
-  public Double longitude;
+  public Municipality municipality;
 
   public Location() {
     this.number = 0;
-    this.latitude = 0.0;
-    this.longitude = 0.0;
   }
 }

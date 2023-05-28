@@ -1,7 +1,5 @@
 package ar.edu.utn.frba.dds.user;
 
-import ar.edu.utn.frba.dds.location.City;
-import ar.edu.utn.frba.dds.location.Country;
 import ar.edu.utn.frba.dds.publicservice.Line;
 import ar.edu.utn.frba.dds.publicservice.Station;
 import ar.edu.utn.frba.dds.publicservice.TransportLine;
@@ -10,6 +8,7 @@ import ar.edu.utn.frba.dds.service.Elevator;
 import ar.edu.utn.frba.dds.service.Section;
 import ar.edu.utn.frba.dds.location.Location;
 
+import ar.edu.utn.frba.dds.services.georef.entities.Municipality;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
@@ -40,25 +39,16 @@ public class UserPreferencesTest {
     return transportType;
   }
 
-  private City city() {
-    City city = new City();
-    city.setName("CABA");
-    return city;
-  }
-
-  private Country country() {
-    Country country = new Country();
-    country.setName("ARGENTINA");
-    return country;
+  private Municipality municipality() {
+    Municipality municipality = new Municipality();
+    municipality.setNombre("CABA");
+    return municipality;
   }
 
   private Location location() {
     Location location = new Location();
     location.setStreet("AV. FIGUEROA ALCORTA Y AV. PUEYRREDON");
-    location.setLatitude(-34.58306);
-    location.setLongitude(-58.39106);
-    location.setCity(this.city());
-    location.setCountry(this.country());
+    location.setMunicipality(this.municipality());
     return location;
   }
 

@@ -1,14 +1,14 @@
 package ar.edu.utn.frba.dds.publicservice;
 
 import ar.edu.utn.frba.dds.location.*;
+import ar.edu.utn.frba.dds.services.georef.entities.Municipality;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class TransportLineTest {
-  private City city;
-  private Country country;
+  private Municipality municipality;
   private Location locationA;
   private Location locationB;
   private Location locationC;
@@ -21,24 +21,16 @@ public class TransportLineTest {
 
   @BeforeEach
   public void init() {
-    this.city = new City();
-    this.city.setName("CABA");
-    this.country = new Country();
-    this.country.setName("ARGENTINA");
+    this.municipality = new Municipality();
+    this.municipality.setNombre("CABA");
     this.locationA = new Location();
     this.locationA.setStreet("AV. FIGUEROA ALCORTA Y AV. PUEYRREDON");
-    this.locationA.setLatitude(-34.58306);
-    this.locationA.setLongitude(-58.39106);
     this.locationB = new Location();
     this.locationB.setStreet("AV. PUEYRREDON");
     this.locationB.setNumber(100);
-    this.locationB.setLatitude(-34.609167);
-    this.locationB.setLongitude(-58.406111);
     this.locationC = new Location();
     this.locationC.setStreet("AV. ALMAFUENTE");
     this.locationC.setNumber(300);
-    this.locationC.setLatitude(-34.641389);
-    this.locationC.setLongitude(-58.4125);
     this.stationA = new Station();
     this.stationA.setName("FACULTAD DE DERECHO");
     this.stationB = new Station();
@@ -55,11 +47,9 @@ public class TransportLineTest {
   @Test
   @DisplayName("A station has a location which belongs to a city and a country")
   public void aStationHasALocationWhichBelongsToACityAndACountry() {
-    this.locationA.setCity(city);
-    this.locationA.setCountry(country);
+    this.locationA.setMunicipality(municipality);
     this.stationA.setLocation(locationA);
-    Assertions.assertEquals("CABA", stationA.getLocation().getCity().getName());
-    Assertions.assertEquals("ARGENTINA", stationA.getLocation().getCountry().getName());
+    Assertions.assertEquals("CABA", stationA.getLocation().getMunicipality().name());
   }
 
   @Test
