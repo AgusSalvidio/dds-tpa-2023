@@ -1,0 +1,21 @@
+{
+  "cantidad": 1,
+  "departamentos": [
+    {
+      "id": "06315",
+      "nombre": "General Juan Madariaga"
+    }
+  ],
+  "inicio": 0,
+  "parametros": {
+    "campos": [
+      "id",
+      "nombre"
+    ],
+    "max": 1,
+    "provincia": [
+      "06"
+    ]
+  },
+  "total": 135
+}

@@ -1,0 +1,128 @@
+{
+  "cantidad": 10,
+  "departamentos": [
+    {
+      "centroide": {
+        "lat": -27.2575511794731,
+        "lon": -60.6806781684245
+      },
+      "id": "22112",
+      "nombre": "O'Higgins",
+      "provincia": {
+        "id": "22",
+        "nombre": "Chaco"
+      }
+    },
+    {
+      "centroide": {
+        "lat": -37.1532136536641,
+        "lon": -57.2307866316173
+      },
+      "id": "06315",
+      "nombre": "General Juan Madariaga",
+      "provincia": {
+        "id": "06",
+        "nombre": "Buenos Aires"
+      }
+    },
+    {
+      "centroide": {
+        "lat": -37.3356554181577,
+        "lon": -59.181805577778
+      },
+      "id": "06791",
+      "nombre": "Tandil",
+      "provincia": {
+        "id": "06",
+        "nombre": "Buenos Aires"
+      }
+    },
+    {
+      "centroide": {
+        "lat": -30.0205633751884,
+        "lon": -62.2804530355771
+      },
+      "id": "86154",
+      "nombre": "Rivadavia",
+      "provincia": {
+        "id": "86",
+        "nombre": "Santiago del Estero"
+      }
+    },
+    {
+      "centroide": {
+        "lat": -28.0394963430537,
+        "lon": -62.5440138783592
+      },
+      "id": "86098",
+      "nombre": "Juan F. Ibarra",
+      "provincia": {
+        "id": "86",
+        "nombre": "Santiago del Estero"
+      }
+    },
+    {
+      "centroide": {
+        "lat": -28.5682847400822,
+        "lon": -62.3388258455986
+      },
+      "id": "86077",
+      "nombre": "General Taboada",
+      "provincia": {
+        "id": "86",
+        "nombre": "Santiago del Estero"
+      }
+    },
+    {
+      "centroide": {
+        "lat": -33.7114684971791,
+        "lon": -67.2475409227538
+      },
+      "id": "50042",
+      "nombre": "La Paz",
+      "provincia": {
+        "id": "50",
+        "nombre": "Mendoza"
+      }
+    },
+    {
+      "centroide": {
+        "lat": -38.1477437843902,
+        "lon": -61.2646589620305
+      },
+      "id": "06196",
+      "nombre": "Coronel Pringles",
+      "provincia": {
+        "id": "06",
+        "nombre": "Buenos Aires"
+      }
+    },
+    {
+      "centroide": {
+        "lat": -34.3815893993371,
+        "lon": -58.599453988125
+      },
+      "id": "06805",
+      "nombre": "Tigre",
+      "provincia": {
+        "id": "06",
+        "nombre": "Buenos Aires"
+      }
+    },
+    {
+      "centroide": {
+        "lat": -34.5118758903445,
+        "lon": -58.7776710941743
+      },
+      "id": "06412",
+      "nombre": "José C. Paz",
+      "provincia": {
+        "id": "06",
+        "nombre": "Buenos Aires"
+      }
+    }
+  ],
+  "inicio": 0,
+  "parametros": {},
+  "total": 529
+}

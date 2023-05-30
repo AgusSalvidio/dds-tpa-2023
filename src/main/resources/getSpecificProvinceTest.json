@@ -1,0 +1,18 @@
+{
+  "cantidad": 1,
+  "inicio": 0,
+  "parametros": {
+    "campos": [
+      "id",
+      "nombre"
+    ],
+    "nombre": "Cordoba"
+  },
+  "provincias": [
+    {
+      "id": "14",
+      "nombre": "Córdoba"
+    }
+  ],
+  "total": 1
+}
