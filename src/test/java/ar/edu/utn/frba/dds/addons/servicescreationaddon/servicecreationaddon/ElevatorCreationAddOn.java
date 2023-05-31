@@ -6,7 +6,6 @@ public class ElevatorCreationAddOn {
   public Elevator elevator() {
     Elevator elevator = new Elevator();
     elevator.setName("Ascensor Principal");
-    elevator.addNewSection(new SectionCreationAddOn().sectionA());
     return elevator;
   }
 }

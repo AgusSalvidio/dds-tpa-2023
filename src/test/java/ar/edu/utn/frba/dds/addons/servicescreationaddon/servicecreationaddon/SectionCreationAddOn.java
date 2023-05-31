@@ -9,4 +9,12 @@ public class SectionCreationAddOn {
     section.setName("Acceso Principal a Molinetes");
     return section;
   }
+
+  public Section sectionB() {
+    Section section = new Section();
+    section.setName("Acceso a Plataforma");
+    return section;
+  }
+
+
 }
