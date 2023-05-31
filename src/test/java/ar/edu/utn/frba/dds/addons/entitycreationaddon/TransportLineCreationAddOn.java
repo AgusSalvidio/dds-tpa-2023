@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.dds.addons.servicescreationaddon.publicservicecreationaddon;
+package ar.edu.utn.frba.dds.addons.entitycreationaddon;
 
 import ar.edu.utn.frba.dds.entity.TransportLine;
 

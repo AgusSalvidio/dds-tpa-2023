@@ -12,7 +12,7 @@ public abstract class Entity {
   @Getter
   public EntityType type;
   @Setter
-  @Getter
+
   public EntityName name;
   public List<Establishment> establishments;
 
@@ -27,4 +27,9 @@ public abstract class Entity {
   public List<Establishment> getEstablishments() {
     return this.establishments.stream().collect(Collectors.toList());
   }
+
+  public String name() {
+    return this.name.getName();
+  }
+
 }

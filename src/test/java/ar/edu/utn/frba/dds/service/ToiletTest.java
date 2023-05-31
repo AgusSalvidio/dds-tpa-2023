@@ -1,31 +1,32 @@
 package ar.edu.utn.frba.dds.service;
 
-import ar.edu.utn.frba.dds.service.*;
+import ar.edu.utn.frba.dds.addons.servicescreationaddon.servicecreationaddon.SectionCreationAddOn;
+import ar.edu.utn.frba.dds.addons.servicescreationaddon.servicecreationaddon.ToiletCreationAddOn;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class ToiletTest {
-    private Toilet toilet;
-    private Section sectionA;
-    private Section sectionB;
+  private Toilet toiletA() {
+    return new ToiletCreationAddOn().toiletA();
+  }
 
-    @BeforeEach
-    public void init() {
-        this.toilet = new Toilet();
-        this.toilet.setName("Toilet Primer Piso");
-        this.sectionA = new Section();
-        this.sectionA.setName("Acceso Principal a Estacion");
-        this.sectionB = new Section();
-        this.sectionB.setName("Acceso a Servicios");
-    }
+  private Section sectionA() {
+    return new SectionCreationAddOn().sectionA();
+  }
 
-    @Test
-    @DisplayName("Toilet has a lot of sections")
-    public void toiletHasALotOfSections() {
-        this.toilet.addNewSection(sectionA);
-        this.toilet.addNewSection(sectionB);
-        Assertions.assertEquals(2, this.toilet.getSections().size());
-    }
+  private Section sectionB() {
+    return new SectionCreationAddOn().sectionB();
+  }
+
+  @Test
+  @DisplayName("Toilet has a lot of sections")
+  public void toiletHasALotOfSectionsTest() {
+    Toilet toilet = this.toiletA();
+
+    toilet.addNewSection(this.sectionA());
+    toilet.addNewSection(this.sectionB());
+
+    Assertions.assertEquals(2, toilet.getSections().size());
+  }
 }
