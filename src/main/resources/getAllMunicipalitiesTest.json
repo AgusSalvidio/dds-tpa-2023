@@ -1,0 +1,128 @@
+{
+  "cantidad": 10,
+  "inicio": 0,
+  "municipios": [
+    {
+      "centroide": {
+        "lat": -22.1949119799291,
+        "lon": -65.3412864273208
+      },
+      "id": "386273",
+      "nombre": "Yavi",
+      "provincia": {
+        "id": "38",
+        "nombre": "Jujuy"
+      }
+    },
+    {
+      "centroide": {
+        "lat": -22.414030404424,
+        "lon": -65.3795310298623
+      },
+      "id": "386259",
+      "nombre": "El Cóndor",
+      "provincia": {
+        "id": "38",
+        "nombre": "Jujuy"
+      }
+    },
+    {
+      "centroide": {
+        "lat": -22.4438999595476,
+        "lon": -65.5405751330491
+      },
+      "id": "386252",
+      "nombre": "Cangrejillos",
+      "provincia": {
+        "id": "38",
+        "nombre": "Jujuy"
+      }
+    },
+    {
+      "centroide": {
+        "lat": -22.8431449411788,
+        "lon": -66.0322682108588
+      },
+      "id": "380014",
+      "nombre": "Abra Pampa",
+      "provincia": {
+        "id": "38",
+        "nombre": "Jujuy"
+      }
+    },
+    {
+      "centroide": {
+        "lat": -22.9377695400232,
+        "lon": -65.5450743065682
+      },
+      "id": "386063",
+      "nombre": "Tres Cruces",
+      "provincia": {
+        "id": "38",
+        "nombre": "Jujuy"
+      }
+    },
+    {
+      "centroide": {
+        "lat": -23.1358937646647,
+        "lon": -65.792209430154
+      },
+      "id": "386014",
+      "nombre": "Abralaite",
+      "provincia": {
+        "id": "38",
+        "nombre": "Jujuy"
+      }
+    },
+    {
+      "centroide": {
+        "lat": -23.1800320816974,
+        "lon": -65.3082961701977
+      },
+      "id": "380105",
+      "nombre": "Humahuaca",
+      "provincia": {
+        "id": "38",
+        "nombre": "Jujuy"
+      }
+    },
+    {
+      "centroide": {
+        "lat": -23.3201640640822,
+        "lon": -65.9917423948271
+      },
+      "id": "386007",
+      "nombre": "Abdón Castro Tolay",
+      "provincia": {
+        "id": "38",
+        "nombre": "Jujuy"
+      }
+    },
+    {
+      "centroide": {
+        "lat": -23.1946260949512,
+        "lon": -66.614526284725
+      },
+      "id": "386161",
+      "nombre": "Coranzuli",
+      "provincia": {
+        "id": "38",
+        "nombre": "Jujuy"
+      }
+    },
+    {
+      "centroide": {
+        "lat": -23.2109438569515,
+        "lon": -65.6379141890805
+      },
+      "id": "380091",
+      "nombre": "El Aguilar",
+      "provincia": {
+        "id": "38",
+        "nombre": "Jujuy"
+      }
+    }
+  ],
+  "parametros": {},
+  "total": 1814
+}

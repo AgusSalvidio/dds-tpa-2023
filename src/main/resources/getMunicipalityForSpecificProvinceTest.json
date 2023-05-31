@@ -1,0 +1,21 @@
+{
+  "cantidad": 1,
+  "inicio": 0,
+  "municipios": [
+    {
+      "id": "060056",
+      "nombre": "Bahía Blanca"
+    }
+  ],
+  "parametros": {
+    "campos": [
+      "id",
+      "nombre"
+    ],
+    "max": 1,
+    "provincia": [
+      "06"
+    ]
+  },
+  "total": 135
+}
