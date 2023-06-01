@@ -1,4 +1,6 @@
-ID;Codigo;Filler01;Name;Filler02;
-1;111;lorem;Registro Numero 1;ipsum;
-2;112;lorem;Registro Numero 2;ipsum;
-3;113;lorem;Registro Numero 3;ipsum;
+ID;Code;Filler01;Name;Filler02
+00001;00001;000000;Nombre 01;N/A
+00002;00002;000000;Nombre 02;N/A
+00003;00003;000000;Nombre 03;N/A
+00004;00004;000000;Nombre 04;N/A
+00005;00005;000000;Nombre 05;N/A
