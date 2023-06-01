@@ -1,12 +1,12 @@
 package ar.edu.utn.frba.dds.filereader;
 
-public class FileFixLen extends FileSource {
+public class FileFixLen extends DataFile {
     public FileFixLen(String _name) {
         super(_name);
     }
 
     @Override
-    public Boolean Load() {
+    public String[] parseLine() {
         //TODO
         return null;
     }

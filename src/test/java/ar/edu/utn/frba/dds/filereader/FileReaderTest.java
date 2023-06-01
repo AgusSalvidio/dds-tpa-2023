@@ -3,64 +3,59 @@ package ar.edu.utn.frba.dds.filereader;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
+import java.util.List;
 
 public class FileReaderTest {
 
-    @Test
-    public void createFileSourceStructureTest() {
-        FileSource fileSource = new FileDelimited("testFile");
+    private DataFile testDataFile() {
+        DataFile _dataFile = new FileDelimited("testFile");
         //Set Source Structure
-        fileSource.path = "testFile.csv";
-        fileSource.rowdelimiter = "CrLf";
-        fileSource.columndelimiter = ";";
-        fileSource.firstRowHasColumnNames = true;
+        _dataFile.path = "d:/testFile.csv";
+        _dataFile.rowDelimiter = "CrLf";
+        _dataFile.colDelimiter = ";";
+        _dataFile.firstRowHasColumnNames = true;
         //Set Source Fields
-        fileSource.fields.add(new Field("ID", FieldType.NUMBER, 5));
-        fileSource.fields.add(new Field("Code", FieldType.STRING, 5));
-        fileSource.fields.add(new Field("Filler01", FieldType.STRING, 5));
-        fileSource.fields.add(new Field("Name", FieldType.STRING, 255));
-        fileSource.fields.add(new Field("Filler02", FieldType.STRING, 5));
-        //Test
-        Assertions.assertEquals(5, fileSource.fields.size());
+        _dataFile.addField(new FieldNumber(0, "ID", 5));
+        _dataFile.addField(new FieldString(1, "Code", 5));
+        _dataFile.addField(new FieldString(2, "Filler01", 5));
+        _dataFile.addField(new FieldString(3, "Name", 255));
+        _dataFile.addField(new FieldString(4, "Filler02", 5));
+        //Return
+        return _dataFile;
     }
 
     @Test
-    public void createDataTableStructureTest() {
-        DataTable dataTable = new DataTable("TestFile");
-        //Set Destination Columns
-        dataTable.cols.add(new DataColumnNumber("ID", 5, "ID"));
-        dataTable.cols.add(new DataColumnString("Code", 5, "Code"));
-        dataTable.cols.add(new DataColumnString("Name", 255, "Name"));
+    public void createDataFileStructureTest() {
+        DataFile _dataFile = testDataFile();
         //Test
-        Assertions.assertEquals(3, dataTable.cols.size());
+        Assertions.assertEquals(5, _dataFile.fields.size());
+    }
+
+
+    @Test
+    public void readFileSourceFirstLineFirstFieldTest() {
+        DataFile _dataFile = testDataFile();
+        List<Field> _row;
+        //Read File
+        _dataFile.Open();
+        _row = _dataFile.getRow();
+        //Test
+        Assertions.assertEquals(1, _row.get(0).getNumericValue());
+        //Close
+        _dataFile.Close();
     }
 
     @Test
-    public void importFileTest() throws IOException {
-        FileSource fileSource = new FileDelimited("testFile");
-        DataTable dataTable = new DataTable("TestFile");
-        DataFile dataFile = new DataFile();
-        //Set Source Structure
-        fileSource.path = "testFile.csv";
-        fileSource.rowdelimiter = "CrLf";
-        fileSource.columndelimiter = ";";
-        fileSource.firstRowHasColumnNames = true;
-        //Set Source Fields
-        fileSource.fields.add(new Field("ID", FieldType.NUMBER, 5));
-        fileSource.fields.add(new Field("Code", FieldType.STRING, 5));
-        fileSource.fields.add(new Field("Filler01", FieldType.STRING, 5));
-        fileSource.fields.add(new Field("Name", FieldType.STRING, 255));
-        fileSource.fields.add(new Field("Filler02", FieldType.STRING, 5));
-        //Set Destination Columns
-        dataTable.cols.add(new DataColumnNumber("ID", 5, "ID"));
-        dataTable.cols.add(new DataColumnString("Code", 5, "Code"));
-        dataTable.cols.add(new DataColumnString("Name", 255, "Name"));
-        //Map Structures
-        dataFile.setFileSource(fileSource);
-        dataFile.setDataTable(dataTable);
-        //Bind
-        dataFile.populate();
+    public void readFileSourceFirstLineLastFieldTest() {
+        DataFile _dataFile = testDataFile();
+        //Read File
+        _dataFile.Open();
+        List<Field> _row;
+        _row = _dataFile.getRow();
         //Test
-        Assertions.assertEquals(3, dataFile.dataTable.rows.size());
+        Assertions.assertEquals("N/A", _row.get(4).getStringValue());
+        //Close
+        _dataFile.Close();
     }
+
 }
