@@ -10,7 +10,7 @@ public class FileReaderTest {
     private DataFile testDataFile() {
         DataFile _dataFile = new FileDelimited("testFile");
         //Set Source Structure
-        _dataFile.path = "d:/testFile.csv";
+        _dataFile.path = "src/test/java/ar/edu/utn/frba/dds/filereader/testFile.csv";
         _dataFile.rowDelimiter = "CrLf";
         _dataFile.colDelimiter = ";";
         _dataFile.firstRowHasColumnNames = true;
