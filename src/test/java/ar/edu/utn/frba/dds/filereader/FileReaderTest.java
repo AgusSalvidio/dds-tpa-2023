@@ -8,54 +8,54 @@ import java.util.List;
 public class FileReaderTest {
 
     private DataFile testDataFile() {
-        DataFile _dataFile = new FileDelimited("testFile");
+        DataFile dataFile = new FileDelimited("testFile");
         //Set Source Structure
-        _dataFile.path = "src/test/java/ar/edu/utn/frba/dds/filereader/testFile.csv";
-        _dataFile.rowDelimiter = "CrLf";
-        _dataFile.colDelimiter = ";";
-        _dataFile.firstRowHasColumnNames = true;
+        dataFile.path = "src/test/java/ar/edu/utn/frba/dds/filereader/testFile.csv";
+        dataFile.rowDelimiter = "CrLf";
+        dataFile.colDelimiter = ";";
+        dataFile.firstRowHasColumnNames = true;
         //Set Source Fields
-        _dataFile.addField(new FieldNumber(0, "ID", 5));
-        _dataFile.addField(new FieldString(1, "Code", 5));
-        _dataFile.addField(new FieldString(2, "Filler01", 5));
-        _dataFile.addField(new FieldString(3, "Name", 255));
-        _dataFile.addField(new FieldString(4, "Filler02", 5));
+        dataFile.addField(new FieldNumber(0, "ID", 5));
+        dataFile.addField(new FieldString(1, "Code", 5));
+        dataFile.addField(new FieldString(2, "Filler01", 5));
+        dataFile.addField(new FieldString(3, "Name", 255));
+        dataFile.addField(new FieldString(4, "Filler02", 5));
         //Return
-        return _dataFile;
+        return dataFile;
     }
 
     @Test
     public void createDataFileStructureTest() {
-        DataFile _dataFile = testDataFile();
+        DataFile dataFile = testDataFile();
         //Test
-        Assertions.assertEquals(5, _dataFile.fields.size());
+        Assertions.assertEquals(5, dataFile.fields.size());
     }
 
 
     @Test
     public void readFileSourceFirstLineFirstFieldTest() {
-        DataFile _dataFile = testDataFile();
-        List<Field> _row;
+        DataFile dataFile = testDataFile();
+        List<Field> row;
         //Read File
-        _dataFile.Open();
-        _row = _dataFile.getRow();
+        dataFile.Open();
+        row = dataFile.getRow();
         //Test
-        Assertions.assertEquals(1, _row.get(0).getNumericValue());
+        Assertions.assertEquals(1, row.get(0).getNumericValue());
         //Close
-        _dataFile.Close();
+        dataFile.Close();
     }
 
     @Test
     public void readFileSourceFirstLineLastFieldTest() {
-        DataFile _dataFile = testDataFile();
+        DataFile dataFile = testDataFile();
         //Read File
-        _dataFile.Open();
-        List<Field> _row;
-        _row = _dataFile.getRow();
+        dataFile.Open();
+        List<Field> row;
+        row = dataFile.getRow();
         //Test
-        Assertions.assertEquals("N/A", _row.get(4).getStringValue());
+        Assertions.assertEquals("N/A", row.get(4).getStringValue());
         //Close
-        _dataFile.Close();
+        dataFile.Close();
     }
 
 }

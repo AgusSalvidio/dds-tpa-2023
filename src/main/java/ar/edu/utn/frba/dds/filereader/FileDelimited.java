@@ -4,15 +4,15 @@ import java.io.IOException;
 
 public class FileDelimited extends DataFile {
 
-  public FileDelimited(String _name) {
-    super(_name);
+  public FileDelimited(String v_name) {
+    super(v_name);
   }
 
   @Override
   public String[] parseLine() {
     try {
-      String[] _fields = this._bufferedReader.readLine().split(this.colDelimiter);
-      return _fields;
+      String[] v_fields = this.bufferedReader.readLine().split(this.colDelimiter);
+      return v_fields;
     } catch (IOException e) {
       return null;
     }

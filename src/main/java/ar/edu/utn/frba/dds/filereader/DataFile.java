@@ -30,10 +30,10 @@ public abstract class DataFile {
   Boolean synchronousRead;
 
   List<Field> fields;
-  BufferedReader _bufferedReader;
+  BufferedReader bufferedReader;
 
-  public DataFile(String _name) {
-    this.name = _name;
+  public DataFile(String v_name) {
+    this.name = v_name;
     this.synchronousRead = true;
     this.fields = new ArrayList<>();
     return;
@@ -41,10 +41,10 @@ public abstract class DataFile {
 
   public void Open() {
     try {
-      if (this._bufferedReader == null) {
-        this._bufferedReader = new BufferedReader(new FileReader(this.path.toString()));
+      if (this.bufferedReader == null) {
+        this.bufferedReader = new BufferedReader(new FileReader(this.path.toString()));
         if (this.firstRowHasColumnNames) {
-          this._bufferedReader.readLine();
+          this.bufferedReader.readLine();
         }
       }
       return;
@@ -57,8 +57,8 @@ public abstract class DataFile {
 
   public void Close() {
     try {
-      if (this._bufferedReader != null) {
-        this._bufferedReader.close();
+      if (this.bufferedReader != null) {
+        this.bufferedReader.close();
       }
       return;
     } catch (IOException e) {
@@ -74,15 +74,15 @@ public abstract class DataFile {
   public abstract String[] parseLine();
 
   public List<Field> getRow() {
-    List<Field> _row = this.fields;
-    String[] _parse_line = this.parseLine();
+    List<Field> row = this.fields;
+    String[] parse_line = this.parseLine();
     try {
       //Map Fields
-      if (_bufferedReader.ready()) {
-        _row.forEach(_field -> _field.setValue(_parse_line[_field.index]));
+      if (bufferedReader.ready()) {
+        row.forEach(field -> field.setValue(parse_line[field.index]));
       }
       //Return Mapped Row
-      return _row;
+      return row;
     } catch (Exception e) {
       return null;
     }

@@ -1,8 +1,8 @@
 package ar.edu.utn.frba.dds.filereader;
 
 public class FileFixLen extends DataFile {
-  public FileFixLen(String _name) {
-    super(_name);
+  public FileFixLen(String v_name) {
+    super(v_name);
   }
 
   @Override
