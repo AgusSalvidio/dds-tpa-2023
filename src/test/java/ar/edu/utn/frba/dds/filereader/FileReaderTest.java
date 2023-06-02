@@ -2,7 +2,7 @@ package ar.edu.utn.frba.dds.filereader;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import java.io.IOException;
+
 import java.util.List;
 
 public class FileReaderTest {
@@ -37,25 +37,25 @@ public class FileReaderTest {
         DataFile dataFile = testDataFile();
         List<Field> row;
         //Read File
-        dataFile.Open();
+        dataFile.openFile();
         row = dataFile.getRow();
         //Test
         Assertions.assertEquals(1, row.get(0).getNumericValue());
         //Close
-        dataFile.Close();
+        dataFile.close();
     }
 
     @Test
     public void readFileSourceFirstLineLastFieldTest() {
         DataFile dataFile = testDataFile();
         //Read File
-        dataFile.Open();
+        dataFile.openFile();
         List<Field> row;
         row = dataFile.getRow();
         //Test
         Assertions.assertEquals("N/A", row.get(4).getStringValue());
         //Close
-        dataFile.Close();
+        dataFile.close();
     }
 
 }

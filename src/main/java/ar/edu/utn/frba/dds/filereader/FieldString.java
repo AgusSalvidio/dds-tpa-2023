@@ -2,13 +2,13 @@ package ar.edu.utn.frba.dds.filereader;
 
 public class FieldString extends Field {
 
-  public FieldString(Integer v_index, String v_name, Integer v_length) {
-    super(v_index, v_name, v_length);
+  public FieldString(Integer vindex, String vname, Integer vlength) {
+    super(vindex, vname, vlength);
   }
 
   @Override
-  public void setValue(String v_value) {
-    stringValue = v_value;
+  public void setValue(String vvalue) {
+    stringValue = vvalue;
   }
 
   @Override

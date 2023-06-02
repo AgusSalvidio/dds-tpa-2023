@@ -4,13 +4,13 @@ import java.time.LocalDateTime;
 
 public class FieldDate extends Field {
 
-  public FieldDate(Integer v_index, String v_name, Integer v_length) {
-    super(v_index, v_name, v_length);
+  public FieldDate(Integer vindex, String vname, Integer vlength) {
+    super(vindex, vname, vlength);
   }
 
   @Override
-  public void setValue(String v_value) {
-    dateTimeValue = LocalDateTime.parse(v_value);
+  public void setValue(String vvalue) {
+    dateTimeValue = LocalDateTime.parse(vvalue);
   }
 
   @Override

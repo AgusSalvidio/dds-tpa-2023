@@ -4,6 +4,9 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
@@ -29,20 +32,21 @@ public abstract class DataFile {
   @Setter
   Boolean synchronousRead;
 
-  List<Field> fields;
+  public List<Field> fields;
   BufferedReader bufferedReader;
 
-  public DataFile(String v_name) {
-    this.name = v_name;
+  public DataFile(String vname) {
+    this.name = vname;
     this.synchronousRead = true;
     this.fields = new ArrayList<>();
     return;
   }
 
-  public void Open() {
+  public void openFile() {
     try {
       if (this.bufferedReader == null) {
-        this.bufferedReader = new BufferedReader(new FileReader(this.path.toString()));
+        this.bufferedReader = Files.newBufferedReader(Path.of(path), StandardCharsets.UTF_8);
+        //this.bufferedReader = new BufferedReader(new FileReader(this.path.getString()));
         if (this.firstRowHasColumnNames) {
           this.bufferedReader.readLine();
         }
@@ -55,7 +59,7 @@ public abstract class DataFile {
     }
   }
 
-  public void Close() {
+  public void close() {
     try {
       if (this.bufferedReader != null) {
         this.bufferedReader.close();
@@ -66,8 +70,8 @@ public abstract class DataFile {
     }
   }
 
-  public boolean addField(Field _field) {
-    this.fields.add(this.fields.size(), _field);
+  public boolean addField(Field field) {
+    this.fields.add(this.fields.size(), field);
     return true;
   }
 
@@ -75,11 +79,11 @@ public abstract class DataFile {
 
   public List<Field> getRow() {
     List<Field> row = this.fields;
-    String[] parse_line = this.parseLine();
+    String[] parseline = this.parseLine();
     try {
       //Map Fields
       if (bufferedReader.ready()) {
-        row.forEach(field -> field.setValue(parse_line[field.index]));
+        row.forEach(field -> field.setValue(parseline[field.index]));
       }
       //Return Mapped Row
       return row;
