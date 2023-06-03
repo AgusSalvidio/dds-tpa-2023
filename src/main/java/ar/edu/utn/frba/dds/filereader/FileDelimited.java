@@ -11,11 +11,15 @@ public class FileDelimited extends DataFile {
   @Override
   public String[] parseLine() {
     try {
-      String[] vfields = this.bufferedReader.readLine().split(this.colDelimiter);
-      return vfields;
+      String line;
+      if ((line = this.bufferedReader.readLine()) != null) {
+        String[] vfields = line.split(this.colDelimiter);
+        return vfields;
+      }
     } catch (IOException e) {
       return null;
     }
+    return new String[0];
   }
 
 }
