@@ -25,12 +25,47 @@ public class FileReaderTest {
     }
 
     @Test
+    public void createFieldNumberStructureTest() {
+        //Set Source Fields
+        FieldNumber fieldNumber =  new FieldNumber(0, "Number", 5);
+        //Test
+        Assertions.assertFalse(fieldNumber == null);
+    }
+
+    @Test
+    public void createFieldStringStructureTest() {
+        //Set Source Fields
+        FieldString fieldString =  new FieldString(0, "String", 255);
+        //Test
+        Assertions.assertFalse(fieldString == null);
+    }
+
+    @Test
+    public void createFieldDateStructureTest() {
+        //Set Source Fields
+        FieldDate fieldDate =  new FieldDate(0, "Fecha", 8);
+        //Test
+        Assertions.assertFalse(fieldDate == null);
+    }
+
+    @Test
     public void createDataFileStructureTest() {
         DataFile dataFile = testDataFile();
         //Test
         Assertions.assertEquals(5, dataFile.fields.size());
     }
 
+    @Test
+    public void openDataFileStructureTest() {
+        DataFile dataFile = testDataFile();
+        List<Field> mRow;
+        //Read File
+        dataFile.openFile();
+        //Test
+        Assertions.assertFalse(dataFile == null);
+        //Close
+        dataFile.close();
+    }
 
     @Test
     public void readFileSourceFirstLineFirstFieldTest() {
