@@ -4,18 +4,22 @@ import java.io.IOException;
 
 public class FileDelimited extends DataFile {
 
-  public FileDelimited(String vname) {
-    super(vname);
+  public FileDelimited(String value) {
+    super(value);
   }
 
   @Override
   public String[] parseLine() {
     try {
-      String[] vfields = this.bufferedReader.readLine().split(this.colDelimiter);
-      return vfields;
+      String[] fieldsAux = new String[this.fields.size()];
+      if (this.bufferedReader != null) {
+        fieldsAux = this.bufferedReader.readLine().split(this.getColDelimiter());
+      }
+      return fieldsAux;
     } catch (IOException e) {
-      return null;
+      throw new RuntimeException(e);
     }
+
   }
 
 }

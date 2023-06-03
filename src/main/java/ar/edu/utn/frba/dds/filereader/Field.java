@@ -16,14 +16,14 @@ public abstract class Field {
   Double doubleValue;
   LocalDateTime dateTimeValue;
 
-  public Field(Integer vindex, String vname, Integer vlength) {
-    this.index = vindex;
-    this.name = vname;
-    this.length = vlength;
+  public Field(Integer index, String name, Integer length) {
+    this.index = index;
+    this.name = name;
+    this.length = length;
     this.nullable = true;
   }
 
-  public abstract void setValue(String vvalue);
+  public abstract void setValue(String value);
 
   public String getStringValue() {
     return "";

@@ -10,10 +10,10 @@ public class FileReaderTest {
     private DataFile testDataFile() {
         DataFile dataFile = new FileDelimited("testFile");
         //Set Source Structure
-        dataFile.path = "src/test/java/ar/edu/utn/frba/dds/filereader/testFile.csv";
-        dataFile.rowDelimiter = "CrLf";
-        dataFile.colDelimiter = ";";
-        dataFile.firstRowHasColumnNames = true;
+        dataFile.setFilePath("src/test/java/ar/edu/utn/frba/dds/filereader/testFile.csv");
+        dataFile.setRowDelimiter("CrLf");
+        dataFile.setColDelimiter(";");
+        dataFile.setFirstRowHasColumnNames(true);
         //Set Source Fields
         dataFile.addField(new FieldNumber(0, "ID", 5));
         dataFile.addField(new FieldString(1, "Code", 5));
@@ -35,12 +35,12 @@ public class FileReaderTest {
     @Test
     public void readFileSourceFirstLineFirstFieldTest() {
         DataFile dataFile = testDataFile();
-        List<Field> row;
+        List<Field> mRow;
         //Read File
         dataFile.openFile();
-        row = dataFile.getRow();
+        mRow = dataFile.getRow();
         //Test
-        Assertions.assertEquals(1, row.get(0).getNumericValue());
+        Assertions.assertEquals(1, mRow.get(0).getNumericValue());
         //Close
         dataFile.close();
     }

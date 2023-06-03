@@ -1,9 +1,6 @@
 package ar.edu.utn.frba.dds.filereader;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,30 +10,24 @@ import lombok.Getter;
 import lombok.Setter;
 
 public abstract class DataFile {
-  @Getter
-  @Setter
-  String name;
-  @Getter
-  @Setter
-  String path;
-  @Getter
-  @Setter
+  @Getter @Setter
+  String fileName;
+  @Getter @Setter
+  String filePath;
+  @Getter @Setter
   String rowDelimiter;
-  @Getter
-  @Setter
+  @Getter @Setter
   String colDelimiter;
-  @Getter
-  @Setter
+  @Getter @Setter
   Boolean firstRowHasColumnNames;
-  @Getter
-  @Setter
+  @Getter @Setter
   Boolean synchronousRead;
 
   public List<Field> fields;
   BufferedReader bufferedReader;
 
-  public DataFile(String vname) {
-    this.name = vname;
+  public DataFile(String mfileName) {
+    this.fileName = mfileName;
     this.synchronousRead = true;
     this.fields = new ArrayList<>();
     return;
@@ -44,16 +35,14 @@ public abstract class DataFile {
 
   public void openFile() {
     try {
-      if (this.bufferedReader == null) {
-        this.bufferedReader = Files.newBufferedReader(Path.of(path), StandardCharsets.UTF_8);
-        //this.bufferedReader = new BufferedReader(new FileReader(this.path.getString()));
+      this.bufferedReader = new BufferedReader(new FileReader(new File(getFilePath())));
+      if (this.bufferedReader != null) {
         if (this.firstRowHasColumnNames) {
           this.bufferedReader.readLine();
         }
       }
-      return;
     } catch (FileNotFoundException e) {
-      return;
+      throw new RuntimeException(e);
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
@@ -64,14 +53,13 @@ public abstract class DataFile {
       if (this.bufferedReader != null) {
         this.bufferedReader.close();
       }
-      return;
     } catch (IOException e) {
-      return;
+      throw new RuntimeException(e);
     }
   }
 
-  public boolean addField(Field field) {
-    this.fields.add(this.fields.size(), field);
+  public boolean addField(Field localField) {
+    this.fields.add(this.fields.size(), localField);
     return true;
   }
 
