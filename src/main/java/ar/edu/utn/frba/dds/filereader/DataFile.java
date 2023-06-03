@@ -1,6 +1,10 @@
 package ar.edu.utn.frba.dds.filereader;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -35,7 +39,8 @@ public abstract class DataFile {
 
   public void openFile() {
     try {
-      this.bufferedReader = new BufferedReader(new FileReader(new File(getFilePath())));
+      this.bufferedReader = Files.newBufferedReader(Path.of(getFilePath()), StandardCharsets.UTF_8);
+      //this.bufferedReader = new BufferedReader(new FileReader(new File(getFilePath())));
       if (this.bufferedReader != null) {
         if (this.firstRowHasColumnNames) {
           this.bufferedReader.readLine();
