@@ -14,7 +14,7 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PasswordTest {
+public class PasswordValidatorTest {
 
   static TopCommonPasswordsFileReader fileReader;
   @BeforeAll
