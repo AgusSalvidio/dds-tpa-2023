@@ -32,7 +32,7 @@ public class PasswordValidatorTest {
 
     PasswordValidator validator = new PasswordValidator(validations);
 
-    Assertions.assertFalse(validator.validations().isEmpty());
+    Assertions.assertEquals(validator.validations(), validations);
   }
 
   @Test
