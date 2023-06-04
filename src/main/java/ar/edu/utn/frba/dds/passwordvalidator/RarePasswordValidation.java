@@ -12,20 +12,28 @@ public class RarePasswordValidation implements PasswordValidation {
     this.passwordCache = new PasswordCache();
   }
 
+  private boolean findPasswordInFileAndAddToCache(String password) throws IOException {
+    if (!passwordsFileReader.assertIsInFile(password)) {
+      passwordCache.addNewPassword(password);
+      return false;
+    }
+    return true;
+  }
+
+  private boolean assertCacheAlreadyHas(String password) throws IOException {
+    if (passwordCache.cacheAlreadyHas(password)) {
+      return false;
+    }
+    return findPasswordInFileAndAddToCache(password);
+  }
+
   @Override
   public boolean validatePassword(String password) {
 
     try {
-      if (passwordCache.cacheAlreadyHas(password)) {
-        return false;
-      }
-      if (!passwordsFileReader.findPassword(password)) {
-        passwordCache.addNewPassword(password);
-        return false;
-      }
+      return this.assertCacheAlreadyHas(password);
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
-    return true;
   }
 }
