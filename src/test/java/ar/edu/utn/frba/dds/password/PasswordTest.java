@@ -7,19 +7,27 @@ import ar.edu.utn.frba.dds.passwordvalidator.RarePasswordValidation;
 import ar.edu.utn.frba.dds.passwordvalidator.StrongPasswordValidation;
 import ar.edu.utn.frba.dds.passwordvalidator.TopCommonPasswordsFileReader;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PasswordTest {
 
+  static TopCommonPasswordsFileReader fileReader;
+  @BeforeAll
+  public static void createFileReader() throws URISyntaxException {
+    fileReader = new TopCommonPasswordsFileReader();
+    fileReader.sortPasswords();
+  }
   @Test
   @DisplayName("Create password validator.")
   public void createPasswordValidatorTest() {
     List<PasswordValidation> validations = new ArrayList<>();
     validations.add(new StrongPasswordValidation());
-    validations.add(new RarePasswordValidation(new TopCommonPasswordsFileReader()));
+    validations.add(new RarePasswordValidation(fileReader));
     validations.add(new NoRepeatingCharactersPasswordValidation());
 
     PasswordValidator validator = new PasswordValidator(validations);
@@ -28,13 +36,12 @@ public class PasswordTest {
   }
 
   @Test
-  @DisplayName("If file is not found an exception is thrown.")
-  public void fileNotFoundTest() {
-    RarePasswordValidation rarePasswordValidation =
-        new RarePasswordValidation(new TopCommonPasswordsFileReader());
+  @DisplayName("Passwords in the top 10000 most common password are not strong enough.")
+  public void passwordIsInTheTop10000MostCommonPasswordsFileTest() {
 
-    Assertions.assertThrows(RuntimeException.class, () ->
-        rarePasswordValidation.validatePassword("password"));
+    RarePasswordValidation rarePasswordValidation = new RarePasswordValidation(fileReader);
+
+    Assertions.assertFalse(rarePasswordValidation.validatePassword("password"));
   }
 
   @Test
@@ -91,7 +98,7 @@ public class PasswordTest {
   public void passwordValidatorTest() {
     List<PasswordValidation> validations = new ArrayList<>();
     validations.add(new StrongPasswordValidation());
-    validations.add(new RarePasswordValidation(new TopCommonPasswordsFileReader()));
+    validations.add(new RarePasswordValidation(fileReader));
     validations.add(new NoRepeatingCharactersPasswordValidation());
 
     PasswordValidator validator = new PasswordValidator(validations);
