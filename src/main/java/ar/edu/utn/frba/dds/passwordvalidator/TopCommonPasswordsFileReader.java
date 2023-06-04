@@ -71,7 +71,7 @@ public class TopCommonPasswordsFileReader {
     }
   }
 
-  public boolean findPassword(String password) throws IOException {
+  public boolean assertIsInFile(String password) throws IOException {
 
     int i = 0;
     File file = new File(absolutePath);
