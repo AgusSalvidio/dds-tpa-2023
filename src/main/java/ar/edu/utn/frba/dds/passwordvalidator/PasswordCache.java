@@ -15,7 +15,7 @@ public class PasswordCache {
     this.passwords.add(password);
   }
 
-  public boolean cacheAlreadyHas(String password) {
+  public boolean alreadyHas(String password) {
     return passwords.contains(password);
   }
 }

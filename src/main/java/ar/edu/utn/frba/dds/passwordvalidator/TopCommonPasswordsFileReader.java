@@ -5,7 +5,6 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -23,10 +22,12 @@ public class TopCommonPasswordsFileReader {
   File file = Paths.get(res.toURI()).toFile();
   String absolutePath = file.getAbsolutePath();
 
-  List<String> sortedElements;
+  private List<String> sortedElements;
+  private PasswordCache passwordCache;
 
   public TopCommonPasswordsFileReader() throws URISyntaxException {
     this.sortedElements = new ArrayList<>();
+    this.passwordCache = new PasswordCache();
   }
 
   public void sortPasswords() {
@@ -71,23 +72,27 @@ public class TopCommonPasswordsFileReader {
     }
   }
 
-  public boolean assertIsInFile(String password) throws IOException {
+  private void assertCacheAlreadyHas(String password) {
+    if (passwordCache.alreadyHas(password)) {
+      throw new InvalidPassword("Password is not strong enough.");
+    }
+  }
+
+  public void assertIsInFileOrCache(String password) {
 
     int i = 0;
-    File file = new File(absolutePath);
 
-    if (!file.exists()) {
-      throw new FileNotFoundException();
-    } else {
-      List<String> elementsWithLength =
-          sortedElements.stream().filter(element -> element.length() == password.length()).toList();
-      while (elementsWithLength.get(i) != null) {
-        if (elementsWithLength.get(i).equals(password)) {
-          return false;
-        }
-        i++;
+    assertCacheAlreadyHas(password);
+    List<String> elementsWithLength =
+        sortedElements.stream().filter(element -> element.length() == password.length()).toList();
+
+    while (elementsWithLength.get(i) != null) {
+      if (elementsWithLength.get(i).equals(password)) {
+        passwordCache.addNewPassword(password);
+        throw new InvalidPassword("Password is not strong enough.");
       }
-      return true;
+      i++;
     }
+
   }
 }

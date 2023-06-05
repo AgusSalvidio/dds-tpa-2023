@@ -13,8 +13,8 @@ public class PasswordValidator {
     return this.validations;
   }
 
-  public boolean validateIfPasswordIsAllowed(String password) {
+  public void validateIfPasswordIsAllowed(String password) {
 
-    return validations.stream().allMatch(validation -> validation.validatePassword(password));
+    validations.forEach(validation -> validation.validatePassword(password));
   }
 }
