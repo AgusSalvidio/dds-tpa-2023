@@ -106,7 +106,6 @@ public class PasswordValidatorTest {
 
     PasswordValidator validator = new PasswordValidator(validations);
 
-//    Assertions.assertFalse(validator.validateIfPasswordIsAllowed("QQpNx1560"));
     Assertions.assertThrows(
         InvalidPassword.class, () -> validator.validateIfPasswordIsAllowed("QQpNx1560"),
         "Password is not strong enough.");
