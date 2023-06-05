@@ -19,7 +19,7 @@ public class PasswordValidatorTest {
 
   @BeforeAll
   public static void createFileReader() throws URISyntaxException {
-    fileReader = new TopCommonPasswordsFileReader();
+    fileReader = new TopCommonPasswordsFileReader(100);
     fileReader.sortPasswords();
 
     rarePasswordValidation = new RarePasswordValidation(fileReader);

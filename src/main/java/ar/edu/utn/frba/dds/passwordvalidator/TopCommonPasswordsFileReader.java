@@ -25,9 +25,9 @@ public class TopCommonPasswordsFileReader {
   private List<String> sortedElements;
   private PasswordCache passwordCache;
 
-  public TopCommonPasswordsFileReader() throws URISyntaxException {
+  public TopCommonPasswordsFileReader(int limitForCache) throws URISyntaxException {
     this.sortedElements = new ArrayList<>();
-    this.passwordCache = new PasswordCache();
+    this.passwordCache = new PasswordCache(limitForCache);
   }
 
   public void sortPasswords() {
