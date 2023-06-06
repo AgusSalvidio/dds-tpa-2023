@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.dds.filereader;
+package ar.edu.utn.frba.dds.datafile;
 
 import java.io.IOException;
 

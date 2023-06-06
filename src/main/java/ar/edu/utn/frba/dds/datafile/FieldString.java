@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.dds.filereader;
+package ar.edu.utn.frba.dds.datafile;
 
 public class FieldString extends Field {
 

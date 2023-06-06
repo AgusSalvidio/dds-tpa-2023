@@ -1,14 +1,14 @@
 package ar.edu.utn.frba.dds.parser.serviceholderparser.parsingadapter;
 
-import ar.edu.utn.frba.dds.filereader.DataFile;
-import ar.edu.utn.frba.dds.filereader.Field;
-import ar.edu.utn.frba.dds.filereader.FieldNumber;
-import ar.edu.utn.frba.dds.filereader.FieldString;
-import ar.edu.utn.frba.dds.filereader.FileDelimited;
+import ar.edu.utn.frba.dds.datafile.DataFile;
+import ar.edu.utn.frba.dds.datafile.Field;
+import ar.edu.utn.frba.dds.datafile.FieldNumber;
+import ar.edu.utn.frba.dds.datafile.FieldString;
+import ar.edu.utn.frba.dds.datafile.FileDelimited;
 import ar.edu.utn.frba.dds.importer.serviceholderimporter.ServiceHolderImportRecord;
 import java.util.List;
 
-public class FileReaderAdapter implements ServiceHolderParserAdapter {
+public class DataFileAdapter implements ServiceHolderCsvAdapter {
 
   DataFile dataFile = new FileDelimited("Organization");
 

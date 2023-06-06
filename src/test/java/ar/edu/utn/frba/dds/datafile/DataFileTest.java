@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.dds.filereader;
+package ar.edu.utn.frba.dds.datafile;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-public class FileReaderTest {
+public class DataFileTest {
 
   private DataFile testDataFile() {
     DataFile dataFile = new FileDelimited("testFile");
