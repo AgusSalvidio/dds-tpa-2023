@@ -93,4 +93,95 @@ public class FileReaderTest {
         dataFile.close();
     }
 
+    @Test
+    public void readFileEntityTest() {
+        DataFile dataFile = new FileDelimited("Entity");
+        //Set Source Structure
+        dataFile.setFilePath("src/test/java/ar/edu/utn/frba/dds/filereader/entidades.csv");
+        dataFile.setRowDelimiter("CrLf");
+        dataFile.setColDelimiter(";");
+        dataFile.setFirstRowHasColumnNames(false);
+        //Set Source Fields
+        dataFile.addField(new FieldNumber(0, "ID", 10));
+        dataFile.addField(new FieldString(1, "Name", 255));
+        dataFile.addField(new FieldString(2, "Type", 255));
+        dataFile.addField(new FieldNumber(3, "ControllerId", 10));
+        //Read File
+        dataFile.openFile();
+        List<Field> row;
+        row = dataFile.getRow();
+        //Test
+        Assertions.assertEquals("Banco de la Nacion Argentina", row.get(1).getStringValue());
+        //Close
+        dataFile.close();
+    }
+
+    @Test
+    public void readFileEstablishmentTest() {
+        DataFile dataFile = new FileDelimited("Establishment");
+        //Set Source Structure
+        dataFile.setFilePath("src/test/java/ar/edu/utn/frba/dds/filereader/establecimientos.csv");
+        dataFile.setRowDelimiter("CrLf");
+        dataFile.setColDelimiter(";");
+        dataFile.setFirstRowHasColumnNames(false);
+        //Set Source Fields
+        dataFile.addField(new FieldNumber(0, "EntityId", 10));
+        dataFile.addField(new FieldNumber(1, "ID", 10));
+        dataFile.addField(new FieldString(2, "Name", 255));
+        dataFile.addField(new FieldString(3, "Type", 255));
+        dataFile.addField(new FieldString(4, "Address", 255));
+        //Read File
+        dataFile.openFile();
+        List<Field> row;
+        row = dataFile.getRow();
+        //Test
+        Assertions.assertEquals("Sucursal Plaza de Mayo", row.get(2).getStringValue());
+        //Close
+        dataFile.close();
+    }
+
+    @Test
+    public void readFileServiceTest() {
+        DataFile dataFile = new FileDelimited("Entity");
+        //Set Source Structure
+        dataFile.setFilePath("src/test/java/ar/edu/utn/frba/dds/filereader/servicios.csv");
+        dataFile.setRowDelimiter("CrLf");
+        dataFile.setColDelimiter(";");
+        dataFile.setFirstRowHasColumnNames(false);
+        //Set Source Fields
+        dataFile.addField(new FieldNumber(0, "EntityId", 10));
+        dataFile.addField(new FieldNumber(1, "EstablishmentId", 10));
+        dataFile.addField(new FieldString(2, "Service", 255));
+        dataFile.addField(new FieldString(3, "Type", 255));
+        //Read File
+        dataFile.openFile();
+        List<Field> row;
+        row = dataFile.getRow();
+        //Test
+        Assertions.assertEquals("Toilet", row.get(2).getStringValue());
+        //Close
+        dataFile.close();
+    }
+
+    @Test
+    public void readFileOrgenismTest() {
+        DataFile dataFile = new FileDelimited("Entity");
+        //Set Source Structure
+        dataFile.setFilePath("src/test/java/ar/edu/utn/frba/dds/filereader/organismos.csv");
+        dataFile.setRowDelimiter("CrLf");
+        dataFile.setColDelimiter(";");
+        dataFile.setFirstRowHasColumnNames(false);
+        //Set Source Fields
+        dataFile.addField(new FieldNumber(0, "ID", 10));
+        dataFile.addField(new FieldString(1, "Name", 255));
+        //Read File
+        dataFile.openFile();
+        List<Field> row;
+        row = dataFile.getRow();
+        //Test
+        Assertions.assertEquals("BCRA", row.get(1).getStringValue());
+        //Close
+        dataFile.close();
+    }
+
 }
