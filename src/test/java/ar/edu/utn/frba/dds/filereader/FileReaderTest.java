@@ -10,7 +10,7 @@ public class FileReaderTest {
     private DataFile testDataFile() {
         DataFile dataFile = new FileDelimited("testFile");
         //Set Source Structure
-        dataFile.setFilePath("src/test/java/ar/edu/utn/frba/dds/filereader/testFile.csv");
+        dataFile.setFilePath("src/main/resources/testFile.csv");
         dataFile.setRowDelimiter("CrLf");
         dataFile.setColDelimiter(";");
         dataFile.setFirstRowHasColumnNames(true);
@@ -97,7 +97,7 @@ public class FileReaderTest {
     public void readFileEntityTest() {
         DataFile dataFile = new FileDelimited("Entity");
         //Set Source Structure
-        dataFile.setFilePath("src/test/java/ar/edu/utn/frba/dds/filereader/Entidades.csv");
+        dataFile.setFilePath("src/main/resources/Entidades.csv");
         dataFile.setRowDelimiter("CrLf");
         dataFile.setColDelimiter(";");
         dataFile.setFirstRowHasColumnNames(false);
@@ -120,7 +120,7 @@ public class FileReaderTest {
     public void readFileEstablishmentTest() {
         DataFile dataFile = new FileDelimited("Establishment");
         //Set Source Structure
-        dataFile.setFilePath("src/test/java/ar/edu/utn/frba/dds/filereader/Establecimientos.csv");
+        dataFile.setFilePath("src/main/resources/Establecimientos.csv");
         dataFile.setRowDelimiter("CrLf");
         dataFile.setColDelimiter(";");
         dataFile.setFirstRowHasColumnNames(false);
@@ -144,7 +144,7 @@ public class FileReaderTest {
     public void readFileServiceTest() {
         DataFile dataFile = new FileDelimited("Entity");
         //Set Source Structure
-        dataFile.setFilePath("src/test/java/ar/edu/utn/frba/dds/filereader/Servicios.csv");
+        dataFile.setFilePath("src/main/resources/Servicios.csv");
         dataFile.setRowDelimiter("CrLf");
         dataFile.setColDelimiter(";");
         dataFile.setFirstRowHasColumnNames(false);
@@ -167,7 +167,7 @@ public class FileReaderTest {
     public void readFileOrgenismTest() {
         DataFile dataFile = new FileDelimited("Entity");
         //Set Source Structure
-        dataFile.setFilePath("src/test/java/ar/edu/utn/frba/dds/filereader/Organismos.csv");
+        dataFile.setFilePath("src/main/resources/Organismos.csv");
         dataFile.setRowDelimiter("CrLf");
         dataFile.setColDelimiter(";");
         dataFile.setFirstRowHasColumnNames(false);
