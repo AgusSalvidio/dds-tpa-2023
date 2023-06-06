@@ -2,8 +2,8 @@ package ar.edu.utn.frba.dds.parser;
 
 import ar.edu.utn.frba.dds.importer.serviceholderimporter.ServiceHolderImportRecord;
 import ar.edu.utn.frba.dds.parser.serviceholderparser.ServiceHolderParser;
-import ar.edu.utn.frba.dds.parser.serviceholderparser.parsingadapter.FileReaderAdapter;
-import ar.edu.utn.frba.dds.parser.serviceholderparser.parsingstrategy.ServiceHolderParserStrategy;
+import ar.edu.utn.frba.dds.parser.serviceholderparser.parsingadapter.DataFileAdapter;
+import ar.edu.utn.frba.dds.parser.serviceholderparser.parsingstrategy.ServiceHolderCsvParseStrategy;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
@@ -22,7 +22,7 @@ public class ServiceHolderParserTest {
     String filePath = this.filePath();
     List<ServiceHolderImportRecord> parsedRecords = new ArrayList<>();
     ServiceHolderParser parser =
-        new ServiceHolderParser(new ServiceHolderParserStrategy(new FileReaderAdapter()));
+        new ServiceHolderParser(new ServiceHolderCsvParseStrategy(new DataFileAdapter()));
 
     parsedRecords.addAll(parser.parseFrom(filePath));
 
