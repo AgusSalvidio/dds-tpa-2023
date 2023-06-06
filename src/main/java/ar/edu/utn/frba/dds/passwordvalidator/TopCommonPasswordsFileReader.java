@@ -25,9 +25,9 @@ public class TopCommonPasswordsFileReader {
   private List<String> sortedElements;
   private PasswordCache passwordCache;
 
-  public TopCommonPasswordsFileReader() throws URISyntaxException {
+  public TopCommonPasswordsFileReader(int limitForCache) throws URISyntaxException {
     this.sortedElements = new ArrayList<>();
-    this.passwordCache = new PasswordCache();
+    this.passwordCache = new PasswordCache(limitForCache);
   }
 
   public void sortPasswords() {
@@ -91,8 +91,8 @@ public class TopCommonPasswordsFileReader {
         passwordCache.addNewPassword(password);
         throw new InvalidPassword("Password is not strong enough.");
       }
+      passwordCache.addNewPassword(elementsWithLength.get(i));
       i++;
     }
-
   }
 }
