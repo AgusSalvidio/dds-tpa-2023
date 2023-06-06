@@ -14,17 +14,23 @@ import lombok.Getter;
 import lombok.Setter;
 
 public abstract class DataFile {
-  @Getter @Setter
+  @Getter
+  @Setter
   String fileName;
-  @Getter @Setter
+  @Getter
+  @Setter
   String filePath;
-  @Getter @Setter
+  @Getter
+  @Setter
   String rowDelimiter;
-  @Getter @Setter
+  @Getter
+  @Setter
   String colDelimiter;
-  @Getter @Setter
+  @Getter
+  @Setter
   Boolean firstRowHasColumnNames;
-  @Getter @Setter
+  @Getter
+  @Setter
   Boolean synchronousRead;
 
   public List<Field> fields;
@@ -85,4 +91,9 @@ public abstract class DataFile {
     }
   }
 
+  public List<Field> allRows() {
+    /*This should be implemented to get all the parsed rows...
+      For now i will only get the first -asalvidio */
+    return this.getRow();
+  }
 }

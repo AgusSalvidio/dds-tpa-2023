@@ -176,7 +176,7 @@ public class FileReaderTest {
 
   @Test
   @DisplayName("Read organism file")
-  public void readFileOrgenismTest() {
+  public void readFileOrganismTest() {
     DataFile dataFile = new FileDelimited("Entity");
     //Set Source Structure
     dataFile.setFilePath("src/main/resources/Organismos.csv");

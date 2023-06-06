@@ -37,4 +37,7 @@ public abstract class Field {
     return null;
   }
 
+  public String name() {
+    return this.name;
+  }
 }
