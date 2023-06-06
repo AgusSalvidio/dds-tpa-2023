@@ -1,6 +1,10 @@
 package ar.edu.utn.frba.dds.serviceholder;
 
+import ar.edu.utn.frba.dds.addons.entitycreationaddon.TransportLineCreationAddOn;
+import ar.edu.utn.frba.dds.addons.servicescreationaddon.servicecreationaddon.ElevatorCreationAddOn;
 import ar.edu.utn.frba.dds.addons.usercreationaddon.UserCreationAddOn;
+import ar.edu.utn.frba.dds.entity.TransportLine;
+import ar.edu.utn.frba.dds.service.Elevator;
 import ar.edu.utn.frba.dds.user.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -8,9 +12,18 @@ import org.junit.jupiter.api.Test;
 
 public class GovermentDepartmentTest {
 
-  private User ibarraneta() throws Exception{
+  private User ibarraneta() throws Exception {
     return new UserCreationAddOn().ibarraneta();
 
+  }
+
+  private Elevator elevator() throws Exception {
+    return new ElevatorCreationAddOn().elevator();
+
+  }
+
+  private TransportLine transportLineA() {
+    return new TransportLineCreationAddOn().transportA();
   }
 
   @Test
@@ -76,4 +89,83 @@ public class GovermentDepartmentTest {
     Assertions.assertTrue(govermentDepartment.analysts().isEmpty());
 
   }
+
+  @Test
+  @DisplayName("Add a service to govermentDepartment")
+  public void addServiceToGovermentDepartmentTest() throws Exception {
+
+    GovermentDepartment govermentDepartment = GovermentDepartment.composedOf("CNRT", "Comisión Nacional de Regulación del Transporte");
+    Elevator elevator = this.elevator();
+
+    Assertions.assertTrue(govermentDepartment.services().isEmpty());
+    Assertions.assertTrue(govermentDepartment.entities().isEmpty());
+
+    govermentDepartment.addService(elevator);
+
+    Assertions.assertTrue(govermentDepartment.services().contains(elevator));
+    Assertions.assertTrue(govermentDepartment.entities().isEmpty());
+
+  }
+
+  @Test
+  @DisplayName("Remove service from govermentDepartment")
+  public void removeServiceGovermentDepartmentTest() throws Exception {
+
+    GovermentDepartment govermentDepartment = GovermentDepartment.composedOf("CNRT", "Comisión Nacional de Regulación del Transporte");
+    Elevator elevator = this.elevator();
+
+    Assertions.assertTrue(govermentDepartment.services().isEmpty());
+    Assertions.assertTrue(govermentDepartment.entities().isEmpty());
+
+    govermentDepartment.addService(elevator);
+
+    Assertions.assertTrue(govermentDepartment.services().contains(elevator));
+    Assertions.assertTrue(govermentDepartment.entities().isEmpty());
+
+    govermentDepartment.removeService(elevator);
+
+    Assertions.assertTrue(govermentDepartment.services().isEmpty());
+    Assertions.assertTrue(govermentDepartment.entities().isEmpty());
+
+  }
+
+  @Test
+  @DisplayName("Add a entity to govermentDepartment")
+  public void addEntityToGovermentDepartmentTest() throws Exception {
+
+    GovermentDepartment govermentDepartment = GovermentDepartment.composedOf("CNRT", "Comisión Nacional de Regulación del Transporte");
+    TransportLine transport = this.transportLineA();
+
+    Assertions.assertTrue(govermentDepartment.services().isEmpty());
+    Assertions.assertTrue(govermentDepartment.entities().isEmpty());
+
+    govermentDepartment.addEntity(transport);
+
+    Assertions.assertTrue(govermentDepartment.entities().contains(transport));
+    Assertions.assertTrue(govermentDepartment.services().isEmpty());
+
+  }
+
+  @Test
+  @DisplayName("Remove entity from govermentDepartment")
+  public void removeEntityGovermentDepartmentTest() throws Exception {
+
+    GovermentDepartment govermentDepartment = GovermentDepartment.composedOf("CNRT", "Comisión Nacional de Regulación del Transporte");
+    TransportLine transport = this.transportLineA();
+
+    Assertions.assertTrue(govermentDepartment.services().isEmpty());
+    Assertions.assertTrue(govermentDepartment.entities().isEmpty());
+
+    govermentDepartment.addEntity(transport);
+
+    Assertions.assertTrue(govermentDepartment.entities().contains(transport));
+    Assertions.assertTrue(govermentDepartment.services().isEmpty());
+
+    govermentDepartment.removeEntity(transport);
+
+    Assertions.assertTrue(govermentDepartment.services().isEmpty());
+    Assertions.assertTrue(govermentDepartment.entities().isEmpty());
+
+  }
+
 }

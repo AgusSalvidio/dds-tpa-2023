@@ -15,26 +15,28 @@ import org.mockito.Mockito;
 
 public class ServiceGeorefTest {
 
-  private Gson gson(){
-    return new GsonBuilder().setPrettyPrinting().create();}
+  private Gson gson() {
+    return new GsonBuilder().setPrettyPrinting().create();
+  }
 
-  private ServiceGeoref georefService(){
+  private ServiceGeoref georefService() {
     ServiceGeoref georefService = ServiceGeoref.instance();
     return Mockito.spy(georefService);
   }
+
   @Test
   @DisplayName("Get all provinces")
   public void getAllProvincesTest() throws IOException {
 
     ServiceGeoref georefService = this.georefService();
 
-    Mockito.when(georefService().provinceCollection())
-            .thenReturn(
-                    this.gson().fromJson(
-                            new FileReader("src/main/resources/getAllProvincesTest.json"),
-                            ProvinceCollection.class));
+    Mockito.when(georefService.provinceCollection())
+        .thenReturn(
+            this.gson().fromJson(
+                new FileReader("src/main/resources/getAllProvincesTest.json"),
+                ProvinceCollection.class));
 
-   ProvinceCollection provinceCollection = georefService.provinceCollection();
+    ProvinceCollection provinceCollection = georefService.provinceCollection();
 
     Assertions.assertEquals(provinceCollection.quantity(), 24);
     Assertions.assertEquals(provinceCollection.start(), 0);
@@ -50,13 +52,13 @@ public class ServiceGeorefTest {
 
     ServiceGeoref georefService = this.georefService();
 
-    Mockito.when(georefService().provinceCollectionFilteredByName("Córdoba", "id,nombre"))
+    Mockito.when(georefService.provinceCollectionFilteredByName("Cordoba", "id,nombre"))
         .thenReturn(
             this.gson().fromJson(
-                new FileReader("src/main/resources/getAllProvincesTest.json"),
+                new FileReader("src/main/resources/getSpecificProvinceTest.json"),
                 ProvinceCollection.class));
 
-    ProvinceCollection provinceCollection = georefService.provinceCollectionFilteredByName("Córdoba", "id,nombre");
+    ProvinceCollection provinceCollection = georefService.provinceCollectionFilteredByName("Cordoba", "id,nombre");
 
     Assertions.assertEquals(provinceCollection.quantity(), 1);
     Assertions.assertEquals(provinceCollection.start(), 0);
@@ -64,7 +66,7 @@ public class ServiceGeorefTest {
 
     Assertions.assertEquals(provinceCollection.provinces().size(), 1);
     Assertions.assertEquals(provinceCollection.provinces().get(0).id(), "14");
-    Assertions.assertEquals(provinceCollection.provinces().get(0).name(), "Córdoba");
+    Assertions.assertEquals(provinceCollection.provinces().get(0).name(), "Cordoba");
 
     Assertions.assertTrue(provinceCollection.parameters().fields().contains("id"));
     Assertions.assertTrue(provinceCollection.parameters().fields().contains("nombre"));
@@ -77,7 +79,7 @@ public class ServiceGeorefTest {
 
     ServiceGeoref georefService = this.georefService();
 
-    Mockito.when(georefService().municipalityCollection())
+    Mockito.when(georefService.municipalityCollection())
         .thenReturn(
             this.gson().fromJson(
                 new FileReader("src/main/resources/getAllMunicipalitiesTest.json"),
@@ -97,7 +99,7 @@ public class ServiceGeorefTest {
   @DisplayName("Get municipality filtered by province id, only bring id and name, and one result")
   public void getMunicipalityForSpecificProvinceTest() throws IOException {
     ServiceGeoref georefService = this.georefService();
-    Mockito.when(georefService().municipalityCollectionFilteredBy("6", "id,nombre", 1))
+    Mockito.when(georefService.municipalityCollectionFilteredBy("6", "id,nombre", 1))
         .thenReturn(
             this.gson().fromJson(
                 new FileReader("src/main/resources/getMunicipalityForSpecificProvinceTest.json"),
@@ -112,7 +114,7 @@ public class ServiceGeorefTest {
 
     Assertions.assertEquals(municipalityCollection.municipalities().size(), 1);
     Assertions.assertEquals(municipalityCollection.municipalities().get(0).id(), "060056");
-    Assertions.assertEquals(municipalityCollection.municipalities().get(0).name(), "Bahía Blanca");
+    Assertions.assertEquals(municipalityCollection.municipalities().get(0).name(), "Bahia Blanca");
 
     Assertions.assertTrue(municipalityCollection.parameters().fields().contains("id"));
     Assertions.assertTrue(municipalityCollection.parameters().fields().contains("nombre"));
@@ -124,7 +126,7 @@ public class ServiceGeorefTest {
   public void getAllDepartmentsTest() throws IOException {
 
     ServiceGeoref georefService = this.georefService();
-    Mockito.when(georefService().departmentCollection())
+    Mockito.when(georefService.departmentCollection())
         .thenReturn(
             this.gson().fromJson(
                 new FileReader("src/main/resources/getAllDepartmentsTest.json"),
@@ -145,7 +147,7 @@ public class ServiceGeorefTest {
   public void getDepartmentForSpecificProvinceTest() throws IOException {
 
     ServiceGeoref georefService = this.georefService();
-    Mockito.when(georefService().departmentCollectionFilteredBy("6", "id,nombre", 1))
+    Mockito.when(georefService.departmentCollectionFilteredBy("6", "id,nombre", 1))
         .thenReturn(
             this.gson().fromJson(
                 new FileReader("src/main/resources/getDepartmentForSpecificProvinceTest.json"),
