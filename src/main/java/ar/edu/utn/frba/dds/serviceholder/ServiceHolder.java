@@ -1,6 +1,8 @@
 package ar.edu.utn.frba.dds.serviceholder;
 
 import ar.edu.utn.frba.dds.community.Member;
+import ar.edu.utn.frba.dds.entity.Entity;
+import ar.edu.utn.frba.dds.service.Service;
 import ar.edu.utn.frba.dds.user.User;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +12,10 @@ public abstract class ServiceHolder {
   String name;
   String description;
   List<Member> members = new ArrayList<>();
+
+  List<Service> services = new ArrayList<>();
+
+  List<Entity> entities = new ArrayList<>();
 
   public String name() {
     return this.name;
@@ -22,6 +28,32 @@ public abstract class ServiceHolder {
   public List<Member> members() {
     return this.members.stream()
         .collect(Collectors.toList());
+  }
+
+  public List<Entity> entities() {
+    return this.entities.stream()
+        .collect(Collectors.toList());
+  }
+
+  public List<Service> services() {
+    return this.services.stream()
+        .collect(Collectors.toList());
+  }
+
+  public void addService(Service service) {
+    this.services.add(service);
+  }
+
+  public void addEntity(Entity entity) {
+    this.entities.add(entity);
+  }
+
+  public void removeService(Service service) {
+    this.services.remove(service);
+  }
+
+  public void removeEntity(Entity entity) {
+    this.entities.remove(entity);
   }
 
   public List<Member> analysts() {
