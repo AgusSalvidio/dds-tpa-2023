@@ -91,8 +91,8 @@ public class TopCommonPasswordsFileReader {
         passwordCache.addNewPassword(password);
         throw new InvalidPassword("Password is not strong enough.");
       }
+      passwordCache.addNewPassword(elementsWithLength.get(i));
       i++;
     }
-
   }
 }
