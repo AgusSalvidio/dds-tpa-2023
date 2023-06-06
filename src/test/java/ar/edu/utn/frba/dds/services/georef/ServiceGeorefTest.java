@@ -52,13 +52,13 @@ public class ServiceGeorefTest {
 
     ServiceGeoref georefService = this.georefService();
 
-    Mockito.when(georefService.provinceCollectionFilteredByName("Córdoba", "id,nombre"))
+    Mockito.when(georefService.provinceCollectionFilteredByName("Cordoba", "id,nombre"))
         .thenReturn(
             this.gson().fromJson(
                 new FileReader("src/main/resources/getSpecificProvinceTest.json"),
                 ProvinceCollection.class));
 
-    ProvinceCollection provinceCollection = georefService.provinceCollectionFilteredByName("Córdoba", "id,nombre");
+    ProvinceCollection provinceCollection = georefService.provinceCollectionFilteredByName("Cordoba", "id,nombre");
 
     Assertions.assertEquals(provinceCollection.quantity(), 1);
     Assertions.assertEquals(provinceCollection.start(), 0);
@@ -66,7 +66,7 @@ public class ServiceGeorefTest {
 
     Assertions.assertEquals(provinceCollection.provinces().size(), 1);
     Assertions.assertEquals(provinceCollection.provinces().get(0).id(), "14");
-    Assertions.assertEquals(provinceCollection.provinces().get(0).name(), "Córdoba");
+    Assertions.assertEquals(provinceCollection.provinces().get(0).name(), "Cordoba");
 
     Assertions.assertTrue(provinceCollection.parameters().fields().contains("id"));
     Assertions.assertTrue(provinceCollection.parameters().fields().contains("nombre"));
@@ -114,7 +114,7 @@ public class ServiceGeorefTest {
 
     Assertions.assertEquals(municipalityCollection.municipalities().size(), 1);
     Assertions.assertEquals(municipalityCollection.municipalities().get(0).id(), "060056");
-    Assertions.assertEquals(municipalityCollection.municipalities().get(0).name(), "Bahía Blanca");
+    Assertions.assertEquals(municipalityCollection.municipalities().get(0).name(), "Bahia Blanca");
 
     Assertions.assertTrue(municipalityCollection.parameters().fields().contains("id"));
     Assertions.assertTrue(municipalityCollection.parameters().fields().contains("nombre"));
