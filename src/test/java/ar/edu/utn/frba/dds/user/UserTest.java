@@ -1,12 +1,13 @@
 package ar.edu.utn.frba.dds.user;
 
+import ar.edu.utn.frba.dds.addons.usercreationaddon.UserDetailsCreationAddOn;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class UserTest {
-  private UserDetails userDetails() {
-    return new UserDetails("Hugo", "Ibarra", "ibarraneta@gmail.com");
+  private UserDetails userDetails() throws Exception {
+    return new UserDetailsCreationAddOn().ibarra();
 
   }
 

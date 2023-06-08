@@ -1,62 +1,52 @@
 package ar.edu.utn.frba.dds.service;
 
+import ar.edu.utn.frba.dds.addons.servicescreationaddon.servicecreationaddon.ElevatorCreationAddOn;
+import ar.edu.utn.frba.dds.addons.servicescreationaddon.servicecreationaddon.EscalatorCreationAddOn;
+import ar.edu.utn.frba.dds.addons.servicescreationaddon.servicecreationaddon.SectionCreationAddOn;
+import ar.edu.utn.frba.dds.addons.servicescreationaddon.servicecreationaddon.ToiletCreationAddOn;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class ServiceGroupTest {
-    private ServiceGroup serviceGroup;
-    private Elevator elevator;
-    private Escalator escalator;
-    private Toilet toilet;
-    private Section sectionElevatorA;
-    private Section sectionElevatorB;
-    private Section sectionEscalatorA;
-    private Section sectionEscalatorB;
-    private Section sectionToiletA;
-    private Section sectionToiletB;
+  private ServiceGroup serviceGroup() {
+    return new ServiceGroup();
+  }
 
-    @BeforeEach
-    public void init() {
-        this.serviceGroup = new ServiceGroup();
+  private Escalator escalator() {
+    Escalator escalator = new EscalatorCreationAddOn().escalatorA();
+    escalator.addNewSection(new SectionCreationAddOn().sectionA());
+    escalator.addNewSection(new SectionCreationAddOn().sectionB());
+    return escalator;
+  }
 
-        this.elevator = new Elevator();
-        this.elevator.setName("Ascensor Principal");
-        this.sectionElevatorA = new Section();
-        this.sectionElevatorA.setName("Acceso Principal a Molinetes");
-        this.sectionElevatorB = new Section();
-        this.sectionElevatorB.setName("Acceso a Plataforma");
+  private Toilet toilet() {
+    Toilet toilet = new ToiletCreationAddOn().toiletA();
+    toilet.addNewSection(new SectionCreationAddOn().sectionA());
+    toilet.addNewSection(new SectionCreationAddOn().sectionB());
+    return toilet;
+  }
 
-        this.escalator = new Escalator();
-        this.escalator.setName("Escalera Mecanica Adaptada");
-        this.sectionEscalatorA = new Section();
-        this.sectionEscalatorA.setName("Acceso Principal a Molinetes");
-        this.sectionEscalatorB = new Section();
-        this.sectionEscalatorB.setName("Acceso a Escalera");
+  private Elevator elevator() {
+    Elevator elevator = new ElevatorCreationAddOn().elevator();
+    elevator.addNewSection(new SectionCreationAddOn().sectionA());
+    elevator.addNewSection(new SectionCreationAddOn().sectionB());
+    return elevator;
+  }
 
-        this.toilet = new Toilet();
-        this.toilet.setName("Toilet Primer Piso");
-        this.sectionToiletA = new Section();
-        this.sectionToiletA.setName("Acceso Principal a Estacion");
-        this.sectionToiletB = new Section();
-        this.sectionToiletB.setName("Acceso a Servicios");
-    }
+  @Test
+  @DisplayName("Group of different services")
+  public void groupOfDifferentServicesTest() {
 
-    @Test
-    public void elevatorHasALotOfSections() {
-        this.elevator.addNewSection(sectionElevatorA);
-        this.elevator.addNewSection(sectionElevatorB);
+    Elevator elevator = this.elevator();
+    Escalator escalator = this.escalator();
+    Toilet toilet = this.toilet();
+    ServiceGroup serviceGroup = this.serviceGroup();
 
-        this.escalator.addNewSection(sectionEscalatorA);
-        this.escalator.addNewSection(sectionEscalatorB);
+    serviceGroup.addNewService(elevator);
+    serviceGroup.addNewService(escalator);
+    serviceGroup.addNewService(toilet);
 
-        this.toilet.addNewSection(sectionToiletA);
-        this.toilet.addNewSection(sectionToiletB);
-
-        this.serviceGroup.addNewService(elevator);
-        this.serviceGroup.addNewService(escalator);
-        this.serviceGroup.addNewService(toilet);
-
-        Assertions.assertEquals(3, this.serviceGroup.getServices().size());
-    }
+    Assertions.assertEquals(3, serviceGroup.getServices().size());
+  }
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ServiceGroup extends Service {
-  private List<Service> services;
+  public List<Service> services;
 
   public ServiceGroup() {
     this.services = new ArrayList<>();

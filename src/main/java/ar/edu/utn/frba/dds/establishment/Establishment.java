@@ -1,5 +1,6 @@
-package ar.edu.utn.frba.dds.publicservice;
+package ar.edu.utn.frba.dds.establishment;
 
+import ar.edu.utn.frba.dds.location.Location;
 import ar.edu.utn.frba.dds.service.Service;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,16 +8,19 @@ import java.util.stream.Collectors;
 import lombok.Getter;
 import lombok.Setter;
 
-public class Station {
+public class Establishment {
   @Setter
   @Getter
-  private String name;
+  public EstablishmentType type;
+  @Setter
+  @Getter
+  public String name;
   @Setter
   @Getter
   public Location location;
-  private List<Service> services;
+  public List<Service> services;
 
-  public Station() {
+  public Establishment() {
     this.services = new ArrayList<>();
   }
 
