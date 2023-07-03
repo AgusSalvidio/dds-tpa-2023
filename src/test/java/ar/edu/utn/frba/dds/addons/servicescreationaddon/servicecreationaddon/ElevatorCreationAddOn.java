@@ -1,11 +1,15 @@
 package ar.edu.utn.frba.dds.addons.servicescreationaddon.servicecreationaddon;
 
 import ar.edu.utn.frba.dds.service.Elevator;
+import ar.edu.utn.frba.dds.service.State;
 
 public class ElevatorCreationAddOn {
+
+  private State inServiceState() {
+    return new StateCreationAddOn().inServiceState();
+  }
+
   public Elevator elevator() {
-    Elevator elevator = new Elevator();
-    elevator.setName("Ascensor Principal");
-    return elevator;
+    return Elevator.composedOf("Ascensor", "Ascensor Principal", this.inServiceState());
   }
 }

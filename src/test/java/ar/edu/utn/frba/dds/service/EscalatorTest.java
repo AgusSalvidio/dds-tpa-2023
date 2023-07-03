@@ -28,6 +28,6 @@ public class EscalatorTest {
     escalator.addNewSection(this.sectionA());
     escalator.addNewSection(this.sectionB());
 
-    Assertions.assertEquals(2, escalator.getSections().size());
+    Assertions.assertEquals(2, escalator.sections().size());
   }
 }

@@ -27,6 +27,6 @@ public class ToiletTest {
     toilet.addNewSection(this.sectionA());
     toilet.addNewSection(this.sectionB());
 
-    Assertions.assertEquals(2, toilet.getSections().size());
+    Assertions.assertEquals(2, toilet.sections().size());
   }
 }

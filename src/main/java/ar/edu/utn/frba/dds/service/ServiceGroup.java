@@ -7,7 +7,14 @@ import java.util.stream.Collectors;
 public class ServiceGroup extends Service {
   public List<Service> services;
 
-  public ServiceGroup() {
+  public static ServiceGroup composedOf(String name, String description) {
+    return new ServiceGroup(name, description);
+  }
+
+  public ServiceGroup(String name, String description) {
+    this.name = name;
+    this.description = description;
+    this.sections = new ArrayList<>();
     this.services = new ArrayList<>();
   }
 
@@ -15,7 +22,7 @@ public class ServiceGroup extends Service {
     this.services.add(newService);
   }
 
-  public List<Service> getServices() {
+  public List<Service> services() {
     return this.services.stream().collect(Collectors.toList());
   }
 }
