@@ -59,4 +59,12 @@ public class Incident {
     return this.user;
   }
 
+  public void synchronizeWith(Incident updatedIncident) {
+    this.service = updatedIncident.service();
+    this.state = updatedIncident.state();
+    this.observations = updatedIncident.observations();
+    this.dateTime = updatedIncident.dateTime();
+    this.user = updatedIncident.user();
+  }
+
 }
