@@ -10,9 +10,10 @@ public class UserManagementSystem implements ManagementSystem {
     This is a STUPID IMPLEMENTATION but CodeSmells checks is so annoying that has to be this way so
     it will shut up.
    */
-  List<Object> systems = new ArrayList<>();
+  List<Object> systems;
 
   public UserManagementSystem(PersistenceSystem persistenceSystem) {
+    this.systems = new ArrayList<>();
     this.systems.add(persistenceSystem);
     this.persistenceSystem().addObjectTypeToStore(User.class.getName());
   }

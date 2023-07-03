@@ -1,9 +1,12 @@
 package ar.edu.utn.frba.dds.community;
 
+import ar.edu.utn.frba.dds.addons.servicescreationaddon.servicecreationaddon.ElevatorCreationAddOn;
+import ar.edu.utn.frba.dds.addons.servicescreationaddon.servicecreationaddon.ToiletCreationAddOn;
 import ar.edu.utn.frba.dds.addons.usercreationaddon.UserCreationAddOn;
 import ar.edu.utn.frba.dds.entity.TransportLine;
 import ar.edu.utn.frba.dds.service.Elevator;
 import ar.edu.utn.frba.dds.service.Service;
+import ar.edu.utn.frba.dds.service.State;
 import ar.edu.utn.frba.dds.service.Toilet;
 import ar.edu.utn.frba.dds.user.User;
 
@@ -18,6 +21,14 @@ public class CommunityTest {
   private User ibarraneta() throws Exception {
     return new UserCreationAddOn().ibarraneta();
 
+  }
+
+  private Toilet toilet() {
+    return new ToiletCreationAddOn().toiletA();
+  }
+
+  private Elevator elevator() {
+    return new ElevatorCreationAddOn().elevator();
   }
 
   @Test
@@ -138,8 +149,8 @@ public class CommunityTest {
     Assertions.assertTrue(community.entities().contains(transportLine));
 
     Community updtedCommunity = Community.composedOf("Comunidad 2", "Comunidad de prueba");
-    Service anotherService = new Toilet();
-    Service otherService = new Elevator();
+    Service anotherService = this.toilet();
+    Service otherService = this.elevator();
 
     updtedCommunity.addService(anotherService);
     updtedCommunity.addService(otherService);

@@ -8,9 +8,10 @@ import java.util.List;
 
 public class CommunityManagementSystem implements ManagementSystem {
 
-  List<Object> systems = new ArrayList<>();
+  List<Object> systems;
 
   public CommunityManagementSystem(PersistenceSystem persistenceSystem) {
+    this.systems = new ArrayList<>();
     this.systems.add(persistenceSystem);
     this.persistenceSystem().addObjectTypeToStore(Community.class.getName());
   }
