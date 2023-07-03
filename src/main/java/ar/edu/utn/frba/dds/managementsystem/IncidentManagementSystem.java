@@ -7,9 +7,10 @@ import java.util.List;
 
 public class IncidentManagementSystem implements ManagementSystem {
 
-  List<Object> systems = new ArrayList<>();
+  List<Object> systems;
 
   public IncidentManagementSystem(PersistenceSystem persistenceSystem) {
+    this.systems = new ArrayList<>();
     this.systems.add(persistenceSystem);
     this.persistenceSystem().addObjectTypeToStore(Incident.class.getName());
   }
