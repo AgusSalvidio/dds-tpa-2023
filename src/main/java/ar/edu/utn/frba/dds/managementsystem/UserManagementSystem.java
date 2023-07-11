@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.managementsystem;
 
+import ar.edu.utn.frba.dds.eventnotificationsystem.notifiableevent.NotifiableEvent;
 import ar.edu.utn.frba.dds.persistencesystem.PersistenceSystem;
 import ar.edu.utn.frba.dds.user.User;
 import java.util.ArrayList;
@@ -51,5 +52,7 @@ public class UserManagementSystem implements ManagementSystem {
         .findObjectTyped(currentUser.getClass().getName(), currentUser);
     obtainedUser.synchronizeWith((User) updatedUser);
   }
+
+  public void receiveFrom(NotifiableEvent event, Object publisher){}
 
 }

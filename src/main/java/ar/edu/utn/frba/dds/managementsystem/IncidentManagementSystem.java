@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.managementsystem;
 
+import ar.edu.utn.frba.dds.eventnotificationsystem.notifiableevent.NotifiableEvent;
 import ar.edu.utn.frba.dds.incident.Incident;
 import ar.edu.utn.frba.dds.persistencesystem.PersistenceSystem;
 import java.util.ArrayList;
@@ -50,4 +51,7 @@ public class IncidentManagementSystem implements ManagementSystem {
     obtainedIncident.synchronizeWith((Incident) updatedIncident);
   }
 
+  public void receiveFrom(NotifiableEvent event, Object publisher) {
+    System.out.println("Me llegó la notif");
+  }
 }

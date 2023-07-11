@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds.persistencesystem;
 
-import ar.edu.utn.frba.dds.user.UserDetails;
+import ar.edu.utn.frba.dds.user.UserDetail;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -41,8 +41,8 @@ public class PersistenceSystemTest {
   public void createPersistenceSystemWithMultipleTypeObjectsTest() {
     PersistenceSystem persistenceSystem = this.persistenceSystem();
     String integerClass = Integer.class.getName();
-    String userDetailsClass = UserDetails.class.getName();
-    UserDetails userDetails = new UserDetails("Basura", "Intergalactica", "basuraintergalactica@gmail.com");
+    String userDetailsClass = UserDetail.class.getName();
+    UserDetail userDetail = new UserDetail("Basura", "Intergalactica", "basuraintergalactica@gmail.com");
 
     persistenceSystem.addObjectTypeToStore(integerClass);
     persistenceSystem.addObjectTypeToStore(userDetailsClass);
@@ -51,16 +51,16 @@ public class PersistenceSystemTest {
     persistenceSystem.storeObjectTyped(integerClass, 4);
     persistenceSystem.storeObjectTyped(integerClass, 15);
 
-    persistenceSystem.storeObjectTyped(userDetailsClass, userDetails);
+    persistenceSystem.storeObjectTyped(userDetailsClass, userDetail);
 
     Object retrievedIntegerList = persistenceSystem.objectsFrom(integerClass);
     List<Integer> obtainedIntegerList = (List<Integer>) retrievedIntegerList;
 
     Object retrievedUserDetailsList = persistenceSystem.objectsFrom(userDetailsClass);
-    List<UserDetails> obtainedUserDetailsList = (List<UserDetails>) retrievedUserDetailsList;
+    List<UserDetail> obtainedUserDetailList = (List<UserDetail>) retrievedUserDetailsList;
 
     Assertions.assertTrue(obtainedIntegerList.containsAll(new ArrayList<>(Arrays.asList(1, 4, 15))));
-    Assertions.assertTrue(obtainedUserDetailsList.contains(userDetails));
+    Assertions.assertTrue(obtainedUserDetailList.contains(userDetail));
 
   }
 
