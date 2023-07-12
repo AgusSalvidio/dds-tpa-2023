@@ -4,4 +4,8 @@
         <Class name="ar.edu.utn.frba.dds.incident.Incident"/>
         <Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2"/>
     </Match>
+    <Match>
+        <Class name="ar.edu.utn.frba.dds.managementsystem.IncidentManagementSystem"/>
+        <Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2"/>
+    </Match>
 </FindBugsFilter>

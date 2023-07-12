@@ -17,8 +17,8 @@ public class ManagementSystemAddOn {
     return new MemoryBasedPersistenceSystem();
   }
 
-  public IncidentManagementSystem incidentManagementSystem() {
-    return IncidentManagementSystem.workingWith(this.persistenceSystem());
+  public IncidentManagementSystem incidentManagementSystemUsing(EventNotificationSystem eventNotificationSystem) {
+    return IncidentManagementSystem.workingWith(this.persistenceSystem(), eventNotificationSystem);
   }
 
   public DummyManagementSystem dummyManagementSystemUsing(EventNotificationSystem eventNotificationSystem) {

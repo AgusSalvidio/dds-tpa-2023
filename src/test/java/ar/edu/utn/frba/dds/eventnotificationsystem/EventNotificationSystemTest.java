@@ -16,8 +16,8 @@ public class EventNotificationSystemTest {
     return new ManagementSystemAddOn().dummyManagementSystemUsing(eventNotificationSystem);
   }
 
-  private IncidentManagementSystem incidentManagementSystem() {
-    return new ManagementSystemAddOn().incidentManagementSystem();
+  private IncidentManagementSystem incidentManagementSystemUsing(EventNotificationSystem eventNotificationSystem) {
+    return new ManagementSystemAddOn().incidentManagementSystemUsing(eventNotificationSystem);
   }
 
   private NotifiableEvent incidentNotifiableEvent() throws Exception {
@@ -69,7 +69,7 @@ public class EventNotificationSystemTest {
     EventNotificationSystem eventNotificationSystem = new EventNotificationSystem();
     DummyManagementSystem dummyManagementSystem = this.dummyManagementSystemUsing(eventNotificationSystem);
     NotifiableEvent notifiableEvent = this.incidentNotifiableEvent();
-    IncidentManagementSystem incidentManagementSystem = this.incidentManagementSystem();
+    IncidentManagementSystem incidentManagementSystem = this.incidentManagementSystemUsing(eventNotificationSystem);
 
     Assertions.assertTrue(eventNotificationSystem.subscriptions().isEmpty());
 

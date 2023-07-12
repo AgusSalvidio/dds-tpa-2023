@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.managementsystem;
 
 import ar.edu.utn.frba.dds.addons.incidentcreationaddon.IncidentCreationAddOn;
+import ar.edu.utn.frba.dds.eventnotificationsystem.EventNotificationSystem;
 import ar.edu.utn.frba.dds.incident.Incident;
 import ar.edu.utn.frba.dds.persistencesystem.MemoryBasedPersistenceSystem;
 import ar.edu.utn.frba.dds.persistencesystem.PersistenceSystem;
@@ -10,6 +11,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class IncidentManagementSystemTest {
+
+  private EventNotificationSystem eventNotificationSystem() {
+    return new EventNotificationSystem();
+  }
 
   private PersistenceSystem persistenceSystem() {
     return this.memoryBasedPersistenceSystem();
@@ -32,7 +37,8 @@ public class IncidentManagementSystemTest {
   @DisplayName("Start managing an incident")
   public void startManagingAnIncidentTest() throws Exception {
 
-    IncidentManagementSystem incidentManagementSystem = IncidentManagementSystem.workingWith(this.persistenceSystem());
+    IncidentManagementSystem incidentManagementSystem =
+        IncidentManagementSystem.workingWith(this.persistenceSystem(), this.eventNotificationSystem());
     Incident incident = this.notWorkingElevatorIncident();
 
     Assertions.assertTrue(incidentManagementSystem.incidents().isEmpty());
@@ -47,7 +53,8 @@ public class IncidentManagementSystemTest {
   @DisplayName("Stop managing an incident")
   public void stopManagingAnIncidentTest() throws Exception {
 
-    IncidentManagementSystem incidentManagementSystem = IncidentManagementSystem.workingWith(this.persistenceSystem());
+    IncidentManagementSystem incidentManagementSystem =
+        IncidentManagementSystem.workingWith(this.persistenceSystem(), this.eventNotificationSystem());
     Incident incident = this.notWorkingElevatorIncident();
 
     Assertions.assertTrue(incidentManagementSystem.incidents().isEmpty());
@@ -66,7 +73,8 @@ public class IncidentManagementSystemTest {
   @DisplayName("Update an incident")
   public void updateAnIncidentTest() throws Exception {
 
-    IncidentManagementSystem incidentManagementSystem = IncidentManagementSystem.workingWith(this.persistenceSystem());
+    IncidentManagementSystem incidentManagementSystem =
+        IncidentManagementSystem.workingWith(this.persistenceSystem(), this.eventNotificationSystem());
     Incident incident = this.notWorkingElevatorIncident();
 
     Assertions.assertTrue(incidentManagementSystem.incidents().isEmpty());
