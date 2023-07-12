@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.dds.addons.servicescreationaddon.servicecreationaddon;
+package ar.edu.utn.frba.dds.addons.servicescreationaddon;
 
 import ar.edu.utn.frba.dds.service.Escalator;
 import ar.edu.utn.frba.dds.service.State;

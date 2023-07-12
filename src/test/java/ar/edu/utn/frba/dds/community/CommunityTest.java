@@ -1,12 +1,11 @@
 package ar.edu.utn.frba.dds.community;
 
-import ar.edu.utn.frba.dds.addons.servicescreationaddon.servicecreationaddon.ElevatorCreationAddOn;
-import ar.edu.utn.frba.dds.addons.servicescreationaddon.servicecreationaddon.ToiletCreationAddOn;
+import ar.edu.utn.frba.dds.addons.servicescreationaddon.ElevatorCreationAddOn;
+import ar.edu.utn.frba.dds.addons.servicescreationaddon.ToiletCreationAddOn;
 import ar.edu.utn.frba.dds.addons.usercreationaddon.UserCreationAddOn;
 import ar.edu.utn.frba.dds.entity.TransportLine;
 import ar.edu.utn.frba.dds.service.Elevator;
 import ar.edu.utn.frba.dds.service.Service;
-import ar.edu.utn.frba.dds.service.State;
 import ar.edu.utn.frba.dds.service.Toilet;
 import ar.edu.utn.frba.dds.user.User;
 

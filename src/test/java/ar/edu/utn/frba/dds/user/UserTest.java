@@ -1,13 +1,13 @@
 package ar.edu.utn.frba.dds.user;
 
-import ar.edu.utn.frba.dds.addons.usercreationaddon.UserDetailsCreationAddOn;
+import ar.edu.utn.frba.dds.addons.usercreationaddon.UserDetailCreationAddOn;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class UserTest {
   private UserDetail userDetails() throws Exception {
-    return new UserDetailsCreationAddOn().ibarra();
+    return new UserDetailCreationAddOn().ibarra();
 
   }
 

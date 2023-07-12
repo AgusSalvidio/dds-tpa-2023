@@ -2,7 +2,7 @@ package ar.edu.utn.frba.dds.user;
 
 import ar.edu.utn.frba.dds.addons.locationcreationaddon.LocationCreationAddOn;
 import ar.edu.utn.frba.dds.addons.entitycreationaddon.TransportLineCreationAddOn;
-import ar.edu.utn.frba.dds.addons.servicescreationaddon.servicecreationaddon.ElevatorCreationAddOn;
+import ar.edu.utn.frba.dds.addons.servicescreationaddon.ElevatorCreationAddOn;
 import ar.edu.utn.frba.dds.entity.TransportLine;
 import ar.edu.utn.frba.dds.service.Elevator;
 import ar.edu.utn.frba.dds.location.Location;

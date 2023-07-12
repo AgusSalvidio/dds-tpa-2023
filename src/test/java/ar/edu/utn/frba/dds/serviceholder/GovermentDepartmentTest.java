@@ -1,7 +1,7 @@
 package ar.edu.utn.frba.dds.serviceholder;
 
 import ar.edu.utn.frba.dds.addons.entitycreationaddon.TransportLineCreationAddOn;
-import ar.edu.utn.frba.dds.addons.servicescreationaddon.servicecreationaddon.ElevatorCreationAddOn;
+import ar.edu.utn.frba.dds.addons.servicescreationaddon.ElevatorCreationAddOn;
 import ar.edu.utn.frba.dds.addons.usercreationaddon.UserCreationAddOn;
 import ar.edu.utn.frba.dds.entity.TransportLine;
 import ar.edu.utn.frba.dds.service.Elevator;
