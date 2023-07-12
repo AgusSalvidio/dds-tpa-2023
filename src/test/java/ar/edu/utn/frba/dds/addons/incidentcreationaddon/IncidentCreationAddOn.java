@@ -39,7 +39,6 @@ public class IncidentCreationAddOn {
 
     return Incident.composedOf(
         this.elevator(),
-        this.openIncidentState(),
         this.notWorkingElevatorObservation(),
         this.curentDateTime(),
         this.ibarraneta()
@@ -50,7 +49,6 @@ public class IncidentCreationAddOn {
 
     return Incident.composedOf(
         this.elevator(),
-        this.closedIncidentState(),
         this.notWorkingElevatorObservation(),
         this.curentDateTime(),
         this.ibarraneta()
