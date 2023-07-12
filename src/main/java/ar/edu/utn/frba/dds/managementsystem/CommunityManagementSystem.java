@@ -52,6 +52,8 @@ public class CommunityManagementSystem implements ManagementSystem {
   }
 
   public void receiveFrom(NotifiableEvent event, Object publisher) {
+    /* For now, this system should have an implementation. This will be enhanced
+     when the extracting the implementation from ManagementSystem -asalvidio*/
   }
 }
 

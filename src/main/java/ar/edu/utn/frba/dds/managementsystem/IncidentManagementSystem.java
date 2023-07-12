@@ -52,6 +52,7 @@ public class IncidentManagementSystem implements ManagementSystem {
   }
 
   public void receiveFrom(NotifiableEvent event, Object publisher) {
-    System.out.println("Me llegó la notif");
+    /* For now, this system should have an implementation. This will be enhanced
+     when the extracting the implementation from ManagementSystem -asalvidio*/
   }
 }

@@ -53,6 +53,9 @@ public class UserManagementSystem implements ManagementSystem {
     obtainedUser.synchronizeWith((User) updatedUser);
   }
 
-  public void receiveFrom(NotifiableEvent event, Object publisher){}
+  public void receiveFrom(NotifiableEvent event, Object publisher) {
+    /* For now, this system should have an implementation. This will be enhanced
+     when the extracting the implementation from ManagementSystem -asalvidio*/
+  }
 
 }
