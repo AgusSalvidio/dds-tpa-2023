@@ -12,4 +12,8 @@ public class UserDetailsCreationAddOn {
     return UserDetails.composedOf("Basura", "Intergalactica", "basuraintergalactica@gmail.com");
   }
 
+  public UserDetails basuraIntergalactica2() throws Exception {
+    return UserDetails.composedOf("Basura", "Intergalactica2", "basuraintergalactica2@gmail.com");
+  }
+
 }
