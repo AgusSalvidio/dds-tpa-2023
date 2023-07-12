@@ -17,4 +17,11 @@ public class UserCreationAddOn {
         "intergalacticGarbageCollector",
         new UserDetailsCreationAddOn().basuraIntergalactica());
   }
+
+  public User basuraIntergalactica2() throws Exception {
+    return User.composedOf(
+        "basuraIntergalactica2",
+        "intergalacticGarbageCollector2",
+        new UserDetailsCreationAddOn().basuraIntergalactica2());
+  }
 }

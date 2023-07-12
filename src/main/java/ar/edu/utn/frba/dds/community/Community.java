@@ -92,6 +92,13 @@ public class Community {
         .collect(Collectors.toList());
   }
 
+  public List<Member> affected() {
+    return this.members().stream()
+        .filter(member -> member.role()
+            .equals("Afectado"))
+        .collect(Collectors.toList());
+  }
+
   private void removeMemberComposedOf(User anUser) {
     Member foundMember = this.members.stream()
         .filter(member -> member.user().equals(anUser))
@@ -112,6 +119,10 @@ public class Community {
 
   public void addUser(User anUser) {
     this.addMemberComposedOf(anUser, "Suscriptor");
+  }
+
+  public void addAffected(User anUser) {
+    this.addMemberComposedOf(anUser, "Afectado");
   }
 
   public void removeUser(User anUser) {

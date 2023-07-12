@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.incident;
 import ar.edu.utn.frba.dds.service.Service;
 import ar.edu.utn.frba.dds.service.State;
 import ar.edu.utn.frba.dds.user.User;
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class Incident {
@@ -53,6 +54,22 @@ public class Incident {
     this.observations = updatedIncident.observations();
     this.dateTime = updatedIncident.dateTime();
     this.user = updatedIncident.user();
+  }
+
+  public long closingTime() {
+    LocalDateTime now = LocalDateTime.now();
+
+    Duration durationOfIncident = Duration.between(now, this.dateTime);
+
+    return Math.abs(durationOfIncident.toHours());
+  }
+
+  public boolean reported24HoursAgo() {
+    LocalDateTime now = LocalDateTime.now();
+
+    Duration durationOfIncident = Duration.between(now, this.dateTime);
+
+    return Math.abs(durationOfIncident.toHours()) >= 24;
   }
 
 }
