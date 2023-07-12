@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.managementsystem;
 
+import ar.edu.utn.frba.dds.eventnotificationsystem.notifiableevent.NotifiableEvent;
 import ar.edu.utn.frba.dds.persistencesystem.PersistenceSystem;
 
 public interface ManagementSystem {
@@ -14,4 +15,6 @@ public interface ManagementSystem {
   public void stopManaging(Object anObject);
 
   public void updateWith(Object currentObject, Object updatedObject);
+
+  public void receiveFrom(NotifiableEvent event, Object publisher);
 }

@@ -3,14 +3,14 @@ package ar.edu.utn.frba.dds.managementsystem;
 import ar.edu.utn.frba.dds.persistencesystem.MemoryBasedPersistenceSystem;
 import ar.edu.utn.frba.dds.persistencesystem.PersistenceSystem;
 import ar.edu.utn.frba.dds.user.User;
-import ar.edu.utn.frba.dds.user.UserDetails;
+import ar.edu.utn.frba.dds.user.UserDetail;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class UserManagementSystemTest {
-  private UserDetails userDetails() {
-    return new UserDetails("Hugo", "Ibarra", "ibarraneta@gmail.com");
+  private UserDetail userDetails() {
+    return new UserDetail("Hugo", "Ibarra", "ibarraneta@gmail.com");
   }
 
   private PersistenceSystem persistenceSystem() {

@@ -4,14 +4,14 @@ import ar.edu.utn.frba.dds.entity.Entity;
 import ar.edu.utn.frba.dds.service.Service;
 import java.util.List;
 
-public class UserDetails {
+public class UserDetail {
   String name;
   String lastname;
   String email;
 
   UserPreferences userPreferences;
 
-  public UserDetails(String name, String lastname, String anEmail) {
+  public UserDetail(String name, String lastname, String anEmail) {
     this.name = name;
     this.lastname = lastname;
     this.email = anEmail;
@@ -30,7 +30,7 @@ public class UserDetails {
     return this.email;
   }
 
-  public static UserDetails composedOf(String name, String lastname, String anEmail)
+  public static UserDetail composedOf(String name, String lastname, String anEmail)
       throws Exception {
     /*
         Implemented this way because its needed an AssertionChecker class that will be implemented
@@ -39,7 +39,7 @@ public class UserDetails {
     if (name.isEmpty() || lastname.isEmpty() || anEmail.isEmpty()) {
       throw new Exception("Los campos no pueden estar en blanco.");
     }
-    return new UserDetails(name, lastname, anEmail);
+    return new UserDetail(name, lastname, anEmail);
   }
 
   public List<Service> services() {

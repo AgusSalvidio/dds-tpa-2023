@@ -3,9 +3,9 @@ package ar.edu.utn.frba.dds.user;
 public class User {
   String username;
   String password;
-  UserDetails details;
+  UserDetail details;
 
-  public static User composedOf(String username, String password, UserDetails userDetails)
+  public static User composedOf(String username, String password, UserDetail userDetail)
       throws Exception {
     /*
         Implemented this way because its needed an AssertionChecker that will be implemented
@@ -14,14 +14,14 @@ public class User {
     if (username.isEmpty() || password.isEmpty()) {
       throw new Exception("Los campos no pueden estar en blanco.");
     }
-    return new User(username, password, userDetails);
+    return new User(username, password, userDetail);
 
   }
 
-  public User(String username, String password, UserDetails userDetails) {
+  public User(String username, String password, UserDetail userDetail) {
     this.username = username;
     this.password = password;
-    this.details = userDetails;
+    this.details = userDetail;
   }
 
   public void synchronizeWith(User anUpdatedUser) {
@@ -38,7 +38,7 @@ public class User {
     return password;
   }
 
-  private UserDetails details() {
+  private UserDetail details() {
     return details;
   }
 

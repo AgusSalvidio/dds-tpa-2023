@@ -6,7 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class UserTest {
-  private UserDetails userDetails() throws Exception {
+  private UserDetail userDetails() throws Exception {
     return new UserDetailsCreationAddOn().ibarra();
 
   }

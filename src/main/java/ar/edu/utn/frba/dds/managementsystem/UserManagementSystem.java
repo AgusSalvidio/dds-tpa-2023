@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.managementsystem;
 
+import ar.edu.utn.frba.dds.eventnotificationsystem.notifiableevent.NotifiableEvent;
 import ar.edu.utn.frba.dds.persistencesystem.PersistenceSystem;
 import ar.edu.utn.frba.dds.user.User;
 import java.util.ArrayList;
@@ -50,6 +51,11 @@ public class UserManagementSystem implements ManagementSystem {
     User obtainedUser = (User) this.persistenceSystem()
         .findObjectTyped(currentUser.getClass().getName(), currentUser);
     obtainedUser.synchronizeWith((User) updatedUser);
+  }
+
+  public void receiveFrom(NotifiableEvent event, Object publisher) {
+    /* For now, this system should have an implementation. This will be enhanced
+     when the extracting the implementation from ManagementSystem -asalvidio*/
   }
 
 }

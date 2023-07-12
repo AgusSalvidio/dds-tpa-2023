@@ -1,8 +1,8 @@
 package ar.edu.utn.frba.dds.managementsystem;
 
 import ar.edu.utn.frba.dds.community.Community;
+import ar.edu.utn.frba.dds.eventnotificationsystem.notifiableevent.NotifiableEvent;
 import ar.edu.utn.frba.dds.persistencesystem.PersistenceSystem;
-import ar.edu.utn.frba.dds.user.User;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,6 +51,9 @@ public class CommunityManagementSystem implements ManagementSystem {
     obtainedCommunity.synchronizeWith((Community) updatedCommunity);
   }
 
-
+  public void receiveFrom(NotifiableEvent event, Object publisher) {
+    /* For now, this system should have an implementation. This will be enhanced
+     when the extracting the implementation from ManagementSystem -asalvidio*/
+  }
 }
 
