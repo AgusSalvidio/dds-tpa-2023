@@ -4,8 +4,6 @@ import ar.edu.utn.frba.dds.establishment.Establishment;
 import ar.edu.utn.frba.dds.incident.Incident;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.OptionalDouble;
-import java.util.stream.Collectors;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,7 +19,7 @@ public abstract class Entity {
 
   public Entity() {
 
-    this.establishments = new ArrayList();
+    this.establishments = new ArrayList<>();
     this.incidents = new ArrayList<>();
   }
 
@@ -30,7 +28,7 @@ public abstract class Entity {
   }
 
   public List<Establishment> getEstablishments() {
-    return this.establishments.stream().collect(Collectors.toList());
+    return this.establishments;
   }
 
   public String name() {
@@ -44,26 +42,6 @@ public abstract class Entity {
 
   public List<Incident> incidents() {
     return this.incidents;
-  }
-
-  public double averageClosingTimeForIncidents() {
-    OptionalDouble average;
-
-    average = this.incidents.stream().mapToDouble(Incident::closingTime).average();
-
-    return average.isPresent() ? average.getAsDouble() : 0;
-  }
-
-  public List<Incident> validIncidents() {
-    List<Incident> incidentsWithMoreThan24Hours = new ArrayList<>();
-
-    for (Incident incident : this.incidents) {
-      if (incident.reported24HoursAgo() && incident.state().name().equals("OPEN")) {
-        incidentsWithMoreThan24Hours.add(incident);
-      }
-    }
-
-    return incidentsWithMoreThan24Hours;
   }
 
 }

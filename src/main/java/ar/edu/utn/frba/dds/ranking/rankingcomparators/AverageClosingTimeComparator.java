@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.ranking.rankingcomparators;
 
 import ar.edu.utn.frba.dds.entity.Entity;
+import ar.edu.utn.frba.dds.incident.IncidentTimeCalculator;
 import java.io.Serializable;
 import java.util.Comparator;
 
@@ -9,9 +10,11 @@ public class AverageClosingTimeComparator implements Comparator<Entity>, Seriali
   @Override
   public int compare(Entity firstEntity, Entity secondEntity) {
 
+    IncidentTimeCalculator incidentTimeCalculator = new IncidentTimeCalculator();
+
     return Double
         .compare(
-            firstEntity.averageClosingTimeForIncidents(),
-            secondEntity.averageClosingTimeForIncidents());
+            incidentTimeCalculator.averageClosingTimeOf(firstEntity.incidents()),
+            incidentTimeCalculator.averageClosingTimeOf(secondEntity.incidents()));
   }
 }

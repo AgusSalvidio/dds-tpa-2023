@@ -49,16 +49,18 @@ public class MostReportedIncidentsRankingTest {
     MostReportedIncidentsRanking mostReportedIncidentsRanking = this.mostReportedIncidentsRanking();
     Entity entityA = new EntityCreationAddOn().entityA();
     Entity entityC = new EntityCreationAddOn().entityC();
+    Entity entityB = new EntityCreationAddOn().entityB();
 
 
-    mostReportedIncidentsRanking.addEntityToRanking(entityA);
     mostReportedIncidentsRanking.addEntityToRanking(entityC);
+    mostReportedIncidentsRanking.addEntityToRanking(entityA);
+    mostReportedIncidentsRanking.addEntityToRanking(entityB);
 
 
-    Assertions.assertEquals(mostReportedIncidentsRanking.entities(), Arrays.asList(entityA, entityC));
+    Assertions.assertEquals(mostReportedIncidentsRanking.entities(), Arrays.asList(entityC, entityA, entityB));
 
     mostReportedIncidentsRanking.generateRanking();
 
-    Assertions.assertEquals(mostReportedIncidentsRanking.entities(), Arrays.asList(entityC, entityA));
+    Assertions.assertEquals(mostReportedIncidentsRanking.entities(), Arrays.asList(entityB, entityC, entityA));
   }
 }
