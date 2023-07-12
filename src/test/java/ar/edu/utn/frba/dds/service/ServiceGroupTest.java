@@ -1,9 +1,9 @@
 package ar.edu.utn.frba.dds.service;
 
-import ar.edu.utn.frba.dds.addons.servicescreationaddon.servicecreationaddon.ElevatorCreationAddOn;
-import ar.edu.utn.frba.dds.addons.servicescreationaddon.servicecreationaddon.EscalatorCreationAddOn;
-import ar.edu.utn.frba.dds.addons.servicescreationaddon.servicecreationaddon.SectionCreationAddOn;
-import ar.edu.utn.frba.dds.addons.servicescreationaddon.servicecreationaddon.ToiletCreationAddOn;
+import ar.edu.utn.frba.dds.addons.servicescreationaddon.ElevatorCreationAddOn;
+import ar.edu.utn.frba.dds.addons.servicescreationaddon.EscalatorCreationAddOn;
+import ar.edu.utn.frba.dds.addons.servicescreationaddon.SectionCreationAddOn;
+import ar.edu.utn.frba.dds.addons.servicescreationaddon.ToiletCreationAddOn;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

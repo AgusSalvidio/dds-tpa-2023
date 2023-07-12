@@ -1,8 +1,8 @@
 package ar.edu.utn.frba.dds.addons.incidentcreationaddon;
 
-import ar.edu.utn.frba.dds.addons.servicescreationaddon.servicecreationaddon.ElevatorCreationAddOn;
-import ar.edu.utn.frba.dds.addons.servicescreationaddon.servicecreationaddon.EscalatorCreationAddOn;
-import ar.edu.utn.frba.dds.addons.servicescreationaddon.servicecreationaddon.StateCreationAddOn;
+import ar.edu.utn.frba.dds.addons.servicescreationaddon.ElevatorCreationAddOn;
+import ar.edu.utn.frba.dds.addons.servicescreationaddon.EscalatorCreationAddOn;
+import ar.edu.utn.frba.dds.addons.servicescreationaddon.StateCreationAddOn;
 import ar.edu.utn.frba.dds.addons.usercreationaddon.UserCreationAddOn;
 import ar.edu.utn.frba.dds.incident.Incident;
 import ar.edu.utn.frba.dds.service.Elevator;
@@ -74,7 +74,6 @@ public class IncidentCreationAddOn {
 
     return Incident.composedOf(
         this.escalator(),
-        this.openIncidentState(),
         this.notWorkingEscalatorObservation(),
         this.anotherDateTime(),
         this.ibarraneta()

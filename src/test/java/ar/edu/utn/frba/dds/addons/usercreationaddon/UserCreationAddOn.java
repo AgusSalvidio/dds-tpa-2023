@@ -8,20 +8,20 @@ public class UserCreationAddOn {
     return User.composedOf(
         "ibarranetaYPF",
         "theBestPassword",
-        new UserDetailsCreationAddOn().ibarra());
+        new UserDetailCreationAddOn().ibarra());
   }
 
   public User basuraIntergalactica() throws Exception {
     return User.composedOf(
         "basuraIntergalactica",
         "intergalacticGarbageCollector",
-        new UserDetailsCreationAddOn().basuraIntergalactica());
+        new UserDetailCreationAddOn().basuraIntergalactica());
   }
 
   public User basuraIntergalactica2() throws Exception {
     return User.composedOf(
         "basuraIntergalactica2",
         "intergalacticGarbageCollector2",
-        new UserDetailsCreationAddOn().basuraIntergalactica2());
+        new UserDetailCreationAddOn().basuraIntergalactica2());
   }
 }
