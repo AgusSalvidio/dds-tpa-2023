@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.community;
 
 import ar.edu.utn.frba.dds.entity.Entity;
+import ar.edu.utn.frba.dds.incident.Incident;
 import ar.edu.utn.frba.dds.service.Service;
 import ar.edu.utn.frba.dds.user.User;
 import java.util.ArrayList;
@@ -12,9 +13,10 @@ public class Community {
 
   String name;
   String description;
-  List<Member> members = new ArrayList<>();
-  List<Service> services = new ArrayList<>();
-  List<Entity> entities = new ArrayList<>();
+  List<Member> members;
+  List<Service> services;
+  List<Entity> entities;
+  List<Incident> openIncidents;
 
   public static Community composedOf(String name, String description)
       throws Exception {
@@ -32,6 +34,10 @@ public class Community {
   public Community(String name, String description) {
     this.name = name;
     this.description = description;
+    this.members = new ArrayList<>();
+    this.entities = new ArrayList<>();
+    this.openIncidents = new ArrayList<>();
+    this.services = new ArrayList<>();
   }
 
   public String name() {
@@ -46,6 +52,26 @@ public class Community {
     return this.members.stream()
         .collect(Collectors.toList());
   }
+
+  public List<Incident> openIncidents() {
+    return this.openIncidents.stream()
+        .collect(Collectors.toList());
+  }
+
+  /*This should be made by the notificationSystem or by anotherObject
+    depends on the implementation chosen -asalvidio */
+  public void addOpenIncident(Incident incident) {
+    this.openIncidents.add(incident);
+    /*Here we have to decide to notify the IncidentPerCommunityManagementSystem
+    to add IncidentPerCommunity or do it before depends on the implementation -asalvidio */
+  }
+
+  public void removeIncident(Incident incident) {
+    this.openIncidents.remove(incident);
+    /*Here we have to decide to notify the IncidentPerCommunityManagementSystem to
+    change the status to closed -asalvidio */
+  }
+
 
   /*Made this way to pass codeSmells check*/
   public List<Service> services() {

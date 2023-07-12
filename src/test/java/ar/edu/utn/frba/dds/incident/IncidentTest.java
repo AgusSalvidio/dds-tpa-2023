@@ -16,10 +16,6 @@ public class IncidentTest {
     return new UserCreationAddOn().ibarraneta();
   }
 
-  private State openIncidentState() {
-    return new StateCreationAddOn().openIncident();
-  }
-
   private Elevator elevator() {
     return new ElevatorCreationAddOn().elevator();
   }
@@ -32,21 +28,18 @@ public class IncidentTest {
   @DisplayName("Create an incident")
   public void createAnIncidentTest() throws Exception {
     Elevator elevator = this.elevator();
-    State openIncidentState = this.openIncidentState();
     User user = this.ibarraneta();
     LocalDateTime curentDateTime = this.curentDateTime();
     String observation = "No funciona el ascensor correctamente";
 
     Incident incident = Incident.composedOf(
         elevator,
-        openIncidentState,
         observation,
         curentDateTime,
         user
     );
 
     Assertions.assertEquals(incident.service(), elevator);
-    Assertions.assertEquals(incident.state(), openIncidentState);
     Assertions.assertEquals(incident.dateTime(), curentDateTime);
     Assertions.assertEquals(incident.observations(), observation);
     Assertions.assertEquals(incident.user(), user);
