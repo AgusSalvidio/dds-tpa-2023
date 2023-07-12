@@ -3,6 +3,9 @@ package ar.edu.utn.frba.dds.loggersystem;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
@@ -16,6 +19,8 @@ public class LoggerSystemTest {
   @DisplayName("Create logger")
   public void createLoggerTest() throws Exception {
     LoggerSystem loggerSystem = new LoggerSystem();
+    String fileName = "logs.log";
+    String filePath = "./".concat(fileName);
 
     String infoMessage = "Mensaje de Info";
     String warningMessage = "Mensaje de Advertencia";
@@ -25,17 +30,17 @@ public class LoggerSystemTest {
 
     FileReader fileReader = null;
     try {
-      fileReader = new FileReader("logs.log");
+      fileReader = new FileReader(fileName);
     } catch (
         FileNotFoundException fe) {
       System.out.println("File not found");
     }
 
-    BufferedReader br = new BufferedReader(fileReader);
+    BufferedReader bufferedReader = new BufferedReader(fileReader);
 
     //The even lines are the messages, the odd ones are the timestamp -asalvidio
 
-    List<String> lines = br.lines().collect(Collectors.toList());
+    List<String> lines = bufferedReader.lines().collect(Collectors.toList());
 
     String secondLine = lines.get(3);
     String fourthLine = lines.get(5);
@@ -43,6 +48,18 @@ public class LoggerSystemTest {
     Assertions.assertEquals(secondLine, "INFO: ".concat(infoMessage));
     Assertions.assertEquals(fourthLine, "WARNING: ".concat(warningMessage));
 
+    bufferedReader.close();
+    fileReader.close();
+
+    //Deletes the file to avoid creating multiples -asalvidio
+    try {
+      Files.deleteIfExists(
+          Paths.get(filePath));
+    } catch (NoSuchFileException e) {
+      System.out.println(
+          "No such file/directory exists");
+
+    }
   }
 
 }
