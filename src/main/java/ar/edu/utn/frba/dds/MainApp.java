@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds;
 
+import ar.edu.utn.frba.dds.controllers.HomeViewController;
 import java.io.IOException;
 import java.util.function.Consumer;
 
@@ -11,21 +12,20 @@ import io.javalin.config.JavalinConfig;
 import io.javalin.http.HttpStatus;
 import io.javalin.rendering.JavalinRenderer;
 
-public class mainApp {
+public class MainApp {
 
   public static void main(String[] args) {
 
     //initializeApplicationContext();
-    //initTemplateEngine();
+    initializeTemplateEngine();
 
     Integer port = Integer.parseInt(System.getProperty("port", "8080"));
-    //Javalin app = Javalin.create(config()).start(port);
-    Javalin app = Javalin.create().start(port);
-    app.get("/", context -> context.result("Hola Mundo"));
+    Javalin app = Javalin.create(config()).start(port);
+    app.get("/", new HomeViewController());
 
   }
 
-  private static void initTemplateEngine() {
+  private static void initializeTemplateEngine() {
     JavalinRenderer.register(
         (path, model, context) -> { // This renders the template
           Handlebars handlebars = new Handlebars();
