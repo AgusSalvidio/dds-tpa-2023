@@ -181,6 +181,15 @@
                             </rules>
                             <excludes>
                                 <exclude>Main.class</exclude>
+                                <exclude>
+                                    ar/edu/utn/frba/dds/applicationcontext/**/*
+                                </exclude>
+                                <exclude>
+                                    ar/edu/utn/frba/dds/controller/**/*
+                                </exclude>
+                                <exclude>
+                                    ar/edu/utn/frba/dds/MainApp.class
+                                </exclude>
                             </excludes>
                         </configuration>
                     </execution>

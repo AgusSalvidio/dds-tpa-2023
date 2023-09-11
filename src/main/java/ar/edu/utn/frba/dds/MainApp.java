@@ -2,20 +2,19 @@ package ar.edu.utn.frba.dds;
 
 import ar.edu.utn.frba.dds.applicationcontext.ApplicationContext;
 import ar.edu.utn.frba.dds.controller.action.GetAllUsersActionController;
-import ar.edu.utn.frba.dds.controller.view.HomeViewController;
 import ar.edu.utn.frba.dds.controller.action.RegisterUserActionController;
+import ar.edu.utn.frba.dds.controller.view.HomeViewController;
 import ar.edu.utn.frba.dds.controller.view.UserRegistrationViewController;
 import ar.edu.utn.frba.dds.controller.view.UserViewController;
-import java.io.IOException;
-import java.util.function.Consumer;
-
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Template;
-
 import io.javalin.Javalin;
 import io.javalin.config.JavalinConfig;
 import io.javalin.http.HttpStatus;
 import io.javalin.rendering.JavalinRenderer;
+import java.io.IOException;
+import java.util.function.Consumer;
+
 
 public class MainApp {
 

@@ -25,17 +25,18 @@ public class UserManagementSystem {
     return this.persistenceSystem;
   }
 
-  public static UserManagementSystem workingWith(RelationalDatabasePersistenceSystem persistenceSystem) {
+  public static UserManagementSystem workingWith(
+      RelationalDatabasePersistenceSystem persistenceSystem) {
     return new UserManagementSystem(persistenceSystem);
   }
 
   public void startManaging(User anUser) {
     this.persistenceSystem().startManagingUser(anUser);
   }
+
   public void startManagingDetail(UserDetail anUserDetail) {
     this.persistenceSystem().startManagingUserDetail(anUserDetail);
   }
-
 
 
   public List<User> users() {

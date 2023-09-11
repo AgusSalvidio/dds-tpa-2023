@@ -17,17 +17,14 @@ public class HomeViewController implements Handler {
     this.applicationContext = applicationContext;
   }
 
-  public User currentUser() throws Exception {
-    //return this.applicationContext.currentUser();
-    //FOR TESTING ONLY
-    UserDetail userDetail = UserDetail.composedOf("Basura", "Intergalactica", "basuraintergalactica@gmail.com");
-    return User.composedOf("BasuraIntergalactica", "theBestPassword", userDetail);
-  }
+  /*public User currentUser() {
+    return this.applicationContext.currentUser();
+  }*/
 
   @Override
   public void handle(Context context) throws Exception {
     Map<String, Object> model = new HashMap<>();
-    model.put("user", this.currentUser());
+    model.put("user", applicationContext);
     context.render("home.hbs", model);
   }
 }

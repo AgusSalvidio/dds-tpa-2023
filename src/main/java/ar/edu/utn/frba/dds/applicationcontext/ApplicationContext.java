@@ -15,17 +15,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ApplicationContext {
-  User currentUser;
+  //User currentUser;
 
   RelationalDatabasePersistenceSystem persistenceSystem = new RelationalDatabasePersistenceSystem();
-  EventNotificationSystem eventNotificationSystem = new EventNotificationSystem();
+  //EventNotificationSystem eventNotificationSystem = new EventNotificationSystem();
   UserManagementSystem userManagementSystem = new UserManagementSystem(this.persistenceSystem);
 
   public UserManagementSystem userManagementSystem() {
     return this.userManagementSystem;
   }
 
-  public User currentUser() {
+  /*public User currentUser() {
     return this.currentUser;
-  }
+  }*/
 }
