@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.dds.controllers;
+package ar.edu.utn.frba.dds.controller.action;
 
 import ar.edu.utn.frba.dds.applicationcontext.ApplicationContext;
 import io.javalin.http.Context;
@@ -7,11 +7,11 @@ import io.javalin.http.HttpStatus;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RegisterUserViewController implements Handler {
+public class RegisterUserActionController implements Handler {
 
   ApplicationContext applicationContext;
 
-  public RegisterUserViewController(ApplicationContext applicationContext) {
+  public RegisterUserActionController(ApplicationContext applicationContext) {
     super();
     this.applicationContext = applicationContext;
   }
@@ -26,6 +26,7 @@ public class RegisterUserViewController implements Handler {
     model.put("password", context.formParam("password"));
 
     this.applicationContext.userManagementSystem().startManagingUserFrom(model);
+    context.status(HttpStatus.CREATED);
     context.redirect("/users");
   }
 

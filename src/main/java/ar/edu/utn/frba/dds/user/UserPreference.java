@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class UserPreferences {
+public class UserPreference {
   List<Service> services = new ArrayList<>();
   List<Entity> entities = new ArrayList<>();
   List<Location> locations = new ArrayList<>();
@@ -38,7 +38,7 @@ public class UserPreferences {
     this.entities.remove(entity);
   }
 
-  public void synchronizeWith(UserPreferences anUpdaterUserPreference) {
+  public void synchronizeWith(UserPreference anUpdaterUserPreference) {
     this.services = anUpdaterUserPreference.services();
     this.entities = anUpdaterUserPreference.entities();
   }

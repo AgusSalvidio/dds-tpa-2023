@@ -1,12 +1,34 @@
 package ar.edu.utn.frba.dds.user;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import lombok.Getter;
 
+@Entity
+@Table(name = "user")
 public class User {
+  @Id
+  @GeneratedValue
+  Integer id;
+
   @Getter
+  @Column(name = "username")
   String username;
-  String password;
+
   @Getter
+  @Column(name = "password")
+  String password;
+
+  @Getter
+  @ManyToOne
+  @JoinColumn(name = "user_detail_id", referencedColumnName = "id")
   UserDetail details;
 
   public static User composedOf(String username, String password, UserDetail userDetail)
@@ -20,6 +42,10 @@ public class User {
     }
     return new User(username, password, userDetail);
 
+  }
+
+  public User() {
+    //Do nothing -asalvidio
   }
 
   public User(String username, String password, UserDetail userDetail) {

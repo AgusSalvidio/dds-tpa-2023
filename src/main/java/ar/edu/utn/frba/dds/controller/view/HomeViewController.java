@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.dds.controllers;
+package ar.edu.utn.frba.dds.controller.view;
 
 import ar.edu.utn.frba.dds.applicationcontext.ApplicationContext;
 import ar.edu.utn.frba.dds.user.User;

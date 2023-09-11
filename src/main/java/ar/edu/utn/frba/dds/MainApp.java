@@ -1,10 +1,11 @@
 package ar.edu.utn.frba.dds;
 
 import ar.edu.utn.frba.dds.applicationcontext.ApplicationContext;
-import ar.edu.utn.frba.dds.controllers.HomeViewController;
-import ar.edu.utn.frba.dds.controllers.RegisterUserViewController;
-import ar.edu.utn.frba.dds.controllers.UserRegistrationViewController;
-import ar.edu.utn.frba.dds.controllers.UserViewController;
+import ar.edu.utn.frba.dds.controller.action.GetAllUsersActionController;
+import ar.edu.utn.frba.dds.controller.view.HomeViewController;
+import ar.edu.utn.frba.dds.controller.action.RegisterUserActionController;
+import ar.edu.utn.frba.dds.controller.view.UserRegistrationViewController;
+import ar.edu.utn.frba.dds.controller.view.UserViewController;
 import java.io.IOException;
 import java.util.function.Consumer;
 
@@ -28,8 +29,9 @@ public class MainApp {
     Javalin app = Javalin.create(config()).start(port);
 
     app.get("/", new HomeViewController(applicationContext));
-    app.post("/register-user", new RegisterUserViewController(applicationContext));
+    app.post("/register-user", new RegisterUserActionController(applicationContext));
     app.get("/users", new UserViewController(applicationContext));
+    app.get("/all-users", new GetAllUsersActionController(applicationContext));
     app.get("/user-registration", new UserRegistrationViewController(applicationContext));
 
 

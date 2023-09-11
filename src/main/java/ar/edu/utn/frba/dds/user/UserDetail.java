@@ -3,23 +3,42 @@ package ar.edu.utn.frba.dds.user;
 import ar.edu.utn.frba.dds.entity.Entity;
 import ar.edu.utn.frba.dds.service.Service;
 import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import lombok.Getter;
 
+@javax.persistence.Entity
+@Table(name = "user_detail")
 public class UserDetail {
+  @Id
+  @GeneratedValue
+  Integer id;
+
   @Getter
+  @Column(name = "name")
   String name;
   @Getter
+  @Column(name = "lastname")
   String lastname;
   @Getter
+  @Column(name = "email")
   String email;
 
-  UserPreferences userPreferences;
+  @Transient
+  UserPreference userPreference;
 
   public UserDetail(String name, String lastname, String anEmail) {
     this.name = name;
     this.lastname = lastname;
     this.email = anEmail;
-    this.userPreferences = new UserPreferences();
+    this.userPreference = new UserPreference();
+  }
+
+  public UserDetail() {
+    //Do nothing -asalvidio
   }
 
   public String name() {
@@ -47,10 +66,10 @@ public class UserDetail {
   }
 
   public List<Service> services() {
-    return this.userPreferences.services();
+    return this.userPreference.services();
   }
 
   public List<Entity> entities() {
-    return this.userPreferences.entities();
+    return this.userPreference.entities();
   }
 }

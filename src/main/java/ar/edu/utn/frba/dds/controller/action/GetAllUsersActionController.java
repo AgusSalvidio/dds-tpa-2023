@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.dds.controllers;
+package ar.edu.utn.frba.dds.controller.action;
 
 import ar.edu.utn.frba.dds.applicationcontext.ApplicationContext;
 import io.javalin.http.Context;
@@ -6,20 +6,18 @@ import io.javalin.http.Handler;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UserRegistrationViewController implements Handler {
+public class GetAllUsersActionController implements Handler {
 
   ApplicationContext applicationContext;
 
-  public UserRegistrationViewController(ApplicationContext applicationContext) {
+  public GetAllUsersActionController(ApplicationContext applicationContext) {
     super();
     this.applicationContext = applicationContext;
   }
 
   @Override
   public void handle(Context context) throws Exception {
-    Map<String, Object> model = new HashMap<>();
-    model.put("user", this.applicationContext.userManagementSystem().users());
-    context.render("user-registration.hbs", model);
+    context.json(this.applicationContext.userManagementSystem().users());
   }
 
 }

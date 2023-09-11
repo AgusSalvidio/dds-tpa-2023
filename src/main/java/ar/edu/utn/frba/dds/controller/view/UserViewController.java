@@ -1,8 +1,6 @@
-package ar.edu.utn.frba.dds.controllers;
+package ar.edu.utn.frba.dds.controller.view;
 
 import ar.edu.utn.frba.dds.applicationcontext.ApplicationContext;
-import ar.edu.utn.frba.dds.user.User;
-import ar.edu.utn.frba.dds.user.UserDetail;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import java.util.HashMap;
