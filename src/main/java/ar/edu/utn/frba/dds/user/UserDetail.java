@@ -3,10 +3,14 @@ package ar.edu.utn.frba.dds.user;
 import ar.edu.utn.frba.dds.entity.Entity;
 import ar.edu.utn.frba.dds.service.Service;
 import java.util.List;
+import lombok.Getter;
 
 public class UserDetail {
+  @Getter
   String name;
+  @Getter
   String lastname;
+  @Getter
   String email;
 
   UserPreferences userPreferences;

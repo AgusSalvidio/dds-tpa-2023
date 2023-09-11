@@ -3,8 +3,11 @@ package ar.edu.utn.frba.dds.managementsystem;
 import ar.edu.utn.frba.dds.eventnotificationsystem.notifiableevent.NotifiableEvent;
 import ar.edu.utn.frba.dds.persistencesystem.PersistenceSystem;
 import ar.edu.utn.frba.dds.user.User;
+import ar.edu.utn.frba.dds.user.UserDetail;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class UserManagementSystem implements ManagementSystem {
   /*
@@ -35,8 +38,9 @@ public class UserManagementSystem implements ManagementSystem {
     return (User) this.persistenceSystem().findObjectTyped(anUser.getClass().getName(), anUser);
   }
 
-  public List<Object> users() {
-    return this.persistenceSystem().objectsFrom(User.class.getName());
+  public List<User> users() {
+    List<Object> users = this.persistenceSystem().objectsFrom(User.class.getName());
+    return users.stream().map(object -> (User) object).collect(Collectors.toList());
   }
 
   public void startManaging(Object anUser) {
@@ -56,6 +60,18 @@ public class UserManagementSystem implements ManagementSystem {
   public void receiveFrom(NotifiableEvent event, Object publisher) {
     /* For now, this system should have an implementation. This will be enhanced
      when the extracting the implementation from ManagementSystem -asalvidio*/
+  }
+
+  public void startManagingUserFrom(Map model) throws Exception {
+    String name = model.get("name").toString();
+    String lastname = model.get("lastname").toString();
+    String email = model.get("email").toString();
+    String username = model.get("username").toString();
+    String password = model.get("password").toString();
+
+    UserDetail userDetail = new UserDetail(name, lastname, email);
+    this.startManaging(User.composedOf(username, password, userDetail));
+
   }
 
 }

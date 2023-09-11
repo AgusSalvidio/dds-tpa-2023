@@ -1,6 +1,10 @@
 package ar.edu.utn.frba.dds;
 
+import ar.edu.utn.frba.dds.applicationcontext.ApplicationContext;
 import ar.edu.utn.frba.dds.controllers.HomeViewController;
+import ar.edu.utn.frba.dds.controllers.RegisterUserViewController;
+import ar.edu.utn.frba.dds.controllers.UserRegistrationViewController;
+import ar.edu.utn.frba.dds.controllers.UserViewController;
 import java.io.IOException;
 import java.util.function.Consumer;
 
@@ -16,12 +20,18 @@ public class MainApp {
 
   public static void main(String[] args) {
 
-    //initializeApplicationContext();
+    ApplicationContext applicationContext = new ApplicationContext();
+
     initializeTemplateEngine();
 
     Integer port = Integer.parseInt(System.getProperty("port", "8080"));
     Javalin app = Javalin.create(config()).start(port);
-    app.get("/", new HomeViewController());
+
+    app.get("/", new HomeViewController(applicationContext));
+    app.post("/register-user", new RegisterUserViewController(applicationContext));
+    app.get("/users", new UserViewController(applicationContext));
+    app.get("/user-registration", new UserRegistrationViewController(applicationContext));
+
 
   }
 

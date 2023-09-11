@@ -10,7 +10,7 @@
     />
     <meta name="keywords" content="Service Status Monitoring, public transport, establishments"/>
 
-    <title>Inicio | Service Status Monitoring of public transport and establishments </title>
+    <title>Usuarios | Service Status Monitoring of public transport and establishments </title>
 </head>
 
 <body>
@@ -20,13 +20,18 @@
 
 <main>
     <section class="">
-        <h2 class="">¡Bienvenido {{user.username}}!</h2>
+        <h2 class="">Usuarios</h2>
     </section>
     <section>
         <div class="">
-            <p>
-                En proceso de construcción...
-            </p>
+            {{#each users}}
+                <p>{{this.details.name}}</p>
+                <p>{{this.details.lastname}}</p>
+                <p>{{this.details.email}}</p>
+                <p>{{this.username}}</p>
+            {{else}}
+                <p class="">No hay usuarios</p>
+            {{/each}}
         </div>
     </section>
 </main>

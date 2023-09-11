@@ -11,6 +11,7 @@ import ar.edu.utn.frba.dds.persistencesystem.PersistenceSystem;
 import ar.edu.utn.frba.dds.user.User;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ApplicationContext {
   User currentUser;
@@ -18,10 +19,10 @@ public class ApplicationContext {
 
   PersistenceSystem persistenceSystem = new MemoryBasedPersistenceSystem();
   EventNotificationSystem eventNotificationSystem = new EventNotificationSystem();
+  UserManagementSystem userManagementSystem = new UserManagementSystem(this.persistenceSystem);
 
   public ApplicationContext() {
     this.systems = new ArrayList<>();
-    this.systems.add(new UserManagementSystem(this.persistenceSystem));
     this.systems.add(new CommunityManagementSystem(this.persistenceSystem));
     this.systems.add(new IncidentManagementSystem(
         this.persistenceSystem,
@@ -33,6 +34,10 @@ public class ApplicationContext {
 
   public List<ManagementSystem> systems() {
     return this.systems;
+  }
+
+  public UserManagementSystem userManagementSystem() {
+    return this.userManagementSystem;
   }
 
   public User currentUser() {

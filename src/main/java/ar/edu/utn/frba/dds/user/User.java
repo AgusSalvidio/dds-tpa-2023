@@ -1,8 +1,12 @@
 package ar.edu.utn.frba.dds.user;
 
+import lombok.Getter;
+
 public class User {
+  @Getter
   String username;
   String password;
+  @Getter
   UserDetail details;
 
   public static User composedOf(String username, String password, UserDetail userDetail)
