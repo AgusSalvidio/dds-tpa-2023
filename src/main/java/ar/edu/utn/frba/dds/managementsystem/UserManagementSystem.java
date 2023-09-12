@@ -1,6 +1,9 @@
 package ar.edu.utn.frba.dds.managementsystem;
 
 import ar.edu.utn.frba.dds.eventnotificationsystem.notifiableevent.NotifiableEvent;
+import ar.edu.utn.frba.dds.notification.notificationmean.JakartaAdapter;
+import ar.edu.utn.frba.dds.notification.notificationmean.NotificationMean;
+import ar.edu.utn.frba.dds.notification.notificationmean.NotifyByMail;
 import ar.edu.utn.frba.dds.persistencesystem.PersistenceSystem;
 import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
 import ar.edu.utn.frba.dds.user.User;
@@ -69,8 +72,10 @@ public class UserManagementSystem {
     String email = model.get("email").toString();
     String username = model.get("username").toString();
     String password = model.get("password").toString();
+    String telephone = model.get("telephone").toString();
+    NotificationMean notificationMean = new NotifyByMail(new JakartaAdapter());
 
-    UserDetail userDetail = new UserDetail(name, lastname, email);
+    UserDetail userDetail = new UserDetail(name, lastname, email, telephone, notificationMean);
     this.startManagingDetail(userDetail);
 
     this.startManaging(User.composedOf(username, password, userDetail));
