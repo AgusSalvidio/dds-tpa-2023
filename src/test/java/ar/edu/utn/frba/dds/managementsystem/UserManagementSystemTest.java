@@ -55,20 +55,43 @@ public class UserManagementSystemTest implements WithSimplePersistenceUnit {
 
   }
 
-  /*
+
+  /* When running on local works fine, but when running mvn clean, fails....
+     Needs to be looked at. -asalvidio
   @Test
   @DisplayName("Stop managing an user")
   public void stopManagingAnUserTest() throws Exception {
 
-    UserManagementSystem userManagementSystem = UserManagementSystem.workingWith(this.persistenceSystem());
-    User user = User.composedOf("ibarranetaYPF", "theBestPassword", this.userDetails());
+    UserManagementSystem userManagementSystem = Mockito.spy(UserManagementSystem.workingWith(this.persistenceSystem()));
+    UserDetail userDetail = this.userDetails();
+    User user = User.composedOf("ibarranetaYPF", "theBestPassword", userDetail);
 
-    userManagementSystem.startManaging(user);
+    EntityTransaction transaction = entityManager().getTransaction();
 
-    Assertions.assertEquals(userManagementSystem.user(user), user);
+    transaction.begin();
+    entityManager().persist(userDetail);
+    entityManager().persist(user);
+    transaction.commit();
 
-    userManagementSystem.stopManaging(user);
+    Assertions.assertEquals(userManagementSystem.users().size(), 1);
 
+    User registeredUser = entityManager().find(User.class, 2);
+
+    Mockito.doAnswer(invocation -> {
+      EntityTransaction transact = entityManager().getTransaction();
+
+      User obtainedUser = invocation.getArgument(0);
+
+      UserDetail obtainedUserDetail = obtainedUser.getDetails();
+
+      transact.begin();
+      entityManager().remove(obtainedUser);
+      transact.commit();
+      return null;
+    }).when(userManagementSystem).stopManaging(registeredUser);
+
+
+    userManagementSystem.stopManaging(registeredUser);
     Assertions.assertTrue(userManagementSystem.users().isEmpty());
 
 
@@ -78,19 +101,43 @@ public class UserManagementSystemTest implements WithSimplePersistenceUnit {
   @DisplayName("Update an user")
   public void updateAnUserTest() throws Exception {
 
-    UserManagementSystem userManagementSystem = UserManagementSystem.workingWith(this.persistenceSystem());
-    User user = User.composedOf("ibarranetaYPF", "theBestPassword", this.userDetails());
-    User updatedUser = User.composedOf("almironeta", "theBestPassword", this.userDetails());
-    userManagementSystem.startManaging(user);
+    UserManagementSystem userManagementSystem = Mockito.spy(UserManagementSystem.workingWith(this.persistenceSystem()));
+    UserDetail userDetail = this.userDetails();
+    User user = User.composedOf("ibarranetaYPF", "theBestPassword", userDetail);
+    User updatedUser = User.composedOf("almironeta", "theBestPassword", userDetail);
 
-    Assertions.assertEquals(userManagementSystem.user(user), user);
+    EntityTransaction transaction = entityManager().getTransaction();
 
-    userManagementSystem.updateWith(user, updatedUser);
+    transaction.begin();
+    entityManager().persist(userDetail);
+    entityManager().persist(user);
+    transaction.commit();
 
-    Assertions.assertTrue(userManagementSystem.users().contains(user));
+    User registeredUser = entityManager().find(User.class, 2);
 
+    Assertions.assertEquals(userManagementSystem.users().size(), 1);
+    Assertions.assertEquals(registeredUser.username(), "ibarranetaYPF");
 
-  }
-*/
+    Mockito.doAnswer(invocation -> {
+      EntityTransaction transact = entityManager().getTransaction();
+
+      User obtainedUser = invocation.getArgument(0);
+
+      User obtainedUpdatedUser = invocation.getArgument(1);
+
+      obtainedUser.synchronizeWith(obtainedUpdatedUser);
+
+      transact.begin();
+      entityManager().merge(obtainedUser);
+      transact.commit();
+      return null;
+    }).when(userManagementSystem).updateWith(registeredUser, updatedUser);
+
+    userManagementSystem.updateWith(registeredUser, updatedUser);
+
+    User persistedUser = entityManager().find(User.class, 2);
+    Assertions.assertEquals(persistedUser.username(), "almironeta");
+
+  }*/
 
 }

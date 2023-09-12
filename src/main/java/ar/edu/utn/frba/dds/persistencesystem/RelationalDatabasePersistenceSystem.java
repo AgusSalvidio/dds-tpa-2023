@@ -15,11 +15,27 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
     transaction.commit();
   }
 
+  public void stopManagingUser(User anUser) {
+    EntityTransaction transaction = entityManager().getTransaction();
+
+    transaction.begin();
+    entityManager().remove(anUser);
+    transaction.commit();
+  }
+
   public void startManagingUserDetail(UserDetail anUserDetail) {
     EntityTransaction transaction = entityManager().getTransaction();
 
     transaction.begin();
     entityManager().persist(anUserDetail);
+    transaction.commit();
+  }
+
+  public void stopManagingUserDetail(UserDetail anUserDetail) {
+    EntityTransaction transaction = entityManager().getTransaction();
+
+    transaction.begin();
+    entityManager().remove(anUserDetail);
     transaction.commit();
   }
 

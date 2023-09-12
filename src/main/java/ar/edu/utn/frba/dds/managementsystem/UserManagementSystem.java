@@ -38,19 +38,20 @@ public class UserManagementSystem {
     this.persistenceSystem().startManagingUserDetail(anUserDetail);
   }
 
+  public void stopManagingDetail(UserDetail anUserDetail) {
+    this.persistenceSystem().stopManagingUserDetail(anUserDetail);
+  }
 
   public List<User> users() {
     return this.persistenceSystem.users();
   }
 
-  public void stopManaging(Object anUser) {
-    //this.persistenceSystem().removeObjectTyped(anUser.getClass().getName(), anUser);
+  public void stopManaging(User anUser) {
+    this.persistenceSystem().stopManagingUser(anUser);
   }
 
-  public void updateWith(Object currentUser, Object updatedUser) {
-    /*User obtainedUser = (User) this.persistenceSystem()
-        .findObjectTyped(currentUser.getClass().getName(), currentUser);
-    obtainedUser.synchronizeWith((User) updatedUser);*/
+  public void updateWith(User currentUser, User updatedUser) {
+    currentUser.synchronizeWith(updatedUser);
   }
 
   /*public User user(User anUser) {
