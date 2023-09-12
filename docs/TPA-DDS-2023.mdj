@@ -2875,7 +2875,7 @@
 											"top": 1643,
 											"width": 280.68701171875,
 											"height": 13,
-											"text": "+userPreferences: UserPreferences",
+											"text": "+userPreference: UserPreferences",
 											"horizontalAlignment": 0
 										}
 									],
@@ -40160,7 +40160,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGHuYW8eqAWTko="
 							},
-							"name": "userPreferences",
+							"name": "userPreference",
 							"type": "UserPreferences"
 						}
 					],

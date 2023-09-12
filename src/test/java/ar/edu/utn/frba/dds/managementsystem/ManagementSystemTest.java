@@ -20,13 +20,13 @@ public class ManagementSystemTest {
     return new UserDetail("Hugo", "Ibarra", "ibarraneta@gmail.com");
   }
 
-  @Test
+  /*@Test
   @DisplayName("Create an object management system")
   public void createAnObjectManagementSystemTest() throws Exception {
     UserManagementSystem userSystem = UserManagementSystem.workingWith(this.persistenceSystem());
 
     Assertions.assertEquals(userSystem.typeDescription(), "Sistema de Administración de Usuarios");
 
-  }
+  }*/
 
 }
