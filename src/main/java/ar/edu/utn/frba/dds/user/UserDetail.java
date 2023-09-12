@@ -33,7 +33,8 @@ public class UserDetail {
   @Column(name = "telephone")
   String telephone;
   @Getter
-  @Transient
+  @Convert(converter =  NotificationMeanConverter.class)
+  @Column(name = "notificationmean")
   NotificationMean notificationMean;
   @Transient
   UserPreference userPreference;
@@ -80,7 +81,7 @@ public class UserDetail {
         in another issue later on. Also should be necesary to specify the field thats empty
      */
     if (name.isEmpty() || lastname.isEmpty() || anEmail.isEmpty()
-        || telephone.isEmpty()) {
+        || telephone.isEmpty() || notificationMean == null) {
       throw new Exception("Los campos no pueden estar en blanco.");
     }
     return new UserDetail(name, lastname, anEmail, telephone, notificationMean);

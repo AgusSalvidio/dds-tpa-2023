@@ -14,9 +14,9 @@ public class NotificationMeanConverter implements AttributeConverter<Notificatio
   public String convertToDatabaseColumn(NotificationMean notificationMean) {
     String str = null;
 
-    if (notificationMean.getClass().getName().equals("NotifyByWhatsApp")) {
+    if (notificationMean.getClass().getSimpleName().equals("NotifyByWhatsApp")) {
       str = "wpp";
-    } else if (notificationMean.getClass().getName().equals("NotifyByMail")) {
+    } else if (notificationMean.getClass().getSimpleName().equals("NotifyByMail")) {
       str = "email";
     }
     return str;
