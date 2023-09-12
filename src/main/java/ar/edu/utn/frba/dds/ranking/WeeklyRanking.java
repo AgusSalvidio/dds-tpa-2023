@@ -1,34 +1,35 @@
 package ar.edu.utn.frba.dds.ranking;
 
-import ar.edu.utn.frba.dds.entity.Entity;
+import ar.edu.utn.frba.dds.entity.EntityIncidentSummary;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
 public class WeeklyRanking {
 
-  public List<Entity> entities;
-  public Comparator<Entity> rankingComparator;
+  public List<EntityIncidentSummary> entityIncidentSummaries;
+  public Comparator<EntityIncidentSummary> rankingComparator;
 
-  public WeeklyRanking(Comparator<Entity> rankingComparator) {
-    this.entities = new ArrayList<>();
+  public WeeklyRanking(Comparator<EntityIncidentSummary> rankingComparator) {
+    this.entityIncidentSummaries = new ArrayList<>();
     this.rankingComparator = rankingComparator;
   }
 
-  public void addEntityToRanking(Entity newEntity) {
-    this.entities.add(newEntity);
+  public void addEntitySummaryToRanking(EntityIncidentSummary newEntitySummary) {
+    this.entityIncidentSummaries.add(newEntitySummary);
   }
 
-  public List<Entity> entities() {
-    return this.entities;
+  public List<EntityIncidentSummary> entityIncidentSummaries() {
+    return this.entityIncidentSummaries;
   }
 
-  public Comparator<Entity> rankingComparator() {
+  public Comparator<EntityIncidentSummary> rankingComparator() {
     return this.rankingComparator;
   }
 
+
   public void generateRanking() {
-    this.entities.sort(this.rankingComparator);
+    this.entityIncidentSummaries.sort(this.rankingComparator);
   }
 
 }
