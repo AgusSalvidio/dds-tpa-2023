@@ -1,10 +1,10 @@
 package ar.edu.utn.frba.dds.ranking;
 
 import ar.edu.utn.frba.dds.community.Community;
+import ar.edu.utn.frba.dds.entity.EntityIncidentSummary;
 import ar.edu.utn.frba.dds.ranking.rankingcomparators.CommunityComparator;
 import ar.edu.utn.frba.dds.ranking.rankingcomparators.GreaterDegreeOfImpactComparator;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class GreaterDegreeOfImpactRanking extends WeeklyRanking {
@@ -18,6 +18,12 @@ public class GreaterDegreeOfImpactRanking extends WeeklyRanking {
     super(rankingComparator);
     this.communities = new ArrayList<>();
     this.communityComparator = communityComparator;
+  }
+
+  @Override
+  public void addEntitySummaryToRanking(EntityIncidentSummary newEntitySummary) {
+    this.entityIncidentSummaries.add(newEntitySummary);
+    this.communities.add(newEntitySummary.incidentPerCommunity().community());
   }
 
   public void addNewCommunity(Community newCommunity) {
@@ -35,11 +41,6 @@ public class GreaterDegreeOfImpactRanking extends WeeklyRanking {
   //This must be done before generating the rankings
   public void sortCommunitiesBasedOnComparator() {
     this.communities.sort(this.communityComparator);
-
-    this.communities.stream()
-        .map(Community::entities)
-        .flatMap(Collection::stream)
-        .forEach(entity -> entities.add(entity));
   }
 
 }

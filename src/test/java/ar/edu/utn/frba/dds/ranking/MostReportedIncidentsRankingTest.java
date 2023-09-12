@@ -1,21 +1,21 @@
 package ar.edu.utn.frba.dds.ranking;
 
+import ar.edu.utn.frba.dds.addons.communitycreationaddon.CommunityCreationAddOn;
 import ar.edu.utn.frba.dds.addons.entitycreationaddon.EntityCreationAddOn;
 import ar.edu.utn.frba.dds.addons.entitycreationaddon.EntityNameCreationAddOn;
-import ar.edu.utn.frba.dds.addons.rankingcreationaddon.RankingCreationAddOn;
+import ar.edu.utn.frba.dds.addons.incidentcreationaddon.IncidentCreationAddOn;
+import ar.edu.utn.frba.dds.community.Community;
 import ar.edu.utn.frba.dds.entity.Entity;
+import ar.edu.utn.frba.dds.entity.EntityIncidentSummary;
+import ar.edu.utn.frba.dds.incident.Incident;
+import ar.edu.utn.frba.dds.incident.IncidentPerCommunity;
 import ar.edu.utn.frba.dds.ranking.rankingcomparators.MostReportedIncidentsComparator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
 public class MostReportedIncidentsRankingTest {
 
-  private MostReportedIncidentsRanking mostReportedIncidentsRanking() {
-    return new RankingCreationAddOn().mostReportedIncidentsRanking();
-  }
 
   @Test
   @DisplayName("Create a ranking")
@@ -23,7 +23,7 @@ public class MostReportedIncidentsRankingTest {
     MostReportedIncidentsComparator mostReportedIncidentsComparator = new MostReportedIncidentsComparator();
     MostReportedIncidentsRanking mostReportedIncidentsRanking = new MostReportedIncidentsRanking(mostReportedIncidentsComparator);
 
-    Assertions.assertTrue(mostReportedIncidentsRanking.entities().isEmpty());
+    Assertions.assertTrue(mostReportedIncidentsRanking.entityIncidentSummaries().isEmpty());
     Assertions.assertEquals(mostReportedIncidentsRanking.rankingComparator(), mostReportedIncidentsComparator);
   }
 
@@ -36,31 +36,16 @@ public class MostReportedIncidentsRankingTest {
     Entity entityTest = new EntityCreationAddOn().entityA();
     entityTest.setName(new EntityNameCreationAddOn().subwayHLine());
 
-    Assertions.assertTrue(mostReportedIncidentsRanking.entities().isEmpty());
+    Incident incident = new IncidentCreationAddOn().notWorkingElevatorIncident();
+    Community community = new CommunityCreationAddOn().firstCommunity();
+    IncidentPerCommunity incidentPerCommunity = IncidentPerCommunity.composedOf(incident, community);
 
-    mostReportedIncidentsRanking.addEntityToRanking(entityTest);
+    EntityIncidentSummary entityIncidentSummaryTest = new EntityIncidentSummary(entityTest, incidentPerCommunity);
 
-    Assertions.assertTrue(mostReportedIncidentsRanking.entities().stream().anyMatch(entity -> entity.name().equals(entityTest.name())));
-  }
+    Assertions.assertTrue(mostReportedIncidentsRanking.entityIncidentSummaries().isEmpty());
 
-  @Test
-  @DisplayName("After generating the ranking, the entities are sorted in order")
-  public void afterGeneratingTheRankingTheEntitiesAreSorted() throws Exception {
-    MostReportedIncidentsRanking mostReportedIncidentsRanking = this.mostReportedIncidentsRanking();
-    Entity entityA = new EntityCreationAddOn().entityA();
-    Entity entityC = new EntityCreationAddOn().entityC();
-    Entity entityB = new EntityCreationAddOn().entityB();
+      mostReportedIncidentsRanking.addEntitySummaryToRanking(entityIncidentSummaryTest);
 
-
-    mostReportedIncidentsRanking.addEntityToRanking(entityC);
-    mostReportedIncidentsRanking.addEntityToRanking(entityA);
-    mostReportedIncidentsRanking.addEntityToRanking(entityB);
-
-
-    Assertions.assertEquals(mostReportedIncidentsRanking.entities(), Arrays.asList(entityC, entityA, entityB));
-
-    mostReportedIncidentsRanking.generateRanking();
-
-    Assertions.assertEquals(mostReportedIncidentsRanking.entities(), Arrays.asList(entityB, entityC, entityA));
+      Assertions.assertTrue(mostReportedIncidentsRanking.entityIncidentSummaries().stream().anyMatch(entityIncidentSummary -> entityIncidentSummary.entity().name().equals(entityTest.name())));
   }
 }

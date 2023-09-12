@@ -2,9 +2,13 @@ package ar.edu.utn.frba.dds.ranking;
 
 import ar.edu.utn.frba.dds.addons.communitycreationaddon.CommunityCreationAddOn;
 import ar.edu.utn.frba.dds.addons.entitycreationaddon.EntityCreationAddOn;
+import ar.edu.utn.frba.dds.addons.incidentcreationaddon.IncidentCreationAddOn;
 import ar.edu.utn.frba.dds.addons.rankingcreationaddon.RankingCreationAddOn;
 import ar.edu.utn.frba.dds.community.Community;
 import ar.edu.utn.frba.dds.entity.Entity;
+import ar.edu.utn.frba.dds.entity.EntityIncidentSummary;
+import ar.edu.utn.frba.dds.incident.Incident;
+import ar.edu.utn.frba.dds.incident.IncidentPerCommunity;
 import ar.edu.utn.frba.dds.ranking.rankingcomparators.CommunityComparator;
 import ar.edu.utn.frba.dds.ranking.rankingcomparators.GreaterDegreeOfImpactComparator;
 import org.junit.jupiter.api.Assertions;
@@ -25,7 +29,7 @@ public class GreaterDegreeOfImpactTest {
     CommunityComparator communityComparator = new CommunityComparator();
     GreaterDegreeOfImpactRanking greaterDegreeOfImpactRanking = new GreaterDegreeOfImpactRanking(greaterDegreeOfImpactComparator, communityComparator);
 
-    Assertions.assertTrue(greaterDegreeOfImpactRanking.entities().isEmpty());
+    Assertions.assertTrue(greaterDegreeOfImpactRanking.entityIncidentSummaries().isEmpty());
     Assertions.assertTrue(greaterDegreeOfImpactRanking.communities().isEmpty());
     Assertions.assertEquals(greaterDegreeOfImpactRanking.rankingComparator(), greaterDegreeOfImpactComparator);
     Assertions.assertEquals(greaterDegreeOfImpactRanking.communityComparator(), communityComparator);
@@ -40,7 +44,7 @@ public class GreaterDegreeOfImpactTest {
 
     Community communityTest = new CommunityCreationAddOn().secondCommunity();
 
-    Assertions.assertTrue(greaterDegreeOfImpactRanking.entities().isEmpty());
+    Assertions.assertTrue(greaterDegreeOfImpactRanking.entityIncidentSummaries().isEmpty());
 
     greaterDegreeOfImpactRanking.addNewCommunity(communityTest);
 
@@ -60,15 +64,20 @@ public class GreaterDegreeOfImpactTest {
     firstCommunity.addTransportLine(entityA);
     secondCommunity.addTransportLine(entityA);
 
-    greaterDegreeOfImpactRanking.addNewCommunity(secondCommunity);
-    greaterDegreeOfImpactRanking.addNewCommunity(firstCommunity);
+    Incident incident = new IncidentCreationAddOn().notWorkingElevatorIncident();
+    IncidentPerCommunity incidentPerCommunityA = IncidentPerCommunity.composedOf(incident, firstCommunity);
+    IncidentPerCommunity incidentPerCommunityB = IncidentPerCommunity.composedOf(incident, secondCommunity);
 
+    EntityIncidentSummary entityIncidentSummaryA = new EntityIncidentSummary(entityA, incidentPerCommunityA);
+    EntityIncidentSummary entityIncidentSummaryB = new EntityIncidentSummary(entityB, incidentPerCommunityB);
+
+    greaterDegreeOfImpactRanking.addEntitySummaryToRanking(entityIncidentSummaryB);
+    greaterDegreeOfImpactRanking.addEntitySummaryToRanking(entityIncidentSummaryA);
 
 
     Assertions.assertEquals(
         greaterDegreeOfImpactRanking.communities(),
         Arrays.asList(secondCommunity, firstCommunity));
-    Assertions.assertTrue(greaterDegreeOfImpactRanking.entities().isEmpty());
 
     greaterDegreeOfImpactRanking.sortCommunitiesBasedOnComparator();
     greaterDegreeOfImpactRanking.generateRanking();
@@ -76,6 +85,6 @@ public class GreaterDegreeOfImpactTest {
     Assertions.assertEquals(
         greaterDegreeOfImpactRanking.communities(),
         Arrays.asList(firstCommunity, secondCommunity));
-    Assertions.assertEquals(greaterDegreeOfImpactRanking.entities(), Arrays.asList(entityA, entityA, entityB));
+    Assertions.assertEquals(greaterDegreeOfImpactRanking.entityIncidentSummaries(), Arrays.asList(entityIncidentSummaryB, entityIncidentSummaryA));
   }
 }
