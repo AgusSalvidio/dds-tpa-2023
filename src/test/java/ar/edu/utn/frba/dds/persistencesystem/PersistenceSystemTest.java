@@ -1,6 +1,5 @@
 package ar.edu.utn.frba.dds.persistencesystem;
 
-import ar.edu.utn.frba.dds.addons.notificationcreationaddon.NotificationMeanCreationAddOn;
 import ar.edu.utn.frba.dds.user.UserDetail;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,12 +38,11 @@ public class PersistenceSystemTest {
 
   @Test
   @DisplayName("Create a more complex PersistenceSystem with more types of objects")
-  public void createPersistenceSystemWithMultipleTypeObjectsTest() throws Exception {
+  public void createPersistenceSystemWithMultipleTypeObjectsTest() {
     PersistenceSystem persistenceSystem = this.persistenceSystem();
     String integerClass = Integer.class.getName();
     String userDetailsClass = UserDetail.class.getName();
-    UserDetail userDetail = new UserDetail("Basura", "Intergalactica",
-        "basuraintergalactica@gmail.com", "0123456789", new NotificationMeanCreationAddOn().wpp());
+    UserDetail userDetail = new UserDetail("Basura", "Intergalactica", "basuraintergalactica@gmail.com");
 
     persistenceSystem.addObjectTypeToStore(integerClass);
     persistenceSystem.addObjectTypeToStore(userDetailsClass);
