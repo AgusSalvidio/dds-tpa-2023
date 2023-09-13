@@ -1,6 +1,5 @@
 package ar.edu.utn.frba.dds.applicationcontext;
 
-import ar.edu.utn.frba.dds.managementsystem.ServiceManagementSystem;
 import ar.edu.utn.frba.dds.eventnotificationsystem.EventNotificationSystem;
 import ar.edu.utn.frba.dds.managementsystem.AuthorizationRoleManagementSystem;
 import ar.edu.utn.frba.dds.managementsystem.CommunityManagementSystem;
@@ -8,6 +7,7 @@ import ar.edu.utn.frba.dds.managementsystem.IncidentManagementSystem;
 import ar.edu.utn.frba.dds.managementsystem.IncidentPerCommunityManagementSystem;
 import ar.edu.utn.frba.dds.managementsystem.ManagementSystem;
 import ar.edu.utn.frba.dds.managementsystem.UserManagementSystem;
+import ar.edu.utn.frba.dds.managementsystem.ServiceManagementSystem;
 import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
 
 public class ApplicationContext {
