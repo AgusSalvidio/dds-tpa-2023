@@ -2,8 +2,11 @@ package ar.edu.utn.frba.dds;
 
 import ar.edu.utn.frba.dds.applicationcontext.ApplicationContext;
 import ar.edu.utn.frba.dds.controller.action.GetAllUsersActionController;
+import ar.edu.utn.frba.dds.controller.action.RegisterAuthorizationRoleActionController;
 import ar.edu.utn.frba.dds.controller.action.RegisterUserActionController;
 import ar.edu.utn.frba.dds.controller.view.AdministrationViewController;
+import ar.edu.utn.frba.dds.controller.view.AuthorizationRoleRegistrationViewController;
+import ar.edu.utn.frba.dds.controller.view.AuthorizationRoleViewController;
 import ar.edu.utn.frba.dds.controller.view.HomeViewController;
 import ar.edu.utn.frba.dds.controller.view.UserRegistrationViewController;
 import ar.edu.utn.frba.dds.controller.view.UserViewController;
@@ -30,11 +33,18 @@ public class MainApp {
 
     app.get("/", new HomeViewController(applicationContext));
     app.get("/home", new HomeViewController(applicationContext));
-    app.post("/register-user", new RegisterUserActionController(applicationContext));
+    app.get("/administration", new AdministrationViewController(applicationContext));
     app.get("/users", new UserViewController(applicationContext));
     app.get("/all-users", new GetAllUsersActionController(applicationContext));
     app.get("/user-registration", new UserRegistrationViewController(applicationContext));
-    app.get("/administration", new AdministrationViewController(applicationContext));
+    app.get("/authorization-roles", new AuthorizationRoleViewController(applicationContext));
+    app.get("/authorization-role-registration",
+        new AuthorizationRoleRegistrationViewController(applicationContext));
+
+
+    app.post("/register-user", new RegisterUserActionController(applicationContext));
+    app.post("/register-authorization-role",
+        new RegisterAuthorizationRoleActionController(applicationContext));
 
   }
 
