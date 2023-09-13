@@ -22,7 +22,8 @@ public class RegisterAuthorizationRoleActionController implements Handler {
     model.put("role", context.formParam("role"));
     model.put("user", context.formParam("users"));
 
-    this.applicationContext.authorizationRoleManagementSystem().startManagingAuthorizationRoleFrom(model);
+    this.applicationContext.authorizationRoleManagementSystem()
+        .startManagingAuthorizationRoleFrom(model);
     context.status(HttpStatus.CREATED);
     context.redirect("/authorization-roles");
   }

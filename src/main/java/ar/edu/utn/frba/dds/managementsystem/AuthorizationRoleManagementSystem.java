@@ -36,9 +36,9 @@ public class AuthorizationRoleManagementSystem {
     return this.persistenceSystem.roles();
   }
 
-  public void stopManaging(AuthorizationRole authorizationRole) {
+  /*public void stopManaging(AuthorizationRole authorizationRole) {
     this.persistenceSystem().stopManagingAuthorizationRole(authorizationRole);
-  }
+  }*/
 
   public void updateWith(
       AuthorizationRole authorizationRole,

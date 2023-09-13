@@ -38,11 +38,13 @@ public class MainApp {
     app.get("/all-users", new GetAllUsersActionController(applicationContext));
     app.get("/user-registration", new UserRegistrationViewController(applicationContext));
     app.get("/authorization-roles", new AuthorizationRoleViewController(applicationContext));
-    app.get("/authorization-role-registration", new AuthorizationRoleRegistrationViewController(applicationContext));
+    app.get("/authorization-role-registration",
+        new AuthorizationRoleRegistrationViewController(applicationContext));
 
 
     app.post("/register-user", new RegisterUserActionController(applicationContext));
-    app.post("/register-authorization-role", new RegisterAuthorizationRoleActionController(applicationContext));
+    app.post("/register-authorization-role",
+        new RegisterAuthorizationRoleActionController(applicationContext));
 
   }
 

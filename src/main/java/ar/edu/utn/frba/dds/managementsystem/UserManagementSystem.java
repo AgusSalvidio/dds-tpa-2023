@@ -38,17 +38,17 @@ public class UserManagementSystem {
     this.persistenceSystem().startManagingUserDetail(anUserDetail);
   }
 
-  public void stopManagingDetail(UserDetail anUserDetail) {
+  /*public void stopManagingDetail(UserDetail anUserDetail) {
     this.persistenceSystem().stopManagingUserDetail(anUserDetail);
-  }
+  }*/
 
   public List<User> users() {
     return this.persistenceSystem.users();
   }
 
-  public void stopManaging(User anUser) {
+  /*public void stopManaging(User anUser) {
     this.persistenceSystem().stopManagingUser(anUser);
-  }
+  }/*
 
   public void updateWith(User currentUser, User updatedUser) {
     currentUser.synchronizeWith(updatedUser);
