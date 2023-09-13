@@ -16,4 +16,12 @@
         <Class name="ar.edu.utn.frba.dds.managementsystem.IncidentPerCommunityManagementSystem"/>
         <Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2"/>
     </Match>
+    <Match>
+        <Package name="ar.edu.utn.frba.dds.controller.action.*"/>
+        <Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2,UC_USELESS_OBJECT,URF_UNREAD_FIELD"/>
+    </Match>
+    <Match>
+        <Package name="ar.edu.utn.frba.dds.controller.view.*"/>
+        <Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2,UC_USELESS_OBJECT,URF_UNREAD_FIELD"/>
+    </Match>
 </FindBugsFilter>

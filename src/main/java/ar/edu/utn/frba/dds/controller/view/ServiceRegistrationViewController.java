@@ -17,8 +17,12 @@ public class ServiceRegistrationViewController implements Handler {
 
   @Override
   public void handle(Context context) {
-    Map<String, Object> model = new HashMap<>();
-    model.put("services", this.applicationContext.serviceManagementSystem().services());
-    context.render("service-registration.hbs", model);
+    if (this.applicationContext.currentUser() == null) {
+      context.redirect("/login");
+    } else {
+      Map<String, Object> model = new HashMap<>();
+      model.put("services", this.applicationContext.serviceManagementSystem().services());
+      context.render("service-registration.hbs", model);
+    }
   }
 }

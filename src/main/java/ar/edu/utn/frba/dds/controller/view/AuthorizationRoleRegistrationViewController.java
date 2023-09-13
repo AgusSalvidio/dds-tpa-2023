@@ -15,14 +15,14 @@ public class AuthorizationRoleRegistrationViewController implements Handler {
     this.applicationContext = applicationContext;
   }
 
-  /*public User currentUser() {
-    return this.applicationContext.currentUser();
-  }*/
-
   @Override
   public void handle(Context context) throws Exception {
-    Map<String, Object> model = new HashMap<>();
-    model.put("users", this.applicationContext.userManagementSystem().users());
-    context.render("authorization-role-registration.hbs", model);
+    if (this.applicationContext.currentUser() == null) {
+      context.redirect("/login");
+    } else {
+      Map<String, Object> model = new HashMap<>();
+      model.put("users", this.applicationContext.userManagementSystem().users());
+      context.render("authorization-role-registration.hbs", model);
+    }
   }
 }

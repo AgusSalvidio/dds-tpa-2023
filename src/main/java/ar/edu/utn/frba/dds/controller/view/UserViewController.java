@@ -17,8 +17,13 @@ public class UserViewController implements Handler {
 
   @Override
   public void handle(Context context) throws Exception {
-    Map<String, Object> model = new HashMap<>();
-    model.put("users", this.applicationContext.userManagementSystem().users());
-    context.render("users.hbs", model);
+    if (this.applicationContext.currentUser() == null) {
+      context.redirect("/login");
+    } else {
+      Map<String, Object> model = new HashMap<>();
+      model.put("users", this.applicationContext.userManagementSystem().users());
+      model.put("user", this.applicationContext.currentUser());
+      context.render("users.hbs", model);
+    }
   }
 }

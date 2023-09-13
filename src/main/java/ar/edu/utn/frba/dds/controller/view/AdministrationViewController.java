@@ -15,14 +15,15 @@ public class AdministrationViewController implements Handler {
     this.applicationContext = applicationContext;
   }
 
-  /*public User currentUser() {
-    return this.applicationContext.currentUser();
-  }*/
 
   @Override
   public void handle(Context context) throws Exception {
-    Map<String, Object> model = new HashMap<>();
-    model.put("user", applicationContext);
-    context.render("administration.hbs", model);
+    if (this.applicationContext.currentUser() == null) {
+      context.redirect("/login");
+    } else {
+      Map<String, Object> model = new HashMap<>();
+      model.put("user", this.applicationContext.currentUser());
+      context.render("administration.hbs", model);
+    }
   }
 }

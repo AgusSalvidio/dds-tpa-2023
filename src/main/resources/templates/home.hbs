@@ -58,6 +58,14 @@
                             >
                         </li>
                     </ul>
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li>
+                            <span class="px-2">{{user.username}}</span>
+                            <img src="/avatar.png"
+                                 class="" alt="User-Profile-Image">
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -66,7 +74,7 @@
 
 <main>
     <section class="px-2">
-        <h2 class="">¡Bienvenido {{user.username}}!</h2>
+        <h2 class="">¡Bienvenido {{user.detail.username}}!</h2>
     </section>
     <section>
         <div class="px-2">
