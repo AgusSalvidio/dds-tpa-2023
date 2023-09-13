@@ -1,11 +1,11 @@
 package ar.edu.utn.frba.dds.persistencesystem;
 
+import ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole;
 import ar.edu.utn.frba.dds.service.Elevator;
 import ar.edu.utn.frba.dds.service.Escalator;
 import ar.edu.utn.frba.dds.service.Service;
 import ar.edu.utn.frba.dds.service.State;
 import ar.edu.utn.frba.dds.service.Toilet;
-import ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole;
 import ar.edu.utn.frba.dds.user.User;
 import ar.edu.utn.frba.dds.user.UserDetail;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
@@ -21,7 +21,7 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
     transaction.commit();
   }
 
-/*public void stopManagingUser(User anUser) {
+  /*public void stopManagingUser(User anUser) {
     EntityTransaction transaction = entityManager().getTransaction();
 
     transaction.begin();
