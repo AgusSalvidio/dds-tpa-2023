@@ -16,7 +16,7 @@ public class TwilioAdapter implements WhatsAppNotifierAdapter {
   public TwilioAdapter() {
     ReadProperties readProp = ReadProperties.getInstance();
     this.accountSid  = readProp.getTwilioAccountSid();
-    this.authToken  = readProp.getTwilioAccountSid();
+    this.authToken  = readProp.getTwilioAuthToken();
     this.twilioPhoneNumber  = readProp.getTwilioPhoneNumber();
   }
 
