@@ -1,5 +1,7 @@
 package ar.edu.utn.frba.dds.user;
 
+import ar.edu.utn.frba.dds.notification.Msg;
+import ar.edu.utn.frba.dds.notification.notificationmean.NotificationMean;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -84,4 +86,11 @@ public class User {
     return this.details().email();
   }
 
+  public String telephone() {
+    return this.details().telephone();
+  }
+
+  public void notifyMe(Msg message) {
+    this.details.getNotificationMean().notify(message);
+  }
 }
