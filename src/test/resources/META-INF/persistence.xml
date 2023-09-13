@@ -12,6 +12,10 @@
         <class>ar.edu.utn.frba.dds.user.User</class>
         <class>ar.edu.utn.frba.dds.user.UserDetail</class>
         <class>ar.edu.utn.frba.dds.user.UserPreference</class>
+        <class>ar.edu.utn.frba.dds.service.State</class>
+        <class>ar.edu.utn.frba.dds.service.Escalator</class>
+        <class>ar.edu.utn.frba.dds.service.Elevator</class>
+        <class>ar.edu.utn.frba.dds.service.Toilet</class>
         <class>ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole</class>
 
         <properties>

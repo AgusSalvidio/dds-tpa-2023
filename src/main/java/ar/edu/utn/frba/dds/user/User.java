@@ -1,15 +1,14 @@
 package ar.edu.utn.frba.dds.user;
 
 import ar.edu.utn.frba.dds.notification.Msg;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import lombok.Getter;
 
 @Entity
@@ -28,7 +27,7 @@ public class User {
   String password;
 
   @Getter
-  @ManyToOne
+  @ManyToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "user_detail_id", referencedColumnName = "id")
   UserDetail details;
 

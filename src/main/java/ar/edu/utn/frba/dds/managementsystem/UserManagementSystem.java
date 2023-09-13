@@ -10,10 +10,8 @@ import ar.edu.utn.frba.dds.persistencesystem.PersistenceSystem;
 import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
 import ar.edu.utn.frba.dds.user.User;
 import ar.edu.utn.frba.dds.user.UserDetail;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class UserManagementSystem {
   RelationalDatabasePersistenceSystem persistenceSystem;
@@ -43,6 +41,7 @@ public class UserManagementSystem {
     this.persistenceSystem().startManagingUserDetail(anUserDetail);
   }
 
+
   /*public void stopManagingDetail(UserDetail anUserDetail) {
     this.persistenceSystem().stopManagingUserDetail(anUserDetail);
   }*/
@@ -59,7 +58,7 @@ public class UserManagementSystem {
     currentUser.synchronizeWith(updatedUser);
   }
 
-  /*public User user(User anUser) {
+  public User user(User anUser) {
     //return (User) this.persistenceSystem().findObjectTyped(anUser.getClass().getName(), anUser);
   }*/
 
