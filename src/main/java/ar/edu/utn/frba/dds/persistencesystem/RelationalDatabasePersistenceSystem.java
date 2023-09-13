@@ -21,13 +21,13 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
     transaction.commit();
   }
 
-  /*public void stopManagingUser(User anUser) {
+  public void stopManagingUser(User anUser) {
     EntityTransaction transaction = entityManager().getTransaction();
 
     transaction.begin();
     entityManager().remove(anUser);
     transaction.commit();
-  }*/
+  }
 
   public void startManagingUserDetail(UserDetail anUserDetail) {
     EntityTransaction transaction = entityManager().getTransaction();
@@ -37,16 +37,20 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
     transaction.commit();
   }
 
-  /*public void stopManagingUserDetail(UserDetail anUserDetail) {
+  public void stopManagingUserDetail(UserDetail anUserDetail) {
     EntityTransaction transaction = entityManager().getTransaction();
 
     transaction.begin();
     entityManager().remove(anUserDetail);
     transaction.commit();
-  }*/
+  }
 
   public List<User> users() {
     return entityManager().createQuery("from " + User.class.getName()).getResultList();
+  }
+
+  public List<UserDetail> userDetails() {
+    return entityManager().createQuery("from " + UserDetail.class.getName()).getResultList();
   }
 
   public void startManagingElevator(Elevator anElevator) {
@@ -73,15 +77,6 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
     transaction.commit();
   }
 
-  /*
-  public void stopManagingElevator(Elevator anElevator) {
-    EntityTransaction transaction = entityManager().getTransaction();
-
-    transaction.begin();
-    entityManager().remove(anElevator);
-    transaction.commit();
-  }
-
   public void stopManagingEscalator(Escalator anEscalator) {
     EntityTransaction transaction = entityManager().getTransaction();
 
@@ -90,13 +85,23 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
     transaction.commit();
   }
 
+  public void stopManagingElevator(Elevator anElevator) {
+    EntityTransaction transaction = entityManager().getTransaction();
+
+    transaction.begin();
+    entityManager().remove(anElevator);
+    transaction.commit();
+  }
+
+
+
   public void stopManagingToilet(Toilet toilet) {
     EntityTransaction transaction = entityManager().getTransaction();
 
     transaction.begin();
     entityManager().remove(toilet);
     transaction.commit();
-  }*/
+  }
 
   public void startManagingState(State state) {
     EntityTransaction transaction = entityManager().getTransaction();
@@ -106,14 +111,14 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
     transaction.commit();
   }
 
-  /*
+
   public void stopManagingState(State state) {
     EntityTransaction transaction = entityManager().getTransaction();
 
     transaction.begin();
     entityManager().remove(state);
     transaction.commit();
-  }*/
+  }
 
   public List<Service> services() {
     return entityManager().createQuery("from " + Service.class.getName()).getResultList();
@@ -126,13 +131,13 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
     transaction.commit();
   }
 
-  /*public void stopManagingAuthorizationRole(AuthorizationRole authorizationRole) {
+  public void stopManagingAuthorizationRole(AuthorizationRole authorizationRole) {
     EntityTransaction transaction = entityManager().getTransaction();
 
     transaction.begin();
     entityManager().remove(authorizationRole);
     transaction.commit();
-  }*/
+  }
 
   public List<AuthorizationRole> roles() {
     return entityManager().createQuery("from " + AuthorizationRole.class.getName()).getResultList();
