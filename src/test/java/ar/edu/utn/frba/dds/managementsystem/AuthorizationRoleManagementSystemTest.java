@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.managementsystem;
 
 import ar.edu.utn.frba.dds.addons.notificationcreationaddon.NotificationMeanCreationAddOn;
+import ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole;
 import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
 import ar.edu.utn.frba.dds.user.User;
 import ar.edu.utn.frba.dds.user.UserDetail;
@@ -11,7 +12,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-public class UserManagementSystemTest implements WithSimplePersistenceUnit {
+import static ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole.composedOf;
+
+public class AuthorizationRoleManagementSystemTest implements WithSimplePersistenceUnit {
   private UserDetail userDetails() throws Exception {
     return new UserDetail("Hugo", "Ibarra", "ibarraneta@gmail.com", "0123456789",
         new NotificationMeanCreationAddOn().wpp());
@@ -26,34 +29,42 @@ public class UserManagementSystemTest implements WithSimplePersistenceUnit {
   }
 
   @Test
-  @DisplayName("Start managing an user")
-  public void startManagingAnUserTest() throws Exception {
+  @DisplayName("Start managing an authorizationRole")
+  public void startManagingAnAuthorizationRoleTest() throws Exception {
 
-    UserManagementSystem userManagementSystem = Mockito.spy(UserManagementSystem.workingWith(this.persistenceSystem()));
+    AuthorizationRoleManagementSystem authorizationRoleManagementSystem =
+        Mockito.spy(AuthorizationRoleManagementSystem.workingWith(this.persistenceSystem()));
+
     UserDetail userDetail = this.userDetails();
     User user = User.composedOf("ibarranetaYPF", "theBestPassword", userDetail);
 
+    EntityTransaction transaction = entityManager().getTransaction();
+
+    transaction.begin();
+    entityManager().persist(userDetail);
+    entityManager().persist(user);
+    transaction.commit();
+    entityManager().close();
+
+
+    AuthorizationRole authorizationRole = AuthorizationRole.composedOf(user, "Administrador");
+
     Mockito.doAnswer(invocation -> {
-      EntityTransaction transaction = entityManager().getTransaction();
+      EntityTransaction transact = entityManager().getTransaction();
 
-      User obtainedUser = invocation.getArgument(0);
-
-      UserDetail obtainedUserDetail = obtainedUser.getDetails();
-
-      transaction.begin();
-      entityManager().persist(obtainedUserDetail);
-      entityManager().persist(obtainedUser);
-      transaction.commit();
+      AuthorizationRole obtainedAuthorizationRole = invocation.getArgument(0);
+      transact.begin();
+      entityManager().persist(obtainedAuthorizationRole);
+      transact.commit();
       return null;
-    }).when(userManagementSystem).startManaging(user);
+    }).when(authorizationRoleManagementSystem).startManaging(authorizationRole);
 
-    userManagementSystem.startManaging(user);
-    UserDetail registeredUserDetail = entityManager().find(UserDetail.class, 1);
-    User registeredUser = entityManager().find(User.class, 2);
+    authorizationRoleManagementSystem.startManaging(authorizationRole);
 
-    Assertions.assertEquals(userManagementSystem.users().size(), 1);
-//    Assertions.assertEquals(userManagementSystem.users().get(0), registeredUser);
-//    Assertions.assertEquals(userManagementSystem.users().get(0).getDetails(), registeredUserDetail);
+    AuthorizationRole registeredRole = entityManager().find(AuthorizationRole.class, 3);
+
+    Assertions.assertEquals(authorizationRoleManagementSystem.roles().size(), 1);
+    //Assertions.assertEquals(authorizationRoleManagementSystem.roles().get(0), registeredRole);
 
   }
 

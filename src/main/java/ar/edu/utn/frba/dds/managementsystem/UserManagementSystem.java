@@ -1,6 +1,12 @@
 package ar.edu.utn.frba.dds.managementsystem;
 
 import ar.edu.utn.frba.dds.eventnotificationsystem.notifiableevent.NotifiableEvent;
+import ar.edu.utn.frba.dds.notification.notificationmean.JakartaAdapter;
+import ar.edu.utn.frba.dds.notification.notificationmean.NotificationMean;
+import ar.edu.utn.frba.dds.notification.notificationmean.NotifyByMail;
+import ar.edu.utn.frba.dds.notification.notificationmean.NotifyByWhatsApp;
+import ar.edu.utn.frba.dds.notification.notificationmean.TwilioAdapter;
+import ar.edu.utn.frba.dds.persistencesystem.PersistenceSystem;
 import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
 import ar.edu.utn.frba.dds.user.User;
 import ar.edu.utn.frba.dds.user.UserDetail;
@@ -35,8 +41,8 @@ public class UserManagementSystem {
     this.persistenceSystem().startManagingUserDetail(anUserDetail);
   }
 
-  /*
-  public void stopManagingDetail(UserDetail anUserDetail) {
+
+  /*public void stopManagingDetail(UserDetail anUserDetail) {
     this.persistenceSystem().stopManagingUserDetail(anUserDetail);
   }*/
 
@@ -44,10 +50,9 @@ public class UserManagementSystem {
     return this.persistenceSystem.users();
   }
 
-  /*
-  public void stopManaging(User anUser) {
+ /*public void stopManaging(User anUser) {
     this.persistenceSystem().stopManagingUser(anUser);
-  }
+  }/*
 
   public void updateWith(User currentUser, User updatedUser) {
     currentUser.synchronizeWith(updatedUser);
@@ -68,12 +73,25 @@ public class UserManagementSystem {
     String email = model.get("email").toString();
     String username = model.get("username").toString();
     String password = model.get("password").toString();
+    String telephone = model.get("telephone").toString();
+    NotificationMean notificationMean = this.convertToEntity(
+        model.get("notificationmean").toString());
 
-    UserDetail userDetail = new UserDetail(name, lastname, email);
+    UserDetail userDetail = new UserDetail(name, lastname, email, telephone, notificationMean);
     this.startManagingDetail(userDetail);
 
     this.startManaging(User.composedOf(username, password, userDetail));
 
   }
 
+  private NotificationMean convertToEntity(String str) {
+    NotificationMean obj = null;
+
+    if (str.equals("wpp")) {
+      obj = new NotifyByWhatsApp(new TwilioAdapter());
+    } else if (str.equals("email")) {
+      obj = new NotifyByMail(new JakartaAdapter());
+    }
+    return obj;
+  }
 }

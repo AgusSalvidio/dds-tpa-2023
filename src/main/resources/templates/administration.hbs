@@ -27,7 +27,9 @@
             referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="css/style.css"/>
-    <title>Usuarios | Service Status Monitoring of public transport and establishments </title>
+
+    <title>Administración | Service Status Monitoring of public transport and
+        establishments </title>
 </head>
 
 <body>
@@ -50,7 +52,7 @@
                                     data-bs-toggle="dropdown"
                                     aria-expanded="false"
                             >
-                                Administrar usuarios
+                                Administrar Usuarios
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
@@ -73,56 +75,12 @@
 </header>
 
 <main>
-    <div class="d-flex justify-content-end p-2">
-        <legend class="">Administrar Usuarios</legend>
-        <a
-                class="btn btn-md btn-primary"
-                href="/user-registration"
-        >
-            Agregar
-        </a>
-    </div>
-    <section>
-        <div class="px-1">
-            <div class="row">
-                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                    <table
-                            class=" table table-striped"
-                    >
-                        <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Apellido</th>
-                            <th>Email</th>
-                            <th>Usuario</th>
-                            <th>Acciones</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {{#each users}}
-                            <tr>
-                                <td>{{this.details.name}}</td>
-                                <td>{{this.details.lastname}}</td>
-                                <td>{{this.details.email}}</td>
-                                <td>{{this.username}}</td>
-                                <td class="px-4">
-                                    <a class="btn-sm "><i
-                                            class="fa-regular fa-pen-to-square"></i></a>
-                                    <a class="btn-sm "><i class="fa-solid fa-xmark"
-                                                          style="color:red"></i></a>
-                                </td>
-                            </tr>
-                        {{else}}
-                            <tr>
-                                <td>No hay usuarios</td>
-                            </tr>
-                        {{/each}}
 
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
+    <section class="px-2">
+        <div class="">
+            <p>
+                En proceso de construcción...
+            </p>
         </div>
     </section>
 </main>

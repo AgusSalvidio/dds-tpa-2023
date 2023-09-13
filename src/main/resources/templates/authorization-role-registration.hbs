@@ -27,7 +27,7 @@
             referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="css/style.css"/>
-    <title>Registro de Usuario | Service Status Monitoring of public transport and
+    <title>Registro de Rol de Autorizacion | Service Status Monitoring of public transport and
         establishments </title>
 </head>
 
@@ -39,30 +39,21 @@
 <main>
 
     <section class="container py-4">
-        <h2 >Registrarse</h2>
-        <form class="row g-3 py-2" method="post" action="/register-user">
+        <h2>Alta Rol de Autorización</h2>
+        <form class="row g-3 py-2" method="post" action="/register-authorization-role">
             <div class="col-md-6">
-                <label for="name" class="col-form-label">Nombre:</label>
-                <input type="text" class="form-control" name="name"/>
+                <label for="role" class="col-form-label">Rol:</label>
+                <input type="text" class="form-control" name="role"/>
             </div>
-            <div class="col-md-6">
-                <label for="lastname" class="col-form-label">Apellido:</label>
-                <input type="text" class="form-control" name="lastname"/>
-            </div>
-            <div class="col-md-6">
-                <label for="email" class="col-form-label">Email:</label>
-                <input type="text" class="form-control" name="email"/>
-            </div>
-            <div class="col-md-6">
-                <label for="username" class="col-form-label">Usuario:</label>
-                <input type="text" class="form-control" name="username"/>
-            </div>
-            <div class="col-md-6">
-                <label for="password" class="col-form-label">Contraseña:</label>
-                <input type="password" class="form-control" name="password"/>
-            </div>
+            <label for="users">Seleccionar usuario:</label>
+            <select class="col-md-6" name="users">
+                {{#each users}}
+                    <option value={{this}}>{{this.username}}</option>
+                {{else}}
+                {{/each}}
+            </select>
             <div class="d-flex justify-content-center gap-2">
-                <button type="submit" class="btn btn-primary">Registrarse</button>
+                <button type="submit" class="btn btn-primary">Aceptar</button>
             </div>
         </form>
     </section>

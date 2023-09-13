@@ -3,7 +3,11 @@ package ar.edu.utn.frba.dds;
 import ar.edu.utn.frba.dds.applicationcontext.ApplicationContext;
 import ar.edu.utn.frba.dds.controller.action.GetAllUsersActionController;
 import ar.edu.utn.frba.dds.controller.action.RegisterServiceActionController;
+import ar.edu.utn.frba.dds.controller.action.RegisterAuthorizationRoleActionController;
 import ar.edu.utn.frba.dds.controller.action.RegisterUserActionController;
+import ar.edu.utn.frba.dds.controller.view.AdministrationViewController;
+import ar.edu.utn.frba.dds.controller.view.AuthorizationRoleRegistrationViewController;
+import ar.edu.utn.frba.dds.controller.view.AuthorizationRoleViewController;
 import ar.edu.utn.frba.dds.controller.view.HomeViewController;
 import ar.edu.utn.frba.dds.controller.view.ServiceRegistrationViewController;
 import ar.edu.utn.frba.dds.controller.view.ServiceViewController;
@@ -36,10 +40,18 @@ public class MainApp {
     app.get("/user-registration", new UserRegistrationViewController(applicationContext));
     app.get("/services", new ServiceViewController(applicationContext));
     app.get("/service-registration", new ServiceRegistrationViewController(applicationContext));
+    app.get("/home", new HomeViewController(applicationContext));
+    app.get("/administration", new AdministrationViewController(applicationContext));
+    app.get("/authorization-roles", new AuthorizationRoleViewController(applicationContext));
+    app.get("/authorization-role-registration",
+        new AuthorizationRoleRegistrationViewController(applicationContext));
 
     app.post("/register-user", new RegisterUserActionController(applicationContext));
     app.post("/register-service",
         new RegisterServiceActionController(applicationContext));
+    app.post("/register-authorization-role",
+        new RegisterAuthorizationRoleActionController(applicationContext));
+
   }
 
   private static void initializeTemplateEngine() {

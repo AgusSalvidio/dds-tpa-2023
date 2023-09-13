@@ -5,6 +5,7 @@ import ar.edu.utn.frba.dds.service.Escalator;
 import ar.edu.utn.frba.dds.service.Service;
 import ar.edu.utn.frba.dds.service.State;
 import ar.edu.utn.frba.dds.service.Toilet;
+import ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole;
 import ar.edu.utn.frba.dds.user.User;
 import ar.edu.utn.frba.dds.user.UserDetail;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
@@ -20,8 +21,7 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
     transaction.commit();
   }
 
-  /*
-  public void stopManagingUser(User anUser) {
+/*public void stopManagingUser(User anUser) {
     EntityTransaction transaction = entityManager().getTransaction();
 
     transaction.begin();
@@ -37,8 +37,7 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
     transaction.commit();
   }
 
-  /*
-  public void stopManagingUserDetail(UserDetail anUserDetail) {
+  /*public void stopManagingUserDetail(UserDetail anUserDetail) {
     EntityTransaction transaction = entityManager().getTransaction();
 
     transaction.begin();
@@ -119,4 +118,24 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
   public List<Service> services() {
     return entityManager().createQuery("from " + Service.class.getName()).getResultList();
   }
+
+  public void startManagingAuthorizationRole(AuthorizationRole authorizationRole) {
+    EntityTransaction transaction = entityManager().getTransaction();
+    transaction.begin();
+    entityManager().persist(authorizationRole);
+    transaction.commit();
+  }
+
+  /*public void stopManagingAuthorizationRole(AuthorizationRole authorizationRole) {
+    EntityTransaction transaction = entityManager().getTransaction();
+
+    transaction.begin();
+    entityManager().remove(authorizationRole);
+    transaction.commit();
+  }*/
+
+  public List<AuthorizationRole> roles() {
+    return entityManager().createQuery("from " + AuthorizationRole.class.getName()).getResultList();
+  }
+
 }
