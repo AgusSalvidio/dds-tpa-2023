@@ -1,11 +1,6 @@
 package ar.edu.utn.frba.dds.managementsystem;
 
 import ar.edu.utn.frba.dds.eventnotificationsystem.notifiableevent.NotifiableEvent;
-import ar.edu.utn.frba.dds.notification.notificationmean.JakartaAdapter;
-import ar.edu.utn.frba.dds.notification.notificationmean.NotificationMean;
-import ar.edu.utn.frba.dds.notification.notificationmean.NotifyByMail;
-import ar.edu.utn.frba.dds.notification.notificationmean.NotifyByWhatsApp;
-import ar.edu.utn.frba.dds.notification.notificationmean.TwilioAdapter;
 import ar.edu.utn.frba.dds.persistencesystem.PersistenceSystem;
 import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
 import ar.edu.utn.frba.dds.user.User;
@@ -74,25 +69,12 @@ public class UserManagementSystem {
     String email = model.get("email").toString();
     String username = model.get("username").toString();
     String password = model.get("password").toString();
-    String telephone = model.get("telephone").toString();
-    NotificationMean notificationMean = this.convertToEntity(
-        model.get("notificationmean").toString());
 
-    UserDetail userDetail = new UserDetail(name, lastname, email, telephone, notificationMean);
+    UserDetail userDetail = new UserDetail(name, lastname, email);
     this.startManagingDetail(userDetail);
 
     this.startManaging(User.composedOf(username, password, userDetail));
 
   }
 
-  private NotificationMean convertToEntity(String str) {
-    NotificationMean obj = null;
-
-    if (str.equals("wpp")) {
-      obj = new NotifyByWhatsApp(new TwilioAdapter());
-    } else if (str.equals("email")) {
-      obj = new NotifyByMail(new JakartaAdapter());
-    }
-    return obj;
-  }
 }

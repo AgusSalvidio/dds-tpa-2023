@@ -21,7 +21,7 @@ public class UserTest {
     Assertions.assertEquals("Hugo", user.name());
     Assertions.assertEquals("Ibarra", user.lastname());
     Assertions.assertEquals("ibarraneta@gmail.com", user.email());
-    Assertions.assertEquals("0123456789", user.telephone());
+
   }
 
   @Test
