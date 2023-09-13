@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.managementsystem;
 
+import ar.edu.utn.frba.dds.addons.notificationcreationaddon.NotificationMeanCreationAddOn;
 import ar.edu.utn.frba.dds.persistencesystem.MemoryBasedPersistenceSystem;
 import ar.edu.utn.frba.dds.persistencesystem.PersistenceSystem;
 import ar.edu.utn.frba.dds.user.UserDetail;
@@ -16,8 +17,9 @@ public class ManagementSystemTest {
     return new MemoryBasedPersistenceSystem();
   }
 
-  private UserDetail userDetails() {
-    return new UserDetail("Hugo", "Ibarra", "ibarraneta@gmail.com");
+  private UserDetail userDetails() throws Exception {
+    return new UserDetail("Hugo", "Ibarra", "ibarraneta@gmail.com", "0123456789",
+        new NotificationMeanCreationAddOn().wpp());
   }
 
   /*@Test

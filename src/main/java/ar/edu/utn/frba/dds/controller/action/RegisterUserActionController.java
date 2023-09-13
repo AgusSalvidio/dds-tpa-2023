@@ -22,6 +22,8 @@ public class RegisterUserActionController implements Handler {
     model.put("name", context.formParam("name"));
     model.put("lastname", context.formParam("lastname"));
     model.put("email", context.formParam("email"));
+    model.put("telephone", context.formParam("telephone"));
+    model.put("notificationmean", context.formParam("notificationmean"));
     model.put("username", context.formParam("username"));
     model.put("password", context.formParam("password"));
 
