@@ -74,8 +74,10 @@ public class UserManagementSystem {
     String username = model.get("username").toString();
     String password = model.get("password").toString();
     String telephone = model.get("telephone").toString();
-    NotificationMean notificationMean = this.convertToEntity(
-        model.get("notificationmean").toString());
+    /*NotificationMean notificationMean = this.convertToEntity(
+        model.get("notificationmean").toString());*/
+
+    NotificationMean notificationMean = new NotifyByWhatsApp(new TwilioAdapter());
 
     UserDetail userDetail = new UserDetail(name, lastname, email, telephone, notificationMean);
     this.startManagingDetail(userDetail);

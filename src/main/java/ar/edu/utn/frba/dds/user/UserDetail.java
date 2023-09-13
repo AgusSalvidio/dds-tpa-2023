@@ -32,9 +32,11 @@ public class UserDetail {
   @Getter
   @Column(name = "telephone")
   String telephone;
-  @Getter
+  /*
   @Convert(converter =  NotificationMeanConverter.class)
-  @Column(name = "notificationmean")
+  @Column(name = "notificationmean")*/
+  @Getter
+  @Transient
   NotificationMean notificationMean;
   @Transient
   UserPreference userPreference;
