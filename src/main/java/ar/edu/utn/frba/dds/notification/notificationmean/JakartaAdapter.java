@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.notification.notificationmean;
 
 import ar.edu.utn.frba.dds.notification.Msg;
+import ar.edu.utn.frba.dds.property.ReadProperties;
 import jakarta.mail.Authenticator;
 import jakarta.mail.Message;
 import jakarta.mail.MessagingException;
@@ -16,8 +17,9 @@ public class JakartaAdapter implements MailNotifierAdapter {
   private final String password;
 
   public JakartaAdapter() {
-    this.username = "testdds.2022@gmail.com";
-    this.password = "bhyaykkfznoyepbb";
+    ReadProperties readProp = ReadProperties.getInstance();
+    this.username = readProp.getJakartaUsername();
+    this.password = readProp.getJakartaPassword();
   }
 
   @Override

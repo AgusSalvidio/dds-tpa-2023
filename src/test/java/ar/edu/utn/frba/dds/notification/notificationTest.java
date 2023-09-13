@@ -5,14 +5,11 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 
 import ar.edu.utn.frba.dds.addons.usercreationaddon.UserDetailCreationAddOn;
-import ar.edu.utn.frba.dds.notification.notificationmean.JakartaAdapter;
 import ar.edu.utn.frba.dds.notification.notificationmean.NotificationMean;
 import ar.edu.utn.frba.dds.notification.notificationmean.NotifyByMail;
 import ar.edu.utn.frba.dds.notification.notificationmean.NotifyByWhatsApp;
-import ar.edu.utn.frba.dds.notification.notificationmean.TwilioAdapter;
 import ar.edu.utn.frba.dds.user.User;
 import ar.edu.utn.frba.dds.user.UserDetail;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
