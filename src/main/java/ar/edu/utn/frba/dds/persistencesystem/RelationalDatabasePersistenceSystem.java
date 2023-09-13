@@ -130,13 +130,13 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
     transaction.commit();
   }
 
-  /*public void stopManagingAuthorizationRole(AuthorizationRole authorizationRole) {
+  public void stopManagingAuthorizationRole(AuthorizationRole authorizationRole) {
     EntityTransaction transaction = entityManager().getTransaction();
 
     transaction.begin();
     entityManager().remove(authorizationRole);
     transaction.commit();
-  }*/
+  }
 
   public List<AuthorizationRole> roles() {
     return entityManager().createQuery("from " + AuthorizationRole.class.getName()).getResultList();

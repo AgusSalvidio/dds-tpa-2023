@@ -7,6 +7,7 @@ import ar.edu.utn.frba.dds.user.User;
 import ar.edu.utn.frba.dds.user.UserDetail;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import javax.persistence.EntityTransaction;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,6 +29,20 @@ public class AuthorizationRoleManagementSystemTest implements WithSimplePersiste
     return new RelationalDatabasePersistenceSystem();
   }
 
+  @AfterEach
+  public void cleanDataBase() {
+    //Cleaning after running test
+    EntityTransaction transaction = entityManager().getTransaction();
+    transaction.begin();
+
+    entityManager().createQuery("DELETE FROM AuthorizationRole ").executeUpdate();
+    entityManager().createQuery("DELETE FROM User").executeUpdate();
+    entityManager().createQuery("DELETE FROM UserDetail").executeUpdate();
+
+    transaction.commit();
+    entityManager().close();
+  }
+
   @Test
   @DisplayName("Start managing an authorizationRole")
   public void startManagingAnAuthorizationRoleTest() throws Exception {
@@ -46,8 +61,13 @@ public class AuthorizationRoleManagementSystemTest implements WithSimplePersiste
     transaction.commit();
     entityManager().close();
 
+    String jpql = "SELECT u FROM User u WHERE u.username = :username";
 
-    AuthorizationRole authorizationRole = AuthorizationRole.composedOf(user, "Administrador");
+    User registeredUser = entityManager().createQuery(jpql, User.class)
+        .setParameter("username", user.username())
+        .getSingleResult();
+
+    AuthorizationRole authorizationRole = AuthorizationRole.composedOf(registeredUser, "Administrador");
 
     Mockito.doAnswer(invocation -> {
       EntityTransaction transact = entityManager().getTransaction();
@@ -61,96 +81,115 @@ public class AuthorizationRoleManagementSystemTest implements WithSimplePersiste
 
     authorizationRoleManagementSystem.startManaging(authorizationRole);
 
-    AuthorizationRole registeredRole = entityManager().find(AuthorizationRole.class, 3);
+    jpql = "SELECT u FROM AuthorizationRole u WHERE u.role = :role";
+
+    AuthorizationRole registeredRole = entityManager().createQuery(jpql, AuthorizationRole.class)
+        .setParameter("role", "Administrador")
+        .getSingleResult();
 
     Assertions.assertEquals(authorizationRoleManagementSystem.roles().size(), 1);
-    //Assertions.assertEquals(authorizationRoleManagementSystem.roles().get(0), registeredRole);
+    Assertions.assertEquals(authorizationRoleManagementSystem.roles().get(0), registeredRole);
 
   }
 
-
-  /* When running on local works fine, but when running mvn clean, fails....
-     Needs to be looked at. -asalvidio
   @Test
-  @DisplayName("Stop managing an user")
-  public void stopManagingAnUserTest() throws Exception {
+  @DisplayName("Stop managing an authorizationRole")
+  public void stopManagingAnAuthorizationRoleTest() throws Exception {
 
-    UserManagementSystem userManagementSystem = Mockito.spy(UserManagementSystem.workingWith(this.persistenceSystem()));
+    AuthorizationRoleManagementSystem authorizationRoleManagementSystem =
+        Mockito.spy(AuthorizationRoleManagementSystem.workingWith(this.persistenceSystem()));
+
     UserDetail userDetail = this.userDetails();
     User user = User.composedOf("ibarranetaYPF", "theBestPassword", userDetail);
+    AuthorizationRole authorizationRole = AuthorizationRole.composedOf(user, "Administrador");
 
     EntityTransaction transaction = entityManager().getTransaction();
 
     transaction.begin();
     entityManager().persist(userDetail);
     entityManager().persist(user);
+    entityManager().persist(authorizationRole);
     transaction.commit();
+    entityManager().close();
 
-    Assertions.assertEquals(userManagementSystem.users().size(), 1);
+    Assertions.assertEquals(authorizationRoleManagementSystem.roles().size(), 1);
 
-    User registeredUser = entityManager().find(User.class, 2);
+    String jpql = "SELECT u FROM AuthorizationRole u WHERE u.role = :role";
+
+    AuthorizationRole registeredRole = entityManager().createQuery(jpql, AuthorizationRole.class)
+        .setParameter("role", "Administrador")
+        .getSingleResult();
 
     Mockito.doAnswer(invocation -> {
       EntityTransaction transact = entityManager().getTransaction();
 
-      User obtainedUser = invocation.getArgument(0);
-
-      UserDetail obtainedUserDetail = obtainedUser.getDetails();
-
+      AuthorizationRole obtainedRole = invocation.getArgument(0);
       transact.begin();
-      entityManager().remove(obtainedUser);
+      entityManager().remove(obtainedRole);
       transact.commit();
       return null;
-    }).when(userManagementSystem).stopManaging(registeredUser);
+    }).when(authorizationRoleManagementSystem).stopManaging(registeredRole);
 
+    authorizationRoleManagementSystem.stopManaging(registeredRole);
 
-    userManagementSystem.stopManaging(registeredUser);
-    Assertions.assertTrue(userManagementSystem.users().isEmpty());
-
-
+    Assertions.assertTrue(authorizationRoleManagementSystem.roles().isEmpty());
   }
 
   @Test
-  @DisplayName("Update an user")
-  public void updateAnUserTest() throws Exception {
+  @DisplayName("Update an authorizationRole")
+  public void updateAnAuthorizationRoleTest() throws Exception {
 
-    UserManagementSystem userManagementSystem = Mockito.spy(UserManagementSystem.workingWith(this.persistenceSystem()));
+
+    AuthorizationRoleManagementSystem authorizationRoleManagementSystem =
+        Mockito.spy(AuthorizationRoleManagementSystem.workingWith(this.persistenceSystem()));
+
     UserDetail userDetail = this.userDetails();
     User user = User.composedOf("ibarranetaYPF", "theBestPassword", userDetail);
-    User updatedUser = User.composedOf("almironeta", "theBestPassword", userDetail);
+    AuthorizationRole authorizationRole = AuthorizationRole.composedOf(user, "Administrador");
+
+    AuthorizationRole updatedRole = AuthorizationRole.composedOf(user, "Seguridad");
 
     EntityTransaction transaction = entityManager().getTransaction();
 
     transaction.begin();
     entityManager().persist(userDetail);
     entityManager().persist(user);
+    entityManager().persist(authorizationRole);
     transaction.commit();
+    entityManager().close();
 
-    User registeredUser = entityManager().find(User.class, 2);
+    String jpql = "SELECT u FROM AuthorizationRole u WHERE u.role = :role";
 
-    Assertions.assertEquals(userManagementSystem.users().size(), 1);
-    Assertions.assertEquals(registeredUser.username(), "ibarranetaYPF");
+    AuthorizationRole registeredRole = entityManager().createQuery(jpql, AuthorizationRole.class)
+        .setParameter("role", "Administrador")
+        .getSingleResult();
+
+    Assertions.assertEquals(authorizationRoleManagementSystem.roles().size(), 1);
+    Assertions.assertEquals(registeredRole.role(), "Administrador");
 
     Mockito.doAnswer(invocation -> {
       EntityTransaction transact = entityManager().getTransaction();
 
-      User obtainedUser = invocation.getArgument(0);
+      AuthorizationRole obtainedRole = invocation.getArgument(0);
 
-      User obtainedUpdatedUser = invocation.getArgument(1);
+      AuthorizationRole obtainedUpdatedRole = invocation.getArgument(1);
 
-      obtainedUser.synchronizeWith(obtainedUpdatedUser);
+      obtainedRole.synchronizeWith(obtainedUpdatedRole);
 
       transact.begin();
-      entityManager().merge(obtainedUser);
+      entityManager().merge(obtainedRole);
       transact.commit();
       return null;
-    }).when(userManagementSystem).updateWith(registeredUser, updatedUser);
+    }).when(authorizationRoleManagementSystem).updateWith(registeredRole, updatedRole);
 
-    userManagementSystem.updateWith(registeredUser, updatedUser);
+    authorizationRoleManagementSystem.updateWith(registeredRole, updatedRole);
 
-    User persistedUser = entityManager().find(User.class, 2);
-    Assertions.assertEquals(persistedUser.username(), "almironeta");
+    AuthorizationRole persistedRole = entityManager().createQuery(jpql, AuthorizationRole.class)
+        .setParameter("role", "Seguridad")
+        .getSingleResult();
 
-  }*/
+    Assertions.assertEquals(persistedRole.role(), "Seguridad");
+
+  }
 
 }
