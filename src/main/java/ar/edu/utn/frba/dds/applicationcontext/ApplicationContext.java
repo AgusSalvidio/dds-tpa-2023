@@ -9,9 +9,10 @@ import ar.edu.utn.frba.dds.managementsystem.ManagementSystem;
 import ar.edu.utn.frba.dds.managementsystem.ServiceManagementSystem;
 import ar.edu.utn.frba.dds.managementsystem.UserManagementSystem;
 import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
+import ar.edu.utn.frba.dds.user.User;
 
 public class ApplicationContext {
-  //User currentUser;
+  User currentUser;
 
   RelationalDatabasePersistenceSystem persistenceSystem = new RelationalDatabasePersistenceSystem();
   //EventNotificationSystem eventNotificationSystem = new EventNotificationSystem();
@@ -28,9 +29,13 @@ public class ApplicationContext {
     return this.authorizationRoleManagementSystem;
   }
 
-  /*public User currentUser() {
-    return this.currentUser;
-  }*/
+  public User currentUser() {
+    return currentUser;
+  }
+
+  public void setCurrentUser() {
+    currentUser = this.userManagementSystem().users().get(1);
+  }
 
   public ServiceManagementSystem serviceManagementSystem() {
     return new ServiceManagementSystem(this.persistenceSystem);
