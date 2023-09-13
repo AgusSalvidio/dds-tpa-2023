@@ -96,4 +96,13 @@ public class UserDetail {
   public List<Entity> entities() {
     return this.userPreference.entities();
   }
+
+  public void synchronizeWith(UserDetail anUpdatedUserDetail) {
+    this.name = anUpdatedUserDetail.name;
+    this.lastname = anUpdatedUserDetail.lastname;
+    this.email = anUpdatedUserDetail.email;
+    this.telephone = anUpdatedUserDetail.telephone;
+    this.notificationMean = anUpdatedUserDetail.notificationMean;
+    this.userPreference = anUpdatedUserDetail.userPreference;
+  }
 }

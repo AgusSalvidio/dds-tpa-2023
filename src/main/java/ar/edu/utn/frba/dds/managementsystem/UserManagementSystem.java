@@ -42,23 +42,31 @@ public class UserManagementSystem {
   }
 
 
-  /*public void stopManagingDetail(UserDetail anUserDetail) {
+  public void stopManagingDetail(UserDetail anUserDetail) {
     this.persistenceSystem().stopManagingUserDetail(anUserDetail);
-  }*/
+  }
 
   public List<User> users() {
     return this.persistenceSystem.users();
   }
 
-  /*public void stopManaging(User anUser) {
+  public List<UserDetail> userDetails() {
+    return this.persistenceSystem.userDetails();
+  }
+
+  public void stopManaging(User anUser) {
     this.persistenceSystem().stopManagingUser(anUser);
-  }/*
+  }
 
   public void updateWith(User currentUser, User updatedUser) {
     currentUser.synchronizeWith(updatedUser);
   }
 
-  public User user(User anUser) {
+  public void updateDetailWith(UserDetail currentUserDetail, UserDetail updatedUserDetail) {
+    currentUserDetail.synchronizeWith(updatedUserDetail);
+  }
+
+  /*public User user(User anUser) {
     //return (User) this.persistenceSystem().findObjectTyped(anUser.getClass().getName(), anUser);
   }*/
 
