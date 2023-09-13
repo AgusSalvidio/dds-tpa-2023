@@ -41,36 +41,33 @@ public class ServiceManagementSystem {
     this.persistenceSystem().startManagingToilet(toilet);
   }
 
-  /*
-  public void stopManagingElevator(Elevator anElevator) {
-    this.persistenceSystem().stopManagingElevator(anElevator);
-  }
-
   public void stopManagingEscalator(Escalator anEscalator) {
     this.persistenceSystem().stopManagingEscalator(anEscalator);
   }
 
+  public void stopManagingElevator(Elevator anElevator) {
+    this.persistenceSystem().stopManagingElevator(anElevator);
+  }
+
   public void stopManagingToilet(Toilet toilet) {
     this.persistenceSystem().stopManagingToilet(toilet);
-  }*/
+  }
 
   public void startManagingState(State state) {
     this.persistenceSystem().startManagingState(state);
   }
 
-  /*
   public void stopManagingState(State state) {
     this.persistenceSystem().stopManagingState(state);
-  }*/
+  }
 
   public List<Service> services() {
     return this.persistenceSystem.services();
   }
 
-  /*
   public void updateWith(Service currentService, Service updateService) {
     currentService.synchronizeWith(updateService);
-  }*/
+  }
 
   public void startManagingServiceFrom(Map model) {
     String name = model.get("name").toString();
@@ -87,7 +84,8 @@ public class ServiceManagementSystem {
       case "Escalera" ->
           this.startManagingEscalator(Escalator.composedOf(name, description, state));
       case "Baño" -> this.startManagingToilet(Toilet.composedOf(name, description, state));
-      default -> { }
+      default -> {
+      }
     }
   }
 
