@@ -1,7 +1,7 @@
 package ar.edu.utn.frba.dds.user;
 
-import javax.persistence.CascadeType;
 import ar.edu.utn.frba.dds.notification.Msg;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
