@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.managementsystem;
 
+import ar.edu.utn.frba.dds.addons.notificationcreationaddon.NotificationMeanCreationAddOn;
 import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
 import ar.edu.utn.frba.dds.user.User;
 import ar.edu.utn.frba.dds.user.UserDetail;
@@ -11,8 +12,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 public class UserManagementSystemTest implements WithSimplePersistenceUnit {
-  private UserDetail userDetails() {
-    return new UserDetail("Hugo", "Ibarra", "ibarraneta@gmail.com");
+  private UserDetail userDetails() throws Exception {
+    return new UserDetail("Hugo", "Ibarra", "ibarraneta@gmail.com", "0123456789",
+        new NotificationMeanCreationAddOn().wpp());
   }
 
   private RelationalDatabasePersistenceSystem persistenceSystem() {
