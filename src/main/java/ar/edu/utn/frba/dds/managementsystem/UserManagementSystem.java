@@ -50,7 +50,7 @@ public class UserManagementSystem {
     return this.persistenceSystem.users();
   }
 
- /*public void stopManaging(User anUser) {
+   /*public void stopManaging(User anUser) {
     this.persistenceSystem().stopManagingUser(anUser);
   }/*
 
