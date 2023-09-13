@@ -27,7 +27,7 @@
             referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="css/style.css"/>
-    <title>Usuarios | Service Status Monitoring of public transport and establishments </title>
+    <title>Roles de Autorizacion | Service Status Monitoring of public transport and establishments </title>
 </head>
 
 <body>
@@ -85,20 +85,16 @@
                     >
                         <thead>
                         <tr>
-                            <th>Nombre</th>
-                            <th>Apellido</th>
-                            <th>Email</th>
+                            <th>Rol</th>
                             <th>Usuario</th>
                             <th>Acciones</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {{#each users}}
+                        {{#each roles}}
                             <tr>
-                                <td>{{this.details.name}}</td>
-                                <td>{{this.details.lastname}}</td>
-                                <td>{{this.details.email}}</td>
-                                <td>{{this.username}}</td>
+                                <td>{{this.role}}</td>
+                                <td>{{this.user.username}}</td>
                                 <td class="px-4">
                                     <a class="btn-sm "><i
                                             class="fa-regular fa-pen-to-square"></i></a>
