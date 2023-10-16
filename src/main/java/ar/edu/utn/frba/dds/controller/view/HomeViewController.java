@@ -24,6 +24,7 @@ public class HomeViewController implements Handler {
     } else {
       Map<String, Object> model = new HashMap<>();
       model.put("user", this.applicationContext.currentUser());
+      model.put("title", "Inicio");
       context.render("home.hbs", model);
     }
 

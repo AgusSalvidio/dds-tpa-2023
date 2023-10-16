@@ -16,6 +16,7 @@ import ar.edu.utn.frba.dds.controller.view.ServiceViewController;
 import ar.edu.utn.frba.dds.controller.view.UserRegistrationViewController;
 import ar.edu.utn.frba.dds.controller.view.UserViewController;
 import com.github.jknack.handlebars.Handlebars;
+import com.github.jknack.handlebars.Helper;
 import com.github.jknack.handlebars.Template;
 import io.javalin.Javalin;
 import io.javalin.config.JavalinConfig;
@@ -58,10 +59,59 @@ public class MainApp {
 
   }
 
+  private static void registerHeadMetaTo(Handlebars handlebars) {
+    handlebars.registerHelper("headMeta", (model, options) -> {
+      String navbarTemplate = "";
+      try {
+        Template template = handlebars.compile("templates/head-meta");
+        navbarTemplate = template.apply(model);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+      return navbarTemplate;
+    });
+  }
+
+  private static void registerScriptsTo(Handlebars handlebars) {
+    handlebars.registerHelper("scripts", (model, options) -> {
+      String navbarTemplate = "";
+      try {
+        Template template = handlebars.compile("templates/scripts");
+        navbarTemplate = template.apply(model);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+      return navbarTemplate;
+    });
+  }
+
+  private static void registerCustomNavbarTo(Handlebars handlebars) {
+    handlebars.registerHelper("customNavbar", (model, options) -> {
+      String navbarTemplate = "";
+      try {
+        Template template = handlebars.compile("templates/home-navbar");
+        navbarTemplate = template.apply(model);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+      return navbarTemplate;
+    });
+  }
+
+  private static void registerCustomHelpersTo(Handlebars handlebars) {
+    registerHeadMetaTo(handlebars);
+    registerCustomNavbarTo(handlebars);
+    registerScriptsTo(handlebars);
+
+  }
+
   private static void initializeTemplateEngine() {
     JavalinRenderer.register(
         (path, model, context) -> { // This renders the template
           Handlebars handlebars = new Handlebars();
+
+          registerCustomHelpersTo(handlebars);
+
           Template template = null;
           try {
             template = handlebars.compile("templates/" + path.replace(".hbs", ""));
