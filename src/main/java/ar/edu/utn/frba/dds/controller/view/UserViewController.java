@@ -23,6 +23,7 @@ public class UserViewController implements Handler {
       Map<String, Object> model = new HashMap<>();
       model.put("users", this.applicationContext.userManagementSystem().users());
       model.put("user", this.applicationContext.currentUser());
+      model.put("title", "Usuarios");
       context.render("users.hbs", model);
     }
   }

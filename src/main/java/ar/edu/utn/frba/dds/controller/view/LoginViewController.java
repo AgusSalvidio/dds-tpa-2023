@@ -17,6 +17,8 @@ public class LoginViewController implements Handler {
 
   @Override
   public void handle(Context context) throws Exception {
-    context.render("login.hbs");
+    Map<String, Object> model = new HashMap<>();
+    model.put("title", "Ingreso");
+    context.render("login.hbs", model);
   }
 }

@@ -22,6 +22,7 @@ public class UserRegistrationViewController implements Handler {
     } else {
       Map<String, Object> model = new HashMap<>();
       model.put("users", this.applicationContext.userManagementSystem().users());
+      model.put("title", "Registro de Usuario");
       context.render("user-registration.hbs", model);
     }
   }

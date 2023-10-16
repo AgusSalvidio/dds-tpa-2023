@@ -23,6 +23,7 @@ public class AdministrationViewController implements Handler {
     } else {
       Map<String, Object> model = new HashMap<>();
       model.put("user", this.applicationContext.currentUser());
+      model.put("title", "Administración");
       context.render("administration.hbs", model);
     }
   }
