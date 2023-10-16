@@ -16,7 +16,6 @@ import ar.edu.utn.frba.dds.controller.view.ServiceViewController;
 import ar.edu.utn.frba.dds.controller.view.UserRegistrationViewController;
 import ar.edu.utn.frba.dds.controller.view.UserViewController;
 import com.github.jknack.handlebars.Handlebars;
-import com.github.jknack.handlebars.Helper;
 import com.github.jknack.handlebars.Template;
 import io.javalin.Javalin;
 import io.javalin.config.JavalinConfig;
@@ -28,87 +27,116 @@ import java.util.function.Consumer;
 
 public class MainApp {
 
-  public static void main(String[] args) {
+
+  private static void initializeHomeEndpointsOn(
+      Javalin app,
+      ApplicationContext applicationContext) {
+    app.get("/", new HomeViewController(applicationContext));
+    app.get("/home", new HomeViewController(applicationContext));
+  }
+
+  private static void initializeAdministrationEndpointsOn(
+      Javalin app,
+      ApplicationContext applicationContext) {
+    app.get("/administration", new AdministrationViewController(applicationContext));
+  }
+
+  private static void initializeLoginEndpointsOn(
+      Javalin app,
+      ApplicationContext applicationContext) {
+    app.get("/login", new LoginViewController(applicationContext));
+    app.post("/register-login", new RegisterLoginActionController(applicationContext));
+  }
+
+  private static void initializeUserEndpointsOn(
+      Javalin app,
+      ApplicationContext applicationContext) {
+    app.get("/users", new UserViewController(applicationContext));
+    app.get("/all-users", new GetAllUsersActionController(applicationContext));
+    app.get("/user-registration", new UserRegistrationViewController(applicationContext));
+    app.post("/register-user", new RegisterUserActionController(applicationContext));
+
+  }
+
+  private static void initializeServiceEndpointsOn(
+      Javalin app,
+      ApplicationContext applicationContext) {
+
+    app.get("/services", new ServiceViewController(applicationContext));
+    app.get("/service-registration", new ServiceRegistrationViewController(applicationContext));
+    app.post("/register-service",
+        new RegisterServiceActionController(applicationContext));
+  }
+
+  private static void initializeAuthorizationRoleEndpointsOn(
+      Javalin app,
+      ApplicationContext applicationContext) {
+    app.get("/authorization-roles", new AuthorizationRoleViewController(applicationContext));
+    app.get("/authorization-role-registration",
+        new AuthorizationRoleRegistrationViewController(applicationContext));
+
+    app.post("/register-authorization-role",
+        new RegisterAuthorizationRoleActionController(applicationContext));
+  }
+
+  private static void initializeEndpointsOn(Javalin app) {
 
     ApplicationContext applicationContext = new ApplicationContext();
+
+    initializeHomeEndpointsOn(app, applicationContext);
+    initializeAdministrationEndpointsOn(app, applicationContext);
+    initializeLoginEndpointsOn(app, applicationContext);
+
+    initializeUserEndpointsOn(app, applicationContext);
+    initializeServiceEndpointsOn(app, applicationContext);
+    initializeAuthorizationRoleEndpointsOn(app, applicationContext);
+
+
+  }
+
+  public static void main(String[] args) {
 
     initializeTemplateEngine();
 
     Integer port = Integer.parseInt(System.getProperty("port", "8080"));
     Javalin app = Javalin.create(config()).start(port);
 
-    app.get("/", new HomeViewController(applicationContext));
-    app.get("/users", new UserViewController(applicationContext));
-    app.get("/all-users", new GetAllUsersActionController(applicationContext));
-    app.get("/user-registration", new UserRegistrationViewController(applicationContext));
-    app.get("/services", new ServiceViewController(applicationContext));
-    app.get("/service-registration", new ServiceRegistrationViewController(applicationContext));
-    app.get("/home", new HomeViewController(applicationContext));
-    app.get("/administration", new AdministrationViewController(applicationContext));
-    app.get("/authorization-roles", new AuthorizationRoleViewController(applicationContext));
-    app.get("/authorization-role-registration",
-        new AuthorizationRoleRegistrationViewController(applicationContext));
-    app.get("/login", new LoginViewController(applicationContext));
+    initializeEndpointsOn(app);
+  }
 
-    app.post("/register-user", new RegisterUserActionController(applicationContext));
-    app.post("/register-service",
-        new RegisterServiceActionController(applicationContext));
-    app.post("/register-authorization-role",
-        new RegisterAuthorizationRoleActionController(applicationContext));
-    app.post("/register-login", new RegisterLoginActionController(applicationContext));
+  private static void registerCustomHelperTo(
+      Handlebars handlebars,
+      String helperName,
+      String templateName) {
+
+    handlebars.registerHelper(helperName, (model, options) -> {
+      String navbarTemplate = "";
+      try {
+        String templateLocation = String.format("templates/%s", templateName);
+        Template template = handlebars.compile(templateLocation);
+        navbarTemplate = template.apply(model);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+      return navbarTemplate;
+    });
 
   }
 
   private static void registerHeadMetaTo(Handlebars handlebars) {
-    handlebars.registerHelper("headMeta", (model, options) -> {
-      String navbarTemplate = "";
-      try {
-        Template template = handlebars.compile("templates/head-meta");
-        navbarTemplate = template.apply(model);
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-      return navbarTemplate;
-    });
+    registerCustomHelperTo(handlebars, "headMeta", "head-meta");
   }
 
   private static void registerScriptsTo(Handlebars handlebars) {
-    handlebars.registerHelper("scripts", (model, options) -> {
-      String navbarTemplate = "";
-      try {
-        Template template = handlebars.compile("templates/scripts");
-        navbarTemplate = template.apply(model);
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-      return navbarTemplate;
-    });
+    registerCustomHelperTo(handlebars, "scripts", "scripts");
   }
 
   private static void registerCustomHomeNavbarTo(Handlebars handlebars) {
-    handlebars.registerHelper("customHomeNavbar", (model, options) -> {
-      String navbarTemplate = "";
-      try {
-        Template template = handlebars.compile("templates/home-navbar");
-        navbarTemplate = template.apply(model);
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-      return navbarTemplate;
-    });
+    registerCustomHelperTo(handlebars, "customHomeNavbar", "home-navbar");
   }
 
   private static void registerCustomAdministrationNavbarTo(Handlebars handlebars) {
-    handlebars.registerHelper("customAdministrationNavbar", (model, options) -> {
-      String navbarTemplate = "";
-      try {
-        Template template = handlebars.compile("templates/administration-navbar");
-        navbarTemplate = template.apply(model);
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-      return navbarTemplate;
-    });
+    registerCustomHelperTo(handlebars, "customAdministrationNavbar", "administration-navbar");
   }
 
   private static void registerCustomHelpersTo(Handlebars handlebars) {
@@ -116,7 +144,6 @@ public class MainApp {
     registerCustomHomeNavbarTo(handlebars);
     registerCustomAdministrationNavbarTo(handlebars);
     registerScriptsTo(handlebars);
-
   }
 
   private static void initializeTemplateEngine() {
