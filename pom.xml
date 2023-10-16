@@ -200,9 +200,6 @@
                                     ar/edu/utn/frba/dds/controller/**/*
                                 </exclude>
                                 <exclude>
-                                    ar/edu/utn/frba/dds/server/**/*
-                                </exclude>
-                                <exclude>
                                     ar/edu/utn/frba/dds/MainApp.class
                                 </exclude>
                                 <exclude>
@@ -210,6 +207,9 @@
                                 </exclude>
                                 <exclude>
                                     ar/edu/utn/frba/dds/notification/**/*
+                                </exclude>
+                                <exclude>
+                                    ar/edu/utn/frba/dds/server/**/*
                                 </exclude>
                             </excludes>
                         </configuration>

@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.server;
 
 import ar.edu.utn.frba.dds.helper.CustomHelper;
+import ar.edu.utn.frba.dds.server.middleware.AuthMiddleware;
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Template;
 import io.javalin.Javalin;
@@ -60,6 +61,7 @@ public class Server {
         staticFiles.hostedPath = "/";
         staticFiles.directory = "/public";
       });
+      AuthMiddleware.apply(config);
     };
   }
 
