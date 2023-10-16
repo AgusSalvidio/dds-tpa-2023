@@ -85,8 +85,8 @@ public class MainApp {
     });
   }
 
-  private static void registerCustomNavbarTo(Handlebars handlebars) {
-    handlebars.registerHelper("customNavbar", (model, options) -> {
+  private static void registerCustomHomeNavbarTo(Handlebars handlebars) {
+    handlebars.registerHelper("customHomeNavbar", (model, options) -> {
       String navbarTemplate = "";
       try {
         Template template = handlebars.compile("templates/home-navbar");
@@ -98,9 +98,23 @@ public class MainApp {
     });
   }
 
+  private static void registerCustomAdministrationNavbarTo(Handlebars handlebars) {
+    handlebars.registerHelper("customAdministrationNavbar", (model, options) -> {
+      String navbarTemplate = "";
+      try {
+        Template template = handlebars.compile("templates/administration-navbar");
+        navbarTemplate = template.apply(model);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+      return navbarTemplate;
+    });
+  }
+
   private static void registerCustomHelpersTo(Handlebars handlebars) {
     registerHeadMetaTo(handlebars);
-    registerCustomNavbarTo(handlebars);
+    registerCustomHomeNavbarTo(handlebars);
+    registerCustomAdministrationNavbarTo(handlebars);
     registerScriptsTo(handlebars);
 
   }
