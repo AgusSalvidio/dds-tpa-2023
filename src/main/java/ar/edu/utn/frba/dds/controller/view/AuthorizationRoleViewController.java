@@ -23,6 +23,7 @@ public class AuthorizationRoleViewController implements Handler {
       Map<String, Object> model = new HashMap<>();
       model.put("roles", this.applicationContext.authorizationRoleManagementSystem().roles());
       model.put("user", this.applicationContext.currentUser());
+      model.put("title", "Roles de Autorizacion");
       context.render("authorization-roles.hbs", model);
     }
   }

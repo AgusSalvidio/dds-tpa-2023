@@ -23,6 +23,7 @@ public class ServiceViewController implements Handler {
       Map<String, Object> model = new HashMap<>();
       model.put("services", this.applicationContext.serviceManagementSystem().services());
       model.put("user", this.applicationContext.currentUser());
+      model.put("title", "Servicios");
       context.render("services.hbs", model);
     }
   }

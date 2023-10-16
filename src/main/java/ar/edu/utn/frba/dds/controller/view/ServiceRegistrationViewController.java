@@ -22,6 +22,7 @@ public class ServiceRegistrationViewController implements Handler {
     } else {
       Map<String, Object> model = new HashMap<>();
       model.put("services", this.applicationContext.serviceManagementSystem().services());
+      model.put("title", "Registro de Servicios");
       context.render("service-registration.hbs", model);
     }
   }
