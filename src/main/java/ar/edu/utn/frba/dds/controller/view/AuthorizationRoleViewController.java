@@ -24,7 +24,7 @@ public class AuthorizationRoleViewController implements Handler {
       model.put("roles", this.applicationContext.authorizationRoleManagementSystem().roles());
       model.put("user", this.applicationContext.currentUser());
       model.put("title", "Roles de Autorizacion");
-      context.render("authorization-roles.hbs", model);
+      context.render("authorization-roles/authorization-roles.hbs", model);
     }
   }
 }

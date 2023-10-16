@@ -24,7 +24,7 @@ public class UserViewController implements Handler {
       model.put("users", this.applicationContext.userManagementSystem().users());
       model.put("user", this.applicationContext.currentUser());
       model.put("title", "Usuarios");
-      context.render("users.hbs", model);
+      context.render("users/users.hbs", model);
     }
   }
 }

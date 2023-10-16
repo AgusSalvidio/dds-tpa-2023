@@ -23,7 +23,7 @@ public class AuthorizationRoleRegistrationViewController implements Handler {
       Map<String, Object> model = new HashMap<>();
       model.put("users", this.applicationContext.userManagementSystem().users());
       model.put("title", "Registro de Rol de Autorizacion");
-      context.render("authorization-role-registration.hbs", model);
+      context.render("authorization-roles/authorization-role-registration.hbs", model);
     }
   }
 }

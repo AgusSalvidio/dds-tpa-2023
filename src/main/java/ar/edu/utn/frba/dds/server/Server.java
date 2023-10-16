@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.server;
 
+import ar.edu.utn.frba.dds.helper.CustomHelper;
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Template;
 import io.javalin.Javalin;
@@ -27,10 +28,18 @@ public class Server {
     }
   }
 
+  private static void registerCustomHelpersTo(Handlebars handlebars) {
+
+    CustomHelper customHelper = CustomHelper.workingWith(handlebars);
+    customHelper.initializeHelpers();
+
+  }
+
   private static void initializeTemplateEngine() {
     JavalinRenderer.register(
         (path, model, context) -> { // This renders the template
           Handlebars handlebars = new Handlebars();
+          registerCustomHelpersTo(handlebars);
           Template template = null;
           try {
             template = handlebars.compile("templates/" + path.replace(".hbs", ""));
