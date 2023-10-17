@@ -12,7 +12,6 @@ import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem
 import ar.edu.utn.frba.dds.user.User;
 
 public class ApplicationContext {
-  User currentUser;
 
   RelationalDatabasePersistenceSystem persistenceSystem = new RelationalDatabasePersistenceSystem();
   //EventNotificationSystem eventNotificationSystem = new EventNotificationSystem();
@@ -29,12 +28,12 @@ public class ApplicationContext {
     return this.authorizationRoleManagementSystem;
   }
 
-  public User currentUser() {
-    return currentUser;
+  public User userIdentifiedBy(Integer anUserId) {
+    return this.userManagementSystem().userIdentifiedBy(anUserId);
   }
 
-  public void setCurrentUser() {
-    currentUser = this.userManagementSystem().users().get(1);
+  public User userNamed(String anUserName) {
+    return this.userManagementSystem().userNamed(anUserName);
   }
 
   public ServiceManagementSystem serviceManagementSystem() {

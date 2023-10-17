@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.server;
 
 import ar.edu.utn.frba.dds.helper.CustomHelper;
+import ar.edu.utn.frba.dds.server.handler.AppHandler;
 import ar.edu.utn.frba.dds.server.middleware.AuthMiddleware;
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Template;
@@ -25,6 +26,7 @@ public class Server {
       Integer port = Integer.parseInt(System.getProperty("port", "8080"));
       app = Javalin.create(config()).start(port);
       initializeTemplateEngine();
+      AppHandler.applyHandlers(app);
       Router.initialize();
     }
   }

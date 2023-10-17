@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.controller.action;
 
 import ar.edu.utn.frba.dds.applicationcontext.ApplicationContext;
+import ar.edu.utn.frba.dds.user.User;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import io.javalin.http.HttpStatus;
@@ -16,12 +17,22 @@ public class RegisterLoginActionController implements Handler {
     this.applicationContext = applicationContext;
   }
 
+  public boolean areValidCredentials(String username, String password) {
+    User user = this.applicationContext.userNamed(username);
+    return user.username() == username && user.getPassword() == password;
+  }
+
+
   @Override
   public void handle(Context context) throws Exception {
-    Map<String, Object> model = new HashMap<>();
-    model.put("username", context.formParam("username"));
-    model.put("password", context.formParam("password"));
-    this.applicationContext.setCurrentUser();
+    String username = context.formParam("username");
+    String password = context.formParam("password");
+
+    if (!this.areValidCredentials(username, password)) {
+      context.redirect("login");
+    }
+    User user = this.applicationContext.userNamed(username);
+    context.sessionAttribute("user_id", user.getId());
     context.redirect("/");
   }
 

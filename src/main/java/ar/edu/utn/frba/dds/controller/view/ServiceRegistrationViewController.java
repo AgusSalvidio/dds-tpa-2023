@@ -6,7 +6,7 @@ import io.javalin.http.Handler;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ServiceRegistrationViewController implements Handler {
+public class ServiceRegistrationViewController extends Controller implements Handler {
 
   ApplicationContext applicationContext;
 
@@ -17,13 +17,9 @@ public class ServiceRegistrationViewController implements Handler {
 
   @Override
   public void handle(Context context) {
-    if (this.applicationContext.currentUser() == null) {
-      context.redirect("/login");
-    } else {
-      Map<String, Object> model = new HashMap<>();
-      model.put("services", this.applicationContext.serviceManagementSystem().services());
-      model.put("title", "Registro de Servicios");
-      context.render("services/service-registration.hbs", model);
-    }
+    Map<String, Object> model = new HashMap<>();
+    model.put("services", this.loggedUser(context));
+    model.put("title", "Registro de Servicios");
+    context.render("services/service-registration.hbs", model);
   }
 }
