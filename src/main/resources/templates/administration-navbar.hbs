@@ -36,11 +36,17 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                    <li>
-                        <span class="px-2">{{user.username}}</span>
-                        <img src="/avatar.png"
-                             class="" alt="User-Profile-Image">
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="px-2">IntergalacticGarbage</span>
+                            <img src="/avatar.png" class="" alt="User-Profile-Image">
                         </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" href="/logout">Cerrar sesión</a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </div>

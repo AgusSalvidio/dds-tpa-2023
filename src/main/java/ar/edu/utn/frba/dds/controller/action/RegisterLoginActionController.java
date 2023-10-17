@@ -7,6 +7,8 @@ import io.javalin.http.Handler;
 import io.javalin.http.HttpStatus;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
+import javax.persistence.NoResultException;
 
 public class RegisterLoginActionController implements Handler {
 
@@ -18,8 +20,13 @@ public class RegisterLoginActionController implements Handler {
   }
 
   public boolean areValidCredentials(String username, String password) {
-    User user = this.applicationContext.userNamed(username);
-    return user.username() == username && user.getPassword() == password;
+    try {
+      User user = this.applicationContext.userNamed(username);
+      return Objects.equals(user.username(), username)
+          && Objects.equals(user.getPassword(), password);
+    } catch (NullPointerException e) {
+      return false;
+    }
   }
 
 
@@ -28,12 +35,15 @@ public class RegisterLoginActionController implements Handler {
     String username = context.formParam("username");
     String password = context.formParam("password");
 
-    if (!this.areValidCredentials(username, password)) {
-      context.redirect("login");
+    if (this.areValidCredentials(username, password)) {
+      User user = this.applicationContext.userNamed(username);
+      context.sessionAttribute("user_id", user.getId());
+      context.redirect("/");
+      context.sessionAttribute("login_failed", null);
+    } else {
+      context.sessionAttribute("login_failed", true);
+      context.redirect("/login");
     }
-    User user = this.applicationContext.userNamed(username);
-    context.sessionAttribute("user_id", user.getId());
-    context.redirect("/");
   }
 
 }

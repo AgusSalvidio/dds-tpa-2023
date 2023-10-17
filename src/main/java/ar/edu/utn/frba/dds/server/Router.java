@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.server;
 
 import ar.edu.utn.frba.dds.applicationcontext.ApplicationContext;
 import ar.edu.utn.frba.dds.controller.action.GetAllUsersActionController;
+import ar.edu.utn.frba.dds.controller.action.LogoutActionController;
 import ar.edu.utn.frba.dds.controller.action.RegisterAuthorizationRoleActionController;
 import ar.edu.utn.frba.dds.controller.action.RegisterLoginActionController;
 import ar.edu.utn.frba.dds.controller.action.RegisterServiceActionController;
@@ -41,6 +42,12 @@ public class Router {
       ApplicationContext applicationContext) {
     app.get("/login", new LoginViewController(applicationContext));
     app.post("/register-login", new RegisterLoginActionController(applicationContext));
+  }
+
+  private static void initializeLogoutEndpointsOn(
+      Javalin app,
+      ApplicationContext applicationContext) {
+    app.get("/logout", new LogoutActionController(applicationContext));
   }
 
   private static void initializeUserEndpointsOn(
@@ -83,6 +90,7 @@ public class Router {
     initializeHomeEndpointsOn(app, applicationContext);
     initializeAdministrationEndpointsOn(app, applicationContext);
     initializeLoginEndpointsOn(app, applicationContext);
+    initializeLogoutEndpointsOn(app, applicationContext);
 
     initializeUserEndpointsOn(app, applicationContext);
     initializeServiceEndpointsOn(app, applicationContext);

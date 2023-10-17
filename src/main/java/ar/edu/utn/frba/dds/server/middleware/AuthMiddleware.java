@@ -11,7 +11,7 @@ public class AuthMiddleware {
 
 
   public static void apply(JavalinConfig config) {
-    String[] allowedPaths = new String[]{"/login", "/register-login"};
+    String[] allowedPaths = new String[]{"/login", "/register-login", "/logout"};
     config.accessManager(((handler, context, routeRoles) -> {
       System.out.println(context.path());
       if (context.sessionAttribute("user_id") == null

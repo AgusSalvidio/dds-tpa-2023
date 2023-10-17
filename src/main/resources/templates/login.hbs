@@ -20,10 +20,16 @@
                 <div class="col-md-12">
                     <label for="username" class="col-form-label">Usuario:</label>
                     <input type="text" class="form-control" name="username"/>
+                    {{#if error}}
+                        <label for="error" class="col-form-label error-label">Usuario incorrecto</label>
+                    {{/if}}
                 </div>
                 <div class="col-md-12">
                     <label for="password" class="col-form-label">Contraseña:</label>
                     <input type="password" class="form-control" name="password"/>
+                    {{#if error}}
+                        <label for="error" class="col-form-label error-label">Contraseña incorrecta</label>
+                    {{/if}}
                 </div>
                 <div class="d-flex justify-content-center gap-2">
                     <button type="submit" class="btn btn-custom">Loguearse</button>
