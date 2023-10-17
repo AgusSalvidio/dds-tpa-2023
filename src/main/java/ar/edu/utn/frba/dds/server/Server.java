@@ -16,8 +16,9 @@ public class Server {
   private static Javalin app = null;
 
   public static Javalin app() {
-    if (app == null)
+    if (app == null) {
       throw new RuntimeException("App no inicializada");
+    }
     return app;
   }
 

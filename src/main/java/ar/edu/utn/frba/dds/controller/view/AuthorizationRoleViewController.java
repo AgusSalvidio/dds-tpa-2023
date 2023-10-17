@@ -17,11 +17,10 @@ public class AuthorizationRoleViewController extends Controller implements Handl
 
   @Override
   public void handle(Context context) throws Exception {
-
-      Map<String, Object> model = new HashMap<>();
-      model.put("roles", this.applicationContext.authorizationRoleManagementSystem().roles());
-      model.put("user", this.loggedUser(context));
-      model.put("title", "Roles de Autorizacion");
-      context.render("authorization-roles/authorization-roles.hbs", model);
+    Map<String, Object> model = new HashMap<>();
+    model.put("roles", this.applicationContext.authorizationRoleManagementSystem().roles());
+    model.put("user", this.loggedUser(context));
+    model.put("title", "Roles de Autorizacion");
+    context.render("authorization-roles/authorization-roles.hbs", model);
   }
 }

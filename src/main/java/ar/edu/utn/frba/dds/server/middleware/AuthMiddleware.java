@@ -14,7 +14,8 @@ public class AuthMiddleware {
     String[] allowedPaths = new String[]{"/login", "/register-login"};
     config.accessManager(((handler, context, routeRoles) -> {
       System.out.println(context.path());
-      if (context.sessionAttribute("user_id") == null && !Arrays.asList(allowedPaths).contains(context.path())) {
+      if (context.sessionAttribute("user_id") == null
+          && !Arrays.asList(allowedPaths).contains(context.path())) {
         throw new AccessDeniedException();
       } else {
         handler.handle(context);
