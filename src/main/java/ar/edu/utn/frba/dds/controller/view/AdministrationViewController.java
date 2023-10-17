@@ -6,7 +6,7 @@ import io.javalin.http.Handler;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AdministrationViewController implements Handler {
+public class AdministrationViewController extends Controller implements Handler {
 
   ApplicationContext applicationContext;
 
@@ -18,12 +18,9 @@ public class AdministrationViewController implements Handler {
 
   @Override
   public void handle(Context context) throws Exception {
-    if (this.applicationContext.currentUser() == null) {
-      context.redirect("/login");
-    } else {
-      Map<String, Object> model = new HashMap<>();
-      model.put("user", this.applicationContext.currentUser());
-      context.render("administration.hbs", model);
-    }
+    Map<String, Object> model = new HashMap<>();
+    model.put("user", this.loggedUser(context));
+    model.put("title", "Administración");
+    context.render("administration/administration.hbs", model);
   }
 }

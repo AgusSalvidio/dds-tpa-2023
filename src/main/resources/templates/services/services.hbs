@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{{headMeta}}}
+</head>
+
+<body>
+<header>
+    {{{customAdministrationNavbar}}}
+</header>
+
+<main>
+    <div class="d-flex justify-content-end p-2">
+        <legend class="">Administrar Servicios</legend>
+        <a
+                class="btn btn-md btn-custom"
+                href="/service-registration"
+        >
+            Agregar
+        </a>
+    </div>
+    <section>
+        <div class="px-1">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <table
+                            class=" table table-striped"
+                    >
+                        <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{#each services}}
+                            <tr>
+                                <td>{{this.name}}</td>
+                                <td>{{this.description}}</td>
+                                <td>{{this.state.name}}</td>
+                                <td class="px-4">
+                                    <a class="btn-sm "><i
+                                            class="fa-regular fa-pen-to-square"></i></a>
+                                    <a class="btn-sm "><i class="fa-solid fa-xmark"
+                                                          style="color:red"></i></a>
+                                </td>
+                            </tr>
+                        {{else}}
+                            <tr>
+                                <td colspan="4">No hay servicios</td>
+                            </tr>
+                        {{/each}}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</main>
+
+<footer>
+</footer>
+{{{scripts}}}
+</body>
+</html>

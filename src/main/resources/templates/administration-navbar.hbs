@@ -1,0 +1,49 @@
+<nav class="navbar navbar-custom navbar-expand-md">
+    <div class="container-fluid">
+        <div
+                class="offcanvas offcanvas-end"
+                tabindex="-1"
+                id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel"
+        >
+            <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
+                    <li class="nav-item dropdown">
+                        <a
+                                class="nav-link dropdown-toggle"
+                                href="#"
+                                role="button"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                        >
+                            Administrar
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a
+                                        class="dropdown-item"
+                                        href="/authorization-roles"
+                                >Roles de Autorizacion</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/users">Usuarios</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/services">Administrar Servicios</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    <li>
+                        <span class="px-2">{{user.username}}</span>
+                        <img src="/avatar.png"
+                             class="" alt="User-Profile-Image">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>

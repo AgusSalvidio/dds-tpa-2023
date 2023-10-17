@@ -49,6 +49,17 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
     return entityManager().createQuery("from " + User.class.getName()).getResultList();
   }
 
+  public User userIdentifiedBy(Integer anUserId) {
+    return entityManager().find(User.class, anUserId);
+  }
+
+  public User userNamed(String anUserName) {
+    return entityManager().createQuery(
+            "SELECT u FROM " + User.class.getName() + " u WHERE u.username = :username", User.class)
+        .setParameter("username", anUserName)
+        .getSingleResult();
+  }
+
   public List<UserDetail> userDetails() {
     return entityManager().createQuery("from " + UserDetail.class.getName()).getResultList();
   }
@@ -92,7 +103,6 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
     entityManager().remove(anElevator);
     transaction.commit();
   }
-
 
 
   public void stopManagingToilet(Toilet toilet) {
