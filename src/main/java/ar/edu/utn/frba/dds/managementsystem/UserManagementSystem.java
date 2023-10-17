@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.managementsystem;
 
+import ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole;
 import ar.edu.utn.frba.dds.eventnotificationsystem.notifiableevent.NotifiableEvent;
 import ar.edu.utn.frba.dds.notification.notificationmean.JakartaAdapter;
 import ar.edu.utn.frba.dds.notification.notificationmean.NotificationMean;
@@ -94,7 +95,8 @@ public class UserManagementSystem {
     UserDetail userDetail = new UserDetail(name, lastname, email, telephone, notificationMean);
     this.startManagingDetail(userDetail);
 
-    this.startManaging(User.composedOf(username, password, userDetail));
+    this.startManaging(
+        User.composedOf(username, password, userDetail, AuthorizationRole.ADMINISTRADOR));
 
   }
 

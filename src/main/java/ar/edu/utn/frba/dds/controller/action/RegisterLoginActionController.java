@@ -20,11 +20,11 @@ public class RegisterLoginActionController implements Handler {
   }
 
   public boolean areValidCredentials(String username, String password) {
-    try {
-      User user = this.applicationContext.userNamed(username);
+    User user = this.applicationContext.userNamed(username);
+    if (user != null) {
       return Objects.equals(user.username(), username)
           && Objects.equals(user.getPassword(), password);
-    } catch (NullPointerException e) {
+    } else {
       return false;
     }
   }

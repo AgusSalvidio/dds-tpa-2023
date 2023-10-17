@@ -20,7 +20,8 @@ public class LoginViewController implements Handler {
   public void handle(Context context) throws Exception {
     Map<String, Object> model = new HashMap<>();
     model.put("title", "Ingreso");
-    if (context.sessionAttribute("login_failed") != null && context.sessionAttribute("user_id") == null) {
+    if (context.sessionAttribute("login_failed") != null
+        && context.sessionAttribute("user_id") == null) {
       model.put("error", true);
     }
     context.render("login.hbs", model);

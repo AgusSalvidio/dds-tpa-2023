@@ -3,13 +3,10 @@ package ar.edu.utn.frba.dds.server;
 import ar.edu.utn.frba.dds.applicationcontext.ApplicationContext;
 import ar.edu.utn.frba.dds.controller.action.GetAllUsersActionController;
 import ar.edu.utn.frba.dds.controller.action.LogoutActionController;
-import ar.edu.utn.frba.dds.controller.action.RegisterAuthorizationRoleActionController;
 import ar.edu.utn.frba.dds.controller.action.RegisterLoginActionController;
 import ar.edu.utn.frba.dds.controller.action.RegisterServiceActionController;
 import ar.edu.utn.frba.dds.controller.action.RegisterUserActionController;
 import ar.edu.utn.frba.dds.controller.view.AdministrationViewController;
-import ar.edu.utn.frba.dds.controller.view.AuthorizationRoleRegistrationViewController;
-import ar.edu.utn.frba.dds.controller.view.AuthorizationRoleViewController;
 import ar.edu.utn.frba.dds.controller.view.HomeViewController;
 import ar.edu.utn.frba.dds.controller.view.LoginViewController;
 import ar.edu.utn.frba.dds.controller.view.ServiceRegistrationViewController;
@@ -70,17 +67,6 @@ public class Router {
         new RegisterServiceActionController(applicationContext));
   }
 
-  private static void initializeAuthorizationRoleEndpointsOn(
-      Javalin app,
-      ApplicationContext applicationContext) {
-    app.get("/authorization-roles", new AuthorizationRoleViewController(applicationContext));
-    app.get("/authorization-role-registration",
-        new AuthorizationRoleRegistrationViewController(applicationContext));
-
-    app.post("/register-authorization-role",
-        new RegisterAuthorizationRoleActionController(applicationContext));
-  }
-
   private static void initializeEndpoints() {
 
     Javalin app = app();
@@ -94,7 +80,6 @@ public class Router {
 
     initializeUserEndpointsOn(app, applicationContext);
     initializeServiceEndpointsOn(app, applicationContext);
-    initializeAuthorizationRoleEndpointsOn(app, applicationContext);
 
   }
 
