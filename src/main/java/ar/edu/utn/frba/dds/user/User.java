@@ -16,6 +16,7 @@ import lombok.Getter;
 public class User {
   @Id
   @GeneratedValue
+  @Getter
   Integer id;
 
   @Getter

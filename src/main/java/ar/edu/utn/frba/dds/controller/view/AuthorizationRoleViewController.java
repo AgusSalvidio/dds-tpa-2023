@@ -6,7 +6,7 @@ import io.javalin.http.Handler;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AuthorizationRoleViewController implements Handler {
+public class AuthorizationRoleViewController extends Controller implements Handler {
 
   ApplicationContext applicationContext;
 
@@ -17,14 +17,10 @@ public class AuthorizationRoleViewController implements Handler {
 
   @Override
   public void handle(Context context) throws Exception {
-    if (this.applicationContext.currentUser() == null) {
-      context.redirect("/login");
-    } else {
-      Map<String, Object> model = new HashMap<>();
-      model.put("roles", this.applicationContext.authorizationRoleManagementSystem().roles());
-      model.put("user", this.applicationContext.currentUser());
-      model.put("title", "Roles de Autorizacion");
-      context.render("authorization-roles.hbs", model);
-    }
+    Map<String, Object> model = new HashMap<>();
+    model.put("roles", this.applicationContext.authorizationRoleManagementSystem().roles());
+    model.put("user", this.loggedUser(context));
+    model.put("title", "Roles de Autorizacion");
+    context.render("authorization-roles/authorization-roles.hbs", model);
   }
 }
