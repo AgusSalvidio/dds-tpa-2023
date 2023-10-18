@@ -15,6 +15,7 @@ public class LogoutActionController implements Handler {
   @Override
   public void handle(Context context) throws Exception {
     context.sessionAttribute("user_id", null);
+    context.sessionAttribute("user_authorization_role", null);
     context.redirect("/login");
   }
 

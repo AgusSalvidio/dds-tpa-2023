@@ -38,6 +38,7 @@ public class RegisterLoginActionController implements Handler {
     if (this.areValidCredentials(username, password)) {
       User user = this.applicationContext.userNamed(username);
       context.sessionAttribute("user_id", user.getId());
+      context.sessionAttribute("user_authorization_role", user.authorizationRole().toString());
       context.redirect("/");
       context.sessionAttribute("login_failed", null);
     } else {

@@ -15,6 +15,9 @@ import ar.edu.utn.frba.dds.controller.view.UserRegistrationViewController;
 import ar.edu.utn.frba.dds.controller.view.UserViewController;
 import io.javalin.Javalin;
 
+import static ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole.ADMINISTRADOR;
+import static ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole.ENTIDAD;
+
 public class Router {
 
   private static Javalin app() {
@@ -31,7 +34,8 @@ public class Router {
   private static void initializeAdministrationEndpointsOn(
       Javalin app,
       ApplicationContext applicationContext) {
-    app.get("/administration", new AdministrationViewController(applicationContext));
+    app.get("/administration",
+        new AdministrationViewController(applicationContext), ADMINISTRADOR, ENTIDAD);
   }
 
   private static void initializeLoginEndpointsOn(
@@ -50,10 +54,11 @@ public class Router {
   private static void initializeUserEndpointsOn(
       Javalin app,
       ApplicationContext applicationContext) {
-    app.get("/users", new UserViewController(applicationContext));
-    app.get("/all-users", new GetAllUsersActionController(applicationContext));
-    app.get("/user-registration", new UserRegistrationViewController(applicationContext));
-    app.post("/register-user", new RegisterUserActionController(applicationContext));
+    app.get("/users", new UserViewController(applicationContext), ADMINISTRADOR);
+    app.get("/all-users", new GetAllUsersActionController(applicationContext), ADMINISTRADOR);
+    app.get("/user-registration",
+        new UserRegistrationViewController(applicationContext), ADMINISTRADOR);
+    app.post("/register-user", new RegisterUserActionController(applicationContext), ADMINISTRADOR);
 
   }
 
@@ -61,10 +66,11 @@ public class Router {
       Javalin app,
       ApplicationContext applicationContext) {
 
-    app.get("/services", new ServiceViewController(applicationContext));
-    app.get("/service-registration", new ServiceRegistrationViewController(applicationContext));
+    app.get("/services", new ServiceViewController(applicationContext), ADMINISTRADOR, ENTIDAD);
+    app.get("/service-registration", new ServiceRegistrationViewController(applicationContext),
+        ADMINISTRADOR, ENTIDAD);
     app.post("/register-service",
-        new RegisterServiceActionController(applicationContext));
+        new RegisterServiceActionController(applicationContext), ADMINISTRADOR, ENTIDAD);
   }
 
   private static void initializeEndpoints() {

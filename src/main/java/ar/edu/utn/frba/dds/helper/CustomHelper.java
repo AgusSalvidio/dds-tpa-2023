@@ -1,8 +1,14 @@
 package ar.edu.utn.frba.dds.helper;
 
+import ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole;
 import com.github.jknack.handlebars.Handlebars;
+import com.github.jknack.handlebars.Helper;
+import com.github.jknack.handlebars.Options;
 import com.github.jknack.handlebars.Template;
 import java.io.IOException;
+
+import static ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole.ADMINISTRADOR;
+import static ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole.ENTIDAD;
 
 public class CustomHelper {
 
@@ -21,6 +27,8 @@ public class CustomHelper {
     registerCustomHomeNavbarTo(handlebars);
     registerCustomAdministrationNavbarTo(handlebars);
     registerScriptsTo(handlebars);
+    registerHasAdminAccessTo(handlebars);
+    registerHasEntityAccessTo(handlebars);
   }
 
   private static void registerCustomHelperTo(
@@ -56,6 +64,28 @@ public class CustomHelper {
 
   private static void registerCustomAdministrationNavbarTo(Handlebars handlebars) {
     registerCustomHelperTo(handlebars, "customAdministrationNavbar", "administration-navbar");
+  }
+
+  private static void registerRoleAccessTo(
+      Handlebars handlebars,
+      String helperName,
+      AuthorizationRole role) {
+    handlebars.registerHelper(helperName, new Helper<Object>() {
+      @Override
+      public Object apply(Object context, Options options) throws IOException {
+        return role.equals(context);
+      }
+    });
+  }
+
+  private static void registerHasAdminAccessTo(Handlebars handlebars) {
+    registerRoleAccessTo(handlebars, "hasAdminAccess", ADMINISTRADOR);
+
+  }
+
+  private static void registerHasEntityAccessTo(Handlebars handlebars) {
+    registerRoleAccessTo(handlebars, "hasEntityAccess", ENTIDAD);
+
   }
 
 

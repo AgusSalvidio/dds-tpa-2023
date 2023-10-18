@@ -18,7 +18,7 @@ public class ServiceRegistrationViewController extends Controller implements Han
   @Override
   public void handle(Context context) {
     Map<String, Object> model = new HashMap<>();
-    model.put("services", this.loggedUser(context));
+    model.put("user", this.loggedUser(context));
     model.put("title", "Registro de Servicios");
     context.render("services/service-registration.hbs", model);
   }
