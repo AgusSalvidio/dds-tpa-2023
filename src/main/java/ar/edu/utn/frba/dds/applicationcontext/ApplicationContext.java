@@ -23,6 +23,8 @@ public class ApplicationContext {
       new CommunityManagementSystem(this.persistenceSystem);
   IncidentPerCommunityManagementSystem incidentPerCommunityManagementSystem =
       new IncidentPerCommunityManagementSystem(this.persistenceSystem);
+  AuthorizationRoleManagementSystem authorizationRoleManagementSystem =
+      new AuthorizationRoleManagementSystem(this.persistenceSystem);
 
   public UserManagementSystem userManagementSystem() {
     return this.userManagementSystem;
