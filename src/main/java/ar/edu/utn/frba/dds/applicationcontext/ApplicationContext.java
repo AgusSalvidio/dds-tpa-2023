@@ -11,6 +11,8 @@ import ar.edu.utn.frba.dds.user.User;
 
 public class ApplicationContext {
 
+  User currentUser;
+  
   RelationalDatabasePersistenceSystem persistenceSystem = new RelationalDatabasePersistenceSystem();
   //EventNotificationSystem eventNotificationSystem = new EventNotificationSystem();
   UserManagementSystem userManagementSystem = new UserManagementSystem(this.persistenceSystem);
