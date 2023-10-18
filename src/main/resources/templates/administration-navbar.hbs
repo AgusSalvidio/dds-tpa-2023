@@ -18,29 +18,31 @@
                         >
                             Administrar
                         </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a
-                                        class="dropdown-item"
-                                        href="/authorization-roles"
-                                >Roles de Autorizacion</a
-                                >
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/users">Usuarios</a>
-                            </li>
-                        </ul>
+                        {{#if (hasAdminAccess user.authorizationRole)}}
+                            <ul class="dropdown-menu">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/users">Usuarios</a>
+                                </li>
+                            </ul>
+                        {{/if}}
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/services">Administrar Servicios</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                    <li>
-                        <span class="px-2">{{user.username}}</span>
-                        <img src="/avatar.png"
-                             class="" alt="User-Profile-Image">
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="px-2">{{user.username}}</span>
+                            <img src="/avatar.png" class="" alt="User-Profile-Image">
                         </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" href="/logout">Cerrar sesión</a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </div>

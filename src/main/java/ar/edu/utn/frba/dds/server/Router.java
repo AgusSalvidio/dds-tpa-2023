@@ -1,14 +1,15 @@
 package ar.edu.utn.frba.dds.server;
 
+import static ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole.ADMINISTRADOR;
+import static ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole.ENTIDAD;
+
 import ar.edu.utn.frba.dds.applicationcontext.ApplicationContext;
 import ar.edu.utn.frba.dds.controller.action.GetAllUsersActionController;
-import ar.edu.utn.frba.dds.controller.action.RegisterAuthorizationRoleActionController;
+import ar.edu.utn.frba.dds.controller.action.LogoutActionController;
 import ar.edu.utn.frba.dds.controller.action.RegisterLoginActionController;
 import ar.edu.utn.frba.dds.controller.action.RegisterServiceActionController;
 import ar.edu.utn.frba.dds.controller.action.RegisterUserActionController;
 import ar.edu.utn.frba.dds.controller.view.AdministrationViewController;
-import ar.edu.utn.frba.dds.controller.view.AuthorizationRoleRegistrationViewController;
-import ar.edu.utn.frba.dds.controller.view.AuthorizationRoleViewController;
 import ar.edu.utn.frba.dds.controller.view.HomeViewController;
 import ar.edu.utn.frba.dds.controller.view.LoginViewController;
 import ar.edu.utn.frba.dds.controller.view.ServiceRegistrationViewController;
@@ -33,7 +34,8 @@ public class Router {
   private static void initializeAdministrationEndpointsOn(
       Javalin app,
       ApplicationContext applicationContext) {
-    app.get("/administration", new AdministrationViewController(applicationContext));
+    app.get("/administration",
+        new AdministrationViewController(applicationContext), ADMINISTRADOR, ENTIDAD);
   }
 
   private static void initializeLoginEndpointsOn(
@@ -43,13 +45,20 @@ public class Router {
     app.post("/register-login", new RegisterLoginActionController(applicationContext));
   }
 
+  private static void initializeLogoutEndpointsOn(
+      Javalin app,
+      ApplicationContext applicationContext) {
+    app.get("/logout", new LogoutActionController(applicationContext));
+  }
+
   private static void initializeUserEndpointsOn(
       Javalin app,
       ApplicationContext applicationContext) {
-    app.get("/users", new UserViewController(applicationContext));
-    app.get("/all-users", new GetAllUsersActionController(applicationContext));
-    app.get("/user-registration", new UserRegistrationViewController(applicationContext));
-    app.post("/register-user", new RegisterUserActionController(applicationContext));
+    app.get("/users", new UserViewController(applicationContext), ADMINISTRADOR);
+    app.get("/all-users", new GetAllUsersActionController(applicationContext), ADMINISTRADOR);
+    app.get("/user-registration",
+        new UserRegistrationViewController(applicationContext), ADMINISTRADOR);
+    app.post("/register-user", new RegisterUserActionController(applicationContext), ADMINISTRADOR);
 
   }
 
@@ -57,21 +66,11 @@ public class Router {
       Javalin app,
       ApplicationContext applicationContext) {
 
-    app.get("/services", new ServiceViewController(applicationContext));
-    app.get("/service-registration", new ServiceRegistrationViewController(applicationContext));
+    app.get("/services", new ServiceViewController(applicationContext), ADMINISTRADOR, ENTIDAD);
+    app.get("/service-registration", new ServiceRegistrationViewController(applicationContext),
+        ADMINISTRADOR, ENTIDAD);
     app.post("/register-service",
-        new RegisterServiceActionController(applicationContext));
-  }
-
-  private static void initializeAuthorizationRoleEndpointsOn(
-      Javalin app,
-      ApplicationContext applicationContext) {
-    app.get("/authorization-roles", new AuthorizationRoleViewController(applicationContext));
-    app.get("/authorization-role-registration",
-        new AuthorizationRoleRegistrationViewController(applicationContext));
-
-    app.post("/register-authorization-role",
-        new RegisterAuthorizationRoleActionController(applicationContext));
+        new RegisterServiceActionController(applicationContext), ADMINISTRADOR, ENTIDAD);
   }
 
   private static void initializeEndpoints() {
@@ -83,10 +82,10 @@ public class Router {
     initializeHomeEndpointsOn(app, applicationContext);
     initializeAdministrationEndpointsOn(app, applicationContext);
     initializeLoginEndpointsOn(app, applicationContext);
+    initializeLogoutEndpointsOn(app, applicationContext);
 
     initializeUserEndpointsOn(app, applicationContext);
     initializeServiceEndpointsOn(app, applicationContext);
-    initializeAuthorizationRoleEndpointsOn(app, applicationContext);
 
   }
 

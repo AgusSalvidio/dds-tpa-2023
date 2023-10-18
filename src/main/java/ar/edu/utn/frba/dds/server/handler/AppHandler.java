@@ -6,6 +6,7 @@ import java.util.Arrays;
 public class AppHandler {
   private Handler[] handlers = new Handler[]{
       new AccessDeniedHandler(),
+      new AccessForbiddenHandler(),
   };
 
   public static void applyHandlers(Javalin app) {

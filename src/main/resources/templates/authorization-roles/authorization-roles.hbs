@@ -28,16 +28,16 @@
                     >
                         <thead>
                         <tr>
-                            <th>Rol</th>
                             <th>Usuario</th>
+                            <th>Rol</th>
                             <th>Acciones</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {{#each roles}}
+                        {{#each user}}
                             <tr>
-                                <td>{{this.role}}</td>
-                                <td>{{this.user.username}}</td>
+                                <td>{{this.username}}</td>
+                                <td>{{this.authorizationRole}}</td>
                                 <td class="px-4">
                                     <a class="btn-sm "><i
                                             class="fa-regular fa-pen-to-square"></i></a>

@@ -184,3 +184,7 @@ tr {
     height: 35px;
     width: unset;
 }
+
+.error-label {
+    color: red;
+}
