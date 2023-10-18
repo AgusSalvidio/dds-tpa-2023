@@ -1,6 +1,5 @@
 package ar.edu.utn.frba.dds.applicationcontext;
 
-import ar.edu.utn.frba.dds.managementsystem.AuthorizationRoleManagementSystem;
 import ar.edu.utn.frba.dds.managementsystem.CommunityManagementSystem;
 import ar.edu.utn.frba.dds.managementsystem.EntityManagementSystem;
 import ar.edu.utn.frba.dds.managementsystem.IncidentManagementSystem;
@@ -23,15 +22,9 @@ public class ApplicationContext {
       new CommunityManagementSystem(this.persistenceSystem);
   IncidentPerCommunityManagementSystem incidentPerCommunityManagementSystem =
       new IncidentPerCommunityManagementSystem(this.persistenceSystem);
-  AuthorizationRoleManagementSystem authorizationRoleManagementSystem =
-      new AuthorizationRoleManagementSystem(this.persistenceSystem);
 
   public UserManagementSystem userManagementSystem() {
     return this.userManagementSystem;
-  }
-
-  public AuthorizationRoleManagementSystem authorizationRoleManagementSystem() {
-    return this.authorizationRoleManagementSystem;
   }
 
   public IncidentManagementSystem incidentManagementSystem() {
