@@ -16,6 +16,7 @@ import ar.edu.utn.frba.dds.user.UserDetail;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import java.util.List;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 
 public class RelationalDatabasePersistenceSystem implements WithSimplePersistenceUnit {
   public void startManagingUser(User anUser) {
@@ -52,6 +53,22 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
 
   public List<User> users() {
     return entityManager().createQuery("from " + User.class.getName()).getResultList();
+  }
+
+  public User userIdentifiedBy(Integer anUserId) {
+    return entityManager().find(User.class, anUserId);
+  }
+
+  public User userNamed(String anUserName) {
+    try {
+      return entityManager().createQuery(
+              "SELECT u FROM " + User.class.getName() + " u WHERE u.username = :username",
+              User.class)
+          .setParameter("username", anUserName)
+          .getSingleResult();
+    } catch (NoResultException e) {
+      return null;
+    }
   }
 
   public List<UserDetail> userDetails() {

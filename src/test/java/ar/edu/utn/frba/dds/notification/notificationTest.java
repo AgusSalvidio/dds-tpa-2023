@@ -5,6 +5,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 
 import ar.edu.utn.frba.dds.addons.usercreationaddon.UserDetailCreationAddOn;
+import ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole;
 import ar.edu.utn.frba.dds.notification.notificationmean.NotificationMean;
 import ar.edu.utn.frba.dds.notification.notificationmean.NotifyByMail;
 import ar.edu.utn.frba.dds.notification.notificationmean.NotifyByWhatsApp;
@@ -21,7 +22,7 @@ public class notificationTest {
     NotificationMean mockMail = mock(NotifyByMail.class);
     UserDetail userDetail = new UserDetailCreationAddOn().basuraIntergalactica();
     userDetail.changeNotificationMean(mockMail);
-    User user = User.composedOf("ibarranetaYPF", "theBestPassword", userDetail);
+    User user = User.composedOf("ibarranetaYPF", "theBestPassword", userDetail, AuthorizationRole.ADMINISTRADOR);
     Msg message = new Msg("Test msg", user);
 
     user.notifyMe(message);
@@ -34,7 +35,7 @@ public class notificationTest {
     NotificationMean mockWhatsApp = mock(NotifyByWhatsApp.class);
     UserDetail userDetail = new UserDetailCreationAddOn().basuraIntergalactica();
     userDetail.changeNotificationMean(mockWhatsApp);
-    User user = User.composedOf("ibarranetaYPF", "theBestPassword", userDetail);
+    User user = User.composedOf("ibarranetaYPF", "theBestPassword", userDetail,AuthorizationRole.ADMINISTRADOR);
     Msg message = new Msg("Test msg", user);
 
     user.notifyMe(message);

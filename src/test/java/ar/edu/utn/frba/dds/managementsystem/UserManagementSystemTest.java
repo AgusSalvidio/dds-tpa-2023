@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.managementsystem;
 
 import ar.edu.utn.frba.dds.addons.notificationcreationaddon.NotificationMeanCreationAddOn;
+import ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole;
 import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
 import ar.edu.utn.frba.dds.user.User;
 import ar.edu.utn.frba.dds.user.UserDetail;
@@ -44,7 +45,7 @@ public class UserManagementSystemTest implements WithSimplePersistenceUnit {
 
     UserManagementSystem userManagementSystem = Mockito.spy(UserManagementSystem.workingWith(this.persistenceSystem()));
     UserDetail userDetail = this.userDetails();
-    User user = User.composedOf("ibarranetaYPF", "theBestPassword", userDetail);
+    User user = User.composedOf("ibarranetaYPF", "theBestPassword", userDetail, AuthorizationRole.ADMINISTRADOR);
 
     Mockito.doAnswer(invocation -> {
       EntityTransaction transaction = entityManager().getTransaction();
@@ -82,7 +83,7 @@ public class UserManagementSystemTest implements WithSimplePersistenceUnit {
 
     UserManagementSystem userManagementSystem = Mockito.spy(UserManagementSystem.workingWith(this.persistenceSystem()));
     UserDetail userDetail = this.userDetails();
-    User user = User.composedOf("ibarranetaYPF", "theBestPassword", userDetail);
+    User user = User.composedOf("ibarranetaYPF", "theBestPassword", userDetail,AuthorizationRole.ADMINISTRADOR);
 
     EntityTransaction transaction = entityManager().getTransaction();
 
@@ -121,8 +122,8 @@ public class UserManagementSystemTest implements WithSimplePersistenceUnit {
 
     UserManagementSystem userManagementSystem = Mockito.spy(UserManagementSystem.workingWith(this.persistenceSystem()));
     UserDetail userDetail = this.userDetails();
-    User user = User.composedOf("ibarranetaYPF", "theBestPassword", userDetail);
-    User updatedUser = User.composedOf("almironeta", "theBestPassword", userDetail);
+    User user = User.composedOf("ibarranetaYPF", "theBestPassword", userDetail,AuthorizationRole.ADMINISTRADOR);
+    User updatedUser = User.composedOf("almironeta", "theBestPassword", userDetail,AuthorizationRole.ADMINISTRADOR);
 
     EntityTransaction transaction = entityManager().getTransaction();
 

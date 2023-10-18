@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.managementsystem;
 
+import ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole;
 import ar.edu.utn.frba.dds.eventnotificationsystem.notifiableevent.NotifiableEvent;
 import ar.edu.utn.frba.dds.notification.notificationmean.JakartaAdapter;
 import ar.edu.utn.frba.dds.notification.notificationmean.NotificationMean;
@@ -66,9 +67,13 @@ public class UserManagementSystem {
     currentUserDetail.synchronizeWith(updatedUserDetail);
   }
 
-  /*public User user(User anUser) {
-    //return (User) this.persistenceSystem().findObjectTyped(anUser.getClass().getName(), anUser);
-  }*/
+  public User userIdentifiedBy(Integer anUserId) {
+    return this.persistenceSystem.userIdentifiedBy(anUserId);
+  }
+
+  public User userNamed(String anUserName) {
+    return this.persistenceSystem.userNamed(anUserName);
+  }
 
   public void receiveFrom(NotifiableEvent event, Object publisher) {
     /* For now, this system should have an implementation. This will be enhanced
@@ -90,7 +95,8 @@ public class UserManagementSystem {
     UserDetail userDetail = new UserDetail(name, lastname, email, telephone, notificationMean);
     this.startManagingDetail(userDetail);
 
-    this.startManaging(User.composedOf(username, password, userDetail));
+    this.startManaging(
+        User.composedOf(username, password, userDetail, AuthorizationRole.ADMINISTRADOR));
 
   }
 
