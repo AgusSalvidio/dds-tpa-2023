@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.managementsystem;
 
 import ar.edu.utn.frba.dds.addons.notificationcreationaddon.NotificationMeanCreationAddOn;
+import ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole;
 import ar.edu.utn.frba.dds.community.Community;
 import ar.edu.utn.frba.dds.eventnotificationsystem.EventNotificationSystem;
 import ar.edu.utn.frba.dds.incident.Incident;
@@ -38,7 +39,7 @@ public class IncidentPerCommunityManagementSystemTest implements WithSimplePersi
     return LocalDateTime.of(2023, 7, 2, 23, 40);
   }
 
-  private UserDetail userDetail() throws Exception{
+  private UserDetail userDetail() throws Exception {
     return UserDetail.composedOf("Hugo", "Ibarra", "ibarraneta@gmail.com", "0123456789",
         new NotificationMeanCreationAddOn().wpp());
   }
@@ -77,7 +78,7 @@ public class IncidentPerCommunityManagementSystemTest implements WithSimplePersi
     State state = this.state();
     Elevator elevator = Elevator.composedOf("Ascensor", "Ascensor Principal", state);
     UserDetail userDetail = this.userDetail();
-    User user = User.composedOf("ibarranetaYPF", "theBestPassword", userDetail);
+    User user = User.composedOf("ibarranetaYPF", "theBestPassword", userDetail, AuthorizationRole.ADMINISTRADOR);
     LocalDateTime dateTime = this.dateTime();
     Incident incident = Incident.composedOf(elevator, "bla", dateTime, user);
 
@@ -131,7 +132,7 @@ public class IncidentPerCommunityManagementSystemTest implements WithSimplePersi
     State state = this.state();
     Elevator elevator = Elevator.composedOf("Ascensor", "Ascensor Principal", state);
     UserDetail userDetail = this.userDetail();
-    User user = User.composedOf("ibarranetaYPF", "theBestPassword", userDetail);
+    User user = User.composedOf("ibarranetaYPF", "theBestPassword", userDetail, AuthorizationRole.ADMINISTRADOR);
     LocalDateTime dateTime = this.dateTime();
     Incident incident = Incident.composedOf(elevator, "bla", dateTime, user);
 
@@ -183,7 +184,7 @@ public class IncidentPerCommunityManagementSystemTest implements WithSimplePersi
     State state = this.state();
     Elevator elevator = Elevator.composedOf("Ascensor", "Ascensor Principal", state);
     UserDetail userDetail = this.userDetail();
-    User user = User.composedOf("ibarranetaYPF", "theBestPassword", userDetail);
+    User user = User.composedOf("ibarranetaYPF", "theBestPassword", userDetail, AuthorizationRole.ADMINISTRADOR);
     LocalDateTime dateTime = this.dateTime();
     Incident incident = Incident.composedOf(elevator, "bla", dateTime, user);
     Community community = this.community();
