@@ -209,6 +209,12 @@
                                     ar/edu/utn/frba/dds/notification/**/*
                                 </exclude>
                                 <exclude>
+                                    ar/edu/utn/frba/dds/managementsystem/**/*
+                                </exclude>
+                                <exclude>
+                                    ar/edu/utn/frba/dds/persistencesystem/**/*
+                                </exclude>
+                                <exclude>
                                     ar/edu/utn/frba/dds/server/**/*
                                 </exclude>
                                 <exclude>

@@ -1,18 +1,43 @@
 package ar.edu.utn.frba.dds.incident;
 
 import ar.edu.utn.frba.dds.service.Service;
-import ar.edu.utn.frba.dds.service.State;
 import ar.edu.utn.frba.dds.user.User;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import lombok.Getter;
 
+@Entity
+@Table(name = "incident")
 public class Incident {
+  @Id
+  @GeneratedValue
+  Integer id;
+
+  @Getter
+  @OneToOne
   Service service;
+
+  @Getter
+  @Column(name = "dateAndTime")
   LocalDateTime dateTime;
 
+  @Getter
+  @Column(name = "observation")
   String observations;
 
+  @Getter
+  @OneToOne
   User user;
+
+  public Incident() {
+
+  }
 
   public static Incident composedOf(
       Service service,

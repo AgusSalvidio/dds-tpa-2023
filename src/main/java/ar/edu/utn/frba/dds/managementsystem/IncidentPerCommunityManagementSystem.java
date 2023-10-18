@@ -1,69 +1,57 @@
 package ar.edu.utn.frba.dds.managementsystem;
 
-import ar.edu.utn.frba.dds.eventnotificationsystem.EventNotificationSystem;
+import ar.edu.utn.frba.dds.community.Community;
 import ar.edu.utn.frba.dds.eventnotificationsystem.notifiableevent.NotifiableEvent;
+import ar.edu.utn.frba.dds.incident.Incident;
 import ar.edu.utn.frba.dds.incident.IncidentPerCommunity;
-import ar.edu.utn.frba.dds.persistencesystem.PersistenceSystem;
-import java.util.ArrayList;
+import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
 import java.util.List;
+import java.util.Map;
 
-public class IncidentPerCommunityManagementSystem implements ManagementSystem {
-
-  List<Object> systems;
-
-  EventNotificationSystem eventNotificationSystem;
+public class IncidentPerCommunityManagementSystem {
+  RelationalDatabasePersistenceSystem persistenceSystem;
 
   public IncidentPerCommunityManagementSystem(
-      PersistenceSystem persistenceSystem,
-      EventNotificationSystem eventNotificationSystem) {
-    this.systems = new ArrayList<>();
-    this.eventNotificationSystem = eventNotificationSystem;
-    this.systems.add(persistenceSystem);
-    this.persistenceSystem().addObjectTypeToStore(IncidentPerCommunity.class.getName());
+      RelationalDatabasePersistenceSystem persistenceSystem) {
+    this.persistenceSystem = persistenceSystem;
   }
 
   public String typeDescription() {
     return "Sistema de Administración de Incidentes por comunidad";
   }
 
-  private PersistenceSystem persistenceSystem() {
-    return (PersistenceSystem) this.systems.get(0);
+  private RelationalDatabasePersistenceSystem persistenceSystem() {
+    return this.persistenceSystem;
   }
 
   public static IncidentPerCommunityManagementSystem workingWith(
-      PersistenceSystem persistenceSystem,
-      EventNotificationSystem eventNotificationSystem) {
-    return new IncidentPerCommunityManagementSystem(persistenceSystem, eventNotificationSystem);
+      RelationalDatabasePersistenceSystem persistenceSystem) {
+    return new IncidentPerCommunityManagementSystem(persistenceSystem);
   }
 
-  public void startManaging(Object incidentPerCommunity) {
-    this.persistenceSystem().storeObjectTyped(
-        incidentPerCommunity.getClass().getName(), incidentPerCommunity);
+  public void startManaging(IncidentPerCommunity incidentPerCommunity) {
+    this.persistenceSystem().startManagingIncidentPerCommunity(incidentPerCommunity);
   }
 
-  public void stopManaging(Object incidentPerCommunity) {
-    this.persistenceSystem().removeObjectTyped(
-        incidentPerCommunity.getClass().getName(), incidentPerCommunity);
+  public void stopManaging(IncidentPerCommunity incidentPerCommunity) {
+    this.persistenceSystem().stopManagingIncidentPerCommunity(incidentPerCommunity);
   }
 
-  public IncidentPerCommunity incidentPerCommunity(IncidentPerCommunity incidentPerCommunity) {
-    return (IncidentPerCommunity) this.persistenceSystem()
-        .findObjectTyped(incidentPerCommunity.getClass().getName(), incidentPerCommunity);
+  public List<IncidentPerCommunity> incidentsPerCommunity() {
+    return this.persistenceSystem().incidentsPerCommunity();
   }
 
-  public List<Object> incidentsPerCommunity() {
-    return this.persistenceSystem().objectsFrom(IncidentPerCommunity.class.getName());
+  public void updateWith(
+      IncidentPerCommunity currentIncidentPerCommunity,
+      IncidentPerCommunity updatedIncidentPerCommunity) {
+    currentIncidentPerCommunity.synchronizeWith(updatedIncidentPerCommunity);
   }
 
-  public void updateWith(Object currentIncidentPerCommunity, Object updatedIncidentPerCommunity) {
-    IncidentPerCommunity obtainedIncident = (IncidentPerCommunity) this.persistenceSystem()
-        .findObjectTyped(currentIncidentPerCommunity.getClass().getName(),
-            currentIncidentPerCommunity);
-    obtainedIncident.synchronizeWith((IncidentPerCommunity) updatedIncidentPerCommunity);
-  }
+  public void startManagingIncidentPerCommunityForm(Map model) {
+    Incident incident = (Incident) model.get("observation");
+    Community community = (Community) model.get("user");
 
-  private EventNotificationSystem eventNotificationSystem() {
-    return this.eventNotificationSystem;
+    this.startManaging(IncidentPerCommunity.composedOf(incident, community));
   }
 
   public void receiveFrom(NotifiableEvent event, Object publisher) {

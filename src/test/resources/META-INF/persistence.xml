@@ -17,6 +17,15 @@
         <class>ar.edu.utn.frba.dds.service.Elevator</class>
         <class>ar.edu.utn.frba.dds.service.Toilet</class>
         <class>ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole</class>
+        <class>ar.edu.utn.frba.dds.community.Community</class>
+        <class>ar.edu.utn.frba.dds.community.Member</class>
+        <class>ar.edu.utn.frba.dds.incident.Incident</class>
+        <class>ar.edu.utn.frba.dds.incident.IncidentPerCommunity</class>
+        <class>ar.edu.utn.frba.dds.entity.TransportLine</class>
+        <class>ar.edu.utn.frba.dds.entity.EntityName</class>
+        <class>ar.edu.utn.frba.dds.establishment.Establishment</class>
+        <class>ar.edu.utn.frba.dds.location.Location</class>
+        <class>ar.edu.utn.frba.dds.service.Section</class>
 
         <properties>
             <property name="hibernate.archive.autodetection" value="class"/>

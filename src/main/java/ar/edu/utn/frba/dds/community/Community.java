@@ -7,29 +7,50 @@ import ar.edu.utn.frba.dds.user.User;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import lombok.Getter;
 
-
+@javax.persistence.Entity
+@Table(name = "community")
 public class Community {
+  @Id
+  @GeneratedValue
+  Integer id;
 
+  @Getter
+  @Column(name = "name")
   String name;
+
+  @Getter
+  @Column(name = "description")
   String description;
+
+  @ManyToMany
+  @JoinColumn(name = "member_id", referencedColumnName = "id")
   List<Member> members;
+
+  @ManyToMany
+  @JoinColumn(name = "service_id", referencedColumnName = "id")
   List<Service> services;
+
+  @ManyToMany
+  @JoinColumn(name = "entity_id", referencedColumnName = "id")
   List<Entity> entities;
+
+  @ManyToMany
+  @JoinColumn(name = "incident_id", referencedColumnName = "id")
   List<Incident> openIncidents;
 
-  public static Community composedOf(String name, String description)
-      throws Exception {
-    /*
-        Implemented this way because its needed an AssertionChecker that will be implemented
-        in another issue later on. Also should be necessary to specify the field thats empty.
-      */
-    if (name.isEmpty() || description.isEmpty()) {
-      throw new Exception("Los campos no pueden estar en blanco.");
-    }
+  public static Community composedOf(String name, String description) {
     return new Community(name, description);
-
   }
+
+  public Community() {}
 
   public Community(String name, String description) {
     this.name = name;

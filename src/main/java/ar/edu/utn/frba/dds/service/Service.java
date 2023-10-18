@@ -2,13 +2,15 @@ package ar.edu.utn.frba.dds.service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import lombok.Getter;
 
 @Entity
@@ -27,13 +29,13 @@ public abstract class Service {
   public String description;
 
   @Getter
-  @OneToOne
+  @ManyToOne
+  @JoinColumn(name = "state_id", referencedColumnName = "id")
   public State state;
 
   @Getter
-  /*@OneToMany(cascade = CascadeType.PERSIST)
-  @JoinColumn(name = "section_id", referencedColumnName = "id")*/
-  @Transient
+  @OneToMany(cascade = CascadeType.PERSIST)
+  @JoinColumn(name = "section_id", referencedColumnName = "id")
   public List<Section> sections;
 
   public String name() {

@@ -1,69 +1,57 @@
 package ar.edu.utn.frba.dds.managementsystem;
 
-import ar.edu.utn.frba.dds.eventnotificationsystem.EventNotificationSystem;
-import ar.edu.utn.frba.dds.eventnotificationsystem.notifiableevent.IncidentAdded;
 import ar.edu.utn.frba.dds.eventnotificationsystem.notifiableevent.NotifiableEvent;
 import ar.edu.utn.frba.dds.incident.Incident;
-import ar.edu.utn.frba.dds.persistencesystem.PersistenceSystem;
-import java.util.ArrayList;
+import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
+import ar.edu.utn.frba.dds.service.Service;
+import ar.edu.utn.frba.dds.user.User;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
-public class IncidentManagementSystem implements ManagementSystem {
+public class IncidentManagementSystem {
+  RelationalDatabasePersistenceSystem persistenceSystem;
 
-  List<Object> systems;
-
-  EventNotificationSystem eventNotificationSystem;
-
-  public IncidentManagementSystem(
-      PersistenceSystem persistenceSystem,
-      EventNotificationSystem eventNotificationSystem) {
-    this.systems = new ArrayList<>();
-    this.eventNotificationSystem = eventNotificationSystem;
-    this.systems.add(persistenceSystem);
-    this.persistenceSystem().addObjectTypeToStore(Incident.class.getName());
+  public IncidentManagementSystem(RelationalDatabasePersistenceSystem persistenceSystem) {
+    this.persistenceSystem = persistenceSystem;
   }
 
   public String typeDescription() {
     return "Sistema de Administración de Incidentes";
   }
 
-  private PersistenceSystem persistenceSystem() {
-    return (PersistenceSystem) this.systems.get(0);
+  private RelationalDatabasePersistenceSystem persistenceSystem() {
+    return this.persistenceSystem;
   }
 
   public static IncidentManagementSystem workingWith(
-      PersistenceSystem persistenceSystem,
-      EventNotificationSystem eventNotificationSystem) {
-    return new IncidentManagementSystem(persistenceSystem, eventNotificationSystem);
+      RelationalDatabasePersistenceSystem persistenceSystem) {
+    return new IncidentManagementSystem(persistenceSystem);
   }
 
-  public IncidentAdded incidentAdded(Incident incident) {
-    return IncidentAdded.referringTo(incident);
+  public void startManaging(Incident anIncident) {
+    this.persistenceSystem().startManagingIncident(anIncident);
   }
 
-  public void startManaging(Object incident) {
-    this.persistenceSystem().storeObjectTyped(incident.getClass().getName(), incident);
-    IncidentAdded incidentAdded = this.incidentAdded((Incident) incident);
-    this.eventNotificationSystem.publishFrom(incidentAdded, this);
+  public void stopManaging(Incident anIncident) {
+    this.persistenceSystem().stopManagingIncident(anIncident);
   }
 
-  public void stopManaging(Object incident) {
-    this.persistenceSystem().removeObjectTyped(incident.getClass().getName(), incident);
+  public List<Incident> incidents() {
+    return this.persistenceSystem().incidents();
   }
 
-  public Incident incident(Incident incident) {
-    return (Incident) this.persistenceSystem()
-        .findObjectTyped(incident.getClass().getName(), incident);
+  public void updateWith(Incident currentIncident, Incident updateIncident) {
+    currentIncident.synchronizeWith(updateIncident);
   }
 
-  public List<Object> incidents() {
-    return this.persistenceSystem().objectsFrom(Incident.class.getName());
-  }
+  public void startManagingIncidentForm(Map model) {
+    Service service = (Service) model.get("service");
+    LocalDateTime dateTime = (LocalDateTime) model.get("dateTime");
+    String observation = model.get("observation").toString();
+    User user = (User) model.get("user");
 
-  public void updateWith(Object currentIncident, Object updatedIncident) {
-    Incident obtainedIncident = (Incident) this.persistenceSystem()
-        .findObjectTyped(currentIncident.getClass().getName(), currentIncident);
-    obtainedIncident.synchronizeWith((Incident) updatedIncident);
+    this.startManaging(Incident.composedOf(service, observation, dateTime, user));
   }
 
   public void receiveFrom(NotifiableEvent event, Object publisher) {

@@ -2,53 +2,51 @@ package ar.edu.utn.frba.dds.managementsystem;
 
 import ar.edu.utn.frba.dds.community.Community;
 import ar.edu.utn.frba.dds.eventnotificationsystem.notifiableevent.NotifiableEvent;
-import ar.edu.utn.frba.dds.persistencesystem.PersistenceSystem;
-import java.util.ArrayList;
+import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
 import java.util.List;
+import java.util.Map;
 
-public class CommunityManagementSystem implements ManagementSystem {
+public class CommunityManagementSystem {
+  RelationalDatabasePersistenceSystem persistenceSystem;
 
-  List<Object> systems;
-
-  public CommunityManagementSystem(PersistenceSystem persistenceSystem) {
-    this.systems = new ArrayList<>();
-    this.systems.add(persistenceSystem);
-    this.persistenceSystem().addObjectTypeToStore(Community.class.getName());
+  public CommunityManagementSystem(RelationalDatabasePersistenceSystem persistenceSystem) {
+    this.persistenceSystem = persistenceSystem;
   }
 
   public String typeDescription() {
     return "Sistema de Administración de Comunidades";
   }
 
-  private PersistenceSystem persistenceSystem() {
-    return (PersistenceSystem) this.systems.get(0);
+  private RelationalDatabasePersistenceSystem persistenceSystem() {
+    return this.persistenceSystem;
   }
 
-  public static CommunityManagementSystem workingWith(PersistenceSystem persistenceSystem) {
+  public static CommunityManagementSystem workingWith(
+      RelationalDatabasePersistenceSystem persistenceSystem) {
     return new CommunityManagementSystem(persistenceSystem);
   }
 
-  public void startManaging(Object community) {
-    this.persistenceSystem().storeObjectTyped(community.getClass().getName(), community);
+  public void startManaging(Community community) {
+    this.persistenceSystem().startManagingCommunity(community);
   }
 
-  public void stopManaging(Object community) {
-    this.persistenceSystem().removeObjectTyped(community.getClass().getName(), community);
+  public void stopManaging(Community community) {
+    this.persistenceSystem().stopManagingCommunity(community);
   }
 
-  public Community community(Community community) {
-    return (Community) this.persistenceSystem()
-        .findObjectTyped(community.getClass().getName(), community);
+  public List<Community> communities() {
+    return this.persistenceSystem().communities();
   }
 
-  public List<Object> communities() {
-    return this.persistenceSystem().objectsFrom(Community.class.getName());
+  public void updateWith(Community currentCommunity, Community updatedCommunity) {
+    currentCommunity.synchronizeWith(updatedCommunity);
   }
 
-  public void updateWith(Object currentCommunity, Object updatedCommunity) {
-    Community obtainedCommunity = (Community) this.persistenceSystem()
-        .findObjectTyped(currentCommunity.getClass().getName(), currentCommunity);
-    obtainedCommunity.synchronizeWith((Community) updatedCommunity);
+  public void startManagingCommunityForm(Map model) {
+    String name = model.get("name").toString();
+    String description = model.get("description").toString();
+
+    this.startManaging(Community.composedOf(name, description));
   }
 
   public void receiveFrom(NotifiableEvent event, Object publisher) {
