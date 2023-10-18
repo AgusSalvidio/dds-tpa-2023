@@ -1,5 +1,8 @@
 package ar.edu.utn.frba.dds.server;
 
+import static ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole.ADMINISTRADOR;
+import static ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole.ENTIDAD;
+
 import ar.edu.utn.frba.dds.applicationcontext.ApplicationContext;
 import ar.edu.utn.frba.dds.controller.action.GetAllUsersActionController;
 import ar.edu.utn.frba.dds.controller.action.LogoutActionController;
@@ -14,9 +17,6 @@ import ar.edu.utn.frba.dds.controller.view.ServiceViewController;
 import ar.edu.utn.frba.dds.controller.view.UserRegistrationViewController;
 import ar.edu.utn.frba.dds.controller.view.UserViewController;
 import io.javalin.Javalin;
-
-import static ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole.ADMINISTRADOR;
-import static ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole.ENTIDAD;
 
 public class Router {
 

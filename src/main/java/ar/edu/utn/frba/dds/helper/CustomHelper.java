@@ -1,5 +1,8 @@
 package ar.edu.utn.frba.dds.helper;
 
+import static ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole.ADMINISTRADOR;
+import static ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole.ENTIDAD;
+
 import ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole;
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Helper;
@@ -7,8 +10,6 @@ import com.github.jknack.handlebars.Options;
 import com.github.jknack.handlebars.Template;
 import java.io.IOException;
 
-import static ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole.ADMINISTRADOR;
-import static ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole.ENTIDAD;
 
 public class CustomHelper {
 
