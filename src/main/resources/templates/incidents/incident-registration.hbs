@@ -17,22 +17,57 @@
     <section class="container">
         <form class="row g-3 py-2" method="post"
             {{#if registered_incident}}
-              action="/incidents/{{registered_incident.id}}" {{else}} action="/incidents" {{/if}}
+              action="/incidents/{{registered_incident.id}}/review" {{else}}
+              action="/incidents" {{/if}}
         >
             <div class="col-md-6">
                 <label for="services">Seleccionar servicio:</label>
-                <select class="col-md-6" name="services">
-                    {{#each services}}
-                        <option value={{this.id}}>{{this.name}}</option>
+                <select class="col-md-6" name="services" {{#if registered_incident}}
+                        disabled
+                {{/if}}>
+                    {{#if registered_incident}}
+                        <option value={{registered_incident.incident.service.id}}>{{registered_incident.incident.service.name}}</option>
                     {{else}}
-                    {{/each}}
+                        <option label="Seleccione Servicio..." value="" disabled
+                                selected></option>
+                        {{#each services}}
+                            <option value={{this.id}}>{{this.name}}</option>
+                        {{else}}
+                        {{/each}}
+                    {{/if}}
                 </select>
             </div>
-            <div class="mb-3">
-                <textarea rows="4" cols="54" name="observations"></textarea>
+            <div class="col-md-6">
+                <label for="communities">Seleccionar comunidad:</label>
+                <select class="col-md-6" name="communities" {{#if registered_incident}}
+                        disabled
+                {{/if}}>
+
+                    {{#if registered_incident}}
+                        <option value={{registered_incident.community.id}}>{{registered_incident.community.name}}</option>
+                    {{else}}
+                        <option label="Seleccione Comunidad..." value="" disabled
+                                selected></option>
+                        {{#each communities}}
+                            <option value={{this.id}}>{{this.name}}</option>
+                        {{else}}
+                        {{/each}}
+                    {{/if}}
+                </select>
+            </div>
+            <div class="col-md-6">
+                <textarea name="observations"
+                          rows="4" cols="108"
+                    {{#if registered_incident}}
+                          disabled
+                    {{/if}}
+                >{{#if registered_incident}}
+                    {{registered_incident.incident.observations}}
+                {{/if}}</textarea>
             </div>
             <div class="d-flex justify-content-center gap-2">
-                <button type="submit" class="btn btn-custom">{{title}}</button>
+                <button class="btn btn-custom"><a href="/incidents">Cancelar</a></button>
+                <button type="submit" class="btn btn-custom">{{buttonActionLabel}}</button>
             </div>
         </form>
     </section>

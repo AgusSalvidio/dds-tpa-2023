@@ -4,8 +4,11 @@ import ar.edu.utn.frba.dds.community.Community;
 import ar.edu.utn.frba.dds.eventnotificationsystem.notifiableevent.NotifiableEvent;
 import ar.edu.utn.frba.dds.persistencesystem.MemoryBasedPersistenceSystem;
 import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
+import ar.edu.utn.frba.dds.service.Service;
+import ar.edu.utn.frba.dds.user.User;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class CommunityManagementSystem {
   MemoryBasedPersistenceSystem persistenceSystem;
@@ -54,5 +57,22 @@ public class CommunityManagementSystem {
     /* For now, this system should have an implementation. This will be enhanced
      when the extracting the implementation from ManagementSystem -asalvidio*/
   }
+
+  public List<Community> communitiesForUser(User anUser) {
+    return this.communities().stream()
+        .filter(community -> community.members().stream()
+            .anyMatch(member -> member.user().equals(anUser)))
+        .collect(Collectors.toList());
+  }
+
+  public List<Service> servicesFor(User anUser) {
+    return this.communities().stream()
+        .filter(community -> community.members().stream()
+            .anyMatch(member -> member.user().equals(anUser)))
+        .flatMap(community -> community.services().stream())
+        .collect(Collectors.toList());
+  }
+
+
 }
 

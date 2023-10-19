@@ -16,6 +16,7 @@ import ar.edu.utn.frba.dds.user.User;
 import ar.edu.utn.frba.dds.user.UserDetail;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
@@ -115,6 +116,14 @@ public class MemoryBasedPersistenceSystem implements PersistenceSystem {
         .findFirst()
         .orElse(null);
   }
+
+  public IncidentPerCommunity incidentPerCommunityIdentifiedBy(Integer anId) {
+    return this.demo.incidentPerCommunities().stream()
+        .filter(incidentPerCommunity -> incidentPerCommunity.getId().equals(anId))
+        .findFirst()
+        .orElse(null);
+  }
+
 
   public User userNamed(String anUserName) {
     return this.demo.users().stream()
@@ -218,21 +227,32 @@ public class MemoryBasedPersistenceSystem implements PersistenceSystem {
   }
 
   public List<Community> communities() {
-    //TODO
-    return null;
+    return this.demo.communities();
   }
 
   public void startManagingIncidentPerCommunity(IncidentPerCommunity anIncidentPerCommunity) {
-    //TODO
+    Integer generatedId;
+    if (!this.demo.incidentPerCommunities().isEmpty()) {
+      IncidentPerCommunity lastIncident = this.demo.incidentPerCommunities()
+          .get(this.demo.incidentPerCommunities().size() - 1);
+      generatedId = lastIncident.getId() + 1;
+    } else {
+      generatedId = 1;
+    }
+    anIncidentPerCommunity.setId(generatedId);
+    this.demo.incidentPerCommunities().add(anIncidentPerCommunity);
   }
 
   public void stopManagingIncidentPerCommunity(IncidentPerCommunity anIncidentPerCommunity) {
     //TODO
   }
 
+  public void closeIncidentPerCommunity(IncidentPerCommunity anIncidentPerCommunity) {
+    anIncidentPerCommunity.setState(State.composedOf("CLOSED", "CLOSED"));
+  }
+
   public List<IncidentPerCommunity> incidentsPerCommunity() {
-    //TODO
-    return null;
+    return this.demo.incidentPerCommunities();
   }
 
   public Service serviceIdentifiedBy(Integer serviceId) {
@@ -240,5 +260,33 @@ public class MemoryBasedPersistenceSystem implements PersistenceSystem {
         .filter(service -> service.getId().equals(serviceId))
         .findFirst()
         .orElse(null);
+  }
+
+  public Community communityIdentifiedBy(Integer communityId) {
+    return this.demo.communities().stream()
+        .filter(community -> community.getId().equals(communityId))
+        .findFirst()
+        .orElse(null);
+  }
+
+  public List<IncidentPerCommunity> incidentsPerCommunityFilteredBy(String state) {
+
+    if (Objects.equals(state, "ALL")) {
+      return this.demo.incidentPerCommunities();
+    } else {
+      return this.demo.incidentPerCommunities().stream()
+          .filter(incidentPerCommunity -> incidentPerCommunity.state().name.equals(state))
+          .collect(Collectors.toList());
+    }
+  }
+
+  public List<AuthorizationRole> authorizationRoles() {
+
+    List<AuthorizationRole> authorizationRoles = new ArrayList<>();
+    authorizationRoles.add(AuthorizationRole.ADMINISTRADOR);
+    authorizationRoles.add(AuthorizationRole.ENTIDAD);
+    authorizationRoles.add(AuthorizationRole.USUARIO);
+
+    return authorizationRoles;
   }
 }

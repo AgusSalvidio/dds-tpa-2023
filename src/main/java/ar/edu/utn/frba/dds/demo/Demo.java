@@ -165,27 +165,31 @@ public class Demo {
   }
 
   public Elevator elevatorA() {
-    return Elevator.composedOf("Ascensor", "Ascensor Principal", this.inServiceState());
+    return Elevator.composedOf("Ascensor Principal", "Ascensor Principal", this.inServiceState());
   }
 
   public Elevator elevatorB() {
-    return Elevator.composedOf("Ascensor", "Ascensor Principal", this.notInServiceState());
+    return Elevator.composedOf("Ascensor Secundario",
+        "Ascensor Secundario", this.notInServiceState());
   }
 
   public Escalator escalatorA() {
-    return Escalator.composedOf("Escalera", "Escalera Mecanica Adaptada", this.notInServiceState());
+    return Escalator.composedOf("Escalera Mecanica Adaptada",
+        "Escalera Mecanica Adaptada", this.notInServiceState());
   }
 
   public Escalator escalatorB() {
-    return Escalator.composedOf("Escalera", "Escalera Mecanica Adaptada", this.inServiceState());
+    return Escalator.composedOf("Escalera Nueva", "Escalera Nueva", this.inServiceState());
   }
 
   public Toilet toiletA() {
-    return Toilet.composedOf("Toilet", "Toilet Primer Piso", this.inServiceState());
+    return Toilet.composedOf("Toilet Primer Piso",
+        "Toilet Primer Piso", this.inServiceState());
   }
 
   public Toilet toiletB() {
-    return Toilet.composedOf("Toilet", "Toilet Primer Piso", this.notInServiceState());
+    return Toilet.composedOf("Toilet Segundo Piso",
+        "Toilet Segundo Piso", this.notInServiceState());
   }
 
   private LocalDateTime curentDateTime() {

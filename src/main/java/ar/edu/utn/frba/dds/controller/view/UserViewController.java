@@ -21,7 +21,7 @@ public class UserViewController extends Controller {
     Map<String, Object> model = new HashMap<>();
     model.put("users", this.applicationContext.userManagementSystem().users());
     model.put("user", this.applicationContext.loggedUser(context));
-    model.put("title", "Usuarios");
+    model.put("title", "Administrar Usuarios");
     context.render("users/users.hbs", model);
   }
 
@@ -30,6 +30,7 @@ public class UserViewController extends Controller {
     model.put("user", this.applicationContext.loggedUser(context));
     model.put("registered_user", null);
     model.put("title", "Registro de Usuario");
+    model.put("buttonActionLabel", "Registrar");
     context.render("users/user-registration.hbs", model);
   }
 
@@ -67,7 +68,9 @@ public class UserViewController extends Controller {
 
     model.put("registered_user", userToEdit);
     model.put("user", this.applicationContext.loggedUser(context));
-    model.put("title", "Editar");
+    model.put("buttonActionLabel", "Editar");
+    model.put("title", "Editar Usuario");
+
 
     context.render("users/user-registration.hbs", model);
   }

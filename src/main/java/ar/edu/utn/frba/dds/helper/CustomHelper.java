@@ -30,6 +30,7 @@ public class CustomHelper {
     registerScriptsTo(handlebars);
     registerHasAdminAccessTo(handlebars);
     registerHasEntityAccessTo(handlebars);
+    registerIsOpenTo(handlebars);
   }
 
   private static void registerCustomHelperTo(
@@ -79,6 +80,7 @@ public class CustomHelper {
     });
   }
 
+
   private static void registerHasAdminAccessTo(Handlebars handlebars) {
     registerRoleAccessTo(handlebars, "hasAdminAccess", ADMINISTRADOR);
 
@@ -89,5 +91,14 @@ public class CustomHelper {
 
   }
 
+  private static void registerIsOpenTo(Handlebars handlebars) {
+    handlebars.registerHelper("isOpen", new Helper<Object>() {
+      @Override
+      public Object apply(Object context, Options options) throws IOException {
+        return "OPEN".equals(context);
+      }
+    });
+  }
 
 }
+
