@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-@Table(name="location")
+@Table(name = "location")
 public class Location {
   @Id
   @GeneratedValue
