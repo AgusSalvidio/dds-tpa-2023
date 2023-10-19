@@ -2,14 +2,15 @@ package ar.edu.utn.frba.dds.managementsystem;
 
 import ar.edu.utn.frba.dds.community.Community;
 import ar.edu.utn.frba.dds.eventnotificationsystem.notifiableevent.NotifiableEvent;
+import ar.edu.utn.frba.dds.persistencesystem.MemoryBasedPersistenceSystem;
 import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
 import java.util.List;
 import java.util.Map;
 
 public class CommunityManagementSystem {
-  RelationalDatabasePersistenceSystem persistenceSystem;
+  MemoryBasedPersistenceSystem persistenceSystem;
 
-  public CommunityManagementSystem(RelationalDatabasePersistenceSystem persistenceSystem) {
+  public CommunityManagementSystem(MemoryBasedPersistenceSystem persistenceSystem) {
     this.persistenceSystem = persistenceSystem;
   }
 
@@ -17,12 +18,12 @@ public class CommunityManagementSystem {
     return "Sistema de Administración de Comunidades";
   }
 
-  private RelationalDatabasePersistenceSystem persistenceSystem() {
+  private MemoryBasedPersistenceSystem persistenceSystem() {
     return this.persistenceSystem;
   }
 
   public static CommunityManagementSystem workingWith(
-      RelationalDatabasePersistenceSystem persistenceSystem) {
+      MemoryBasedPersistenceSystem persistenceSystem) {
     return new CommunityManagementSystem(persistenceSystem);
   }
 

@@ -22,7 +22,7 @@ public class Server {
     return app;
   }
 
-  public static void initialize() {
+  public static void initialize() throws Exception {
     if (app == null) {
       Integer port = Integer.parseInt(System.getProperty("port", "8080"));
       app = Javalin.create(config()).start(port);

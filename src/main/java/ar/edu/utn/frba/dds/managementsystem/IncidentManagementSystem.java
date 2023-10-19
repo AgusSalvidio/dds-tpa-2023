@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.managementsystem;
 
 import ar.edu.utn.frba.dds.eventnotificationsystem.notifiableevent.NotifiableEvent;
 import ar.edu.utn.frba.dds.incident.Incident;
+import ar.edu.utn.frba.dds.persistencesystem.MemoryBasedPersistenceSystem;
 import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
 import ar.edu.utn.frba.dds.service.Service;
 import ar.edu.utn.frba.dds.user.User;
@@ -10,9 +11,9 @@ import java.util.List;
 import java.util.Map;
 
 public class IncidentManagementSystem {
-  RelationalDatabasePersistenceSystem persistenceSystem;
+  MemoryBasedPersistenceSystem persistenceSystem;
 
-  public IncidentManagementSystem(RelationalDatabasePersistenceSystem persistenceSystem) {
+  public IncidentManagementSystem(MemoryBasedPersistenceSystem persistenceSystem) {
     this.persistenceSystem = persistenceSystem;
   }
 
@@ -20,12 +21,12 @@ public class IncidentManagementSystem {
     return "Sistema de Administración de Incidentes";
   }
 
-  private RelationalDatabasePersistenceSystem persistenceSystem() {
+  private MemoryBasedPersistenceSystem persistenceSystem() {
     return this.persistenceSystem;
   }
 
   public static IncidentManagementSystem workingWith(
-      RelationalDatabasePersistenceSystem persistenceSystem) {
+      MemoryBasedPersistenceSystem persistenceSystem) {
     return new IncidentManagementSystem(persistenceSystem);
   }
 
@@ -45,10 +46,14 @@ public class IncidentManagementSystem {
     currentIncident.synchronizeWith(updateIncident);
   }
 
-  public void startManagingIncidentForm(Map model) {
-    Service service = (Service) model.get("service");
-    LocalDateTime dateTime = (LocalDateTime) model.get("dateTime");
-    String observation = model.get("observation").toString();
+  public void startManagingIncidentFrom(Map model) {
+    String serviceIdStr = (String) model.get("service");
+    Integer serviceId = Integer.parseInt(serviceIdStr);
+    System.out.println(serviceIdStr);
+    System.out.println(serviceId);
+    Service service = this.persistenceSystem.serviceIdentifiedBy(serviceId);
+    LocalDateTime dateTime = (LocalDateTime) model.get("datetime");
+    String observation = (String) model.get("observations");
     User user = (User) model.get("user");
 
     this.startManaging(Incident.composedOf(service, observation, dateTime, user));

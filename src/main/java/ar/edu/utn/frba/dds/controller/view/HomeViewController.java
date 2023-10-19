@@ -8,7 +8,7 @@ import io.javalin.http.Handler;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HomeViewController extends Controller implements Handler {
+public class HomeViewController extends Controller {
 
   ApplicationContext applicationContext;
 
@@ -17,8 +17,7 @@ public class HomeViewController extends Controller implements Handler {
     this.applicationContext = applicationContext;
   }
 
-  @Override
-  public void handle(Context context) throws Exception {
+  public void index(Context context) {
     Map<String, Object> model = new HashMap<>();
     /* For debugging porpuses -asalvidio
     if (context.sessionAttribute("user_id") == null) {
@@ -27,9 +26,10 @@ public class HomeViewController extends Controller implements Handler {
       System.out.println(context.sessionAttribute("user_id").toString());
     }*/
 
-    model.put("user", this.loggedUser(context));
+    model.put("user", this.applicationContext.loggedUser(context));
     model.put("title", "Inicio");
     context.render("home.hbs", model);
 
   }
 }
+

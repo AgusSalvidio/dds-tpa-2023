@@ -17,7 +17,23 @@
         <Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2"/>
     </Match>
     <Match>
-        <Package name="ar.edu.utn.frba.dds.controller.action.*"/>
+        <Class name="ar.edu.utn.frba.dds.managementsystem.CommunityManagementSystem"/>
+        <Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2"/>
+    </Match>
+    <Match>
+        <Class name="ar.edu.utn.frba.dds.managementsystem.EntityManagementSystem"/>
+        <Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2"/>
+    </Match>
+    <Match>
+        <Class name="ar.edu.utn.frba.dds.managementsystem.ServiceManagementSystem"/>
+        <Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2"/>
+    </Match>
+    <Match>
+        <Class name="ar.edu.utn.frba.dds.managementsystem.UserManagementSystem"/>
+        <Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2"/>
+    </Match>
+    <Match>
+        <Package name="ar.edu.utn.frba.dds.demo.*"/>
         <Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2,UC_USELESS_OBJECT,URF_UNREAD_FIELD,ES_COMPARING_PARAMETER_STRING_WITH_EQ"/>
     </Match>
     <Match>
@@ -26,6 +42,18 @@
     </Match>
     <Match>
         <Package name="ar.edu.utn.frba.dds.helper.*"/>
+        <Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2"/>
+    </Match>
+    <Match>
+        <Package name="ar.edu.utn.frba.dds.community.*"/>
+        <Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2"/>
+    </Match>
+    <Match>
+        <Package name="ar.edu.utn.frba.dds.user.*"/>
+        <Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2"/>
+    </Match>
+    <Match>
+        <Class name="ar.edu.utn.frba.dds.eventnotificationsystem.notifiableevent.IncidentAdded"/>
         <Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2"/>
     </Match>
 </FindBugsFilter>

@@ -1,12 +1,34 @@
 package ar.edu.utn.frba.dds.persistencesystem;
 
+import ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole;
+import ar.edu.utn.frba.dds.community.Community;
+import ar.edu.utn.frba.dds.demo.Demo;
+import ar.edu.utn.frba.dds.entity.Entity;
+import ar.edu.utn.frba.dds.entity.TransportLine;
+import ar.edu.utn.frba.dds.incident.Incident;
+import ar.edu.utn.frba.dds.incident.IncidentPerCommunity;
+import ar.edu.utn.frba.dds.service.Elevator;
+import ar.edu.utn.frba.dds.service.Escalator;
+import ar.edu.utn.frba.dds.service.Service;
+import ar.edu.utn.frba.dds.service.State;
+import ar.edu.utn.frba.dds.service.Toilet;
+import ar.edu.utn.frba.dds.user.User;
+import ar.edu.utn.frba.dds.user.UserDetail;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 
 public class MemoryBasedPersistenceSystem implements PersistenceSystem {
 
   List<StorageAssignment> memoryStorage = new ArrayList<>();
+
+  Demo demo = new Demo();
+
+  public MemoryBasedPersistenceSystem() throws Exception {
+    this.demo.initialize();
+  }
 
   public void addObjectTypeToStore(String anObjectClassName) {
     this.memoryStorage.add(new StorageAssignment(anObjectClassName));
@@ -50,4 +72,173 @@ public class MemoryBasedPersistenceSystem implements PersistenceSystem {
     return storageAssignmentFor(anObjectClassName).objectList();
   }
 
+
+  public void startManagingUser(User anUser) {
+    Integer generatedId;
+    if (!this.demo.users().isEmpty()) {
+      User lastUser = this.demo.users().get(this.demo.users().size() - 1);
+      generatedId = lastUser.getId() + 1;
+    } else {
+      generatedId = 1;
+    }
+    anUser.setId(generatedId);
+    this.demo.users().add(anUser);
+  }
+
+  public void stopManagingUser(User anUser) {
+    this.demo.users().remove(anUser);
+  }
+
+  public void startManagingUserDetail(UserDetail anUserDetail) {
+    Integer generatedId;
+    if (!this.demo.userDetails().isEmpty()) {
+      UserDetail lastUserDetail = this.demo.userDetails().get(this.demo.userDetails().size() - 1);
+      generatedId = lastUserDetail.getId() + 1;
+    } else {
+      generatedId = 1;
+    }
+    anUserDetail.setId(generatedId);
+    this.demo.userDetails().add(anUserDetail);
+  }
+
+  public void stopManagingUserDetail(UserDetail anUserDetail) {
+    //TODO
+  }
+
+  public List<User> users() {
+    return this.demo.users();
+  }
+
+  public User userIdentifiedBy(Integer anUserId) {
+    return this.demo.users().stream()
+        .filter(user -> user.getId().equals(anUserId))
+        .findFirst()
+        .orElse(null);
+  }
+
+  public User userNamed(String anUserName) {
+    return this.demo.users().stream()
+        .filter(user -> user.username().equals(anUserName))
+        .findFirst()
+        .orElse(null);
+  }
+
+  public List<UserDetail> userDetails() {
+    return this.demo.userDetails();
+  }
+
+  public void startManagingElevator(Elevator anElevator) {
+    //TODO
+  }
+
+  public void startManagingEscalator(Escalator anEscalator) {
+    //TODO
+  }
+
+  public void startManagingToilet(Toilet toilet) {
+    //TODO
+  }
+
+  public void stopManagingEscalator(Escalator anEscalator) {
+    //TODO
+  }
+
+  public void stopManagingElevator(Elevator anElevator) {
+    //TODO
+  }
+
+  public void stopManagingToilet(Toilet toilet) {
+    //TODO
+  }
+
+  public void startManagingState(State state) {
+    //TODO
+  }
+
+  public void stopManagingState(State state) {
+    //TODO
+  }
+
+  public List<Service> services() {
+    return this.demo.services();
+  }
+
+  public void startManagingAuthorizationRole(AuthorizationRole authorizationRole) {
+    //TODO
+  }
+
+  public void stopManagingAuthorizationRole(AuthorizationRole authorizationRole) {
+    //TODO
+  }
+
+  public List<AuthorizationRole> roles() {
+    //TODO
+    return null;
+  }
+
+  public void startManagingIncident(Incident anIncident) {
+    Integer generatedId;
+    if (!this.demo.incidents().isEmpty()) {
+      Incident lastIncident = this.demo.incidents().get(this.demo.incidents().size() - 1);
+      generatedId = lastIncident.getId() + 1;
+    } else {
+      generatedId = 1;
+    }
+    anIncident.setId(generatedId);
+    this.demo.incidents().add(anIncident);
+  }
+
+  public void stopManagingIncident(Incident anIncident) {
+    //TODO
+  }
+
+  public List<Incident> incidents() {
+    return this.demo.incidents();
+  }
+
+  public void startManagingTransportLine(TransportLine transportLine) {
+    //TODO
+  }
+
+  public void stopManagingTransportLine(TransportLine transportLine) {
+    //TODO
+  }
+
+  public List<Entity> entities() {
+    //TODO
+    return null;
+  }
+
+  public void startManagingCommunity(Community community) {
+    //TODO
+  }
+
+  public void stopManagingCommunity(Community community) {
+    //TODO
+  }
+
+  public List<Community> communities() {
+    //TODO
+    return null;
+  }
+
+  public void startManagingIncidentPerCommunity(IncidentPerCommunity anIncidentPerCommunity) {
+    //TODO
+  }
+
+  public void stopManagingIncidentPerCommunity(IncidentPerCommunity anIncidentPerCommunity) {
+    //TODO
+  }
+
+  public List<IncidentPerCommunity> incidentsPerCommunity() {
+    //TODO
+    return null;
+  }
+
+  public Service serviceIdentifiedBy(Integer serviceId) {
+    return this.demo.services().stream()
+        .filter(service -> service.getId().equals(serviceId))
+        .findFirst()
+        .orElse(null);
+  }
 }

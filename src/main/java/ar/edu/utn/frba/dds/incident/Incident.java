@@ -11,12 +11,15 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "incident")
 public class Incident {
   @Id
   @GeneratedValue
+  @Getter
+  @Setter
   Integer id;
 
   @Getter
@@ -24,7 +27,7 @@ public class Incident {
   Service service;
 
   @Getter
-  @Column(name = "dateAndTime")
+  @Column(name = "date_time")
   LocalDateTime dateTime;
 
   @Getter

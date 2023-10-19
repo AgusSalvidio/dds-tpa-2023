@@ -22,6 +22,8 @@ import lombok.Setter;
 public class Establishment {
   @Id
   @GeneratedValue
+  @Setter
+  @Getter
   Integer id;
 
   @Setter
@@ -37,7 +39,7 @@ public class Establishment {
   @Setter
   @Getter
   @OneToOne
-  @JoinColumn(name = "locationId", referencedColumnName = "id")
+  @JoinColumn(name = "location_id", referencedColumnName = "id")
   public Location location;
 
   @OneToMany

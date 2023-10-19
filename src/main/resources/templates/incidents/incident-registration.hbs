@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{{headMeta}}}
+</head>
+
+<body>
+<header>
+    {{{customHomeNavbar}}}
+</header>
+
+<main>
+
+    <section class="titles justify-content-center">
+        <h2 class="title">{{title}}</h2>
+    </section>
+    <section class="container">
+        <form class="row g-3 py-2" method="post"
+            {{#if registered_incident}}
+              action="/incidents/{{registered_incident.id}}" {{else}} action="/incidents" {{/if}}
+        >
+            <div class="col-md-6">
+                <label for="services">Seleccionar servicio:</label>
+                <select class="col-md-6" name="services">
+                    {{#each services}}
+                        <option value={{this.id}}>{{this.name}}</option>
+                    {{else}}
+                    {{/each}}
+                </select>
+            </div>
+            <div class="mb-3">
+                <textarea rows="4" cols="54" name="observations"></textarea>
+            </div>
+            <div class="d-flex justify-content-center gap-2">
+                <button type="submit" class="btn btn-custom">{{title}}</button>
+            </div>
+        </form>
+    </section>
+
+</main>
+
+<footer>
+</footer>
+{{{scripts}}}
+</body>
+</html>

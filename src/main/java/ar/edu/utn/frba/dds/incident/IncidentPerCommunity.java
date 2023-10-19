@@ -14,10 +14,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "incidentPerCommunity")
+@Table(name = "incident_per_community")
 public class IncidentPerCommunity {
   @Id
   @GeneratedValue
+  @Setter
+  @Getter
   Integer id;
 
   @Getter

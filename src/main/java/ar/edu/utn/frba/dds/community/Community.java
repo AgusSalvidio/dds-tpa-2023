@@ -14,12 +14,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import lombok.Getter;
+import lombok.Setter;
 
 @javax.persistence.Entity
 @Table(name = "community")
 public class Community {
   @Id
   @GeneratedValue
+  @Setter
+  @Getter
   Integer id;
 
   @Getter
@@ -132,6 +135,10 @@ public class Community {
   private void addMemberComposedOf(User anUser, String role) {
     Member newMember = Member.composedOf(anUser, role);
     this.members.add(newMember);
+  }
+
+  public void addMember(Member member) {
+    this.members.add(member);
   }
 
   public void addModerator(User anUser) {

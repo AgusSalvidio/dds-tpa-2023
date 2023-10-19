@@ -16,7 +16,7 @@ public class EventNotificationSystemTest {
     return new ManagementSystemAddOn().dummyManagementSystemUsing(eventNotificationSystem);
   }
 
-  private IncidentManagementSystem incidentManagementSystemUsing(EventNotificationSystem eventNotificationSystem) {
+  private IncidentManagementSystem incidentManagementSystemUsing(EventNotificationSystem eventNotificationSystem) throws Exception {
     return new ManagementSystemAddOn().incidentManagementSystemUsing(eventNotificationSystem);
   }
 

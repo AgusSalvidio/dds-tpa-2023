@@ -223,6 +223,9 @@
                                 <exclude>
                                     ar/edu/utn/frba/dds/services/**/*
                                 </exclude>
+                                <exclude>
+                                    ar/edu/utn/frba/dds/demo/**/*
+                                </exclude>
                             </excludes>
                         </configuration>
                     </execution>

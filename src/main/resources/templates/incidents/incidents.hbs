@@ -6,15 +6,15 @@
 
 <body>
 <header>
-    {{{customAdministrationNavbar}}}
+    {{{customHomeNavbar}}}
 </header>
 
 <main>
     <div class="d-flex justify-content-end p-2">
-        <legend class="">Administrar Roles</legend>
+        <legend class="">Administrar Incidentes</legend>
         <a
                 class="btn btn-md btn-custom"
-                href="/authorization-role-registration"
+                href="/incidents/register"
         >
             Agregar
         </a>
@@ -29,25 +29,29 @@
                         <thead>
                         <tr>
                             <th>Usuario</th>
-                            <th>Rol</th>
+                            <th>Servicio</th>
+                            <th>Observaciones</th>
+                            <th>Fecha</th>
                             <th>Acciones</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {{#each user}}
+                        {{#each incidents}}
                             <tr>
-                                <td>{{this.username}}</td>
-                                <td>{{this.authorizationRole}}</td>
+                                <td>{{this.user.username}}</td>
+                                <td>{{this.service.name}}</td>
+                                <td>{{this.observations}}</td>
+                                <td>{{this.dateTime}}</td>
                                 <td class="px-4">
-                                    <a class="btn-sm "><i
-                                            class="fa-regular fa-pen-to-square"></i></a>
-                                    <a class="btn-sm "><i class="fa-solid fa-xmark"
+                                    <a href="/incidents/{{this.id}}/review" class="btn-sm "><i
+                                            class="fa-solid fa-magnifying-glass-location"></i></a>
+                                    <a href="/incidents/{{this.id}}/close" class="btn-sm "><i class="fa-solid fa-lock"
                                                           style="color:red"></i></a>
                                 </td>
                             </tr>
                         {{else}}
                             <tr>
-                                <td colspan="3">No hay roles</td>
+                                <td colspan="6">No hay incidentes</td>
                             </tr>
                         {{/each}}
 
