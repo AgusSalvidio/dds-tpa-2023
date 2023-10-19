@@ -6,7 +6,7 @@ import io.javalin.http.Handler;
 import java.util.HashMap;
 import java.util.Map;
 
-public class IncidentViewController extends Controller implements Handler {
+public class IncidentViewController extends Controller {
   ApplicationContext applicationContext;
 
   public IncidentViewController(ApplicationContext applicationContext) {
@@ -14,8 +14,7 @@ public class IncidentViewController extends Controller implements Handler {
     this.applicationContext = applicationContext;
   }
 
-  @Override
-  public void handle(Context context) throws Exception {
+  public void index(Context context) throws Exception {
     Map<String, Object> model = new HashMap<>();
     model.put("incidents", this.applicationContext.incidentManagementSystem().incidents());
     model.put("user", this.applicationContext.loggedUser(context));

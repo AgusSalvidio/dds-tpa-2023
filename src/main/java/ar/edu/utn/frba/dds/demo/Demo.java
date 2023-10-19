@@ -35,15 +35,30 @@ public class Demo {
   }
 
   public UserDetail ibarra() throws Exception {
-    return UserDetail.composedOf("Hugo", "Ibarra", "ibarraneta@gmail.com", "0123456789", this.wpp());
+    return UserDetail.composedOf(
+        "Hugo",
+        "Ibarra",
+        "ibarraneta@gmail.com",
+        "0123456789",
+        this.wpp());
   }
 
   public UserDetail basuraIntergalactica() throws Exception {
-    return UserDetail.composedOf("Basura", "Intergalactica", "basuraintergalactica@gmail.com", "0123456789", this.mail());
+    return UserDetail.composedOf(
+        "Basura",
+        "Intergalactica",
+        "basuraintergalactica@gmail.com",
+        "0123456789",
+        this.mail());
   }
 
   public UserDetail basuraIntergalactica2() throws Exception {
-    return UserDetail.composedOf("Basura", "Intergalactica2", "basuraintergalactica2@gmail.com", "0123456789", this.wpp());
+    return UserDetail.composedOf(
+        "Basura",
+        "Intergalactica2",
+        "basuraintergalactica2@gmail.com",
+        "0123456789",
+        this.wpp());
   }
 
   public User hugo() throws Exception {
@@ -55,7 +70,11 @@ public class Demo {
   }
 
   public User basura2() throws Exception {
-    return User.composedOf("entidad", "entidad", this.basuraIntergalactica2(), AuthorizationRole.ENTIDAD);
+    return User.composedOf(
+        "entidad",
+        "entidad",
+        this.basuraIntergalactica2(),
+        AuthorizationRole.ENTIDAD);
   }
 
   public void initialize() throws Exception {
