@@ -82,11 +82,12 @@ public class Router {
         ADMINISTRADOR, ENTIDAD, USUARIO);
     app.post("/incidents",
         new IncidentViewController(applicationContext)::save, ADMINISTRADOR, ENTIDAD, USUARIO);
-    /*app.get("/incidents/{id}/review", new IncidentViewController(applicationContext)::review,
+    app.get("/incidents/{id}/review", new IncidentViewController(applicationContext)::review,
         ADMINISTRADOR, ENTIDAD, USUARIO);
-
+    app.post("/incidents/{id}/review", new IncidentViewController(applicationContext)::close,
+        ADMINISTRADOR, ENTIDAD, USUARIO);
     app.get("/incidents/{id}/close", new IncidentViewController(applicationContext)::close,
-        ADMINISTRADOR, ENTIDAD, USUARIO);*/
+        ADMINISTRADOR, ENTIDAD, USUARIO);
 
   }
 

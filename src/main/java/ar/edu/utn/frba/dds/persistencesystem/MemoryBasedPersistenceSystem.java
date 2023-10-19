@@ -116,6 +116,14 @@ public class MemoryBasedPersistenceSystem implements PersistenceSystem {
         .orElse(null);
   }
 
+  public IncidentPerCommunity incidentPerCommunityIdentifiedBy(Integer anId) {
+    return this.demo.incidentPerCommunities().stream()
+        .filter(incidentPerCommunity -> incidentPerCommunity.getId().equals(anId))
+        .findFirst()
+        .orElse(null);
+  }
+
+
   public User userNamed(String anUserName) {
     return this.demo.users().stream()
         .filter(user -> user.username().equals(anUserName))
@@ -218,26 +226,44 @@ public class MemoryBasedPersistenceSystem implements PersistenceSystem {
   }
 
   public List<Community> communities() {
-    //TODO
-    return null;
+    return this.demo.communities();
   }
 
   public void startManagingIncidentPerCommunity(IncidentPerCommunity anIncidentPerCommunity) {
-    //TODO
+    Integer generatedId;
+    if (!this.demo.incidentPerCommunities().isEmpty()) {
+      IncidentPerCommunity lastIncident = this.demo.incidentPerCommunities()
+          .get(this.demo.incidentPerCommunities().size() - 1);
+      generatedId = lastIncident.getId() + 1;
+    } else {
+      generatedId = 1;
+    }
+    anIncidentPerCommunity.setId(generatedId);
+    this.demo.incidentPerCommunities().add(anIncidentPerCommunity);
   }
 
   public void stopManagingIncidentPerCommunity(IncidentPerCommunity anIncidentPerCommunity) {
     //TODO
   }
 
+  public void closeIncidentPerCommunity(IncidentPerCommunity anIncidentPerCommunity) {
+    anIncidentPerCommunity.setState(State.composedOf("CLOSED", "CLOSED"));
+  }
+
   public List<IncidentPerCommunity> incidentsPerCommunity() {
-    //TODO
-    return null;
+    return this.demo.incidentPerCommunities();
   }
 
   public Service serviceIdentifiedBy(Integer serviceId) {
     return this.demo.services().stream()
         .filter(service -> service.getId().equals(serviceId))
+        .findFirst()
+        .orElse(null);
+  }
+
+  public Community communityIdentifiedBy(Integer communityId) {
+    return this.demo.communities().stream()
+        .filter(community -> community.getId().equals(communityId))
         .findFirst()
         .orElse(null);
   }

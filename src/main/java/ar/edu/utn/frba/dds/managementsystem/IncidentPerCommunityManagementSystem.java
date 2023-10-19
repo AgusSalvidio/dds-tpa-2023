@@ -6,8 +6,10 @@ import ar.edu.utn.frba.dds.incident.Incident;
 import ar.edu.utn.frba.dds.incident.IncidentPerCommunity;
 import ar.edu.utn.frba.dds.persistencesystem.MemoryBasedPersistenceSystem;
 import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
+import ar.edu.utn.frba.dds.user.User;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class IncidentPerCommunityManagementSystem {
   MemoryBasedPersistenceSystem persistenceSystem;
@@ -38,6 +40,10 @@ public class IncidentPerCommunityManagementSystem {
     this.persistenceSystem().stopManagingIncidentPerCommunity(incidentPerCommunity);
   }
 
+  public void closeIncidentPerCommunity(IncidentPerCommunity incidentPerCommunity) {
+    this.persistenceSystem().closeIncidentPerCommunity(incidentPerCommunity);
+  }
+
   public List<IncidentPerCommunity> incidentsPerCommunity() {
     return this.persistenceSystem().incidentsPerCommunity();
   }
@@ -58,6 +64,17 @@ public class IncidentPerCommunityManagementSystem {
   public void receiveFrom(NotifiableEvent event, Object publisher) {
     /* For now, this system should have an implementation. This will be enhanced
      when the extracting the implementation from ManagementSystem -asalvidio*/
+  }
+
+  public IncidentPerCommunity incidentPerCommunityIdentifiedBy(Integer anId) {
+    return this.persistenceSystem.incidentPerCommunityIdentifiedBy(anId);
+  }
+
+  public List<IncidentPerCommunity> incidentsFor(User anUser) {
+    return this.incidentsPerCommunity().stream()
+        .filter(incidentPerCommunity -> incidentPerCommunity.community().members().stream()
+            .anyMatch(member -> member.user().equals(anUser)))
+        .collect(Collectors.toList());
   }
 
 }
