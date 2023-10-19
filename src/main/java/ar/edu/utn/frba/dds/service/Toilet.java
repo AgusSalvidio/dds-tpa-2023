@@ -7,6 +7,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "toilet")
 public class Toilet extends Service {
+
+
   public static Toilet composedOf(String name, String description, State state) {
     return new Toilet(name, description, state);
   }

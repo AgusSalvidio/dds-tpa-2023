@@ -160,8 +160,7 @@ public class MemoryBasedPersistenceSystem implements PersistenceSystem {
   }
 
   public List<Service> services() {
-    //TODO
-    return null;
+    return this.demo.services();
   }
 
   public void startManagingAuthorizationRole(AuthorizationRole authorizationRole) {
@@ -178,7 +177,15 @@ public class MemoryBasedPersistenceSystem implements PersistenceSystem {
   }
 
   public void startManagingIncident(Incident anIncident) {
-    //TODO
+    Integer generatedId;
+    if (!this.demo.incidents().isEmpty()) {
+      Incident lastIncident = this.demo.incidents().get(this.demo.incidents().size() - 1);
+      generatedId = lastIncident.getId() + 1;
+    } else {
+      generatedId = 1;
+    }
+    anIncident.setId(generatedId);
+    this.demo.incidents().add(anIncident);
   }
 
   public void stopManagingIncident(Incident anIncident) {
@@ -186,8 +193,7 @@ public class MemoryBasedPersistenceSystem implements PersistenceSystem {
   }
 
   public List<Incident> incidents() {
-    //TODO
-    return null;
+    return this.demo.incidents();
   }
 
   public void startManagingTransportLine(TransportLine transportLine) {
@@ -229,4 +235,10 @@ public class MemoryBasedPersistenceSystem implements PersistenceSystem {
     return null;
   }
 
+  public Service serviceIdentifiedBy(Integer serviceId) {
+    return this.demo.services().stream()
+        .filter(service -> service.getId().equals(serviceId))
+        .findFirst()
+        .orElse(null);
+  }
 }

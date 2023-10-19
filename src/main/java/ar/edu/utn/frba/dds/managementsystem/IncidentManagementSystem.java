@@ -46,10 +46,14 @@ public class IncidentManagementSystem {
     currentIncident.synchronizeWith(updateIncident);
   }
 
-  public void startManagingIncidentForm(Map model) {
-    Service service = (Service) model.get("service");
-    LocalDateTime dateTime = (LocalDateTime) model.get("dateTime");
-    String observation = model.get("observation").toString();
+  public void startManagingIncidentFrom(Map model) {
+    String serviceIdStr = (String) model.get("service");
+    Integer serviceId = Integer.parseInt(serviceIdStr);
+    System.out.println(serviceIdStr);
+    System.out.println(serviceId);
+    Service service = this.persistenceSystem.serviceIdentifiedBy(serviceId);
+    LocalDateTime dateTime = (LocalDateTime) model.get("datetime");
+    String observation = (String) model.get("observations");
     User user = (User) model.get("user");
 
     this.startManaging(Incident.composedOf(service, observation, dateTime, user));

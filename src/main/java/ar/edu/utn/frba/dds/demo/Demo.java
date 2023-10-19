@@ -470,23 +470,29 @@ public class Demo {
   public void addServices() {
     this.states.add(this.inServiceState());
     this.states.add(this.notInServiceState());
+
     Service elevatorA = this.elevatorA();
-    this.elevatorA().setId(1);
+    elevatorA.setId(1);
     this.services.add(elevatorA);
+
     Service elevatorB = this.elevatorB();
-    this.elevatorB().setId(2);
+    elevatorB.setId(2);
     this.services.add(elevatorB);
+
     Service escalatorA = this.escalatorA();
-    this.escalatorA().setId(3);
+    escalatorA.setId(3);
     this.services.add(escalatorA);
+
     Service escalatorB = this.escalatorB();
-    this.escalatorB().setId(4);
+    escalatorB.setId(4);
     this.services.add(escalatorB);
+
     Service toiletA = this.toiletA();
-    this.toiletA().setId(5);
+    toiletA.setId(5);
     this.services.add(toiletA);
+
     Service toiletB = this.toiletB();
-    this.toiletB().setId(6);
+    toiletB.setId(6);
     this.services.add(toiletB);
   }
 

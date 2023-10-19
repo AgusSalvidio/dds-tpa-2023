@@ -14,7 +14,7 @@
         <legend class="">Administrar Incidentes</legend>
         <a
                 class="btn btn-md btn-custom"
-                href="/user-registration"
+                href="/incidents/register"
         >
             Agregar
         </a>
@@ -39,13 +39,13 @@
                         {{#each incidents}}
                             <tr>
                                 <td>{{this.user.username}}</td>
-                                <td>{{this.service}}</td>
+                                <td>{{this.service.name}}</td>
                                 <td>{{this.observations}}</td>
                                 <td>{{this.dateTime}}</td>
                                 <td class="px-4">
-                                    <a class="btn-sm "><i
+                                    <a href="/incidents/{{this.id}}/review" class="btn-sm "><i
                                             class="fa-solid fa-magnifying-glass-location"></i></a>
-                                    <a class="btn-sm "><i class="fa-solid fa-lock"
+                                    <a href="/incidents/{{this.id}}/close" class="btn-sm "><i class="fa-solid fa-lock"
                                                           style="color:red"></i></a>
                                 </td>
                             </tr>
