@@ -97,7 +97,30 @@ public class UserManagementSystem {
     this.startManagingDetail(userDetail);
 
     this.startManaging(
-        User.composedOf(username, password, userDetail, AuthorizationRole.ADMINISTRADOR));
+        User.composedOf(username, password, userDetail, AuthorizationRole.USUARIO));
+
+  }
+
+  public void updateUserFrom(User userToUpdate, Map model) throws Exception {
+    String name = model.get("name").toString();
+    String lastname = model.get("lastname").toString();
+    String email = model.get("email").toString();
+    String username = model.get("username").toString();
+    String password = model.get("password").toString();
+    String telephone = model.get("telephone").toString();
+    /*NotificationMean notificationMean = this.convertToEntity(
+        model.get("notificationmean").toString());*/
+
+    NotificationMean notificationMean = new NotifyByWhatsApp(new TwilioAdapter());
+
+    UserDetail userDetail = new UserDetail(name, lastname, email, telephone, notificationMean);
+    userDetail.setId(userToUpdate.getDetails().getId());
+
+    User updatedUser = User.composedOf(username,
+        password, userDetail, userToUpdate.authorizationRole());
+    updatedUser.setId(userToUpdate.getId());
+
+    this.updateWith(userToUpdate, updatedUser);
 
   }
 

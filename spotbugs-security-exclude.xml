@@ -52,4 +52,8 @@
         <Package name="ar.edu.utn.frba.dds.user.*"/>
         <Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2"/>
     </Match>
+    <Match>
+        <Class name="ar.edu.utn.frba.dds.eventnotificationsystem.notifiableevent.IncidentAdded"/>
+        <Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2"/>
+    </Match>
 </FindBugsFilter>

@@ -52,8 +52,12 @@ public class Router {
       ApplicationContext applicationContext) {
     app.get("/users", new UserViewController(applicationContext)::index, ADMINISTRADOR);
     app.get("/users/register", new UserViewController(applicationContext)::create, ADMINISTRADOR);
+    app.get("/users/{id}/edit", new UserViewController(applicationContext)::edit, ADMINISTRADOR);
+    app.post("/users/{id}", new UserViewController(applicationContext)::update, ADMINISTRADOR);
     app.post("/users",
         new UserViewController(applicationContext)::save, ADMINISTRADOR);
+    app.get("/users/{id}/delete",
+        new UserViewController(applicationContext)::delete, ADMINISTRADOR);
   }
 
   private static void initializeServiceEndpointsOn(

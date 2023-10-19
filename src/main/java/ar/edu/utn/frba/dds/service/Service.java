@@ -13,12 +13,15 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "service")
 public abstract class Service {
   @Id
   @GeneratedValue
+  @Setter
+  @Getter
   Integer id;
 
   @Getter

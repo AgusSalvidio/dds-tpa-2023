@@ -72,16 +72,33 @@ public class MemoryBasedPersistenceSystem implements PersistenceSystem {
     return storageAssignmentFor(anObjectClassName).objectList();
   }
 
+
   public void startManagingUser(User anUser) {
-    //TODO
+    Integer generatedId;
+    if (!this.demo.users().isEmpty()) {
+      User lastUser = this.demo.users().get(this.demo.users().size() - 1);
+      generatedId = lastUser.getId() + 1;
+    } else {
+      generatedId = 1;
+    }
+    anUser.setId(generatedId);
+    this.demo.users().add(anUser);
   }
 
   public void stopManagingUser(User anUser) {
-    //TODO
+    this.demo.users().remove(anUser);
   }
 
   public void startManagingUserDetail(UserDetail anUserDetail) {
-    //TODO
+    Integer generatedId;
+    if (!this.demo.userDetails().isEmpty()) {
+      UserDetail lastUserDetail = this.demo.userDetails().get(this.demo.userDetails().size() - 1);
+      generatedId = lastUserDetail.getId() + 1;
+    } else {
+      generatedId = 1;
+    }
+    anUserDetail.setId(generatedId);
+    this.demo.userDetails().add(anUserDetail);
   }
 
   public void stopManagingUserDetail(UserDetail anUserDetail) {

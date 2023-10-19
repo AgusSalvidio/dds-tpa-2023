@@ -8,12 +8,15 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "member")
 public class Member {
   @Id
   @GeneratedValue
+  @Setter
+  @Getter
   Integer id;
 
   @Getter

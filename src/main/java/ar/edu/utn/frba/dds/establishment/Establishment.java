@@ -22,6 +22,8 @@ import lombok.Setter;
 public class Establishment {
   @Id
   @GeneratedValue
+  @Setter
+  @Getter
   Integer id;
 
   @Setter

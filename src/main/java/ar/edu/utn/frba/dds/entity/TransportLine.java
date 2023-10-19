@@ -17,6 +17,8 @@ import lombok.Setter;
 public class TransportLine extends Entity {
   @Id
   @GeneratedValue
+  @Setter
+  @Getter
   Integer id;
 
   @Setter

@@ -17,6 +17,8 @@ import lombok.Setter;
 public class Location {
   @Id
   @GeneratedValue
+  @Setter
+  @Getter
   Integer id;
 
   @Column(name = "street")

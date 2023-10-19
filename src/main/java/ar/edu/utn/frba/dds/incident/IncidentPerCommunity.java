@@ -18,6 +18,8 @@ import lombok.Setter;
 public class IncidentPerCommunity {
   @Id
   @GeneratedValue
+  @Setter
+  @Getter
   Integer id;
 
   @Getter

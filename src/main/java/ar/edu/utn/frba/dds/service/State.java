@@ -6,12 +6,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "state")
 public class State {
   @Id
   @GeneratedValue
+  @Getter
+  @Setter
   Integer id;
 
   @Getter
