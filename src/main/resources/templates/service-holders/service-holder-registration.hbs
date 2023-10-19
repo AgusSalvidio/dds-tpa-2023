@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{{headMeta}}}
+</head>
+
+<body>
+<header>
+    {{{customAdministrationNavbar}}}
+</header>
+
+<main>
+    <section class="titles justify-content-center">
+        <h2 class="title">Registrar Entidad</h2>
+    </section>
+    <div class="container d-flex justify-content-center py-4">
+        <section class="">
+            <form class="row g-3 py-2" method="post" action="/service-holders"
+                  enctype="multipart/form-data">
+                <div class="col-md-6">
+                    <input type="file" name="files" multiple>
+                </div>
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-custom px-4">Registrar</button>
+                </div>
+            </form>
+        </section>
+    </div>
+
+</main>
+
+<footer>
+</footer>
+{{{scripts}}}
+</body>
+</html>

@@ -7,9 +7,15 @@ import ar.edu.utn.frba.dds.user.User;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import lombok.Getter;
+import lombok.Setter;
 
 public abstract class ServiceHolder {
+  @Getter
+  @Setter
   String name;
+  @Getter
+  @Setter
   String description;
   List<Member> members = new ArrayList<>();
 

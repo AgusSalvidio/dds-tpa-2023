@@ -21,6 +21,9 @@ import ar.edu.utn.frba.dds.service.Escalator;
 import ar.edu.utn.frba.dds.service.Service;
 import ar.edu.utn.frba.dds.service.State;
 import ar.edu.utn.frba.dds.service.Toilet;
+import ar.edu.utn.frba.dds.serviceholder.Company;
+import ar.edu.utn.frba.dds.serviceholder.GovermentDepartment;
+import ar.edu.utn.frba.dds.serviceholder.ServiceHolder;
 import ar.edu.utn.frba.dds.services.georef.entities.Municipality;
 import ar.edu.utn.frba.dds.user.User;
 import ar.edu.utn.frba.dds.user.UserDetail;
@@ -30,6 +33,7 @@ import java.util.List;
 
 public class Demo {
   private List<User> users = new ArrayList<>();
+  private List<ServiceHolder> serviceHolders = new ArrayList<>();
   private List<UserDetail> userDetails = new ArrayList<>();
   private List<Service> services = new ArrayList<>();
   private List<Incident> incidents = new ArrayList<>();
@@ -51,6 +55,10 @@ public class Demo {
 
   public List<Service> services() {
     return this.services;
+  }
+
+  public List<ServiceHolder> serviceHolders() {
+    return this.serviceHolders;
   }
 
 
@@ -539,6 +547,22 @@ public class Demo {
     this.incidentPerCommunities.add(this.incidentPerCommunityC());
   }
 
+  public void addServiceHolders() throws Exception {
+
+    Company company = Company.composedOf("Empresa 1", "Empresa 1");
+    GovermentDepartment govermentDepartment = GovermentDepartment.composedOf(
+        "Empresa Estatal 1", "Empresa Estatal 1");
+    Company company2 = Company.composedOf("Empresa 2", "Empresa 2");
+    GovermentDepartment govermentDepartment2 = GovermentDepartment.composedOf(
+        "Empresa Estatal 2", "Empresa Estatal 2");
+
+    this.serviceHolders.add(company);
+    this.serviceHolders.add(company2);
+    this.serviceHolders.add(govermentDepartment);
+    this.serviceHolders.add(govermentDepartment2);
+
+  }
+
   public void initialize() throws Exception {
     this.addUsers();
     this.addServices();
@@ -546,6 +570,7 @@ public class Demo {
     this.addEntities();
     this.addCommunities();
     this.addIncidentsPerCommunity();
+    this.addServiceHolders();
 
   }
 }

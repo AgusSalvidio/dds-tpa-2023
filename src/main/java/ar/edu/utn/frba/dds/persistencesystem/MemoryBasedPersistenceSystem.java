@@ -12,6 +12,7 @@ import ar.edu.utn.frba.dds.service.Escalator;
 import ar.edu.utn.frba.dds.service.Service;
 import ar.edu.utn.frba.dds.service.State;
 import ar.edu.utn.frba.dds.service.Toilet;
+import ar.edu.utn.frba.dds.serviceholder.ServiceHolder;
 import ar.edu.utn.frba.dds.user.User;
 import ar.edu.utn.frba.dds.user.UserDetail;
 import java.util.ArrayList;
@@ -288,5 +289,13 @@ public class MemoryBasedPersistenceSystem implements PersistenceSystem {
     authorizationRoles.add(AuthorizationRole.USUARIO);
 
     return authorizationRoles;
+  }
+
+  public List<ServiceHolder> serviceHolders() {
+    return this.demo.serviceHolders();
+  }
+
+  public void startManagingServiceHolder(ServiceHolder serviceHolder) {
+    this.demo.serviceHolders().add(serviceHolder);
   }
 }
