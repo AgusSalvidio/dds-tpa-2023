@@ -25,10 +25,11 @@
                 <select class="col-md-6" name="services" {{#if registered_incident}}
                         disabled
                 {{/if}}>
-
                     {{#if registered_incident}}
                         <option value={{registered_incident.incident.service.id}}>{{registered_incident.incident.service.name}}</option>
                     {{else}}
+                        <option label="Seleccione Servicio..." value="" disabled
+                                selected></option>
                         {{#each services}}
                             <option value={{this.id}}>{{this.name}}</option>
                         {{else}}
@@ -41,9 +42,12 @@
                 <select class="col-md-6" name="communities" {{#if registered_incident}}
                         disabled
                 {{/if}}>
+
                     {{#if registered_incident}}
                         <option value={{registered_incident.community.id}}>{{registered_incident.community.name}}</option>
                     {{else}}
+                        <option label="Seleccione Comunidad..." value="" disabled
+                                selected></option>
                         {{#each communities}}
                             <option value={{this.id}}>{{this.name}}</option>
                         {{else}}

@@ -19,6 +19,17 @@
             Agregar
         </a>
     </div>
+    <form method="post" action="/incidents/filter" class="row g-3 px-2 py-2">
+        <div class="col-md-6">
+            <label for="services">Filtrar</label>
+            <select class="col-md-6" name="states">
+                <option label="Seleccione Estado..." value="" disabled selected></option>
+                <option value="OPEN">OPEN</option>
+                <option value="CLOSED">CLOSED</option>
+                <option value="ALL">TODOS</option>
+            </select>
+            <button type="submit" class="btn btn-sm btn-custom">Filtrar</button></div>
+    </form>
     <section>
         <div class="px-1">
             <div class="row">

@@ -16,6 +16,7 @@ import ar.edu.utn.frba.dds.user.User;
 import ar.edu.utn.frba.dds.user.UserDetail;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
@@ -266,5 +267,26 @@ public class MemoryBasedPersistenceSystem implements PersistenceSystem {
         .filter(community -> community.getId().equals(communityId))
         .findFirst()
         .orElse(null);
+  }
+
+  public List<IncidentPerCommunity> incidentsPerCommunityFilteredBy(String state) {
+
+    if (Objects.equals(state, "ALL")) {
+      return this.demo.incidentPerCommunities();
+    } else {
+      return this.demo.incidentPerCommunities().stream()
+          .filter(incidentPerCommunity -> incidentPerCommunity.state().name.equals(state))
+          .collect(Collectors.toList());
+    }
+  }
+
+  public List<AuthorizationRole> authorizationRoles() {
+
+    List<AuthorizationRole> authorizationRoles = new ArrayList<>();
+    authorizationRoles.add(AuthorizationRole.ADMINISTRADOR);
+    authorizationRoles.add(AuthorizationRole.ENTIDAD);
+    authorizationRoles.add(AuthorizationRole.USUARIO);
+
+    return authorizationRoles;
   }
 }

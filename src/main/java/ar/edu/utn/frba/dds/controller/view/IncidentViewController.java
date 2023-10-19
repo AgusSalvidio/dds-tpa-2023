@@ -11,6 +11,7 @@ import io.javalin.http.Handler;
 import io.javalin.http.HttpStatus;
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -94,6 +95,26 @@ public class IncidentViewController extends Controller {
     model.put("title", "Revision de Incidente");
     model.put("buttonActionLabel", "Cerrar");
     context.render("incidents/incident-registration.hbs", model);
+  }
+
+  public void filter(Context context) throws Exception {
+
+    String state = context.formParam("states");
+
+    if (state != null) {
+      List<IncidentPerCommunity> incidentsPerCommunity = this.applicationContext
+          .incidentPerCommunityManagementSystem().incidentsPerCommunityFilteredBy(state);
+      Map<String, Object> model = new HashMap<>();
+
+      User loggedUser = this.applicationContext.loggedUser(context);
+
+      model.put("incidents", incidentsPerCommunity);
+      model.put("user", loggedUser);
+      model.put("title", "Administrar Incidentes");
+      context.render("incidents/incidents.hbs", model);
+    } else {
+      context.redirect("/incidents");
+    }
   }
 
 }

@@ -19,6 +19,10 @@ public class IncidentPerCommunityManagementSystem {
     this.persistenceSystem = persistenceSystem;
   }
 
+  public List<IncidentPerCommunity> incidentsPerCommunityFilteredBy(String state) {
+    return this.persistenceSystem.incidentsPerCommunityFilteredBy(state);
+  }
+
   public String typeDescription() {
     return "Sistema de Administración de Incidentes por comunidad";
   }
