@@ -9,11 +9,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class ManagementSystemTest {
-  private PersistenceSystem persistenceSystem() {
+  private PersistenceSystem persistenceSystem() throws Exception {
     return this.memoryBasedPersistenceSystem();
   }
 
-  private MemoryBasedPersistenceSystem memoryBasedPersistenceSystem() {
+  private MemoryBasedPersistenceSystem memoryBasedPersistenceSystem() throws Exception {
     return new MemoryBasedPersistenceSystem();
   }
 

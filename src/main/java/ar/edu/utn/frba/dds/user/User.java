@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "user")
@@ -20,6 +21,7 @@ public class User {
   @Id
   @GeneratedValue
   @Getter
+  @Setter
   Integer id;
 
   @Getter

@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.persistencesystem;
 
 import ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole;
 import ar.edu.utn.frba.dds.community.Community;
+import ar.edu.utn.frba.dds.demo.Demo;
 import ar.edu.utn.frba.dds.entity.Entity;
 import ar.edu.utn.frba.dds.entity.TransportLine;
 import ar.edu.utn.frba.dds.incident.Incident;
@@ -23,7 +24,11 @@ public class MemoryBasedPersistenceSystem implements PersistenceSystem {
 
   List<StorageAssignment> memoryStorage = new ArrayList<>();
 
+  Demo demo = new Demo();
 
+  public MemoryBasedPersistenceSystem() throws Exception {
+    this.demo.initialize();
+  }
 
   public void addObjectTypeToStore(String anObjectClassName) {
     this.memoryStorage.add(new StorageAssignment(anObjectClassName));
@@ -84,23 +89,25 @@ public class MemoryBasedPersistenceSystem implements PersistenceSystem {
   }
 
   public List<User> users() {
-    //TODO
-    return null;
+    return this.demo.users();
   }
 
   public User userIdentifiedBy(Integer anUserId) {
-    //TODO
-    return null;
+    return this.demo.users().stream()
+        .filter(user -> user.getId().equals(anUserId))
+        .findFirst()
+        .orElse(null);
   }
 
   public User userNamed(String anUserName) {
-    //TODO
-    return null;
+    return this.demo.users().stream()
+        .filter(user -> user.username().equals(anUserName))
+        .findFirst()
+        .orElse(null);
   }
 
   public List<UserDetail> userDetails() {
-    //TODO
-    return null;
+    return this.demo.userDetails();
   }
 
   public void startManagingElevator(Elevator anElevator) {

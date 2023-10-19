@@ -18,7 +18,7 @@ public class UserRegistrationViewController extends Controller implements Handle
   @Override
   public void handle(Context context) throws Exception {
     Map<String, Object> model = new HashMap<>();
-    model.put("user", this.loggedUser(context));
+    model.put("user", this.applicationContext.loggedUser(context));
     model.put("title", "Registro de Usuario");
     context.render("users/user-registration.hbs", model);
   }

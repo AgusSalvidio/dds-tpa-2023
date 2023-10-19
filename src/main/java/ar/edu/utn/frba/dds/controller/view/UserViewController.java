@@ -19,7 +19,7 @@ public class UserViewController extends Controller implements Handler {
   public void handle(Context context) throws Exception {
     Map<String, Object> model = new HashMap<>();
     model.put("users", this.applicationContext.userManagementSystem().users());
-    model.put("user", this.loggedUser(context));
+    model.put("user", this.applicationContext.loggedUser(context));
     model.put("title", "Usuarios");
     context.render("users/users.hbs", model);
   }

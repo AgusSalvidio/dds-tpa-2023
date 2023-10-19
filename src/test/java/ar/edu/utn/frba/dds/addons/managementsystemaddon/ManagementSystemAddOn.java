@@ -7,15 +7,15 @@ import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem
 
 public class ManagementSystemAddOn {
 
-  private MemoryBasedPersistenceSystem persistenceSystem() {
+  private MemoryBasedPersistenceSystem persistenceSystem() throws Exception {
     return this.relationalDatabasePersistenceSystem();
   }
 
-  private MemoryBasedPersistenceSystem relationalDatabasePersistenceSystem() {
+  private MemoryBasedPersistenceSystem relationalDatabasePersistenceSystem() throws Exception {
     return new MemoryBasedPersistenceSystem();
   }
 
-  public IncidentManagementSystem incidentManagementSystemUsing(EventNotificationSystem eventNotificationSystem) {
+  public IncidentManagementSystem incidentManagementSystemUsing(EventNotificationSystem eventNotificationSystem) throws Exception {
     return IncidentManagementSystem.workingWith(this.persistenceSystem());
   }
 

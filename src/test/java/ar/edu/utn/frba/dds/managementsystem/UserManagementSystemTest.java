@@ -21,11 +21,11 @@ public class UserManagementSystemTest implements WithSimplePersistenceUnit {
         new NotificationMeanCreationAddOn().wpp());
   }
 
-  private MemoryBasedPersistenceSystem persistenceSystem() {
+  private MemoryBasedPersistenceSystem persistenceSystem() throws Exception {
     return this.relationalDatabasePersistenceSystem();
   }
 
-  private MemoryBasedPersistenceSystem relationalDatabasePersistenceSystem() {
+  private MemoryBasedPersistenceSystem relationalDatabasePersistenceSystem() throws Exception {
     return new MemoryBasedPersistenceSystem();
   }
 

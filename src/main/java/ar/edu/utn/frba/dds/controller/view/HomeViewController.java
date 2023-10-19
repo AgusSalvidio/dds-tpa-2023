@@ -27,7 +27,7 @@ public class HomeViewController extends Controller implements Handler {
       System.out.println(context.sessionAttribute("user_id").toString());
     }*/
 
-    model.put("user", this.loggedUser(context));
+    model.put("user", this.applicationContext.loggedUser(context));
     model.put("title", "Inicio");
     context.render("home.hbs", model);
 

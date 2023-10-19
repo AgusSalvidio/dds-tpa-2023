@@ -18,7 +18,7 @@ public class IncidentViewController extends Controller implements Handler {
   public void handle(Context context) throws Exception {
     Map<String, Object> model = new HashMap<>();
     model.put("incidents", this.applicationContext.incidentManagementSystem().incidents());
-    model.put("user", this.loggedUser(context));
+    model.put("user", this.applicationContext.loggedUser(context));
     model.put("title", "Incidentes");
     context.render("incidents/incidents.hbs", model);
   }

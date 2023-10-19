@@ -84,7 +84,7 @@ public class Router {
 
   }
 
-  private static void initializeEndpoints() {
+  private static void initializeEndpoints() throws Exception {
 
     Javalin app = app();
 
@@ -101,7 +101,7 @@ public class Router {
 
   }
 
-  public static void initialize() {
+  public static void initialize() throws Exception {
 
     initializeEndpoints();
 

@@ -5,7 +5,7 @@ import ar.edu.utn.frba.dds.server.Server;
 
 public class MainApp {
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws Exception {
     Server.initialize();
   }
 

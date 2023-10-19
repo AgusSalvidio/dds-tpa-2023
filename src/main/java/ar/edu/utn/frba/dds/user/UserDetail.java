@@ -12,12 +12,15 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import lombok.Getter;
+import lombok.Setter;
 
 @javax.persistence.Entity
 @Table(name = "user_detail")
 public class UserDetail {
   @Id
   @GeneratedValue
+  @Getter
+  @Setter
   Integer id;
 
   @Getter

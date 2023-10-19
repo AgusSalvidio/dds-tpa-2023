@@ -13,11 +13,11 @@ import javax.persistence.EntityTransaction;
 
 public class CommunityManagementSystemTest implements WithSimplePersistenceUnit {
 
-  private MemoryBasedPersistenceSystem persistenceSystem() {
+  private MemoryBasedPersistenceSystem persistenceSystem() throws Exception {
     return this.relationalDatabasePersistenceSystem();
   }
 
-  private MemoryBasedPersistenceSystem relationalDatabasePersistenceSystem() {
+  private MemoryBasedPersistenceSystem relationalDatabasePersistenceSystem() throws Exception {
     return new MemoryBasedPersistenceSystem();
   }
 

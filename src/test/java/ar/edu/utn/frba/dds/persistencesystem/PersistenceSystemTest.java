@@ -10,17 +10,17 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class PersistenceSystemTest {
-  private PersistenceSystem persistenceSystem() {
+  private PersistenceSystem persistenceSystem() throws Exception {
     return this.memoryBasedPersistenceSystem();
   }
 
-  private MemoryBasedPersistenceSystem memoryBasedPersistenceSystem() {
+  private MemoryBasedPersistenceSystem memoryBasedPersistenceSystem() throws Exception {
     return new MemoryBasedPersistenceSystem();
   }
 
   @Test
   @DisplayName("Create a simple PersistenceSystem with only a collection of Integers")
-  public void createPersistenceSystemWithIntegersTest() {
+  public void createPersistenceSystemWithIntegersTest() throws Exception {
     String integerClassName = Integer.class.getName();
     PersistenceSystem persistenceSystem = this.persistenceSystem();
 
@@ -68,7 +68,7 @@ public class PersistenceSystemTest {
 
   @Test
   @DisplayName("When PersistenceSystem has no objects and a system looks for an specific object, should raise error")
-  public void whenPersistenceSystemHasNoObjectsStoredAndAnySystemLooksForAnObjectShouldRaiseExceptionTest() {
+  public void whenPersistenceSystemHasNoObjectsStoredAndAnySystemLooksForAnObjectShouldRaiseExceptionTest() throws Exception {
     PersistenceSystem persistenceSystem = this.persistenceSystem();
     String integerClass = Integer.class.getName();
 
@@ -85,7 +85,7 @@ public class PersistenceSystemTest {
 
   @Test
   @DisplayName("When PersistenceSystem does not have a StorageAssignment for a system and a system looks for an specific object, should raise error")
-  public void whenPersistenceSystemHasNoStorageAssignmentAndAnySystemLooksForAnObjectShouldRaiseExceptionTest() {
+  public void whenPersistenceSystemHasNoStorageAssignmentAndAnySystemLooksForAnObjectShouldRaiseExceptionTest() throws Exception {
     PersistenceSystem persistenceSystem = this.persistenceSystem();
     String integerClass = Integer.class.getName();
 

@@ -9,6 +9,7 @@ import ar.edu.utn.frba.dds.managementsystem.UserManagementSystem;
 import ar.edu.utn.frba.dds.persistencesystem.MemoryBasedPersistenceSystem;
 import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
 import ar.edu.utn.frba.dds.user.User;
+import io.javalin.http.Context;
 
 public class ApplicationContext {
 
@@ -25,6 +26,9 @@ public class ApplicationContext {
       new CommunityManagementSystem(this.persistenceSystem);
   IncidentPerCommunityManagementSystem incidentPerCommunityManagementSystem =
       new IncidentPerCommunityManagementSystem(this.persistenceSystem);
+
+  public ApplicationContext() throws Exception {
+  }
 
   public UserManagementSystem userManagementSystem() {
     return this.userManagementSystem;
@@ -56,5 +60,14 @@ public class ApplicationContext {
 
   public ServiceManagementSystem serviceManagementSystem() {
     return new ServiceManagementSystem(this.persistenceSystem);
+  }
+
+  public User loggedUser(Context context) {
+    if (context.sessionAttribute("user_id") == null) {
+      return null;
+    } else {
+      Integer userId = context.sessionAttribute("user_id");
+      return this.userManagementSystem().userIdentifiedBy(userId);
+    }
   }
 }
