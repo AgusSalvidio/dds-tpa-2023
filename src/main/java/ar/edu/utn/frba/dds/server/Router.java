@@ -10,6 +10,7 @@ import ar.edu.utn.frba.dds.controller.view.HomeViewController;
 import ar.edu.utn.frba.dds.controller.view.IncidentViewController;
 import ar.edu.utn.frba.dds.controller.view.LoginViewController;
 import ar.edu.utn.frba.dds.controller.view.LogoutViewController;
+import ar.edu.utn.frba.dds.controller.view.ServiceHolderViewController;
 import ar.edu.utn.frba.dds.controller.view.ServiceViewController;
 import ar.edu.utn.frba.dds.controller.view.UserViewController;
 import io.javalin.Javalin;
@@ -93,6 +94,19 @@ public class Router {
 
   }
 
+  private static void initializeServiceHolderEndpointsOn(
+      Javalin app,
+      ApplicationContext applicationContext) {
+
+    app.get("/service-holders", new ServiceHolderViewController(applicationContext)::index,
+        ADMINISTRADOR, ENTIDAD);
+    app.get("/service-holders/register",
+        new ServiceHolderViewController(applicationContext)::create, ADMINISTRADOR, ENTIDAD);
+    app.post("/service-holders",
+        new ServiceHolderViewController(applicationContext)::save, ADMINISTRADOR, ENTIDAD);
+
+  }
+
   private static void initializeEndpoints() throws Exception {
 
     Javalin app = app();
@@ -107,6 +121,7 @@ public class Router {
     initializeUserEndpointsOn(app, applicationContext);
     initializeServiceEndpointsOn(app, applicationContext);
     initializeIncidentEndpointsOn(app, applicationContext);
+    initializeServiceHolderEndpointsOn(app, applicationContext);
 
   }
 

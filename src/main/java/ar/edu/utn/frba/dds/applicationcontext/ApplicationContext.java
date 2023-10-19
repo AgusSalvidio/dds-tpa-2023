@@ -4,12 +4,15 @@ import ar.edu.utn.frba.dds.managementsystem.CommunityManagementSystem;
 import ar.edu.utn.frba.dds.managementsystem.EntityManagementSystem;
 import ar.edu.utn.frba.dds.managementsystem.IncidentManagementSystem;
 import ar.edu.utn.frba.dds.managementsystem.IncidentPerCommunityManagementSystem;
+import ar.edu.utn.frba.dds.managementsystem.ServiceHolderManagementSystem;
 import ar.edu.utn.frba.dds.managementsystem.ServiceManagementSystem;
 import ar.edu.utn.frba.dds.managementsystem.UserManagementSystem;
 import ar.edu.utn.frba.dds.persistencesystem.MemoryBasedPersistenceSystem;
 import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
+import ar.edu.utn.frba.dds.serviceholder.ServiceHolder;
 import ar.edu.utn.frba.dds.user.User;
 import io.javalin.http.Context;
+import java.util.List;
 
 public class ApplicationContext {
 
@@ -26,6 +29,9 @@ public class ApplicationContext {
       new CommunityManagementSystem(this.persistenceSystem);
   IncidentPerCommunityManagementSystem incidentPerCommunityManagementSystem =
       new IncidentPerCommunityManagementSystem(this.persistenceSystem);
+
+  ServiceHolderManagementSystem serviceHolderManagementSystem =
+      new ServiceHolderManagementSystem(this.persistenceSystem);
 
   public ApplicationContext() throws Exception {
   }
@@ -48,6 +54,18 @@ public class ApplicationContext {
 
   public IncidentPerCommunityManagementSystem incidentPerCommunityManagementSystem() {
     return this.incidentPerCommunityManagementSystem;
+  }
+
+  public ServiceHolderManagementSystem serviceHolderManagementSystem() {
+    return this.serviceHolderManagementSystem;
+  }
+
+  public void startManagingServiceHolder(ServiceHolder serviceHolder) {
+    this.persistenceSystem.startManagingServiceHolder(serviceHolder);
+  }
+
+  public List<ServiceHolder> serviceHolders() {
+    return this.serviceHolderManagementSystem.serviceHolders();
   }
 
   public User userIdentifiedBy(Integer anUserId) {

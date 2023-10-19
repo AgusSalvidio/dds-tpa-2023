@@ -33,6 +33,10 @@
         <Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2"/>
     </Match>
     <Match>
+        <Class name="ar.edu.utn.frba.dds.managementsystem.ServiceHolderManagementSystem"/>
+        <Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2"/>
+    </Match>
+    <Match>
         <Package name="ar.edu.utn.frba.dds.demo.*"/>
         <Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2,UC_USELESS_OBJECT,URF_UNREAD_FIELD,ES_COMPARING_PARAMETER_STRING_WITH_EQ"/>
     </Match>
