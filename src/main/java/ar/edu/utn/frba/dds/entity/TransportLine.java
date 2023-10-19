@@ -13,7 +13,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @javax.persistence.Entity
-@Table(name = "transportLine")
+@Table(name = "transport_line")
 public class TransportLine extends Entity {
   @Id
   @GeneratedValue

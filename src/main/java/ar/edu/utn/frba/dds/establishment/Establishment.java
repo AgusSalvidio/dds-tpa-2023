@@ -37,7 +37,7 @@ public class Establishment {
   @Setter
   @Getter
   @OneToOne
-  @JoinColumn(name = "locationId", referencedColumnName = "id")
+  @JoinColumn(name = "location_id", referencedColumnName = "id")
   public Location location;
 
   @OneToMany

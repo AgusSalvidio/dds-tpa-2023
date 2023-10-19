@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import lombok.Getter;
 
 @Entity
@@ -34,8 +35,9 @@ public abstract class Service {
   public State state;
 
   @Getter
-  @OneToMany(cascade = CascadeType.PERSIST)
-  @JoinColumn(name = "section_id", referencedColumnName = "id")
+  /*@OneToMany(cascade = CascadeType.PERSIST)
+  @JoinColumn(name = "section_id", referencedColumnName = "id")*/
+  @Transient
   public List<Section> sections;
 
   public String name() {

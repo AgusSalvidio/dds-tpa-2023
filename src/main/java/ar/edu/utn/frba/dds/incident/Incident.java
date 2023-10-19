@@ -24,7 +24,7 @@ public class Incident {
   Service service;
 
   @Getter
-  @Column(name = "dateAndTime")
+  @Column(name = "date_time")
   LocalDateTime dateTime;
 
   @Getter

@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.managementsystem;
 
+import ar.edu.utn.frba.dds.persistencesystem.MemoryBasedPersistenceSystem;
 import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
 import ar.edu.utn.frba.dds.service.Elevator;
 import ar.edu.utn.frba.dds.service.Escalator;
@@ -10,9 +11,9 @@ import java.util.List;
 import java.util.Map;
 
 public class ServiceManagementSystem {
-  RelationalDatabasePersistenceSystem persistenceSystem;
+  MemoryBasedPersistenceSystem persistenceSystem;
 
-  public ServiceManagementSystem(RelationalDatabasePersistenceSystem persistenceSystem) {
+  public ServiceManagementSystem(MemoryBasedPersistenceSystem persistenceSystem) {
     this.persistenceSystem = persistenceSystem;
   }
 
@@ -20,12 +21,12 @@ public class ServiceManagementSystem {
     return "Sistema de Administración de Servicios";
   }
 
-  private RelationalDatabasePersistenceSystem persistenceSystem() {
+  private MemoryBasedPersistenceSystem persistenceSystem() {
     return this.persistenceSystem;
   }
 
   public static ServiceManagementSystem workingWith(
-      RelationalDatabasePersistenceSystem persistenceSystem) {
+      MemoryBasedPersistenceSystem persistenceSystem) {
     return new ServiceManagementSystem(persistenceSystem);
   }
 

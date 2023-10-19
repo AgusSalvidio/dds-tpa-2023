@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{{headMeta}}}
+</head>
+
+<body>
+<header>
+    {{{customHomeNavbar}}}
+</header>
+
+<main>
+    <div class="d-flex justify-content-end p-2">
+        <legend class="">Administrar Incidentes</legend>
+        <a
+                class="btn btn-md btn-custom"
+                href="/user-registration"
+        >
+            Agregar
+        </a>
+    </div>
+    <section>
+        <div class="px-1">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <table
+                            class=" table table-striped"
+                    >
+                        <thead>
+                        <tr>
+                            <th>Usuario</th>
+                            <th>Servicio</th>
+                            <th>Observaciones</th>
+                            <th>Fecha</th>
+                            <th>Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{#each incidents}}
+                            <tr>
+                                <td>{{this.user.username}}</td>
+                                <td>{{this.service}}</td>
+                                <td>{{this.observations}}</td>
+                                <td>{{this.dateTime}}</td>
+                                <td class="px-4">
+                                    <a class="btn-sm "><i
+                                            class="fa-regular fa-pen-to-square"></i></a>
+                                    <a class="btn-sm "><i class="fa-solid fa-xmark"
+                                                          style="color:red"></i></a>
+                                </td>
+                            </tr>
+                        {{else}}
+                            <tr>
+                                <td colspan="6">No hay incidentes</td>
+                            </tr>
+                        {{/each}}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</main>
+
+<footer>
+</footer>
+{{{scripts}}}
+</body>
+</html>

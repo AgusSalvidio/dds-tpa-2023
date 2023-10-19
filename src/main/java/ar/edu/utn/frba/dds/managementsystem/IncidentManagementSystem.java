@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.managementsystem;
 
 import ar.edu.utn.frba.dds.eventnotificationsystem.notifiableevent.NotifiableEvent;
 import ar.edu.utn.frba.dds.incident.Incident;
+import ar.edu.utn.frba.dds.persistencesystem.MemoryBasedPersistenceSystem;
 import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
 import ar.edu.utn.frba.dds.service.Service;
 import ar.edu.utn.frba.dds.user.User;
@@ -10,9 +11,9 @@ import java.util.List;
 import java.util.Map;
 
 public class IncidentManagementSystem {
-  RelationalDatabasePersistenceSystem persistenceSystem;
+  MemoryBasedPersistenceSystem persistenceSystem;
 
-  public IncidentManagementSystem(RelationalDatabasePersistenceSystem persistenceSystem) {
+  public IncidentManagementSystem(MemoryBasedPersistenceSystem persistenceSystem) {
     this.persistenceSystem = persistenceSystem;
   }
 
@@ -20,12 +21,12 @@ public class IncidentManagementSystem {
     return "Sistema de Administración de Incidentes";
   }
 
-  private RelationalDatabasePersistenceSystem persistenceSystem() {
+  private MemoryBasedPersistenceSystem persistenceSystem() {
     return this.persistenceSystem;
   }
 
   public static IncidentManagementSystem workingWith(
-      RelationalDatabasePersistenceSystem persistenceSystem) {
+      MemoryBasedPersistenceSystem persistenceSystem) {
     return new IncidentManagementSystem(persistenceSystem);
   }
 

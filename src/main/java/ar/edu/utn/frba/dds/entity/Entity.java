@@ -4,6 +4,7 @@ import ar.edu.utn.frba.dds.establishment.Establishment;
 import ar.edu.utn.frba.dds.incident.Incident;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;

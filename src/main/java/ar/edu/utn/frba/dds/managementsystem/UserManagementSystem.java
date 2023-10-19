@@ -7,6 +7,7 @@ import ar.edu.utn.frba.dds.notification.notificationmean.NotificationMean;
 import ar.edu.utn.frba.dds.notification.notificationmean.NotifyByMail;
 import ar.edu.utn.frba.dds.notification.notificationmean.NotifyByWhatsApp;
 import ar.edu.utn.frba.dds.notification.notificationmean.TwilioAdapter;
+import ar.edu.utn.frba.dds.persistencesystem.MemoryBasedPersistenceSystem;
 import ar.edu.utn.frba.dds.persistencesystem.PersistenceSystem;
 import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
 import ar.edu.utn.frba.dds.user.User;
@@ -15,9 +16,9 @@ import java.util.List;
 import java.util.Map;
 
 public class UserManagementSystem {
-  RelationalDatabasePersistenceSystem persistenceSystem;
+  MemoryBasedPersistenceSystem persistenceSystem;
 
-  public UserManagementSystem(RelationalDatabasePersistenceSystem persistenceSystem) {
+  public UserManagementSystem(MemoryBasedPersistenceSystem persistenceSystem) {
     this.persistenceSystem = persistenceSystem;
   }
 
@@ -25,12 +26,12 @@ public class UserManagementSystem {
     return "Sistema de Administración de Usuarios";
   }
 
-  private RelationalDatabasePersistenceSystem persistenceSystem() {
+  private MemoryBasedPersistenceSystem persistenceSystem() {
     return this.persistenceSystem;
   }
 
   public static UserManagementSystem workingWith(
-      RelationalDatabasePersistenceSystem persistenceSystem) {
+      MemoryBasedPersistenceSystem persistenceSystem) {
     return new UserManagementSystem(persistenceSystem);
   }
 

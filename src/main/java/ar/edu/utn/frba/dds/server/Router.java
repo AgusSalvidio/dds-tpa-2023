@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.server;
 
 import static ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole.ADMINISTRADOR;
 import static ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole.ENTIDAD;
+import static ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole.USUARIO;
 
 import ar.edu.utn.frba.dds.applicationcontext.ApplicationContext;
 import ar.edu.utn.frba.dds.controller.action.GetAllUsersActionController;
@@ -11,6 +12,7 @@ import ar.edu.utn.frba.dds.controller.action.RegisterServiceActionController;
 import ar.edu.utn.frba.dds.controller.action.RegisterUserActionController;
 import ar.edu.utn.frba.dds.controller.view.AdministrationViewController;
 import ar.edu.utn.frba.dds.controller.view.HomeViewController;
+import ar.edu.utn.frba.dds.controller.view.IncidentViewController;
 import ar.edu.utn.frba.dds.controller.view.LoginViewController;
 import ar.edu.utn.frba.dds.controller.view.ServiceRegistrationViewController;
 import ar.edu.utn.frba.dds.controller.view.ServiceViewController;
@@ -73,6 +75,15 @@ public class Router {
         new RegisterServiceActionController(applicationContext), ADMINISTRADOR, ENTIDAD);
   }
 
+  private static void initializeIncidentEndpointsOn(
+      Javalin app,
+      ApplicationContext applicationContext) {
+
+    app.get("/incidents", new IncidentViewController(applicationContext),
+        ADMINISTRADOR, ENTIDAD, USUARIO);
+
+  }
+
   private static void initializeEndpoints() {
 
     Javalin app = app();
@@ -86,6 +97,7 @@ public class Router {
 
     initializeUserEndpointsOn(app, applicationContext);
     initializeServiceEndpointsOn(app, applicationContext);
+    initializeIncidentEndpointsOn(app, applicationContext);
 
   }
 
