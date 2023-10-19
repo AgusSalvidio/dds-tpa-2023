@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.persistencesystem;
 
-import ar.edu.utn.frba.dds.user.UserDetails;
+import ar.edu.utn.frba.dds.addons.notificationcreationaddon.NotificationMeanCreationAddOn;
+import ar.edu.utn.frba.dds.user.UserDetail;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -9,17 +10,17 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class PersistenceSystemTest {
-  private PersistenceSystem persistenceSystem() {
+  private PersistenceSystem persistenceSystem() throws Exception {
     return this.memoryBasedPersistenceSystem();
   }
 
-  private MemoryBasedPersistenceSystem memoryBasedPersistenceSystem() {
+  private MemoryBasedPersistenceSystem memoryBasedPersistenceSystem() throws Exception {
     return new MemoryBasedPersistenceSystem();
   }
 
   @Test
   @DisplayName("Create a simple PersistenceSystem with only a collection of Integers")
-  public void createPersistenceSystemWithIntegersTest() {
+  public void createPersistenceSystemWithIntegersTest() throws Exception {
     String integerClassName = Integer.class.getName();
     PersistenceSystem persistenceSystem = this.persistenceSystem();
 
@@ -38,11 +39,12 @@ public class PersistenceSystemTest {
 
   @Test
   @DisplayName("Create a more complex PersistenceSystem with more types of objects")
-  public void createPersistenceSystemWithMultipleTypeObjectsTest() {
+  public void createPersistenceSystemWithMultipleTypeObjectsTest() throws Exception {
     PersistenceSystem persistenceSystem = this.persistenceSystem();
     String integerClass = Integer.class.getName();
-    String userDetailsClass = UserDetails.class.getName();
-    UserDetails userDetails = new UserDetails("Basura", "Intergalactica", "basuraintergalactica@gmail.com");
+    String userDetailsClass = UserDetail.class.getName();
+    UserDetail userDetail = new UserDetail("Basura", "Intergalactica", "basuraintergalactica@gmail.com",
+        "0123456789", new NotificationMeanCreationAddOn().wpp());;
 
     persistenceSystem.addObjectTypeToStore(integerClass);
     persistenceSystem.addObjectTypeToStore(userDetailsClass);
@@ -51,22 +53,22 @@ public class PersistenceSystemTest {
     persistenceSystem.storeObjectTyped(integerClass, 4);
     persistenceSystem.storeObjectTyped(integerClass, 15);
 
-    persistenceSystem.storeObjectTyped(userDetailsClass, userDetails);
+    persistenceSystem.storeObjectTyped(userDetailsClass, userDetail);
 
     Object retrievedIntegerList = persistenceSystem.objectsFrom(integerClass);
     List<Integer> obtainedIntegerList = (List<Integer>) retrievedIntegerList;
 
     Object retrievedUserDetailsList = persistenceSystem.objectsFrom(userDetailsClass);
-    List<UserDetails> obtainedUserDetailsList = (List<UserDetails>) retrievedUserDetailsList;
+    List<UserDetail> obtainedUserDetailList = (List<UserDetail>) retrievedUserDetailsList;
 
     Assertions.assertTrue(obtainedIntegerList.containsAll(new ArrayList<>(Arrays.asList(1, 4, 15))));
-    Assertions.assertTrue(obtainedUserDetailsList.contains(userDetails));
+    Assertions.assertTrue(obtainedUserDetailList.contains(userDetail));
 
   }
 
   @Test
   @DisplayName("When PersistenceSystem has no objects and a system looks for an specific object, should raise error")
-  public void whenPersistenceSystemHasNoObjectsStoredAndAnySystemLooksForAnObjectShouldRaiseExceptionTest() {
+  public void whenPersistenceSystemHasNoObjectsStoredAndAnySystemLooksForAnObjectShouldRaiseExceptionTest() throws Exception {
     PersistenceSystem persistenceSystem = this.persistenceSystem();
     String integerClass = Integer.class.getName();
 
@@ -83,7 +85,7 @@ public class PersistenceSystemTest {
 
   @Test
   @DisplayName("When PersistenceSystem does not have a StorageAssignment for a system and a system looks for an specific object, should raise error")
-  public void whenPersistenceSystemHasNoStorageAssignmentAndAnySystemLooksForAnObjectShouldRaiseExceptionTest() {
+  public void whenPersistenceSystemHasNoStorageAssignmentAndAnySystemLooksForAnObjectShouldRaiseExceptionTest() throws Exception {
     PersistenceSystem persistenceSystem = this.persistenceSystem();
     String integerClass = Integer.class.getName();
 

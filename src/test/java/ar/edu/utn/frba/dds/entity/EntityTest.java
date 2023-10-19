@@ -34,7 +34,6 @@ public class EntityTest {
   @Test
   @DisplayName("An establishment has a location which belongs to a municipality")
   public void anEstablishmentHasALocationWhichBelongsToAMunicipalityTest() {
-    ;
     Assertions.assertEquals("CABA", this.stationA().getLocation().getMunicipality().name());
   }
 

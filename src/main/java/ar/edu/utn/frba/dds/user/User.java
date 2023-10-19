@@ -1,11 +1,53 @@
 package ar.edu.utn.frba.dds.user;
 
-public class User {
-  String username;
-  String password;
-  UserDetails details;
+import ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole;
+import ar.edu.utn.frba.dds.notification.Msg;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
-  public static User composedOf(String username, String password, UserDetails userDetails)
+@Entity
+@Table(name = "user")
+public class User {
+  @Id
+  @GeneratedValue
+  @Getter
+  @Setter
+  Integer id;
+
+  @Getter
+  @Column(name = "username")
+  String username;
+
+  @Getter
+  @Column(name = "password")
+  String password;
+
+  @Getter
+  @ManyToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "user_detail_id", referencedColumnName = "id")
+  UserDetail details;
+
+  @Getter
+  @Column(name = "authorization_role")
+  @Enumerated(EnumType.STRING)
+  AuthorizationRole authorizationRole;
+
+  public static User composedOf(
+      String username,
+      String password,
+      UserDetail userDetail,
+      AuthorizationRole authorizationRole)
+
       throws Exception {
     /*
         Implemented this way because its needed an AssertionChecker that will be implemented
@@ -14,31 +56,46 @@ public class User {
     if (username.isEmpty() || password.isEmpty()) {
       throw new Exception("Los campos no pueden estar en blanco.");
     }
-    return new User(username, password, userDetails);
+    return new User(username, password, userDetail, authorizationRole);
 
   }
 
-  public User(String username, String password, UserDetails userDetails) {
+  public User() {
+    //Do nothing -asalvidio
+  }
+
+  public User(
+      String username,
+      String password,
+      UserDetail userDetail,
+      AuthorizationRole authorizationRole) {
+
     this.username = username;
     this.password = password;
-    this.details = userDetails;
+    this.details = userDetail;
+    this.authorizationRole = authorizationRole;
   }
 
   public void synchronizeWith(User anUpdatedUser) {
     this.username = anUpdatedUser.username();
     this.password = anUpdatedUser.password();
     this.details = anUpdatedUser.details();
+    this.authorizationRole = anUpdatedUser.authorizationRole();
   }
 
   public String username() {
     return username;
   }
 
+  public AuthorizationRole authorizationRole() {
+    return authorizationRole;
+  }
+
   private String password() {
     return password;
   }
 
-  private UserDetails details() {
+  private UserDetail details() {
     return details;
   }
 
@@ -54,4 +111,11 @@ public class User {
     return this.details().email();
   }
 
+  public String telephone() {
+    return this.details().telephone();
+  }
+
+  public void notifyMe(Msg message) {
+    this.details.getNotificationMean().notify(message);
+  }
 }

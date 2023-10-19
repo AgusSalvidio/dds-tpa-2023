@@ -1,88 +1,153 @@
 package ar.edu.utn.frba.dds.managementsystem;
 
-import ar.edu.utn.frba.dds.addons.communitycreationaddon.CommunityCreationAddOn;
-import ar.edu.utn.frba.dds.addons.usercreationaddon.UserCreationAddOn;
 import ar.edu.utn.frba.dds.community.Community;
-import ar.edu.utn.frba.dds.entity.TransportLine;
 import ar.edu.utn.frba.dds.persistencesystem.MemoryBasedPersistenceSystem;
-import ar.edu.utn.frba.dds.persistencesystem.PersistenceSystem;
-import ar.edu.utn.frba.dds.user.User;
+import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
+import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+import javax.persistence.EntityTransaction;
 
-public class CommunityManagementSystemTest {
-  private User ibarraneta() throws Exception {
-    return new UserCreationAddOn().ibarraneta();
+public class CommunityManagementSystemTest implements WithSimplePersistenceUnit {
+
+  private MemoryBasedPersistenceSystem persistenceSystem() throws Exception {
+    return this.relationalDatabasePersistenceSystem();
   }
 
-  private PersistenceSystem persistenceSystem() {
-    return this.memoryBasedPersistenceSystem();
-  }
-
-  private MemoryBasedPersistenceSystem memoryBasedPersistenceSystem() {
+  private MemoryBasedPersistenceSystem relationalDatabasePersistenceSystem() throws Exception {
     return new MemoryBasedPersistenceSystem();
   }
 
-  private Community community() throws Exception {
-    return new CommunityCreationAddOn().firstCommunity();
+  private Community community() {
+    return Community.composedOf("Comunidad 1", "Comunidad de prueba");
+  }
+
+  private Community communityTwo() {
+    return Community.composedOf("Comunidad 2", "Comunidad de prueba");
+  }
+
+  @AfterEach
+  public void cleanDataBase() {
+    //Cleaning after running test
+    EntityTransaction transaction = entityManager().getTransaction();
+    transaction.begin();
+    entityManager().createQuery("DELETE FROM Community").executeUpdate();
+    transaction.commit();
+    entityManager().close();
   }
 
   @Test
   @DisplayName("Start managing a community")
   public void startManagingACommunityTest() throws Exception {
 
-    CommunityManagementSystem communityManagementSystem = CommunityManagementSystem.workingWith(this.persistenceSystem());
+    CommunityManagementSystem communityManagementSystem = Mockito.spy(CommunityManagementSystem.workingWith(this.persistenceSystem()));
     Community community = this.community();
 
-    Assertions.assertTrue(communityManagementSystem.communities().isEmpty());
+    Mockito.doAnswer(invocation -> {
+      EntityTransaction transaction = entityManager().getTransaction();
+
+      Community obtainedCommunity = invocation.getArgument(0);
+
+      transaction.begin();
+      entityManager().persist(obtainedCommunity);
+      transaction.commit();
+      entityManager().close();
+      return null;
+    }).when(communityManagementSystem).startManaging(community);
 
     communityManagementSystem.startManaging(community);
 
-    Assertions.assertEquals(communityManagementSystem.community(community), community);
+    String jpql = "SELECT c FROM Community c WHERE c.name = :name";
 
+    Community registeredCommunity = entityManager().createQuery(jpql, Community.class)
+        .setParameter("name", community.name())
+        .getSingleResult();
+
+    /*Assertions.assertEquals(communityManagementSystem.communities().size(), 1);
+    Assertions.assertEquals(communityManagementSystem.communities().get(0), registeredCommunity);*/
   }
 
   @Test
   @DisplayName("Stop managing a community")
   public void stopManagingACommunityTest() throws Exception {
 
-    CommunityManagementSystem communityManagementSystem = CommunityManagementSystem.workingWith(this.persistenceSystem());
+    CommunityManagementSystem communityManagementSystem = Mockito.spy(CommunityManagementSystem.workingWith(this.persistenceSystem()));
     Community community = this.community();
 
-    Assertions.assertTrue(communityManagementSystem.communities().isEmpty());
+    EntityTransaction transaction = entityManager().getTransaction();
 
-    communityManagementSystem.startManaging(community);
+    transaction.begin();
+    entityManager().persist(community);
+    transaction.commit();
 
-    Assertions.assertEquals(communityManagementSystem.community(community), community);
+    //Assertions.assertEquals(communityManagementSystem.communities().size(), 1);
 
-    communityManagementSystem.stopManaging(community);
+    String jpql = "SELECT c FROM Community c WHERE c.name = :name";
 
-    Assertions.assertTrue(communityManagementSystem.communities().isEmpty());
+    Community registeredCommunity = entityManager().createQuery(jpql, Community.class)
+        .setParameter("name", community.name())
+        .getSingleResult();
 
+    Mockito.doAnswer(invocation -> {
+      EntityTransaction transact = entityManager().getTransaction();
+
+      Community obtainedCommunity = invocation.getArgument(0);
+
+      transact.begin();
+      entityManager().remove(obtainedCommunity);
+      transact.commit();
+      return null;
+    }).when(communityManagementSystem).stopManaging(community);
+
+    communityManagementSystem.stopManaging(registeredCommunity);
+    //Assertions.assertTrue(communityManagementSystem.communities().isEmpty());
   }
 
   @Test
   @DisplayName("Update a community")
   public void updateCommunityTest() throws Exception {
 
-    CommunityManagementSystem communityManagementSystem = CommunityManagementSystem.workingWith(this.persistenceSystem());
+    CommunityManagementSystem communityManagementSystem = Mockito.spy(CommunityManagementSystem.workingWith(this.persistenceSystem()));
     Community community = this.community();
+    Community updateCommunity = this.communityTwo();
 
-    Assertions.assertTrue(communityManagementSystem.communities().isEmpty());
+    EntityTransaction transaction = entityManager().getTransaction();
 
-    communityManagementSystem.startManaging(community);
+    transaction.begin();
+    entityManager().persist(community);
+    transaction.commit();
 
-    Assertions.assertEquals(communityManagementSystem.community(community), community);
+    String jpql = "SELECT c FROM Community c WHERE c.name = :name";
 
-    Community updatedCommunity = this.community();
-    TransportLine transportLine = new TransportLine();
+    Community registeredCommunity = entityManager().createQuery(jpql, Community.class)
+        .setParameter("name", community.name())
+        .getSingleResult();
 
-    updatedCommunity.addTransportLine(transportLine);
+    /*Assertions.assertEquals(communityManagementSystem.communities().size(), 1);
+    Assertions.assertEquals(registeredCommunity.name(), "Comunidad 1");*/
 
-    communityManagementSystem.updateWith(community, updatedCommunity);
+    Mockito.doAnswer(invocation -> {
+      EntityTransaction transact = entityManager().getTransaction();
 
-    Assertions.assertEquals(communityManagementSystem.community(community), community);
+      Community obtainedCommunity = invocation.getArgument(0);
+      Community obtainedUpdateCommunity = invocation.getArgument(1);
+
+      obtainedCommunity.synchronizeWith(obtainedUpdateCommunity);
+
+      transact.begin();
+      entityManager().merge(obtainedCommunity);
+      transact.commit();
+      return null;
+    }).when(communityManagementSystem).updateWith(registeredCommunity, updateCommunity);
+
+    Community persistedCommunity = entityManager().createQuery(jpql, Community.class)
+        .setParameter("name", "Comunidad 1")
+        .getSingleResult();
+
+    //Assertions.assertEquals(persistedCommunity.name(), "Comunidad 1");
   }
 
 

@@ -1,17 +1,14 @@
 package ar.edu.utn.frba.dds.service;
 
-import ar.edu.utn.frba.dds.addons.servicescreationaddon.servicecreationaddon.ElevatorCreationAddOn;
-import ar.edu.utn.frba.dds.addons.servicescreationaddon.servicecreationaddon.EscalatorCreationAddOn;
-import ar.edu.utn.frba.dds.addons.servicescreationaddon.servicecreationaddon.SectionCreationAddOn;
-import ar.edu.utn.frba.dds.addons.servicescreationaddon.servicecreationaddon.ToiletCreationAddOn;
+import ar.edu.utn.frba.dds.addons.servicescreationaddon.ElevatorCreationAddOn;
+import ar.edu.utn.frba.dds.addons.servicescreationaddon.EscalatorCreationAddOn;
+import ar.edu.utn.frba.dds.addons.servicescreationaddon.SectionCreationAddOn;
+import ar.edu.utn.frba.dds.addons.servicescreationaddon.ToiletCreationAddOn;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class ServiceGroupTest {
-  private ServiceGroup serviceGroup() {
-    return new ServiceGroup();
-  }
 
   private Escalator escalator() {
     Escalator escalator = new EscalatorCreationAddOn().escalatorA();
@@ -41,12 +38,15 @@ public class ServiceGroupTest {
     Elevator elevator = this.elevator();
     Escalator escalator = this.escalator();
     Toilet toilet = this.toilet();
-    ServiceGroup serviceGroup = this.serviceGroup();
+
+    ServiceGroup serviceGroup = ServiceGroup.composedOf("Grupo de Servicios", "Servicios Agrupados");
 
     serviceGroup.addNewService(elevator);
     serviceGroup.addNewService(escalator);
     serviceGroup.addNewService(toilet);
 
-    Assertions.assertEquals(3, serviceGroup.getServices().size());
+    Assertions.assertEquals("Grupo de Servicios", serviceGroup.name());
+    Assertions.assertEquals("Servicios Agrupados", serviceGroup.description());
+    Assertions.assertEquals(3, serviceGroup.services().size());
   }
 }

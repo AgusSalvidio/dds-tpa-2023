@@ -1,54 +1,137 @@
 package ar.edu.utn.frba.dds.managementsystem;
 
+import ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole;
+import ar.edu.utn.frba.dds.eventnotificationsystem.notifiableevent.NotifiableEvent;
+import ar.edu.utn.frba.dds.notification.notificationmean.JakartaAdapter;
+import ar.edu.utn.frba.dds.notification.notificationmean.NotificationMean;
+import ar.edu.utn.frba.dds.notification.notificationmean.NotifyByMail;
+import ar.edu.utn.frba.dds.notification.notificationmean.NotifyByWhatsApp;
+import ar.edu.utn.frba.dds.notification.notificationmean.TwilioAdapter;
+import ar.edu.utn.frba.dds.persistencesystem.MemoryBasedPersistenceSystem;
 import ar.edu.utn.frba.dds.persistencesystem.PersistenceSystem;
+import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
 import ar.edu.utn.frba.dds.user.User;
-import java.util.ArrayList;
+import ar.edu.utn.frba.dds.user.UserDetail;
 import java.util.List;
+import java.util.Map;
 
-public class UserManagementSystem implements ManagementSystem {
-  /*
-    This is a STUPID IMPLEMENTATION but CodeSmells checks is so annoying that has to be this way so
-    it will shut up.
-   */
-  List<Object> systems = new ArrayList<>();
+public class UserManagementSystem {
+  MemoryBasedPersistenceSystem persistenceSystem;
 
-  public UserManagementSystem(PersistenceSystem persistenceSystem) {
-    this.systems.add(persistenceSystem);
-    this.persistenceSystem().addObjectTypeToStore(User.class.getName());
+  public UserManagementSystem(MemoryBasedPersistenceSystem persistenceSystem) {
+    this.persistenceSystem = persistenceSystem;
   }
 
   public String typeDescription() {
     return "Sistema de Administración de Usuarios";
   }
 
-  private PersistenceSystem persistenceSystem() {
-    return (PersistenceSystem) this.systems.get(0);
+  private MemoryBasedPersistenceSystem persistenceSystem() {
+    return this.persistenceSystem;
   }
 
-  public static UserManagementSystem workingWith(PersistenceSystem persistenceSystem) {
+  public static UserManagementSystem workingWith(
+      MemoryBasedPersistenceSystem persistenceSystem) {
     return new UserManagementSystem(persistenceSystem);
   }
 
-  public User user(User anUser) {
-    return (User) this.persistenceSystem().findObjectTyped(anUser.getClass().getName(), anUser);
+  public void startManaging(User anUser) {
+    this.persistenceSystem().startManagingUser(anUser);
   }
 
-  public List<Object> users() {
-    return this.persistenceSystem().objectsFrom(User.class.getName());
+  public void startManagingDetail(UserDetail anUserDetail) {
+    this.persistenceSystem().startManagingUserDetail(anUserDetail);
   }
 
-  public void startManaging(Object anUser) {
-    this.persistenceSystem().storeObjectTyped(User.class.getName(), anUser);
+
+  public void stopManagingDetail(UserDetail anUserDetail) {
+    this.persistenceSystem().stopManagingUserDetail(anUserDetail);
   }
 
-  public void stopManaging(Object anUser) {
-    this.persistenceSystem().removeObjectTyped(anUser.getClass().getName(), anUser);
+  public List<User> users() {
+    return this.persistenceSystem.users();
   }
 
-  public void updateWith(Object currentUser, Object updatedUser) {
-    User obtainedUser = (User) this.persistenceSystem()
-        .findObjectTyped(currentUser.getClass().getName(), currentUser);
-    obtainedUser.synchronizeWith((User) updatedUser);
+  public List<UserDetail> userDetails() {
+    return this.persistenceSystem.userDetails();
   }
 
+  public void stopManaging(User anUser) {
+    this.persistenceSystem().stopManagingUser(anUser);
+  }
+
+  public void updateWith(User currentUser, User updatedUser) {
+    currentUser.synchronizeWith(updatedUser);
+  }
+
+  public void updateDetailWith(UserDetail currentUserDetail, UserDetail updatedUserDetail) {
+    currentUserDetail.synchronizeWith(updatedUserDetail);
+  }
+
+  public User userIdentifiedBy(Integer anUserId) {
+    return this.persistenceSystem.userIdentifiedBy(anUserId);
+  }
+
+  public User userNamed(String anUserName) {
+    return this.persistenceSystem.userNamed(anUserName);
+  }
+
+  public void receiveFrom(NotifiableEvent event, Object publisher) {
+    /* For now, this system should have an implementation. This will be enhanced
+     when the extracting the implementation from ManagementSystem -asalvidio*/
+  }
+
+  public void startManagingUserFrom(Map model) throws Exception {
+    String name = model.get("name").toString();
+    String lastname = model.get("lastname").toString();
+    String email = model.get("email").toString();
+    String username = model.get("username").toString();
+    String password = model.get("password").toString();
+    String telephone = model.get("telephone").toString();
+    /*NotificationMean notificationMean = this.convertToEntity(
+        model.get("notificationmean").toString());*/
+
+    NotificationMean notificationMean = new NotifyByWhatsApp(new TwilioAdapter());
+
+    UserDetail userDetail = new UserDetail(name, lastname, email, telephone, notificationMean);
+    this.startManagingDetail(userDetail);
+
+    this.startManaging(
+        User.composedOf(username, password, userDetail, AuthorizationRole.USUARIO));
+
+  }
+
+  public void updateUserFrom(User userToUpdate, Map model) throws Exception {
+    String name = model.get("name").toString();
+    String lastname = model.get("lastname").toString();
+    String email = model.get("email").toString();
+    String username = model.get("username").toString();
+    String password = model.get("password").toString();
+    String telephone = model.get("telephone").toString();
+    /*NotificationMean notificationMean = this.convertToEntity(
+        model.get("notificationmean").toString());*/
+
+    NotificationMean notificationMean = new NotifyByWhatsApp(new TwilioAdapter());
+
+    UserDetail userDetail = new UserDetail(name, lastname, email, telephone, notificationMean);
+    userDetail.setId(userToUpdate.getDetails().getId());
+
+    User updatedUser = User.composedOf(username,
+        password, userDetail, userToUpdate.authorizationRole());
+    updatedUser.setId(userToUpdate.getId());
+
+    this.updateWith(userToUpdate, updatedUser);
+
+  }
+
+  private NotificationMean convertToEntity(String str) {
+    NotificationMean obj = null;
+
+    if (str.equals("wpp")) {
+      obj = new NotifyByWhatsApp(new TwilioAdapter());
+    } else if (str.equals("email")) {
+      obj = new NotifyByMail(new JakartaAdapter());
+    }
+    return obj;
+  }
 }

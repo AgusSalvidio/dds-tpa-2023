@@ -1,13 +1,14 @@
 package ar.edu.utn.frba.dds.user;
 
-import ar.edu.utn.frba.dds.addons.usercreationaddon.UserDetailsCreationAddOn;
+import ar.edu.utn.frba.dds.addons.usercreationaddon.UserDetailCreationAddOn;
+import ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class UserTest {
-  private UserDetails userDetails() throws Exception {
-    return new UserDetailsCreationAddOn().ibarra();
+  private UserDetail userDetails() throws Exception {
+    return new UserDetailCreationAddOn().ibarra();
 
   }
 
@@ -15,20 +16,21 @@ public class UserTest {
   @DisplayName("Create an user")
   public void createUser() throws Exception {
 
-    User user = User.composedOf("ibarranetaYPF", "theBestPassword", this.userDetails());
+    User user = User.composedOf("ibarranetaYPF", "theBestPassword", this.userDetails(), AuthorizationRole.ADMINISTRADOR);
 
     Assertions.assertEquals("ibarranetaYPF", user.username());
     Assertions.assertEquals("Hugo", user.name());
     Assertions.assertEquals("Ibarra", user.lastname());
     Assertions.assertEquals("ibarraneta@gmail.com", user.email());
+    Assertions.assertEquals("0123456789", user.telephone());
 
   }
 
   @Test
   @DisplayName("When creating an user with any field empty should raise error")
   public void cannotCreateUserWhenAnyFieldIsEmpty() throws Exception {
-    Assertions.assertThrows(Exception.class, () -> User.composedOf("", "theBestPassword", this.userDetails()), "Los campos no pueden estar en blanco.");
-    Assertions.assertThrows(Exception.class, () -> User.composedOf("ibarranetaYPF", "", this.userDetails()), "Los campos no pueden estar en blanco.");
+    Assertions.assertThrows(Exception.class, () -> User.composedOf("", "theBestPassword", this.userDetails(), AuthorizationRole.ADMINISTRADOR), "Los campos no pueden estar en blanco.");
+    Assertions.assertThrows(Exception.class, () -> User.composedOf("ibarranetaYPF", "", this.userDetails(), AuthorizationRole.ADMINISTRADOR), "Los campos no pueden estar en blanco.");
   }
 
 }

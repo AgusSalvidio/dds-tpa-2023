@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.addons.usercreationaddon;
 
+import ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole;
 import ar.edu.utn.frba.dds.user.User;
 
 public class UserCreationAddOn {
@@ -8,13 +9,20 @@ public class UserCreationAddOn {
     return User.composedOf(
         "ibarranetaYPF",
         "theBestPassword",
-        new UserDetailsCreationAddOn().ibarra());
+        new UserDetailCreationAddOn().ibarra(), AuthorizationRole.ADMINISTRADOR);
   }
 
   public User basuraIntergalactica() throws Exception {
     return User.composedOf(
         "basuraIntergalactica",
         "intergalacticGarbageCollector",
-        new UserDetailsCreationAddOn().basuraIntergalactica());
+        new UserDetailCreationAddOn().basuraIntergalactica(), AuthorizationRole.ADMINISTRADOR);
+  }
+
+  public User basuraIntergalactica2() throws Exception {
+    return User.composedOf(
+        "basuraIntergalactica2",
+        "intergalacticGarbageCollector2",
+        new UserDetailCreationAddOn().basuraIntergalactica2(), AuthorizationRole.ADMINISTRADOR);
   }
 }

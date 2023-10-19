@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{{headMeta}}}
+</head>
+
+<body>
+<header>
+    {{{customHomeNavbar}}}
+</header>
+
+<main>
+    <div class="d-flex justify-content-end p-2">
+        <legend class="">Administrar Incidentes</legend>
+        <a
+                class="btn btn-md btn-custom"
+                href="/incidents/register"
+        >
+            Agregar
+        </a>
+    </div>
+    <form method="post" action="/incidents/filter" class="row g-3 px-2 py-2">
+        <div class="col-md-6">
+            <label for="services">Filtrar</label>
+            <select class="col-md-6" name="states">
+                <option label="Seleccione Estado..." value="" disabled selected></option>
+                <option value="OPEN">OPEN</option>
+                <option value="CLOSED">CLOSED</option>
+                <option value="ALL">TODOS</option>
+            </select>
+            <button type="submit" class="btn btn-sm btn-custom">Filtrar</button></div>
+    </form>
+    <section>
+        <div class="px-1">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <table
+                            class=" table table-striped"
+                    >
+                        <thead>
+                        <tr>
+                            <th>Comunidad</th>
+                            <th>Reportado por</th>
+                            <th>Servicio</th>
+                            <th>Observaciones</th>
+                            <th>Estado</th>
+                            <th>Fecha</th>
+                            <th>Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{#each incidents}}
+                            <tr>
+                                <td>{{this.community.name}}</td>
+                                <td>{{this.incident.user.username}}</td>
+                                <td>{{this.incident.service.name}}</td>
+                                <td>{{this.incident.observations}}</td>
+                                <td>{{this.state.name}}</td>
+                                <td>{{this.dateTime}}</td>
+                                <td class="px-4">
+                                    {{#if (isOpen this.state.name)}}
+                                    <a href="/incidents/{{this.id}}/review" class="btn-sm "><i
+                                            class="fa-solid fa-magnifying-glass-location"></i></a>
+                                    <a href="/incidents/{{this.id}}/close" class="btn-sm "><i class="fa-solid fa-lock"
+                                                          style="color:red"></i></a>
+                                    {{/if}}
+                                </td>
+                            </tr>
+                        {{else}}
+                            <tr>
+                                <td colspan="7">No hay incidentes</td>
+                            </tr>
+                        {{/each}}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</main>
+
+<footer>
+</footer>
+{{{scripts}}}
+</body>
+</html>
