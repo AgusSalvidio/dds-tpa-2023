@@ -301,27 +301,33 @@ public class MemoryBasedPersistenceSystem implements PersistenceSystem {
     this.demo.serviceHolders().add(serviceHolder);
   }
 
-  public void startManagingAverageClosingTimeRanking(AverageClosingTimeRanking averageClosingTimeRanking) {
+  public void startManagingAverageClosingTimeRanking(
+      AverageClosingTimeRanking averageClosingTimeRanking) {
     //TODO
   }
 
-  public void stopManagingAverageClosingTimeRanking(AverageClosingTimeRanking averageClosingTimeRanking) {
+  public void stopManagingAverageClosingTimeRanking(
+      AverageClosingTimeRanking averageClosingTimeRanking) {
     //TODO
   }
 
-  public void startManagingGreaterDegreeOfImpactRanking(GreaterDegreeOfImpactRanking greaterDegreeOfImpactRanking) {
+  public void startManagingGreaterDegreeOfImpactRanking(
+      GreaterDegreeOfImpactRanking greaterDegreeOfImpactRanking) {
     //TODO
   }
 
-  public void stopManagingGreaterDegreeOfImpactRanking(GreaterDegreeOfImpactRanking greaterDegreeOfImpactRanking) {
+  public void stopManagingGreaterDegreeOfImpactRanking(
+      GreaterDegreeOfImpactRanking greaterDegreeOfImpactRanking) {
     //TODO
   }
 
-  public void startManagingMostReportedIncidentRanking(MostReportedIncidentsRanking mostReportedIncidentsRanking) {
+  public void startManagingMostReportedIncidentRanking(
+      MostReportedIncidentsRanking mostReportedIncidentsRanking) {
     //TODO
   }
 
-  public void stopManagingMostReportedIncidentRanking(MostReportedIncidentsRanking mostReportedIncidentsRanking) {
+  public void stopManagingMostReportedIncidentRanking(
+      MostReportedIncidentsRanking mostReportedIncidentsRanking) {
     //TODO
   }
 

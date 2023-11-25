@@ -98,7 +98,9 @@ public class Demo {
     return this.states;
   }
 
-  public List<WeeklyRanking> rankings() {return this.rankings;}
+  public List<WeeklyRanking> rankings() {
+    return this.rankings;
+  }
 
   public Demo() throws Exception {
   }

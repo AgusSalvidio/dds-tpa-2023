@@ -18,7 +18,8 @@ public class MostReportedIncidentsRanking extends WeeklyRanking {
   @Getter
   Integer id;
 
-  public static MostReportedIncidentsRanking composedOf(MostReportedIncidentsComparator rankingComparator) {
+  public static MostReportedIncidentsRanking composedOf(
+      MostReportedIncidentsComparator rankingComparator) {
     return new MostReportedIncidentsRanking(rankingComparator);
   }
 

@@ -4,6 +4,8 @@ import ar.edu.utn.frba.dds.community.Community;
 import ar.edu.utn.frba.dds.entity.EntityIncidentSummary;
 import ar.edu.utn.frba.dds.ranking.rankingcomparators.CommunityComparator;
 import ar.edu.utn.frba.dds.ranking.rankingcomparators.GreaterDegreeOfImpactComparator;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -11,8 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import java.util.ArrayList;
-import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -34,7 +34,8 @@ public class GreaterDegreeOfImpactRanking extends WeeklyRanking {
   @Transient
   public CommunityComparator communityComparator;
 
-  public static GreaterDegreeOfImpactRanking composedOf(GreaterDegreeOfImpactComparator rankingComparator, CommunityComparator communityComparator) {
+  public static GreaterDegreeOfImpactRanking composedOf(
+      GreaterDegreeOfImpactComparator rankingComparator, CommunityComparator communityComparator) {
     return new GreaterDegreeOfImpactRanking(rankingComparator, communityComparator);
   }
 
