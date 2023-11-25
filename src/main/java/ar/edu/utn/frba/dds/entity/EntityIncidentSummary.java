@@ -1,14 +1,14 @@
 package ar.edu.utn.frba.dds.entity;
 
 import ar.edu.utn.frba.dds.incident.IncidentPerCommunity;
-import lombok.Getter;
-import lombok.Setter;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 @javax.persistence.Entity
 @Table(name = "entity_incident_summary")

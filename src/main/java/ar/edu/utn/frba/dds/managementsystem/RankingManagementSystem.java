@@ -69,10 +69,19 @@ public class RankingManagementSystem {
     String rankingType = model.get("ranking-type").toString();
 
     switch (rankingType) {
-      case "Tiempo de cierre" -> this.startManagingAverageClosingTimeRanking(AverageClosingTimeRanking.composedOf(new AverageClosingTimeComparator()));
-      case "Mayor impacto" -> this.startManagingGreaterDegreeOfImpactRanking(GreaterDegreeOfImpactRanking.composedOf(new GreaterDegreeOfImpactComparator(), new CommunityComparator()));
-      case "Incidentes reportados" -> this.startManagingMostReportedIncidentRanking(MostReportedIncidentsRanking.composedOf(new MostReportedIncidentsComparator()));
-      default -> {}
+      case "Tiempo de cierre" ->
+          this.startManagingAverageClosingTimeRanking(
+              AverageClosingTimeRanking.composedOf(new AverageClosingTimeComparator()));
+      case "Mayor impacto" ->
+          this.startManagingGreaterDegreeOfImpactRanking(
+              GreaterDegreeOfImpactRanking.composedOf(
+                  new GreaterDegreeOfImpactComparator(), new CommunityComparator()));
+      case "Incidentes reportados" ->
+          this.startManagingMostReportedIncidentRanking(
+              MostReportedIncidentsRanking.composedOf(new MostReportedIncidentsComparator()));
+      default -> {
+
+      }
     }
 
   }

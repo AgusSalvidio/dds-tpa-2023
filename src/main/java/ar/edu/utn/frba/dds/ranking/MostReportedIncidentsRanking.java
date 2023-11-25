@@ -1,12 +1,12 @@
 package ar.edu.utn.frba.dds.ranking;
 
 import ar.edu.utn.frba.dds.ranking.rankingcomparators.MostReportedIncidentsComparator;
-import lombok.Getter;
-import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "most_reported_incidents_ranking")
