@@ -16,6 +16,7 @@ import ar.edu.utn.frba.dds.notification.notificationmean.NotificationMean;
 import ar.edu.utn.frba.dds.notification.notificationmean.NotifyByMail;
 import ar.edu.utn.frba.dds.notification.notificationmean.NotifyByWhatsApp;
 import ar.edu.utn.frba.dds.notification.notificationmean.TwilioAdapter;
+import ar.edu.utn.frba.dds.ranking.WeeklyRanking;
 import ar.edu.utn.frba.dds.service.Elevator;
 import ar.edu.utn.frba.dds.service.Escalator;
 import ar.edu.utn.frba.dds.service.Service;
@@ -44,6 +45,7 @@ public class Demo {
   private List<Community> communities = new ArrayList<>();
   private List<IncidentPerCommunity> incidentPerCommunities = new ArrayList<>();
   private List<State> states = new ArrayList<>();
+  private List<WeeklyRanking> rankings = new ArrayList<>();
 
   public List<User> users() {
     return this.users;
@@ -95,6 +97,8 @@ public class Demo {
   public List<State> states() {
     return this.states;
   }
+
+  public List<WeeklyRanking> rankings() {return this.rankings;}
 
   public Demo() throws Exception {
   }
@@ -561,6 +565,10 @@ public class Demo {
     this.serviceHolders.add(govermentDepartment);
     this.serviceHolders.add(govermentDepartment2);
 
+  }
+
+  public void addWeeklyRankings() {
+    //TODO
   }
 
   public void initialize() throws Exception {
