@@ -16,9 +16,8 @@ import java.util.List;
 
 public class ApplicationContext {
 
-  //RelationalDatabasePersistenceSystem persistenceSystem =
-  // new RelationalDatabasePersistenceSystem();
-  MemoryBasedPersistenceSystem persistenceSystem = new MemoryBasedPersistenceSystem();
+  RelationalDatabasePersistenceSystem persistenceSystem = new RelationalDatabasePersistenceSystem();
+  //MemoryBasedPersistenceSystem persistenceSystem = new MemoryBasedPersistenceSystem();
   //EventNotificationSystem eventNotificationSystem = new EventNotificationSystem();
   UserManagementSystem userManagementSystem = new UserManagementSystem(this.persistenceSystem);
   IncidentManagementSystem incidentManagementSystem =

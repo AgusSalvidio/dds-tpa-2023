@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.Map;
 
 public class ServiceManagementSystem {
-  MemoryBasedPersistenceSystem persistenceSystem;
+  RelationalDatabasePersistenceSystem persistenceSystem;
 
-  public ServiceManagementSystem(MemoryBasedPersistenceSystem persistenceSystem) {
+  public ServiceManagementSystem(RelationalDatabasePersistenceSystem persistenceSystem) {
     this.persistenceSystem = persistenceSystem;
   }
 
@@ -21,12 +21,12 @@ public class ServiceManagementSystem {
     return "Sistema de Administración de Servicios";
   }
 
-  private MemoryBasedPersistenceSystem persistenceSystem() {
+  private RelationalDatabasePersistenceSystem persistenceSystem() {
     return this.persistenceSystem;
   }
 
   public static ServiceManagementSystem workingWith(
-      MemoryBasedPersistenceSystem persistenceSystem) {
+          RelationalDatabasePersistenceSystem persistenceSystem) {
     return new ServiceManagementSystem(persistenceSystem);
   }
 

@@ -218,7 +218,7 @@ public class MemoryBasedPersistenceSystem implements PersistenceSystem {
 
   public List<Entity> entities() {
     //TODO
-    return null;
+    return this.demo.entities();
   }
 
   public void startManagingCommunity(Community community) {

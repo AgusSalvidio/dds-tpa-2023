@@ -10,9 +10,9 @@ import java.util.List;
 import java.util.Map;
 
 public class EntityManagementSystem {
-  MemoryBasedPersistenceSystem persistenceSystem;
+  RelationalDatabasePersistenceSystem persistenceSystem;
 
-  public EntityManagementSystem(MemoryBasedPersistenceSystem persistenceSystem) {
+  public EntityManagementSystem(RelationalDatabasePersistenceSystem persistenceSystem) {
     this.persistenceSystem = persistenceSystem;
   }
 
@@ -20,12 +20,12 @@ public class EntityManagementSystem {
     return "Sistema de administración de entidades.";
   }
 
-  private MemoryBasedPersistenceSystem persistenceSystem() {
+  private RelationalDatabasePersistenceSystem persistenceSystem() {
     return this.persistenceSystem;
   }
 
   public static EntityManagementSystem workingWith(
-      MemoryBasedPersistenceSystem persistenceSystem
+          RelationalDatabasePersistenceSystem persistenceSystem
   ) {
     return new EntityManagementSystem(persistenceSystem);
   }
@@ -51,6 +51,6 @@ public class EntityManagementSystem {
     Establishment arrival = (Establishment) model.get("arrival");
     Direction direction = (Direction) model.get("direction");
 
-    this.startManagingTransportLine(TransportLine.composedOf(departure, arrival, direction));
+    this.startManagingTransportLine(TransportLine.composedOf("Line", departure, arrival, direction));
   }
 }

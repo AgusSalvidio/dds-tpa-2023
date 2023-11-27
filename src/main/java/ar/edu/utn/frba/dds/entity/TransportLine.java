@@ -39,14 +39,16 @@ public class TransportLine extends Entity {
   public Direction direction;
 
   public static TransportLine composedOf(
+      String name,
       Establishment departure,
       Establishment arrival, Direction direction) {
-    return new TransportLine(departure, arrival, direction);
+    return new TransportLine(name, departure, arrival, direction);
   }
 
   public TransportLine() {}
 
-  public TransportLine(Establishment departure, Establishment arrival, Direction direction) {
+  public TransportLine(String name, Establishment departure, Establishment arrival, Direction direction) {
+    this.name = name;
     this.establishments = new ArrayList<>();
     this.incidents = new ArrayList<>();
     this.departure = departure;

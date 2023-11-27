@@ -16,9 +16,9 @@ import java.util.List;
 import java.util.Map;
 
 public class UserManagementSystem {
-  MemoryBasedPersistenceSystem persistenceSystem;
+  RelationalDatabasePersistenceSystem persistenceSystem;
 
-  public UserManagementSystem(MemoryBasedPersistenceSystem persistenceSystem) {
+  public UserManagementSystem(RelationalDatabasePersistenceSystem persistenceSystem) {
     this.persistenceSystem = persistenceSystem;
   }
 
@@ -26,12 +26,12 @@ public class UserManagementSystem {
     return "Sistema de Administración de Usuarios";
   }
 
-  private MemoryBasedPersistenceSystem persistenceSystem() {
+  private RelationalDatabasePersistenceSystem persistenceSystem() {
     return this.persistenceSystem;
   }
 
   public static UserManagementSystem workingWith(
-      MemoryBasedPersistenceSystem persistenceSystem) {
+          RelationalDatabasePersistenceSystem persistenceSystem) {
     return new UserManagementSystem(persistenceSystem);
   }
 

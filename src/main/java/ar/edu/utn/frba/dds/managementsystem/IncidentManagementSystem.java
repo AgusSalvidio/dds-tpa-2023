@@ -14,9 +14,9 @@ import java.util.List;
 import java.util.Map;
 
 public class IncidentManagementSystem {
-  MemoryBasedPersistenceSystem persistenceSystem;
+  RelationalDatabasePersistenceSystem persistenceSystem;
 
-  public IncidentManagementSystem(MemoryBasedPersistenceSystem persistenceSystem) {
+  public IncidentManagementSystem(RelationalDatabasePersistenceSystem persistenceSystem) {
     this.persistenceSystem = persistenceSystem;
   }
 
@@ -24,12 +24,12 @@ public class IncidentManagementSystem {
     return "Sistema de Administración de Incidentes";
   }
 
-  private MemoryBasedPersistenceSystem persistenceSystem() {
+  private RelationalDatabasePersistenceSystem persistenceSystem() {
     return this.persistenceSystem;
   }
 
   public static IncidentManagementSystem workingWith(
-      MemoryBasedPersistenceSystem persistenceSystem) {
+          RelationalDatabasePersistenceSystem persistenceSystem) {
     return new IncidentManagementSystem(persistenceSystem);
   }
 

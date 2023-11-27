@@ -11,9 +11,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class CommunityManagementSystem {
-  MemoryBasedPersistenceSystem persistenceSystem;
+  RelationalDatabasePersistenceSystem persistenceSystem;
 
-  public CommunityManagementSystem(MemoryBasedPersistenceSystem persistenceSystem) {
+  public CommunityManagementSystem(RelationalDatabasePersistenceSystem persistenceSystem) {
     this.persistenceSystem = persistenceSystem;
   }
 
@@ -21,12 +21,12 @@ public class CommunityManagementSystem {
     return "Sistema de Administración de Comunidades";
   }
 
-  private MemoryBasedPersistenceSystem persistenceSystem() {
+  private RelationalDatabasePersistenceSystem persistenceSystem() {
     return this.persistenceSystem;
   }
 
   public static CommunityManagementSystem workingWith(
-      MemoryBasedPersistenceSystem persistenceSystem) {
+          RelationalDatabasePersistenceSystem persistenceSystem) {
     return new CommunityManagementSystem(persistenceSystem);
   }
 

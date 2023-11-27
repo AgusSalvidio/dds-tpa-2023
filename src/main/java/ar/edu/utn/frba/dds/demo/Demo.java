@@ -381,7 +381,7 @@ public class Demo {
   }
 
   public TransportLine entityA() throws Exception {
-    TransportLine transportLine = TransportLine.composedOf(
+    TransportLine transportLine = TransportLine.composedOf("Entidad A",
         this.lawSchoolStation(),
         this.lasHerasStation(),
         Direction.FORWARD);
@@ -392,6 +392,7 @@ public class Demo {
 
   public TransportLine entityB() throws Exception {
     TransportLine transportLine = TransportLine.composedOf(
+  "Entidad B",
         this.headquarterBranch(),
         this.onceStation(),
         Direction.RETURN);
@@ -402,6 +403,7 @@ public class Demo {
 
   public TransportLine entityC() throws Exception {
     TransportLine transportLine = TransportLine.composedOf(
+  "Entidad C",
         this.hospitalStation(),
         this.lasHerasStation(),
         Direction.FORWARD);
@@ -581,6 +583,5 @@ public class Demo {
     this.addCommunities();
     this.addIncidentsPerCommunity();
     this.addServiceHolders();
-
   }
 }

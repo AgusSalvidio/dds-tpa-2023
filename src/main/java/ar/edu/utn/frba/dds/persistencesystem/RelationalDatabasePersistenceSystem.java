@@ -6,15 +6,22 @@ import ar.edu.utn.frba.dds.entity.Entity;
 import ar.edu.utn.frba.dds.entity.TransportLine;
 import ar.edu.utn.frba.dds.incident.Incident;
 import ar.edu.utn.frba.dds.incident.IncidentPerCommunity;
+import ar.edu.utn.frba.dds.ranking.AverageClosingTimeRanking;
+import ar.edu.utn.frba.dds.ranking.GreaterDegreeOfImpactRanking;
+import ar.edu.utn.frba.dds.ranking.MostReportedIncidentsRanking;
+import ar.edu.utn.frba.dds.ranking.WeeklyRanking;
 import ar.edu.utn.frba.dds.service.Elevator;
 import ar.edu.utn.frba.dds.service.Escalator;
 import ar.edu.utn.frba.dds.service.Service;
 import ar.edu.utn.frba.dds.service.State;
 import ar.edu.utn.frba.dds.service.Toilet;
+import ar.edu.utn.frba.dds.serviceholder.ServiceHolder;
 import ar.edu.utn.frba.dds.user.User;
 import ar.edu.utn.frba.dds.user.UserDetail;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 
@@ -243,4 +250,86 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
         .createQuery("from " + IncidentPerCommunity.class.getName()).getResultList();
   }
 
+  //Agregados por FDM, faltaban todos
+  //Hay que desarrollarlos pq no hay nada-!!!!!!!!!!!!!!!!!
+  //Menos Mal que estoy escuchndo IRON MAIDEN
+  public Service serviceIdentifiedBy(Integer serviceId) {
+    //return this.demo.services().stream().filter(service -> service.getId().equals(serviceId)).findFirst().orElse(null);
+    return null;
+  }
+
+  public Community communityIdentifiedBy(Integer communityId) {
+    //return this.demo.communities().stream().filter(community -> community.getId().equals(communityId)).findFirst().orElse(null);
+    return null;
+  }
+
+  public IncidentPerCommunity incidentPerCommunityIdentifiedBy(Integer anId) {
+    //return this.demo.incidentPerCommunities().stream().filter(incidentPerCommunity -> incidentPerCommunity.getId().equals(anId)).findFirst().orElse(null);
+    return null;
+  }
+
+  public List<IncidentPerCommunity> incidentsPerCommunityFilteredBy(String state) {
+    /*
+    if (Objects.equals(state, "ALL")) {
+      return this.demo.incidentPerCommunities();
+    } else {
+      return this.demo.incidentPerCommunities().stream()
+              .filter(incidentPerCommunity -> incidentPerCommunity.state().name.equals(state))
+              .collect(Collectors.toList());
+    }
+    */
+    return null;
+  }
+
+  public void closeIncidentPerCommunity(IncidentPerCommunity anIncidentPerCommunity) {
+    anIncidentPerCommunity.setState(State.composedOf("CLOSED", "CLOSED"));
+  }
+
+  public void startManagingAverageClosingTimeRanking(
+          AverageClosingTimeRanking averageClosingTimeRanking) {
+    //TODO
+  }
+
+  public void stopManagingAverageClosingTimeRanking(
+          AverageClosingTimeRanking averageClosingTimeRanking) {
+    //TODO
+  }
+
+  public void startManagingGreaterDegreeOfImpactRanking(
+          GreaterDegreeOfImpactRanking greaterDegreeOfImpactRanking) {
+    //TODO
+  }
+
+  public void stopManagingGreaterDegreeOfImpactRanking(
+          GreaterDegreeOfImpactRanking greaterDegreeOfImpactRanking) {
+    //TODO
+  }
+
+  public void startManagingMostReportedIncidentRanking(
+          MostReportedIncidentsRanking mostReportedIncidentsRanking) {
+    //TODO
+  }
+
+  public void stopManagingMostReportedIncidentRanking(
+          MostReportedIncidentsRanking mostReportedIncidentsRanking) {
+    //TODO
+  }
+
+  public List<WeeklyRanking> rankings() {
+    //return this.demo.rankings();
+    return null;
+  }
+
+  public List<ServiceHolder> serviceHolders() {
+    //return this.demo.serviceHolders();
+    return null;
+  }
+
+  public void startManagingServiceHolder(ServiceHolder serviceHolder) {
+    //this.demo.serviceHolders().add(serviceHolder);
+    //TODO
+  }
+
+
 }
+

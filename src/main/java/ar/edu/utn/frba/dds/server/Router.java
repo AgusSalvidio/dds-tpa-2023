@@ -5,14 +5,7 @@ import static ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole.ENTIDAD;
 import static ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole.USUARIO;
 
 import ar.edu.utn.frba.dds.applicationcontext.ApplicationContext;
-import ar.edu.utn.frba.dds.controller.view.AdministrationViewController;
-import ar.edu.utn.frba.dds.controller.view.HomeViewController;
-import ar.edu.utn.frba.dds.controller.view.IncidentViewController;
-import ar.edu.utn.frba.dds.controller.view.LoginViewController;
-import ar.edu.utn.frba.dds.controller.view.LogoutViewController;
-import ar.edu.utn.frba.dds.controller.view.ServiceHolderViewController;
-import ar.edu.utn.frba.dds.controller.view.ServiceViewController;
-import ar.edu.utn.frba.dds.controller.view.UserViewController;
+import ar.edu.utn.frba.dds.controller.view.*;
 import io.javalin.Javalin;
 
 public class Router {
@@ -107,6 +100,19 @@ public class Router {
 
   }
 
+  private static void initializeEntitiesEndpointsOn(
+          Javalin app,
+          ApplicationContext applicationContext) {
+
+    app.get("/entities", new EntityViewController(applicationContext)::index,
+            ADMINISTRADOR, ENTIDAD);
+    app.get("/entities/register",
+            new EntityViewController(applicationContext)::create, ADMINISTRADOR, ENTIDAD);
+    app.post("/entities",
+            new EntityViewController(applicationContext)::save, ADMINISTRADOR, ENTIDAD);
+
+  }
+
   private static void initializeEndpoints() throws Exception {
 
     Javalin app = app();
@@ -122,6 +128,7 @@ public class Router {
     initializeServiceEndpointsOn(app, applicationContext);
     initializeIncidentEndpointsOn(app, applicationContext);
     initializeServiceHolderEndpointsOn(app, applicationContext);
+    initializeEntitiesEndpointsOn(app, applicationContext);
 
   }
 

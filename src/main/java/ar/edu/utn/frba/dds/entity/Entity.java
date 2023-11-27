@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import ar.edu.utn.frba.dds.serviceholder.Company;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,7 +33,7 @@ public abstract class Entity {
   @Getter
   @Setter
   @OneToOne
-  public EntityName name;
+  public String name;
 
   @OneToMany
   @JoinColumn(name = "establishment_id", referencedColumnName = "id")
@@ -56,7 +58,8 @@ public abstract class Entity {
   }
 
   public String name() {
-    return this.name.getName();
+    //return this.name.getName();
+    return this.name();
   }
 
 

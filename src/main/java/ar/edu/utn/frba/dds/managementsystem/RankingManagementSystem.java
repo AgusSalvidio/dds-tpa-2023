@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.managementsystem;
 
 import ar.edu.utn.frba.dds.persistencesystem.MemoryBasedPersistenceSystem;
+import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
 import ar.edu.utn.frba.dds.ranking.AverageClosingTimeRanking;
 import ar.edu.utn.frba.dds.ranking.GreaterDegreeOfImpactRanking;
 import ar.edu.utn.frba.dds.ranking.MostReportedIncidentsRanking;
@@ -14,9 +15,9 @@ import java.util.Map;
 
 public class RankingManagementSystem {
 
-  MemoryBasedPersistenceSystem persistenceSystem;
+  RelationalDatabasePersistenceSystem persistenceSystem;
 
-  public RankingManagementSystem(MemoryBasedPersistenceSystem persistenceSystem) {
+  public RankingManagementSystem(RelationalDatabasePersistenceSystem persistenceSystem) {
     this.persistenceSystem = persistenceSystem;
   }
 
@@ -24,12 +25,12 @@ public class RankingManagementSystem {
     return "Sistema de Administración de rankings.";
   }
 
-  private MemoryBasedPersistenceSystem persistenceSystem() {
+  private RelationalDatabasePersistenceSystem persistenceSystem() {
     return this.persistenceSystem;
   }
 
   public static RankingManagementSystem workingWith(
-      MemoryBasedPersistenceSystem persistenceSystem) {
+          RelationalDatabasePersistenceSystem persistenceSystem) {
     return new RankingManagementSystem(persistenceSystem);
   }
 
