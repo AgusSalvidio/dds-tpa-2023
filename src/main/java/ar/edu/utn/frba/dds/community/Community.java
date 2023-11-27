@@ -7,16 +7,12 @@ import ar.edu.utn.frba.dds.user.User;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 import lombok.Getter;
 import lombok.Setter;
 
-@javax.persistence.Entity
+//@javax.persistence.Entity
 @Table(name = "community")
 public class Community {
   @Id
@@ -34,18 +30,26 @@ public class Community {
   String description;
 
   @ManyToMany
-  @JoinColumn(name = "member_id", referencedColumnName = "id")
+  //@JoinColumn(name = "member_id", referencedColumnName = "id")
+  @JoinTable(name = "community_member",
+          joinColumns = { @JoinColumn(name = "member_id", referencedColumnName = "id") },
+          inverseJoinColumns = { @JoinColumn(name = "community_id") })
   List<Member> members;
 
   @ManyToMany
-  @JoinColumn(name = "service_id", referencedColumnName = "id")
+  //@JoinColumn(name = "service_id", referencedColumnName = "id")
+  @JoinTable(name = "community_service",
+          joinColumns = { @JoinColumn(name = "service_id", referencedColumnName = "id") },
+          inverseJoinColumns = { @JoinColumn(name = "community_id") })
   List<Service> services;
 
-  @ManyToMany
+  @OneToMany(mappedBy = "entity")
+  @JoinTable(name = "community_entity")
   @JoinColumn(name = "entity_id", referencedColumnName = "id")
   List<Entity> entities;
 
-  @ManyToMany
+  @OneToMany
+  @JoinTable(name = "community_incident")
   @JoinColumn(name = "incident_id", referencedColumnName = "id")
   List<Incident> openIncidents;
 

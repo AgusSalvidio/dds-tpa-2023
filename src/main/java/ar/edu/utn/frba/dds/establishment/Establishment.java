@@ -19,25 +19,19 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "establishment")
+@Getter
+@Setter
 public class Establishment {
   @Id
   @GeneratedValue
-  @Setter
-  @Getter
   Integer id;
 
-  @Setter
-  @Getter
   @Transient
   public EstablishmentType type;
 
-  @Setter
-  @Getter
   @Column(name = "name")
   public String name;
 
-  @Setter
-  @Getter
   @OneToOne
   @JoinColumn(name = "location_id", referencedColumnName = "id")
   public Location location;

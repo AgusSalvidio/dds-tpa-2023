@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
+//@Entity
 @Table(name = "incident")
 public class Incident {
   @Id

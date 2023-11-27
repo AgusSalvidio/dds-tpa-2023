@@ -1,47 +1,47 @@
 package ar.edu.utn.frba.dds.user;
 
+import ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole;
 import ar.edu.utn.frba.dds.converters.NotificationMeanConverter;
 import ar.edu.utn.frba.dds.entity.Entity;
 import ar.edu.utn.frba.dds.notification.notificationmean.NotificationMean;
 import ar.edu.utn.frba.dds.service.Service;
+import ar.edu.utn.frba.dds.notification.notificationmean.NotificationType;
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Convert;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
+
 import lombok.Getter;
 import lombok.Setter;
 
 @javax.persistence.Entity
 @Table(name = "user_detail")
+@Getter
+@Setter
 public class UserDetail {
   @Id
   @GeneratedValue
-  @Getter
-  @Setter
   Integer id;
 
-  @Getter
   @Column(name = "name")
   String name;
-  @Getter
+
   @Column(name = "lastname")
   String lastname;
-  @Getter
+
   @Column(name = "email")
   String email;
-  @Getter
+
   @Column(name = "telephone")
   String telephone;
-  /*
-  @Convert(converter =  NotificationMeanConverter.class)
-  @Column(name = "notificationmean")*/
-  @Getter
+
+  @Column(name = "notification_type")
+  @Enumerated(EnumType.STRING)
+  NotificationType notificationType;
+
   @Transient
   NotificationMean notificationMean;
-  @Transient
+
+  @OneToOne
+  @JoinColumn(name = "preference_id", referencedColumnName = "id")
   UserPreference userPreference;
 
   public UserDetail(String name, String lastname, String anEmail, String telephone,

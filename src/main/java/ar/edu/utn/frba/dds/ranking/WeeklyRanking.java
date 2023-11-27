@@ -14,7 +14,7 @@ import javax.persistence.Transient;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
+//@Entity
 @Table(name = "ranking")
 public class WeeklyRanking {
   @Id
@@ -24,8 +24,8 @@ public class WeeklyRanking {
   Integer id;
 
   @Getter
-  @ManyToMany
-  @JoinColumn(name = "entity_incident_id", referencedColumnName = "id")
+  //@ManyToMany
+  //@JoinColumn(name = "entity_incident_id", referencedColumnName = "id")
   public List<EntityIncidentSummary> entityIncidentSummaries;
 
   @Transient

@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "toilet")
 public class Toilet extends Service {
 
 

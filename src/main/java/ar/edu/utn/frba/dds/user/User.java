@@ -2,42 +2,31 @@ package ar.edu.utn.frba.dds.user;
 
 import ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole;
 import ar.edu.utn.frba.dds.notification.Msg;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+
+import javax.persistence.*;
+
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Table(name = "user")
+@Getter
+@Setter
 public class User {
   @Id
   @GeneratedValue
-  @Getter
-  @Setter
   Integer id;
 
-  @Getter
   @Column(name = "username")
   String username;
 
-  @Getter
   @Column(name = "password")
   String password;
 
-  @Getter
-  @ManyToOne(cascade = CascadeType.ALL)
+  @OneToOne
   @JoinColumn(name = "user_detail_id", referencedColumnName = "id")
   UserDetail details;
 
-  @Getter
   @Column(name = "authorization_role")
   @Enumerated(EnumType.STRING)
   AuthorizationRole authorizationRole;
@@ -61,7 +50,7 @@ public class User {
   }
 
   public User() {
-    //Do nothing -asalvidio
+    //Sobrecarga para que no rompa Hibernate
   }
 
   public User(

@@ -4,20 +4,12 @@ import ar.edu.utn.frba.dds.establishment.Establishment;
 import ar.edu.utn.frba.dds.incident.Incident;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 import ar.edu.utn.frba.dds.serviceholder.Company;
 import lombok.Getter;
 import lombok.Setter;
 
-@javax.persistence.Entity
 @Table(name = "entity")
 public abstract class Entity {
 
@@ -32,7 +24,6 @@ public abstract class Entity {
 
   @Getter
   @Setter
-  @OneToOne
   public String name;
 
   @OneToMany

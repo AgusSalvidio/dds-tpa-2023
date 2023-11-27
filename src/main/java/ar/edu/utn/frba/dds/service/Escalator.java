@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "escalator")
 public class Escalator extends Service {
   public static Escalator composedOf(String name, String description, State state) {
     return new Escalator(name, description, state);

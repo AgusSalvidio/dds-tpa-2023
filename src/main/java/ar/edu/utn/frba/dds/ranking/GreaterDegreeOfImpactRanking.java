@@ -16,7 +16,7 @@ import javax.persistence.Transient;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
+//@Entity
 @Table(name = "greater_degree_impact_ranking")
 public class GreaterDegreeOfImpactRanking extends WeeklyRanking {
 

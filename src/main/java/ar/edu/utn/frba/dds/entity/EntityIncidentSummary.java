@@ -1,17 +1,14 @@
 package ar.edu.utn.frba.dds.entity;
 
 import ar.edu.utn.frba.dds.incident.IncidentPerCommunity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+
+import javax.persistence.*;
+
 import lombok.Getter;
 import lombok.Setter;
 
-@javax.persistence.Entity
-@Table(name = "entity_incident_summary")
+//@javax.persistence.Entity
+//@Table(name = "entity_incident_summary")
 public class EntityIncidentSummary {
   @Id
   @GeneratedValue
@@ -20,12 +17,13 @@ public class EntityIncidentSummary {
   Integer id;
 
   @Getter
-  @ManyToOne
-  @JoinColumn(name = "entity_id", referencedColumnName = "id")
+  //@ManyToOne
+  //@JoinColumn(name = "entity_id", referencedColumnName = "id")
+  //@JoinTable(name = "entity", joinColumns = { @JoinColumn(name = "entity_id", referencedColumnName = "id") })
   public Entity entity;
 
   @Getter
-  @OneToOne
+  //@OneToOne
   public IncidentPerCommunity incidentPerCommunity;
 
   public EntityIncidentSummary() {

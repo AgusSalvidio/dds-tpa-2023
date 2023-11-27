@@ -7,8 +7,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.Getter;
 
-@Entity
-@Table(name = "section")
 public class Section {
   @Id
   @GeneratedValue
