@@ -2,11 +2,7 @@ package ar.edu.utn.frba.dds.managementsystem;
 
 import ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole;
 import ar.edu.utn.frba.dds.eventnotificationsystem.notifiableevent.NotifiableEvent;
-import ar.edu.utn.frba.dds.notification.notificationmean.JakartaAdapter;
-import ar.edu.utn.frba.dds.notification.notificationmean.NotificationMean;
-import ar.edu.utn.frba.dds.notification.notificationmean.NotifyByMail;
-import ar.edu.utn.frba.dds.notification.notificationmean.NotifyByWhatsApp;
-import ar.edu.utn.frba.dds.notification.notificationmean.TwilioAdapter;
+import ar.edu.utn.frba.dds.notification.notificationmean.*;
 import ar.edu.utn.frba.dds.persistencesystem.MemoryBasedPersistenceSystem;
 import ar.edu.utn.frba.dds.persistencesystem.PersistenceSystem;
 import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
@@ -88,17 +84,15 @@ public class UserManagementSystem {
     String username = model.get("username").toString();
     String password = model.get("password").toString();
     String telephone = model.get("telephone").toString();
-    /*NotificationMean notificationMean = this.convertToEntity(
-        model.get("notificationmean").toString());*/
+    NotificationType notificationType = NotificationType.valueOf(model.get("notificationtype").toString());
 
-    NotificationMean notificationMean = new NotifyByWhatsApp(new TwilioAdapter());
+    //NotificationMean notificationMean = new NotifyByWhatsApp(new TwilioAdapter());
 
-    UserDetail userDetail = new UserDetail(name, lastname, email, telephone, notificationMean);
+    UserDetail userDetail = new UserDetail(name, lastname, email, telephone, notificationType);
     this.startManagingDetail(userDetail);
 
     this.startManaging(
         User.composedOf(username, password, userDetail, AuthorizationRole.USUARIO));
-
   }
 
   public void updateUserFrom(User userToUpdate, Map model) throws Exception {
@@ -108,12 +102,11 @@ public class UserManagementSystem {
     String username = model.get("username").toString();
     String password = model.get("password").toString();
     String telephone = model.get("telephone").toString();
-    /*NotificationMean notificationMean = this.convertToEntity(
-        model.get("notificationmean").toString());*/
+    NotificationType notificationType = NotificationType.valueOf(model.get("notificationtype").toString());
 
     NotificationMean notificationMean = new NotifyByWhatsApp(new TwilioAdapter());
 
-    UserDetail userDetail = new UserDetail(name, lastname, email, telephone, notificationMean);
+    UserDetail userDetail = new UserDetail(name, lastname, email, telephone, notificationType);
     userDetail.setId(userToUpdate.getDetails().getId());
 
     User updatedUser = User.composedOf(username,

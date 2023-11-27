@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@javax.persistence.Entity
-@Table(name = "user_preference")
+//@javax.persistence.Entity
+//@Table(name = "user_preference")
 @Getter
 @Setter
 public class UserPreference {

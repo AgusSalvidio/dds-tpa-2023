@@ -11,11 +11,7 @@ import ar.edu.utn.frba.dds.establishment.EstablishmentType;
 import ar.edu.utn.frba.dds.incident.Incident;
 import ar.edu.utn.frba.dds.incident.IncidentPerCommunity;
 import ar.edu.utn.frba.dds.location.Location;
-import ar.edu.utn.frba.dds.notification.notificationmean.JakartaAdapter;
-import ar.edu.utn.frba.dds.notification.notificationmean.NotificationMean;
-import ar.edu.utn.frba.dds.notification.notificationmean.NotifyByMail;
-import ar.edu.utn.frba.dds.notification.notificationmean.NotifyByWhatsApp;
-import ar.edu.utn.frba.dds.notification.notificationmean.TwilioAdapter;
+import ar.edu.utn.frba.dds.notification.notificationmean.*;
 import ar.edu.utn.frba.dds.ranking.WeeklyRanking;
 import ar.edu.utn.frba.dds.service.Elevator;
 import ar.edu.utn.frba.dds.service.Escalator;
@@ -115,21 +111,21 @@ public class Demo {
 
   public UserDetail ibarra() throws Exception {
     UserDetail userDetail = UserDetail.composedOf("Hugo",
-        "Ibarra", "ibarraneta@gmail.com", "0123456789", this.wpp());
+        "Ibarra", "ibarraneta@gmail.com", "0123456789", NotificationType.WATHSAPP);
     userDetail.setId(1);
     return userDetail;
   }
 
   public UserDetail basuraIntergalactica() throws Exception {
     UserDetail userDetail = UserDetail.composedOf("Basura",
-        "Intergalactica", "basuraintergalactica@gmail.com", "0123456789", this.mail());
+        "Intergalactica", "basuraintergalactica@gmail.com", "0123456789", NotificationType.MAIL);
     userDetail.setId(2);
     return userDetail;
   }
 
   public UserDetail basuraIntergalactica2() throws Exception {
     UserDetail userDetail = UserDetail.composedOf("Basura",
-        "Intergalactica2", "basuraintergalactica2@gmail.com", "0123456789", this.wpp());
+        "Intergalactica2", "basuraintergalactica2@gmail.com", "0123456789", NotificationType.WATHSAPP);
     userDetail.setId(3);
     return userDetail;
   }

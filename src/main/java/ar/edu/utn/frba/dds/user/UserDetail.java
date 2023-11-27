@@ -40,22 +40,22 @@ public class UserDetail {
   @Transient
   NotificationMean notificationMean;
 
-  @OneToOne
-  @JoinColumn(name = "preference_id", referencedColumnName = "id")
+  @Transient
+  //@OneToOne
+  //@JoinColumn(name = "preference_id", referencedColumnName = "id")
   UserPreference userPreference;
 
+  public UserDetail() {
+    //Sobrecarga para que no rompa Hibernate
+  }
   public UserDetail(String name, String lastname, String anEmail, String telephone,
-                    NotificationMean notificationMean) {
+                    NotificationType notificationType) {
     this.name = name;
     this.lastname = lastname;
     this.email = anEmail;
     this.telephone = telephone;
-    this.notificationMean = notificationMean;
-    this.userPreference = new UserPreference();
-  }
-
-  public UserDetail() {
-    //Do nothing -asalvidio
+    this.notificationType = notificationType;
+    //this.userPreference = new UserPreference();
   }
 
   public String name() {
@@ -79,17 +79,17 @@ public class UserDetail {
   }
 
   public static UserDetail composedOf(String name, String lastname, String anEmail,
-                                      String telephone, NotificationMean notificationMean)
+                                      String telephone, NotificationType notificationType)
       throws Exception {
     /*
         Implemented this way because its needed an AssertionChecker class that will be implemented
         in another issue later on. Also should be necesary to specify the field thats empty
      */
     if (name.isEmpty() || lastname.isEmpty() || anEmail.isEmpty()
-        || telephone.isEmpty() || notificationMean == null) {
+        || telephone.isEmpty() || notificationType == null) {
       throw new Exception("Los campos no pueden estar en blanco.");
     }
-    return new UserDetail(name, lastname, anEmail, telephone, notificationMean);
+    return new UserDetail(name, lastname, anEmail, telephone, notificationType);
   }
 
   public List<Service> services() {
