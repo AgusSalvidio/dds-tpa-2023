@@ -10,7 +10,7 @@ public class Escalator extends Service {
   }
 
   public Escalator() {
-
+    this.type = ServiceType.ESCALERA;
   }
 
   public Escalator(String name, String description, State state) {

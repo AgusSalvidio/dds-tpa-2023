@@ -12,7 +12,7 @@ public class Toilet extends Service {
   }
 
   public Toilet() {
-
+    this.type = ServiceType.TOILET;
   }
 
   public Toilet(String name, String description, State state) {

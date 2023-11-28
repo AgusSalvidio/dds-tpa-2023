@@ -1,12 +1,9 @@
 package ar.edu.utn.frba.dds.managementsystem;
 
+import ar.edu.utn.frba.dds.notification.notificationmean.NotificationType;
 import ar.edu.utn.frba.dds.persistencesystem.MemoryBasedPersistenceSystem;
 import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
-import ar.edu.utn.frba.dds.service.Elevator;
-import ar.edu.utn.frba.dds.service.Escalator;
-import ar.edu.utn.frba.dds.service.Service;
-import ar.edu.utn.frba.dds.service.State;
-import ar.edu.utn.frba.dds.service.Toilet;
+import ar.edu.utn.frba.dds.service.*;
 import java.util.List;
 import java.util.Map;
 
@@ -76,15 +73,16 @@ public class ServiceManagementSystem {
     String stateName = model.get("state-name").toString();
     String stateDescription = model.get("state-description").toString();
     String serviceType = model.get("service-type").toString();
+    ServiceType servieType = ServiceType.valueOf(model.get("servicestype").toString());
 
     State state = new State(stateName, stateDescription);
     this.startManagingState(state);
 
     switch (serviceType) {
-      case "Elevador" -> this.startManagingElevator(Elevator.composedOf(name, description, state));
-      case "Escalera" ->
+      case "ELEVADOR" -> this.startManagingElevator(Elevator.composedOf(name, description, state));
+      case "ESCALERA" ->
           this.startManagingEscalator(Escalator.composedOf(name, description, state));
-      case "Baño" -> this.startManagingToilet(Toilet.composedOf(name, description, state));
+      case "TOILET" -> this.startManagingToilet(Toilet.composedOf(name, description, state));
       default -> {
       }
     }

@@ -1,9 +1,13 @@
 package ar.edu.utn.frba.dds.controller.view;
 
 import ar.edu.utn.frba.dds.applicationcontext.ApplicationContext;
+import ar.edu.utn.frba.dds.notification.notificationmean.NotificationType;
+import ar.edu.utn.frba.dds.service.ServiceType;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import io.javalin.http.HttpStatus;
+
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,6 +32,7 @@ public class ServiceViewController extends Controller {
     Map<String, Object> model = new HashMap<>();
     model.put("user", this.applicationContext.loggedUser(context));
     model.put("title", "Registro de Servicios");
+    model.put("servicestype", Arrays.stream(ServiceType.values()).toList());
     context.render("services/service-registration.hbs", model);
   }
 
@@ -37,7 +42,7 @@ public class ServiceViewController extends Controller {
     model.put("description", context.formParam("description"));
     model.put("state-name", context.formParam("state-name"));
     model.put("state-description", context.formParam("state-description"));
-    model.put("service-type", context.formParam("service-type"));
+    model.put("servicetype", context.formParam("servicetype"));
 
     this.applicationContext.serviceManagementSystem().startManagingServiceFrom(model);
     context.status(HttpStatus.CREATED);

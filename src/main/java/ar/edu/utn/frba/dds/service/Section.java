@@ -17,7 +17,7 @@ public class Section {
   public String name;
 
   public Section() {
-
+    //Sobrecarga para que no rompa Hibernate
   }
 
   public static Section named(String name) {

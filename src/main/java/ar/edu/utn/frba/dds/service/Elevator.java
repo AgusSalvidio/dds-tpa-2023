@@ -10,7 +10,7 @@ public class Elevator extends Service {
   }
 
   public Elevator() {
-
+    this.type = ServiceType.ELEVADOR;
   }
 
   public Elevator(String name, String description, State state) {
