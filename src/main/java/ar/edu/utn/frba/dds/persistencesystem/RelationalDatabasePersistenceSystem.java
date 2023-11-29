@@ -2,8 +2,11 @@ package ar.edu.utn.frba.dds.persistencesystem;
 
 import ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole;
 import ar.edu.utn.frba.dds.community.Community;
+import ar.edu.utn.frba.dds.controller.view.TransportationTypeViewController;
 import ar.edu.utn.frba.dds.entity.Entity;
+import ar.edu.utn.frba.dds.entity.EntityType;
 import ar.edu.utn.frba.dds.entity.TransportLine;
+import ar.edu.utn.frba.dds.entity.TransportType;
 import ar.edu.utn.frba.dds.incident.Incident;
 import ar.edu.utn.frba.dds.incident.IncidentPerCommunity;
 import ar.edu.utn.frba.dds.ranking.AverageClosingTimeRanking;
@@ -26,6 +29,18 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 
 public class RelationalDatabasePersistenceSystem implements WithSimplePersistenceUnit {
+
+  //--------------------------------------------------------------------------------------------
+  //USERS
+  //--------------------------------------------------------------------------------------------
+  public List<User> users() {
+    return entityManager().createQuery("from " + User.class.getName()).getResultList();
+  }
+
+  public User userIdentifiedBy(Integer anUserId) {
+    return entityManager().find(User.class, anUserId);
+  }
+
   public void startManagingUser(User anUser) {
     EntityTransaction transaction = entityManager().getTransaction();
 
@@ -58,14 +73,6 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
     transaction.commit();
   }
 
-  public List<User> users() {
-    return entityManager().createQuery("from " + User.class.getName()).getResultList();
-  }
-
-  public User userIdentifiedBy(Integer anUserId) {
-    return entityManager().find(User.class, anUserId);
-  }
-
   public User userNamed(String anUserName) {
     try {
       return entityManager().createQuery(
@@ -81,6 +88,65 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
   public List<UserDetail> userDetails() {
     return entityManager().createQuery("from " + UserDetail.class.getName()).getResultList();
   }
+
+  //--------------------------------------------------------------------------------------------
+  //ENTITY-TYPE
+  //--------------------------------------------------------------------------------------------
+  public List<EntityType> entityTypes() {
+    return entityManager().createQuery("from " + EntityType.class.getName()).getResultList();
+  }
+
+  public void startManagingEntityType(EntityType object) {
+    EntityTransaction transaction = entityManager().getTransaction();
+    transaction.begin();
+    entityManager().persist(object);
+    transaction.commit();
+  }
+
+  public void stopManagingEntityType(EntityType object) {
+    EntityTransaction transaction = entityManager().getTransaction();
+    transaction.begin();
+    entityManager().remove(object);
+    transaction.commit();
+  }
+
+  //--------------------------------------------------------------------------------------------
+  //TRANSPORTATION-TYPE
+  //--------------------------------------------------------------------------------------------
+  public List<TransportType> transportTypes() {
+    return entityManager().createQuery("from " + TransportType.class.getName()).getResultList();
+  }
+
+  public void startManagingTransportType(TransportType object) {
+    EntityTransaction transaction = entityManager().getTransaction();
+    transaction.begin();
+    entityManager().persist(object);
+    transaction.commit();
+  }
+
+  public void stopManagingEntityType(TransportType object) {
+    EntityTransaction transaction = entityManager().getTransaction();
+    transaction.begin();
+    entityManager().remove(object);
+    transaction.commit();
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   public void startManagingElevator(Elevator anElevator) {
     EntityTransaction transaction = entityManager().getTransaction();

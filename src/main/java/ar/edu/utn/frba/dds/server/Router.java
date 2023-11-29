@@ -14,6 +14,9 @@ public class Router {
     return Server.app();
   }
 
+  //--------------------------------------------------------------------------------------------
+  //PRINCIPALES
+  //--------------------------------------------------------------------------------------------
   private static void initializeHomeEndpointsOn(
       Javalin app,
       ApplicationContext applicationContext) {
@@ -41,6 +44,9 @@ public class Router {
     app.get("/logout", new LogoutViewController(applicationContext)::index);
   }
 
+  //--------------------------------------------------------------------------------------------
+  //USUARIO
+  //--------------------------------------------------------------------------------------------
   private static void initializeUserEndpointsOn(
       Javalin app,
       ApplicationContext applicationContext) {
@@ -53,6 +59,81 @@ public class Router {
     app.get("/users/{id}/delete",
         new UserViewController(applicationContext)::delete, ADMINISTRADOR);
   }
+
+  //--------------------------------------------------------------------------------------------
+  //PARAMETRIA
+  //--------------------------------------------------------------------------------------------
+  private static void initializeEntityTypeEndpointsOn(
+          Javalin app,
+          ApplicationContext applicationContext) {
+
+    app.get("/entity-type",
+            new EntityTypeViewController(applicationContext)::index, ADMINISTRADOR, ENTIDAD);
+    app.get("/entity-type/register",
+            new EntityTypeViewController(applicationContext)::create, ADMINISTRADOR, ENTIDAD);
+    app.post("/entity-type",
+            new EntityTypeViewController(applicationContext)::save, ADMINISTRADOR, ENTIDAD);
+
+  }
+
+  private static void initializeTransportationTypeEndpointsOn(
+          Javalin app,
+          ApplicationContext applicationContext) {
+
+    app.get("/transportation-type",
+            new TransportationTypeViewController(applicationContext)::index, ADMINISTRADOR, ENTIDAD);
+    app.get("/transportation-type/register",
+            new TransportationTypeViewController(applicationContext)::create, ADMINISTRADOR, ENTIDAD);
+    app.post("/transportation-type",
+            new TransportationTypeViewController(applicationContext)::save, ADMINISTRADOR, ENTIDAD);
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+  private static void initializeEntitiesEndpointsOn(
+          Javalin app,
+          ApplicationContext applicationContext) {
+
+    app.get("/entities", new EntityViewController(applicationContext)::index,
+            ADMINISTRADOR, ENTIDAD);
+    app.get("/entities/register",
+            new EntityViewController(applicationContext)::create, ADMINISTRADOR, ENTIDAD);
+    app.post("/entities",
+            new EntityViewController(applicationContext)::save, ADMINISTRADOR, ENTIDAD);
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   private static void initializeServiceEndpointsOn(
       Javalin app,
@@ -100,20 +181,7 @@ public class Router {
 
   }
 
-  private static void initializeEntitiesEndpointsOn(
-          Javalin app,
-          ApplicationContext applicationContext) {
-
-    app.get("/entities", new EntityViewController(applicationContext)::index,
-            ADMINISTRADOR, ENTIDAD);
-    app.get("/entities/register",
-            new EntityViewController(applicationContext)::create, ADMINISTRADOR, ENTIDAD);
-    app.post("/entities",
-            new EntityViewController(applicationContext)::save, ADMINISTRADOR, ENTIDAD);
-
-  }
-
-  private static void initializeEndpoints() throws Exception {
+    private static void initializeEndpoints() throws Exception {
 
     Javalin app = app();
 
@@ -121,10 +189,17 @@ public class Router {
 
     initializeHomeEndpointsOn(app, applicationContext);
     initializeAdministrationEndpointsOn(app, applicationContext);
+
     initializeLoginEndpointsOn(app, applicationContext);
     initializeLogoutEndpointsOn(app, applicationContext);
-
     initializeUserEndpointsOn(app, applicationContext);
+
+    initializeEntityTypeEndpointsOn(app, applicationContext);
+    initializeTransportationTypeEndpointsOn(app, applicationContext);
+
+
+
+
     initializeServiceEndpointsOn(app, applicationContext);
     initializeIncidentEndpointsOn(app, applicationContext);
     initializeServiceHolderEndpointsOn(app, applicationContext);

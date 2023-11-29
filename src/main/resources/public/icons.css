@@ -1,11 +1,5 @@
 @charset "UTF-8";
-/*
-Template Name: Hyper - Responsive Bootstrap 5 Admin Dashboard
-Version: 1.6.0
-Author: CoderThemes
-Email: support@coderthemes.com
-File: Icons Css File
-*/
+
 @font-face {
   font-family: "unicons";
   src: url("../fonts/unicons.eot?34404611");
@@ -13,16 +7,7 @@ File: Icons Css File
   font-weight: normal;
   font-style: normal;
 }
-/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
-/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
-/*
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-  @font-face {
-    font-family: 'unicons';
-    src: url('../font/unicons.svg?34404611#unicons') format('svg');
-  }
-}
-*/
+
 [class^=uil-]:before, [class*=" uil-"]:before {
   font-family: "unicons";
   font-style: normal;

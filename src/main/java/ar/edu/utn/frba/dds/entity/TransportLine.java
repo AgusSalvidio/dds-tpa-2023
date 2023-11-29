@@ -12,30 +12,22 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-@javax.persistence.Entity
-@Table(name = "transport_line")
+@Setter
+@Getter
 public class TransportLine extends Entity {
   @Id
   @GeneratedValue
-  @Setter
-  @Getter
   Integer id;
 
-  @Setter
-  @Getter
-  @OneToOne
-  @JoinColumn(name = "departure_id", referencedColumnName = "id")
+  //@OneToOne
+  //@JoinColumn(name = "departure_id", referencedColumnName = "id")
   public Establishment departure;
 
-  @Setter
-  @Getter
-  @OneToOne
-  @JoinColumn(name = "arrival_id", referencedColumnName = "id")
+  //@OneToOne
+  //@JoinColumn(name = "arrival_id", referencedColumnName = "id")
   public Establishment arrival;
 
-  @Setter
-  @Getter
-  @Enumerated(EnumType.STRING)
+  //@Enumerated(EnumType.STRING)
   public Direction direction;
 
   public static TransportLine composedOf(

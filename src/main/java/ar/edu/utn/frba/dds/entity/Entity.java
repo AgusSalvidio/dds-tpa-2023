@@ -10,29 +10,29 @@ import ar.edu.utn.frba.dds.serviceholder.Company;
 import lombok.Getter;
 import lombok.Setter;
 
+@javax.persistence.Entity
 @Table(name = "entity")
+@Getter
+@Setter
 public abstract class Entity {
 
   @Id
   @GeneratedValue
   Integer id;
 
-  @Getter
-  @Setter
   @Transient
   public EntityType type;
 
-  @Getter
-  @Setter
   public String name;
 
-  @OneToMany
-  @JoinColumn(name = "establishment_id", referencedColumnName = "id")
+  @Transient
+  //@OneToMany
+  //@JoinColumn(name = "establishment_id", referencedColumnName = "id")
   public List<Establishment> establishments;
 
-  @Getter
-  @OneToMany
-  @JoinColumn(name = "incident_id", referencedColumnName = "id")
+  @Transient
+  //@OneToMany
+  //@JoinColumn(name = "incident_id", referencedColumnName = "id")
   public List<Incident> incidents;
 
   public Entity() {
@@ -52,7 +52,6 @@ public abstract class Entity {
     //return this.name.getName();
     return this.name();
   }
-
 
   public void addNewIncident(Incident newIncident) {
     this.incidents.add(newIncident);

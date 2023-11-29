@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{{headMeta}}}
+</head>
+
+<body>
+    <header>
+        {{{customAdministrationNavbar}}}
+    </header>
+
+<main>
+    <div class="d-flex justify-content-end p-2">
+        <legend class="">A/E de Tipo de Entidades</legend>
+        <a class="btn btn-success" href="/entity-type/register"><i class="fa-regular fa-file"></i> Agregar</a>
+    </div>
+
+    <section>
+        <div class="px-1">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {{#each entity-types}}
+                            <tr>
+                                <td>{{this.id}}</td>
+                                <td>{{this.name}}</td>
+                                <td class="px-4">
+                                    <a href="/users/{{this.id}}/edit" class="btn-sm ">
+                                        <i class="fa-regular fa-pen-to-square"></i>
+                                    </a>
+                                    <a href="/users/{{this.id}}/delete" class="btn-sm ">
+                                        <i class="fa-solid fa-xmark" style="color:red"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        {{else}}
+                            <tr>
+                                <td colspan="6">No hay Tipo de Entidades</td>
+                            </tr>
+                        {{/each}}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</main>
+
+<footer>
+</footer>
+{{{scripts}}}
+</body>
+</html>
