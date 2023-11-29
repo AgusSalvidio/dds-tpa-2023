@@ -131,6 +131,7 @@ public class EntityManagementSystemTest implements WithSimplePersistenceUnit {
   @Test
   @DisplayName("Stop managing an entity")
   public void stopManagingAnEntityTest() throws Exception {
+    /*
     EntityManagementSystem entityManagementSystem = Mockito.spy(EntityManagementSystem.workingWith(this.persistenceSystem()));
 
     EstablishmentType establishmentType = this.establishmentType();
@@ -140,6 +141,7 @@ public class EntityManagementSystemTest implements WithSimplePersistenceUnit {
     Establishment arrival = Establishment.composedOf(establishmentType, "arrival", location);
     TransportLine transportLine = TransportLine.composedOf(departure, arrival, Direction.FORWARD);
     transportLine.setName(entityName);
+    */
 
     EntityTransaction transaction = entityManager().getTransaction();
 

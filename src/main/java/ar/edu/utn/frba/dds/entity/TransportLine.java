@@ -2,31 +2,26 @@ package ar.edu.utn.frba.dds.entity;
 
 import ar.edu.utn.frba.dds.establishment.Establishment;
 import java.util.ArrayList;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 import lombok.Getter;
 import lombok.Setter;
 
 @Setter
 @Getter
 public class TransportLine extends Entity {
-  @Id
-  @GeneratedValue
-  Integer id;
 
+  @Transient
   //@OneToOne
   //@JoinColumn(name = "departure_id", referencedColumnName = "id")
   public Establishment departure;
 
+  @Transient
   //@OneToOne
   //@JoinColumn(name = "arrival_id", referencedColumnName = "id")
   public Establishment arrival;
 
+  @Transient
   //@Enumerated(EnumType.STRING)
   public Direction direction;
 

@@ -2,11 +2,11 @@ package ar.edu.utn.frba.dds.persistencesystem;
 
 import ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole;
 import ar.edu.utn.frba.dds.community.Community;
-import ar.edu.utn.frba.dds.controller.view.TransportationTypeViewController;
 import ar.edu.utn.frba.dds.entity.Entity;
 import ar.edu.utn.frba.dds.entity.EntityType;
 import ar.edu.utn.frba.dds.entity.TransportLine;
 import ar.edu.utn.frba.dds.entity.TransportType;
+import ar.edu.utn.frba.dds.establishment.EstablishmentType;
 import ar.edu.utn.frba.dds.incident.Incident;
 import ar.edu.utn.frba.dds.incident.IncidentPerCommunity;
 import ar.edu.utn.frba.dds.ranking.AverageClosingTimeRanking;
@@ -23,8 +23,6 @@ import ar.edu.utn.frba.dds.user.User;
 import ar.edu.utn.frba.dds.user.UserDetail;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 
@@ -90,6 +88,49 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
   }
 
   //--------------------------------------------------------------------------------------------
+  //GENERIC
+  //--------------------------------------------------------------------------------------------
+  public List<Object> objectList(String className) {
+    return entityManager().createQuery("from " + className).getResultList();
+  }
+
+  public void startManaging(Object object) {
+    EntityTransaction transaction = entityManager().getTransaction();
+    transaction.begin();
+    entityManager().persist(object);
+    transaction.commit();
+  }
+
+  public void stopManaging(Object object) {
+    EntityTransaction transaction = entityManager().getTransaction();
+    transaction.begin();
+    entityManager().remove(object);
+    transaction.commit();
+  }
+
+  //--------------------------------------------------------------------------------------------
+  //GET BY ID
+  //--------------------------------------------------------------------------------------------
+  public EntityType entityTypeById(Integer id) {
+    return entityManager().find(EntityType.class, id);
+  }
+
+  public EstablishmentType establishmentTypeById(Integer id) { return entityManager().find(EstablishmentType.class, id); }
+
+  public TransportType transportTypeById(Integer id) {
+    return entityManager().find(TransportType.class, id);
+  }
+
+  public Entity entityById(Integer id) {
+    return entityManager().find(Entity.class, id);
+  }
+
+
+
+
+
+
+  //--------------------------------------------------------------------------------------------
   //ENTITY-TYPE
   //--------------------------------------------------------------------------------------------
   public List<EntityType> entityTypes() {
@@ -124,7 +165,7 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
     transaction.commit();
   }
 
-  public void stopManagingEntityType(TransportType object) {
+  public void stopManagingTransportType(TransportType object) {
     EntityTransaction transaction = entityManager().getTransaction();
     transaction.begin();
     entityManager().remove(object);

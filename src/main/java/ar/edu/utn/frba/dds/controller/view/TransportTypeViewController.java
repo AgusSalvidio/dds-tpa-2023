@@ -2,33 +2,25 @@ package ar.edu.utn.frba.dds.controller.view;
 
 import ar.edu.utn.frba.dds.applicationcontext.ApplicationContext;
 import ar.edu.utn.frba.dds.datafile.DataFile;
-import ar.edu.utn.frba.dds.datafile.Field;
-import ar.edu.utn.frba.dds.datafile.FieldNumber;
 import ar.edu.utn.frba.dds.datafile.FieldString;
 import ar.edu.utn.frba.dds.datafile.FileDelimited;
-import ar.edu.utn.frba.dds.entity.EntityType;
-import ar.edu.utn.frba.dds.notification.notificationmean.NotificationType;
-import ar.edu.utn.frba.dds.user.User;
-import ar.edu.utn.frba.dds.user.UserDetail;
+import ar.edu.utn.frba.dds.entity.TransportType;
 import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
 import io.javalin.util.FileUtil;
-
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-public class EntityTypeViewController {
+public class TransportTypeViewController {
 
     ApplicationContext applicationContext;
-    String pageTitle = "A/E de Tipo de Entidades";
-    String actionString = "entity-type";
+    String pageTitle = "A/E de Tipo de Transportes";
+    String actionString = "transport-type";
     String listPage = "parameters/parameters.hbs";
     String unitPage = "parameters/parameters-registration.hbs";
-    String fileName = "entity-type.csv";
+    String fileName = "transport-type.csv";
 
-    public EntityTypeViewController(ApplicationContext applicationContext) {
+    public TransportTypeViewController(ApplicationContext applicationContext) {
         super();
         this.applicationContext = applicationContext;
     }
@@ -38,7 +30,7 @@ public class EntityTypeViewController {
         model.put("title", pageTitle);
         model.put("user", this.applicationContext.loggedUser(context));
         model.put("action", actionString);
-        model.put("object-list", this.applicationContext.entityTypeManagementSystem().objectList(EntityType.class.getName()));
+        model.put("object-list", this.applicationContext.transportTypeManagementSystem().objectList(TransportType.class.getName()));
         context.render(listPage, model);
     }
 
@@ -54,7 +46,7 @@ public class EntityTypeViewController {
 
     public void edit(Context context) throws Exception {
         Map<String, Object> model = new HashMap<>();
-        EntityType object = this.applicationContext.entityTypeManagementSystem().entityTypeById(Integer.parseInt(context.pathParam("id")));
+        TransportType object = this.applicationContext.transportTypeManagementSystem().transportTypeById(Integer.parseInt(context.pathParam("id")));
         model.put("title", pageTitle);
         model.put("user", this.applicationContext.loggedUser(context));
         model.put("action", actionString);
@@ -64,18 +56,18 @@ public class EntityTypeViewController {
     }
 
     public void save(Context context) throws Exception {
-        EntityType object = new EntityType();
+        TransportType object = new TransportType();
         object.name = context.formParam("name");
-        this.applicationContext.entityTypeManagementSystem().startManaging(object);
+        this.applicationContext.transportTypeManagementSystem().startManaging(object);
         context.status(HttpStatus.CREATED);
         context.redirect(actionString);
     }
 
     public void update(Context context) throws Exception {
-        EntityType object = this.applicationContext.entityTypeManagementSystem().entityTypeById(Integer.parseInt(context.pathParam("id")));
+        TransportType object = this.applicationContext.transportTypeManagementSystem().transportTypeById(Integer.parseInt(context.pathParam("id")));
         object.setId(Integer.parseInt(context.pathParam("id")));
         object.name = context.formParam("name");
-        this.applicationContext.entityTypeManagementSystem().startManaging(object);
+        this.applicationContext.transportTypeManagementSystem().startManaging(object);
         context.status(HttpStatus.CREATED);
         context.redirect(actionString);
     }

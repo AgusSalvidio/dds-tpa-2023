@@ -5,6 +5,7 @@
 </head>
 
 <body>
+
     <header>
         {{{customAdministrationNavbar}}}
     </header>
@@ -14,41 +15,42 @@
             <legend class="">{{title}}</legend>
             <a class="btn btn-success" href="/{{action}}/register"><i class="fa-regular fa-file"></i> Agregar</a>
         </div>
+
         <section>
             <div class="px-1">
                 <div class="row">
                     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                        <table class=" table table-striped" >
+                        <table class="table table-striped">
                             <thead>
                                 <tr>
                                     <th class="col-2">ID</th>
-                                    <th class="col-5">Nombre</th>
-                                    <th class="col-4">Descripcion</th>
+                                    <th class="col-9">Nombre</th>
                                     <th class="col-1"></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {{#each entities}}
-                                    <tr>
-                                        <td>{{this.id}}</td>
-                                        <td>{{this.name}}</td>
-                                        <td>{{this.name}}</td>
-                                        <td class="px-4">
-                                            <a href="" class="btn-sm "><i class="fa-regular fa-pen-to-square"></i></a>
-                                            <a href="" class="btn-sm "><i class="fa-solid fa-xmark"></i></a>
-                                        </td>
-                                    </tr>
+                            {{#each object-list}}
+                                <tr>
+                                    <td>{{this.id}}</td>
+                                    <td>{{this.name}}</td>
+                                    <td class="px-4">
+                                        <a href="/entity-type/{{this.id}}/edit" class="btn-sm ">
+                                            <i class="fa-regular fa-pen-to-square"></i>
+                                        </a>
+                                        <a href="/entity-type/{{this.id}}/delete" class="btn-sm ">
+                                            <i class="fa-solid fa-xmark" style="color:red"></i>
+                                        </a>
+                                    </td>
+                                </tr>
                             {{else}}
                                 <tr>
-                                    <td colspan="6">No hay entidades</td>
+                                    <td colspan="6">No hay Registros en el Sistema</td>
                                 </tr>
                             {{/each}}
-
                             </tbody>
                         </table>
                     </div>
                 </div>
-
             </div>
         </section>
     </main>

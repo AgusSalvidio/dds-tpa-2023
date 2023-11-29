@@ -100,3 +100,25 @@ body {
     background-color: #FFFFFF;
 }
 
+table,
+th,
+td,
+tr {
+    border: 1px solid #092d69;
+    border-collapse: collapse;
+    transition: 0.4s;
+    text-align: center;
+}
+
+.table th {
+    background-color: #3393ff;
+}
+
+tr:hover {
+    background-color: #eeeded;
+}
+
+th {
+    background-color: #e7aa3d;
+    color: #092d69;
+}

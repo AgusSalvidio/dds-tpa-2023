@@ -15,7 +15,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public abstract class Entity {
-
   @Id
   @GeneratedValue
   Integer id;
@@ -31,8 +30,6 @@ public abstract class Entity {
   public List<Establishment> establishments;
 
   @Transient
-  //@OneToMany
-  //@JoinColumn(name = "incident_id", referencedColumnName = "id")
   public List<Incident> incidents;
 
   public Entity() {

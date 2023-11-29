@@ -1,20 +1,42 @@
 package ar.edu.utn.frba.dds.managementsystem;
 
+import ar.edu.utn.frba.dds.entity.TransportType;
 import ar.edu.utn.frba.dds.eventnotificationsystem.notifiableevent.NotifiableEvent;
 import ar.edu.utn.frba.dds.persistencesystem.PersistenceSystem;
+import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
+import ar.edu.utn.frba.dds.user.User;
 
-public interface ManagementSystem {
-  private PersistenceSystem persistenceSystem() throws Exception {
-    throw new Exception("Subclass responsability");
+import java.util.List;
+
+public abstract class ManagementSystem {
+
+  RelationalDatabasePersistenceSystem persistenceSystem;
+
+  String myTypeDescription;
+
+  public ManagementSystem(RelationalDatabasePersistenceSystem persistenceSystem) {
+    this.persistenceSystem = persistenceSystem;
+    myTypeDescription = "";
   }
 
-  public String typeDescription();
+  public String typeDescripction() {
+    return this.myTypeDescription;
+  }
 
-  public void startManaging(Object anObject);
+  private RelationalDatabasePersistenceSystem persistenceSystem() {
+    return this.persistenceSystem;
+  }
 
-  public void stopManaging(Object anObject);
+  public List<Object> objectList(String className) {
+    return this.persistenceSystem.objectList(className);
+  }
 
-  public void updateWith(Object currentObject, Object updatedObject);
+  public void startManaging(Object object) {
+    this.persistenceSystem.startManaging(object);
+  }
 
-  public void receiveFrom(NotifiableEvent event, Object publisher);
+  public void stopManagingEntityType(Object object) {
+    this.persistenceSystem.stopManaging(object);
+  }
+
 }

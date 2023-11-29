@@ -9,20 +9,18 @@ import lombok.Setter;
 
 //@javax.persistence.Entity
 //@Table(name = "entity_incident_summary")
+@Setter
+@Getter
 public class EntityIncidentSummary {
   @Id
   @GeneratedValue
-  @Setter
-  @Getter
   Integer id;
 
-  @Getter
   //@ManyToOne
   //@JoinColumn(name = "entity_id", referencedColumnName = "id")
   //@JoinTable(name = "entity", joinColumns = { @JoinColumn(name = "entity_id", referencedColumnName = "id") })
   public Entity entity;
 
-  @Getter
   //@OneToOne
   public IncidentPerCommunity incidentPerCommunity;
 

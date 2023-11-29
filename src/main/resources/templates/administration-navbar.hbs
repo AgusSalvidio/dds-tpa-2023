@@ -16,7 +16,16 @@
                         {{#if (hasAdminAccess user.authorizationRole)}}
                             <ul class="dropdown-menu">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/entities">Entidades</a>
+                                    <a class="nav-link" href="/organizations">Organizaciones</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/transport-lines">Lineas de Transporte</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/service-holders">Grupos de Entidades</a>
+                                </li>
+                                <li class="nav-item">
+                                    <hr />
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="/establismens">Establecimientos</a>
@@ -28,9 +37,8 @@
                                     <a class="nav-link" href="/services">Servicios</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/service-holders">Grupos de Entidades</a>
+                                    <hr />
                                 </li>
-                                <hr />
                                 <li class="nav-left">
                                     <a class="nav-link" href="/users">Comunidades</a>
                                 </li>
@@ -50,7 +58,10 @@
                                     <a class="nav-link" href="/entity-type">Tipo de Entidades</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/transtprtation-type">Tipo de Transporte</a>
+                                    <a class="nav-link" href="/establishment-type">Tipo de Establecimientos</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/transport-type">Tipo de Transporte</a>
                                 </li>
                             </ul>
                         {{/if}}

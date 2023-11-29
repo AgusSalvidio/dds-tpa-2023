@@ -6,29 +6,30 @@ import ar.edu.utn.frba.dds.datafile.Field;
 import ar.edu.utn.frba.dds.datafile.FieldNumber;
 import ar.edu.utn.frba.dds.datafile.FieldString;
 import ar.edu.utn.frba.dds.datafile.FileDelimited;
+import ar.edu.utn.frba.dds.entity.Entity;
+import ar.edu.utn.frba.dds.entity.TransportLine;
+import ar.edu.utn.frba.dds.entity.Direction;
+import ar.edu.utn.frba.dds.entity.EntityName;
 import ar.edu.utn.frba.dds.entity.EntityType;
-import ar.edu.utn.frba.dds.notification.notificationmean.NotificationType;
 import ar.edu.utn.frba.dds.user.User;
-import ar.edu.utn.frba.dds.user.UserDetail;
 import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
 import io.javalin.util.FileUtil;
-
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class EntityTypeViewController {
+public class TransportLineViewController {
 
     ApplicationContext applicationContext;
-    String pageTitle = "A/E de Tipo de Entidades";
-    String actionString = "entity-type";
-    String listPage = "parameters/parameters.hbs";
-    String unitPage = "parameters/parameters-registration.hbs";
-    String fileName = "entity-type.csv";
 
-    public EntityTypeViewController(ApplicationContext applicationContext) {
+    String pageTitle = "A/E de Lineas de Transporte";
+    String actionString = "transport-lines";
+    String listPage = "entities/entities.hbs";
+    String unitPage = "entities/transport-lines-registration.hbs";
+    String fileName = "entity.csv";
+
+    public TransportLineViewController(ApplicationContext applicationContext) {
         super();
         this.applicationContext = applicationContext;
     }
@@ -38,7 +39,7 @@ public class EntityTypeViewController {
         model.put("title", pageTitle);
         model.put("user", this.applicationContext.loggedUser(context));
         model.put("action", actionString);
-        model.put("object-list", this.applicationContext.entityTypeManagementSystem().objectList(EntityType.class.getName()));
+        model.put("object-list", this.applicationContext.entityTypeManagementSystem().objectList(Entity.class.getName()));
         context.render(listPage, model);
     }
 
@@ -54,7 +55,7 @@ public class EntityTypeViewController {
 
     public void edit(Context context) throws Exception {
         Map<String, Object> model = new HashMap<>();
-        EntityType object = this.applicationContext.entityTypeManagementSystem().entityTypeById(Integer.parseInt(context.pathParam("id")));
+        Entity object = this.applicationContext.entityManagementSystem().entityById(Integer.parseInt(context.pathParam("id")));
         model.put("title", pageTitle);
         model.put("user", this.applicationContext.loggedUser(context));
         model.put("action", actionString);
@@ -64,18 +65,20 @@ public class EntityTypeViewController {
     }
 
     public void save(Context context) throws Exception {
-        EntityType object = new EntityType();
+        /*
+        Entity object = new Entity();
         object.name = context.formParam("name");
-        this.applicationContext.entityTypeManagementSystem().startManaging(object);
+        this.applicationContext.entityManagementSystem().startManaging(object);
         context.status(HttpStatus.CREATED);
         context.redirect(actionString);
+        */
     }
 
     public void update(Context context) throws Exception {
-        EntityType object = this.applicationContext.entityTypeManagementSystem().entityTypeById(Integer.parseInt(context.pathParam("id")));
+        Entity object = this.applicationContext.entityManagementSystem().entityById(Integer.parseInt(context.pathParam("id")));
         object.setId(Integer.parseInt(context.pathParam("id")));
         object.name = context.formParam("name");
-        this.applicationContext.entityTypeManagementSystem().startManaging(object);
+        this.applicationContext.entityManagementSystem().startManaging(object);
         context.status(HttpStatus.CREATED);
         context.redirect(actionString);
     }
@@ -91,7 +94,7 @@ public class EntityTypeViewController {
     }
 
     public void save_massive(Context context) throws Exception {
-
+        /*
         context.uploadedFiles("files").forEach(uploadedFile ->
                 FileUtil.streamToFile(uploadedFile.content(), "./src/main/resources/upload/" + fileName));
 
@@ -106,5 +109,7 @@ public class EntityTypeViewController {
         //Set Source Fields
         dataFile.addField(new FieldString(0, "Type", 255));
         dataFile.addField(new FieldString(1, "Name", 255));
+        */
     }
+
 }

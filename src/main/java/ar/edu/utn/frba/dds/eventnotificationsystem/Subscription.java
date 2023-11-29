@@ -21,7 +21,7 @@ public class Subscription {
   }
 
   public void receiveFrom(NotifiableEvent event, Object publisher) {
-    this.subscriber.receiveFrom(event, publisher);
+    //this.subscriber.receiveFrom(event, publisher);
   }
 
 }

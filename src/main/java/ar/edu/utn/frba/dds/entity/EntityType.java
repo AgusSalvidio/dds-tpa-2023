@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.entity;
 import javax.persistence.*;
 import javax.persistence.Entity;
 
+import ar.edu.utn.frba.dds.user.User;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,3 +19,4 @@ public class EntityType {
   @Column(name = "name")
   public String name;
 }
+

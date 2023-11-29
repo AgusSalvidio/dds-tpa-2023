@@ -7,7 +7,7 @@ import javax.persistence.*;
 import javax.persistence.Entity;
 
 @Entity
-@Table(name = "transportation_type")
+@Table(name = "transport_type")
 @Getter
 @Setter
 public class TransportType {

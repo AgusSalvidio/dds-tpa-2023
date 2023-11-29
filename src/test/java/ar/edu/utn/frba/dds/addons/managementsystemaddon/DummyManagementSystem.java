@@ -4,7 +4,7 @@ import ar.edu.utn.frba.dds.eventnotificationsystem.EventNotificationSystem;
 import ar.edu.utn.frba.dds.eventnotificationsystem.notifiableevent.NotifiableEvent;
 import ar.edu.utn.frba.dds.managementsystem.ManagementSystem;
 
-public class DummyManagementSystem implements ManagementSystem {
+public class DummyManagementSystem {
 
   Boolean wasNotified = false;
   EventNotificationSystem eventNotificationSystem;
