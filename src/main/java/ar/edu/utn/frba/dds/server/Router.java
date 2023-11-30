@@ -59,7 +59,7 @@ public class Router {
   }
 
   //--------------------------------------------------------------------------------------------
-  //USUARIO
+  //USUARIOS
   //--------------------------------------------------------------------------------------------
   private static void initializeUserEndpointsOn(
       Javalin app,
@@ -78,6 +78,23 @@ public class Router {
     app.get("/users/{id}/delete",
         new UserViewController(applicationContext)::delete, ADMINISTRADOR);
   }
+
+  //--------------------------------------------------------------------------------------------
+  //SERVICIOS
+  //--------------------------------------------------------------------------------------------
+  private static void initializeServiceEndpointsOn(
+          Javalin app,
+          ApplicationContext applicationContext) {
+
+    app.get("/services", new ServiceViewController(applicationContext)::index,
+            ADMINISTRADOR, ENTIDAD);
+    app.get("/services/register",
+            new ServiceViewController(applicationContext)::create, ADMINISTRADOR, ENTIDAD);
+    app.post("/services", new ServiceViewController(applicationContext)::save,
+            ADMINISTRADOR, ENTIDAD);
+  }
+
+
 
   //--------------------------------------------------------------------------------------------
   //PARAMETRIA
@@ -210,17 +227,7 @@ public class Router {
   }
 
 
-  private static void initializeServiceEndpointsOn(
-      Javalin app,
-      ApplicationContext applicationContext) {
 
-    app.get("/services", new ServiceViewController(applicationContext)::index,
-        ADMINISTRADOR, ENTIDAD);
-    app.get("/services/register",
-        new ServiceViewController(applicationContext)::create, ADMINISTRADOR, ENTIDAD);
-    app.post("/services", new ServiceViewController(applicationContext)::save,
-        ADMINISTRADOR, ENTIDAD);
-  }
 
   private static void initializeIncidentEndpointsOn(
       Javalin app,
@@ -263,12 +270,15 @@ public class Router {
     ApplicationContext applicationContext = new ApplicationContext();
 
     //Principales
-    initializeHomeEndpointsOn(app, applicationContext);
-    initializeAdministrationEndpointsOn(app, applicationContext);
-    initializeLoginEndpointsOn(app, applicationContext);
-    initializeLogoutEndpointsOn(app, applicationContext);
-    //Usuario
-    initializeUserEndpointsOn(app, applicationContext);
+    initializeHomeEndpointsOn(app, applicationContext);           //OK
+    initializeAdministrationEndpointsOn(app, applicationContext); //OK
+    initializeLoginEndpointsOn(app, applicationContext);          //OK
+    initializeLogoutEndpointsOn(app, applicationContext);         //OK
+    //Usuarios
+    initializeUserEndpointsOn(app, applicationContext);           //OK
+    //Servicios
+    initializeServiceEndpointsOn(app, applicationContext);
+    /*
     //Parametricas
     initializeEntityTypeEndpointsOn(app, applicationContext);
     initializeEstablishmentTypeEndpointsOn(app, applicationContext);
@@ -277,14 +287,14 @@ public class Router {
     initializeEntitiesEndpointsOn(app, applicationContext);
     initializeOrganizationEndpointsOn(app, applicationContext);
     initializeTransportLinesEndpointsOn(app, applicationContext);
-    //Ranking
+    //Rankings
     initializeRankingEndpointsOn(app, applicationContext);
 
 
     initializeServiceEndpointsOn(app, applicationContext);
     initializeIncidentEndpointsOn(app, applicationContext);
     initializeServiceHolderEndpointsOn(app, applicationContext);
-
+    */
   }
 
   public static void initialize() throws Exception {

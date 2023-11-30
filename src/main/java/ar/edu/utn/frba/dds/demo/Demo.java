@@ -159,6 +159,38 @@ public class Demo {
     return state;
   }
 
+  public Elevator elevatorA() {
+    return Elevator.composedOf("Ascensor Principal", "Ascensor Principal", this.inServiceState());
+  }
+
+  public Elevator elevatorB() {
+    return Elevator.composedOf("Ascensor Secundario",
+            "Ascensor Secundario", this.notInServiceState());
+  }
+
+  public Escalator escalatorA() {
+    return Escalator.composedOf("Escalera Mecanica Adaptada",
+            "Escalera Mecanica Adaptada", this.notInServiceState());
+  }
+
+  public Escalator escalatorB() {
+    return Escalator.composedOf("Escalera Nueva", "Escalera Nueva", this.inServiceState());
+  }
+
+  public Toilet toiletA() {
+    return Toilet.composedOf("Toilet Primer Piso",
+            "Toilet Primer Piso", this.inServiceState());
+  }
+
+  public Toilet toiletB() {
+    return Toilet.composedOf("Toilet Segundo Piso",
+            "Toilet Segundo Piso", this.notInServiceState());
+  }
+
+
+
+  //*************************************************
+
   public State openIncident() {
     State state = State.composedOf("OPEN", "Open Incident");
     return state;
@@ -169,33 +201,7 @@ public class Demo {
     return state;
   }
 
-  public Elevator elevatorA() {
-    return Elevator.composedOf("Ascensor Principal", "Ascensor Principal", this.inServiceState());
-  }
 
-  public Elevator elevatorB() {
-    return Elevator.composedOf("Ascensor Secundario",
-        "Ascensor Secundario", this.notInServiceState());
-  }
-
-  public Escalator escalatorA() {
-    return Escalator.composedOf("Escalera Mecanica Adaptada",
-        "Escalera Mecanica Adaptada", this.notInServiceState());
-  }
-
-  public Escalator escalatorB() {
-    return Escalator.composedOf("Escalera Nueva", "Escalera Nueva", this.inServiceState());
-  }
-
-  public Toilet toiletA() {
-    return Toilet.composedOf("Toilet Primer Piso",
-        "Toilet Primer Piso", this.inServiceState());
-  }
-
-  public Toilet toiletB() {
-    return Toilet.composedOf("Toilet Segundo Piso",
-        "Toilet Segundo Piso", this.notInServiceState());
-  }
 
   private LocalDateTime curentDateTime() {
     return LocalDateTime.of(2023, 7, 2, 23, 40);
@@ -543,8 +549,19 @@ public class Demo {
   }
   */
   public void initialize(RelationalDatabasePersistenceSystem persistenceSystem) throws Exception {
-    persistenceSystem.startManagingUser(this.hugo());
-    persistenceSystem.startManagingUser(this.basura1());
-    persistenceSystem.startManagingUser(this.basura2());
+    //USERS
+    persistenceSystem.startManaging(this.hugo());
+    persistenceSystem.startManaging(this.basura1());
+    persistenceSystem.startManaging(this.basura2());
+    //SERVICES & STATES
+    persistenceSystem.startManaging(this.inServiceState());
+    persistenceSystem.startManaging(this.notInServiceState());
+    persistenceSystem.startManaging(this.elevatorA());
+    persistenceSystem.startManaging(this.elevatorB());
+    persistenceSystem.startManaging(this.escalatorA());
+    persistenceSystem.startManaging(this.escalatorB());
+    persistenceSystem.startManaging(this.toiletA());
+    persistenceSystem.startManaging(this.toiletB());
+
   }
 }

@@ -4,7 +4,6 @@ import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem
 import ar.edu.utn.frba.dds.service.Elevator;
 import ar.edu.utn.frba.dds.service.Escalator;
 import ar.edu.utn.frba.dds.service.Service;
-import ar.edu.utn.frba.dds.service.ServiceType;
 import ar.edu.utn.frba.dds.service.State;
 import ar.edu.utn.frba.dds.service.Toilet;
 import java.util.List;
@@ -25,49 +24,44 @@ public class ServiceManagementSystem {
     return this.persistenceSystem;
   }
 
-  public static ServiceManagementSystem workingWith(
-      RelationalDatabasePersistenceSystem persistenceSystem) {
-    return new ServiceManagementSystem(persistenceSystem);
-  }
-
-  public void startManagingElevator(Elevator anElevator) {
-    this.persistenceSystem().startManagingElevator(anElevator);
-  }
-
-  public void startManagingEscalator(Escalator anEscalator) {
-    this.persistenceSystem().startManagingEscalator(anEscalator);
-  }
-
-  public void startManagingToilet(Toilet toilet) {
-    this.persistenceSystem().startManagingToilet(toilet);
-  }
-
-  public void stopManagingEscalator(Escalator anEscalator) {
-    this.persistenceSystem().stopManagingEscalator(anEscalator);
-  }
-
-  public void stopManagingElevator(Elevator anElevator) {
-    this.persistenceSystem().stopManagingElevator(anElevator);
-  }
-
-  public void stopManagingToilet(Toilet toilet) {
-    this.persistenceSystem().stopManagingToilet(toilet);
-  }
-
   public void startManagingState(State state) {
-    this.persistenceSystem().startManagingState(state);
+    this.persistenceSystem().startManaging(state);
   }
 
   public void stopManagingState(State state) {
-    this.persistenceSystem().stopManagingState(state);
+    this.persistenceSystem().stopManaging(state);
   }
 
-  public List<Service> services() {
-    return this.persistenceSystem.services();
+  public void startManagingElevator(Elevator anElevator) {
+    this.persistenceSystem().startManaging(anElevator);
   }
 
-  public void updateWith(Service currentService, Service updateService) {
-    currentService.synchronizeWith(updateService);
+  public void stopManagingElevator(Elevator anElevator) {
+    this.persistenceSystem().stopManaging(anElevator);
+  }
+
+  public void startManagingEscalator(Escalator anEscalator) {
+    this.persistenceSystem().startManaging(anEscalator);
+  }
+
+  public void stopManagingEscalator(Escalator anEscalator) {
+    this.persistenceSystem().stopManaging(anEscalator);
+  }
+
+  public void startManagingToilet(Toilet toilet) {
+    this.persistenceSystem().startManaging(toilet);
+  }
+
+  public void stopManagingToilet(Toilet toilet) {
+    this.persistenceSystem().stopManaging(toilet);
+  }
+
+  public void updateWith(Service service) {
+    this.persistenceSystem().updateManaging(service);
+  }
+
+  public List<Object> services() {
+    return this.persistenceSystem.objectList(Service.class.getName());
   }
 
   public void startManagingServiceFrom(Map model) {
@@ -76,16 +70,17 @@ public class ServiceManagementSystem {
     String stateName = model.get("state-name").toString();
     String stateDescription = model.get("state-description").toString();
     String serviceType = model.get("service-type").toString();
-    //ServiceType servieType = ServiceType.valueOf(model.get("servicestype").toString());
 
     State state = new State(stateName, stateDescription);
     this.startManagingState(state);
 
     switch (serviceType) {
-      case "ELEVADOR" -> this.startManagingElevator(Elevator.composedOf(name, description, state));
+      case "ELEVADOR" ->
+              this.startManagingElevator(Elevator.composedOf(name, description, state));
       case "ESCALERA" ->
           this.startManagingEscalator(Escalator.composedOf(name, description, state));
-      case "TOILET" -> this.startManagingToilet(Toilet.composedOf(name, description, state));
+      case "TOILET" ->
+              this.startManagingToilet(Toilet.composedOf(name, description, state));
       default -> {
       }
     }

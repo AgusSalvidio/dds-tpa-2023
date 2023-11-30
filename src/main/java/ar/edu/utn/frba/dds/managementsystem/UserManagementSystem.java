@@ -34,35 +34,35 @@ public class UserManagementSystem {
   }
 
   public void startManaging(User anUser) {
-    this.persistenceSystem().startManagingUser(anUser);
+    this.persistenceSystem().startManaging(anUser);
   }
 
   public void updateWith(User anUser) {
-    this.persistenceSystem().updateManagingUser(anUser);
+    this.persistenceSystem().updateManaging(anUser);
   }
 
   public void stopManaging(User anUser) {
-    this.persistenceSystem().stopManagingUser(anUser);
+    this.persistenceSystem().stopManaging(anUser);
   }
 
   public void startManagingDetail(UserDetail anUserDetail) {
-    this.persistenceSystem().startManagingUserDetail(anUserDetail);
+    this.persistenceSystem().startManaging(anUserDetail);
   }
 
   public void updateDetailWith(UserDetail anUserDetail) {
-    this.persistenceSystem().updateManagingUserDetail(anUserDetail);
+    this.persistenceSystem().updateManaging(anUserDetail);
   }
 
   public void stopManagingDetail(UserDetail anUserDetail) {
-    this.persistenceSystem().stopManagingUserDetail(anUserDetail);
+    this.persistenceSystem().stopManaging(anUserDetail);
   }
 
-  public List<User> users() {
-    return this.persistenceSystem.users();
+  public List<Object> users() {
+    return this.persistenceSystem.objectList(User.class.getName());
   }
 
-  public List<UserDetail> userDetails() {
-    return this.persistenceSystem.userDetails();
+  public List<Object> userDetails() {
+    return this.persistenceSystem.objectList(UserDetail.class.getName());
   }
 
   public User userIdentifiedBy(Integer anUserId) {

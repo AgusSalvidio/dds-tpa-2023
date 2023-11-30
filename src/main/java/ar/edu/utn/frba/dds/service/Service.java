@@ -2,17 +2,10 @@ package ar.edu.utn.frba.dds.service;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.Table;
-import javax.persistence.Transient;
 import lombok.Getter;
 import lombok.Setter;
+
+import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -31,7 +24,8 @@ public abstract class Service {
   @Column(name = "description")
   public String description;
 
-  @Transient
+  @ManyToOne
+  @JoinColumn(name = "service_state_id", referencedColumnName = "id")
   public State state;
 
   @Transient

@@ -37,16 +37,52 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
   }
 
   //--------------------------------------------------------------------------------------------
-  //USERS
+  //GENERIC
   //--------------------------------------------------------------------------------------------
-  public List<User> users() {
-    return entityManager().createQuery("from " + User.class.getName()).getResultList();
+  public void startManaging(Object object) {
+    EntityTransaction transaction = entityManager().getTransaction();
+    transaction.begin();
+    entityManager().persist(object);
+    transaction.commit();
   }
 
+  public void updateManaging(Object object) {
+    EntityTransaction transaction = entityManager().getTransaction();
+    transaction.begin();
+    entityManager().merge(object);
+    transaction.commit();
+  }
+
+  public void stopManaging(Object object) {
+    EntityTransaction transaction = entityManager().getTransaction();
+    transaction.begin();
+    entityManager().remove(object);
+    transaction.commit();
+  }
+
+  public List<Object> objectList(String className) {
+    return entityManager().createQuery("from " + className).getResultList();
+  }
+
+  //--------------------------------------------------------------------------------------------
+  //USERS
+  //--------------------------------------------------------------------------------------------
   public User userIdentifiedBy(Integer anUserId) {
     return entityManager().find(User.class, anUserId);
   }
 
+  public User userNamed(String anUserName) {
+    try {
+      return entityManager().createQuery(
+                      "SELECT u FROM " + User.class.getName() + " u WHERE u.username = :username",
+                      User.class)
+              .setParameter("username", anUserName)
+              .getSingleResult();
+    } catch (NoResultException e) {
+      return null;
+    }
+  }
+  /*
   public void startManagingUser(User anUser) {
     EntityTransaction transaction = entityManager().getTransaction();
 
@@ -95,42 +131,14 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
     transaction.commit();
   }
 
-  public User userNamed(String anUserName) {
-    try {
-      return entityManager().createQuery(
-              "SELECT u FROM " + User.class.getName() + " u WHERE u.username = :username",
-              User.class)
-          .setParameter("username", anUserName)
-          .getSingleResult();
-    } catch (NoResultException e) {
-      return null;
-    }
+  public List<User> users() {
+    return entityManager().createQuery("from " + User.class.getName()).getResultList();
   }
 
   public List<UserDetail> userDetails() {
     return entityManager().createQuery("from " + UserDetail.class.getName()).getResultList();
   }
-
-  //--------------------------------------------------------------------------------------------
-  //GENERIC
-  //--------------------------------------------------------------------------------------------
-  public List<Object> objectList(String className) {
-    return entityManager().createQuery("from " + className).getResultList();
-  }
-
-  public void startManaging(Object object) {
-    EntityTransaction transaction = entityManager().getTransaction();
-    transaction.begin();
-    entityManager().persist(object);
-    transaction.commit();
-  }
-
-  public void stopManaging(Object object) {
-    EntityTransaction transaction = entityManager().getTransaction();
-    transaction.begin();
-    entityManager().remove(object);
-    transaction.commit();
-  }
+  */
 
   //--------------------------------------------------------------------------------------------
   //GET BY ID
