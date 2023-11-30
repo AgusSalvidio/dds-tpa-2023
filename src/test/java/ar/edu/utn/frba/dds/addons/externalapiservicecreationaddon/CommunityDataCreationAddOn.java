@@ -1,4 +1,5 @@
 package ar.edu.utn.frba.dds.addons.externalapiservicecreationaddon;
+
 import ar.edu.utn.frba.dds.services.communitiesfusion.entities.CommonData;
 import ar.edu.utn.frba.dds.services.communitiesfusion.entities.CommunityData;
 

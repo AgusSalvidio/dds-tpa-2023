@@ -1,45 +1,93 @@
-<nav class="navbar navbar-custom navbar-expand-md">
+<nav class="navbar navbar-custom navbar-expand-lg">
     <div class="container-fluid">
-        <div
-                class="offcanvas offcanvas-end"
-                tabindex="-1"
-                id="offcanvasNavbar"
-                aria-labelledby="offcanvasNavbarLabel"
-        >
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
             <div class="offcanvas-body">
-                <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
+                <ul class="navbar-nav justify-content-start flex-grow-1 pe-1">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/rankings">Rankings</a>
+                    </li>
                     <li class="nav-item dropdown">
-                        <a
-                                class="nav-link dropdown-toggle"
-                                href="#"
-                                role="button"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                        >
-                            Administrar
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
+                            Maestros
+                        </a>
+                        {{#if (hasAdminAccess user.authorizationRole)}}
+                            <ul class="dropdown-menu">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/organizations">Organizaciones</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/transport-lines">Lineas de Transporte</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/service-holders">Grupos de Entidades</a>
+                                </li>
+                                <li class="nav-item">
+                                    <hr />
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/establishments">Establecimientos</a>
+                                </li>
+                                <li class="nav-item">
+                                    <hr />
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/services">Servicios</a>
+                                </li>
+                                <li class="nav-item">
+                                    <hr />
+                                </li>
+                                <li class="nav-left">
+                                    <a class="nav-link" href="/users">Comunidades</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/users">Miembros</a>
+                                </li>
+                            </ul>
+                        {{/if}}
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
+                            Parametria
+                        </a>
+                        {{#if (hasAdminAccess user.authorizationRole)}}
+                            <ul class="dropdown-menu">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/entity-type">Tipo de Entidades</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/establishment-type">Tipo de Establecimientos</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/transport-type">Tipo de Transporte</a>
+                                </li>
+                            </ul>
+                        {{/if}}
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
+                            Seguridad
                         </a>
                         {{#if (hasAdminAccess user.authorizationRole)}}
                             <ul class="dropdown-menu">
                                 <li class="nav-item">
                                     <a class="nav-link" href="/users">Usuarios</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/administrators">Administradores</a>
+                                </li>
                             </ul>
                         {{/if}}
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/services">Administrar Servicios</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/service-holders">Administrar Entidades</a>
-                    </li>
                 </ul>
-                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-2">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">
                             <span class="px-2">{{user.username}}</span>
-                            <img src="/avatar.png" class="" alt="User-Profile-Image">
+                            <img src="/avatar.png" class="navbar-nav-avatar" alt="User-Profile-Image">
                         </a>
                         <ul class="dropdown-menu">
                             <li>

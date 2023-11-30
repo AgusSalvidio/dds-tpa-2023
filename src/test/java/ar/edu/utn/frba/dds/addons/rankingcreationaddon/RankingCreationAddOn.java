@@ -12,7 +12,7 @@ public class RankingCreationAddOn {
 
   public AverageClosingTimeRanking averageClosingTimeRanking() {
 //    AverageClosingTimeRanking averageRanking =
-      return  new AverageClosingTimeRanking(new AverageClosingTimeComparator());
+    return new AverageClosingTimeRanking(new AverageClosingTimeComparator());
 
 //    averageRanking.addEntityToRanking(new EntityCreationAddOn().entityA());
 //    averageRanking.addEntityToRanking(new EntityCreationAddOn().entityB());
@@ -22,10 +22,10 @@ public class RankingCreationAddOn {
 
   public GreaterDegreeOfImpactRanking greaterDegreeOfImpactRanking() {
 //    GreaterDegreeOfImpactRanking greaterDegreeRanking =
-      return  new GreaterDegreeOfImpactRanking(
-            new GreaterDegreeOfImpactComparator(),
-            new CommunityComparator()
-        );
+    return new GreaterDegreeOfImpactRanking(
+        new GreaterDegreeOfImpactComparator(),
+        new CommunityComparator()
+    );
 
 //    greaterDegreeRanking.addNewCommunity(new CommunityCreationAddOn().firstCommunity());
 //    greaterDegreeRanking.addNewCommunity(new CommunityCreationAddOn().secondCommunity());
@@ -37,7 +37,7 @@ public class RankingCreationAddOn {
 
   public MostReportedIncidentsRanking mostReportedIncidentsRanking() {
 //    MostReportedIncidentsRanking mostReportedRanking =
-        return new MostReportedIncidentsRanking(new MostReportedIncidentsComparator());
+    return new MostReportedIncidentsRanking(new MostReportedIncidentsComparator());
 
 //    mostReportedRanking.addEntityToRanking(new EntityCreationAddOn().entityA());
 //    mostReportedRanking.addEntityToRanking(new EntityCreationAddOn().entityC());

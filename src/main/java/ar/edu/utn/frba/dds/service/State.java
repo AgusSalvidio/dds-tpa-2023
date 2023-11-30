@@ -9,24 +9,22 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "state")
+@Table(name = "service_state")
+@Getter
+@Setter
 public class State {
   @Id
   @GeneratedValue
-  @Getter
-  @Setter
   Integer id;
 
-  @Getter
   @Column(name = "name")
   public String name;
 
-  @Getter
   @Column(name = "description")
   public String description;
 
   public State() {
-    //Do nothing -FedericoFuentesWeber
+    //Sobrecarga para que no rompa Hibernate
   }
 
   public static State composedOf(String name, String description) {
@@ -38,11 +36,4 @@ public class State {
     this.description = description;
   }
 
-  public String name() {
-    return this.name;
-  }
-
-  public String description() {
-    return this.description;
-  }
 }

@@ -7,6 +7,10 @@ import ar.edu.utn.frba.dds.entity.Entity;
 import ar.edu.utn.frba.dds.entity.TransportLine;
 import ar.edu.utn.frba.dds.incident.Incident;
 import ar.edu.utn.frba.dds.incident.IncidentPerCommunity;
+import ar.edu.utn.frba.dds.ranking.AverageClosingTimeRanking;
+import ar.edu.utn.frba.dds.ranking.GreaterDegreeOfImpactRanking;
+import ar.edu.utn.frba.dds.ranking.MostReportedIncidentsRanking;
+import ar.edu.utn.frba.dds.ranking.WeeklyRanking;
 import ar.edu.utn.frba.dds.service.Elevator;
 import ar.edu.utn.frba.dds.service.Escalator;
 import ar.edu.utn.frba.dds.service.Service;
@@ -19,8 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import javax.persistence.EntityTransaction;
-import javax.persistence.NoResultException;
 
 public class MemoryBasedPersistenceSystem implements PersistenceSystem {
 
@@ -29,7 +31,7 @@ public class MemoryBasedPersistenceSystem implements PersistenceSystem {
   Demo demo = new Demo();
 
   public MemoryBasedPersistenceSystem() throws Exception {
-    this.demo.initialize();
+    //this.demo.initialize();
   }
 
   public void addObjectTypeToStore(String anObjectClassName) {
@@ -216,7 +218,7 @@ public class MemoryBasedPersistenceSystem implements PersistenceSystem {
 
   public List<Entity> entities() {
     //TODO
-    return null;
+    return this.demo.entities();
   }
 
   public void startManagingCommunity(Community community) {
@@ -297,5 +299,39 @@ public class MemoryBasedPersistenceSystem implements PersistenceSystem {
 
   public void startManagingServiceHolder(ServiceHolder serviceHolder) {
     this.demo.serviceHolders().add(serviceHolder);
+  }
+
+  public void startManagingAverageClosingTimeRanking(
+      AverageClosingTimeRanking averageClosingTimeRanking) {
+    //TODO
+  }
+
+  public void stopManagingAverageClosingTimeRanking(
+      AverageClosingTimeRanking averageClosingTimeRanking) {
+    //TODO
+  }
+
+  public void startManagingGreaterDegreeOfImpactRanking(
+      GreaterDegreeOfImpactRanking greaterDegreeOfImpactRanking) {
+    //TODO
+  }
+
+  public void stopManagingGreaterDegreeOfImpactRanking(
+      GreaterDegreeOfImpactRanking greaterDegreeOfImpactRanking) {
+    //TODO
+  }
+
+  public void startManagingMostReportedIncidentRanking(
+      MostReportedIncidentsRanking mostReportedIncidentsRanking) {
+    //TODO
+  }
+
+  public void stopManagingMostReportedIncidentRanking(
+      MostReportedIncidentsRanking mostReportedIncidentsRanking) {
+    //TODO
+  }
+
+  public List<WeeklyRanking> rankings() {
+    return this.demo.rankings();
   }
 }

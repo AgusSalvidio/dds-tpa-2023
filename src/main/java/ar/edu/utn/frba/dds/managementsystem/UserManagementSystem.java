@@ -7,8 +7,6 @@ import ar.edu.utn.frba.dds.notification.notificationmean.NotificationMean;
 import ar.edu.utn.frba.dds.notification.notificationmean.NotifyByMail;
 import ar.edu.utn.frba.dds.notification.notificationmean.NotifyByWhatsApp;
 import ar.edu.utn.frba.dds.notification.notificationmean.TwilioAdapter;
-import ar.edu.utn.frba.dds.persistencesystem.MemoryBasedPersistenceSystem;
-import ar.edu.utn.frba.dds.persistencesystem.PersistenceSystem;
 import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
 import ar.edu.utn.frba.dds.user.User;
 import ar.edu.utn.frba.dds.user.UserDetail;
@@ -16,9 +14,9 @@ import java.util.List;
 import java.util.Map;
 
 public class UserManagementSystem {
-  MemoryBasedPersistenceSystem persistenceSystem;
+  RelationalDatabasePersistenceSystem persistenceSystem;
 
-  public UserManagementSystem(MemoryBasedPersistenceSystem persistenceSystem) {
+  public UserManagementSystem(RelationalDatabasePersistenceSystem persistenceSystem) {
     this.persistenceSystem = persistenceSystem;
   }
 
@@ -26,12 +24,12 @@ public class UserManagementSystem {
     return "Sistema de Administración de Usuarios";
   }
 
-  private MemoryBasedPersistenceSystem persistenceSystem() {
+  private RelationalDatabasePersistenceSystem persistenceSystem() {
     return this.persistenceSystem;
   }
 
   public static UserManagementSystem workingWith(
-      MemoryBasedPersistenceSystem persistenceSystem) {
+      RelationalDatabasePersistenceSystem persistenceSystem) {
     return new UserManagementSystem(persistenceSystem);
   }
 
@@ -88,17 +86,14 @@ public class UserManagementSystem {
     String username = model.get("username").toString();
     String password = model.get("password").toString();
     String telephone = model.get("telephone").toString();
-    /*NotificationMean notificationMean = this.convertToEntity(
-        model.get("notificationmean").toString());*/
-
-    NotificationMean notificationMean = new NotifyByWhatsApp(new TwilioAdapter());
+    NotificationMean notificationMean =
+        this.convertToEntity(model.get("notificationMean").toString());
 
     UserDetail userDetail = new UserDetail(name, lastname, email, telephone, notificationMean);
     this.startManagingDetail(userDetail);
 
     this.startManaging(
         User.composedOf(username, password, userDetail, AuthorizationRole.USUARIO));
-
   }
 
   public void updateUserFrom(User userToUpdate, Map model) throws Exception {
@@ -108,10 +103,8 @@ public class UserManagementSystem {
     String username = model.get("username").toString();
     String password = model.get("password").toString();
     String telephone = model.get("telephone").toString();
-    /*NotificationMean notificationMean = this.convertToEntity(
-        model.get("notificationmean").toString());*/
-
-    NotificationMean notificationMean = new NotifyByWhatsApp(new TwilioAdapter());
+    NotificationMean notificationMean =
+        this.convertToEntity(model.get("notificationMean").toString());
 
     UserDetail userDetail = new UserDetail(name, lastname, email, telephone, notificationMean);
     userDetail.setId(userToUpdate.getDetails().getId());
@@ -121,7 +114,6 @@ public class UserManagementSystem {
     updatedUser.setId(userToUpdate.getId());
 
     this.updateWith(userToUpdate, updatedUser);
-
   }
 
   private NotificationMean convertToEntity(String str) {

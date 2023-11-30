@@ -45,8 +45,8 @@ public class ServiceGroupTest {
     serviceGroup.addNewService(escalator);
     serviceGroup.addNewService(toilet);
 
-    Assertions.assertEquals("Grupo de Servicios", serviceGroup.name());
-    Assertions.assertEquals("Servicios Agrupados", serviceGroup.description());
+    Assertions.assertEquals("Grupo de Servicios", serviceGroup.getName());
+    Assertions.assertEquals("Servicios Agrupados", serviceGroup.getDescription());
     Assertions.assertEquals(3, serviceGroup.services().size());
   }
 }

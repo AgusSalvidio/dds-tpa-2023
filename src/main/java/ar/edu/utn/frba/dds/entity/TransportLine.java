@@ -2,40 +2,24 @@ package ar.edu.utn.frba.dds.entity;
 
 import ar.edu.utn.frba.dds.establishment.Establishment;
 import java.util.ArrayList;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Transient;
 import lombok.Getter;
 import lombok.Setter;
 
 @javax.persistence.Entity
-@Table(name = "transport_line")
+@DiscriminatorValue("transport_line")
+@Setter
+@Getter
 public class TransportLine extends Entity {
-  @Id
-  @GeneratedValue
-  @Setter
-  @Getter
-  Integer id;
 
-  @Setter
-  @Getter
-  @OneToOne
-  @JoinColumn(name = "departure_id", referencedColumnName = "id")
+  @Transient
   public Establishment departure;
 
-  @Setter
-  @Getter
-  @OneToOne
-  @JoinColumn(name = "arrival_id", referencedColumnName = "id")
+  @Transient
   public Establishment arrival;
 
-  @Setter
-  @Getter
-  @Enumerated(EnumType.STRING)
+  @Transient
   public Direction direction;
 
   public static TransportLine composedOf(
@@ -44,7 +28,8 @@ public class TransportLine extends Entity {
     return new TransportLine(departure, arrival, direction);
   }
 
-  public TransportLine() {}
+  public TransportLine() {
+  }
 
   public TransportLine(Establishment departure, Establishment arrival, Direction direction) {
     this.establishments = new ArrayList<>();

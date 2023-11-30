@@ -1,14 +1,19 @@
 package ar.edu.utn.frba.dds.password;
 
-import ar.edu.utn.frba.dds.passwordvalidator.*;
+import ar.edu.utn.frba.dds.passwordvalidator.InvalidPassword;
+import ar.edu.utn.frba.dds.passwordvalidator.NoRepeatingCharactersPasswordValidation;
+import ar.edu.utn.frba.dds.passwordvalidator.PasswordValidation;
+import ar.edu.utn.frba.dds.passwordvalidator.PasswordValidator;
+import ar.edu.utn.frba.dds.passwordvalidator.RarePasswordValidation;
+import ar.edu.utn.frba.dds.passwordvalidator.StrongPasswordValidation;
+import ar.edu.utn.frba.dds.passwordvalidator.TopCommonPasswordsFileReader;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class PasswordValidatorTest {
 

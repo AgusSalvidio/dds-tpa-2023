@@ -4,7 +4,6 @@ import ar.edu.utn.frba.dds.community.Community;
 import ar.edu.utn.frba.dds.eventnotificationsystem.notifiableevent.NotifiableEvent;
 import ar.edu.utn.frba.dds.incident.Incident;
 import ar.edu.utn.frba.dds.incident.IncidentPerCommunity;
-import ar.edu.utn.frba.dds.persistencesystem.MemoryBasedPersistenceSystem;
 import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
 import ar.edu.utn.frba.dds.user.User;
 import java.util.List;
@@ -12,10 +11,10 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class IncidentPerCommunityManagementSystem {
-  MemoryBasedPersistenceSystem persistenceSystem;
+  RelationalDatabasePersistenceSystem persistenceSystem;
 
   public IncidentPerCommunityManagementSystem(
-      MemoryBasedPersistenceSystem persistenceSystem) {
+      RelationalDatabasePersistenceSystem persistenceSystem) {
     this.persistenceSystem = persistenceSystem;
   }
 
@@ -27,12 +26,12 @@ public class IncidentPerCommunityManagementSystem {
     return "Sistema de Administración de Incidentes por comunidad";
   }
 
-  private MemoryBasedPersistenceSystem persistenceSystem() {
+  private RelationalDatabasePersistenceSystem persistenceSystem() {
     return this.persistenceSystem;
   }
 
   public static IncidentPerCommunityManagementSystem workingWith(
-      MemoryBasedPersistenceSystem persistenceSystem) {
+      RelationalDatabasePersistenceSystem persistenceSystem) {
     return new IncidentPerCommunityManagementSystem(persistenceSystem);
   }
 

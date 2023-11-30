@@ -10,15 +10,13 @@ import javax.persistence.Transient;
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter
-@Getter
 @Entity
 @Table(name = "location")
+@Setter
+@Getter
 public class Location {
   @Id
   @GeneratedValue
-  @Setter
-  @Getter
   Integer id;
 
   @Column(name = "street")

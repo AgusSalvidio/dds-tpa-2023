@@ -44,8 +44,8 @@ public class MostReportedIncidentsRankingTest {
 
     Assertions.assertTrue(mostReportedIncidentsRanking.entityIncidentSummaries().isEmpty());
 
-      mostReportedIncidentsRanking.addEntitySummaryToRanking(entityIncidentSummaryTest);
+    mostReportedIncidentsRanking.addEntitySummaryToRanking(entityIncidentSummaryTest);
 
-      Assertions.assertTrue(mostReportedIncidentsRanking.entityIncidentSummaries().stream().anyMatch(entityIncidentSummary -> entityIncidentSummary.entity().name().equals(entityTest.name())));
+    Assertions.assertTrue(mostReportedIncidentsRanking.entityIncidentSummaries().stream().anyMatch(entityIncidentSummary -> entityIncidentSummary.entity().name().equals(entityTest.name())));
   }
 }

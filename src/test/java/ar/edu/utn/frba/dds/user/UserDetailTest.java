@@ -1,9 +1,9 @@
 package ar.edu.utn.frba.dds.user;
 
 import ar.edu.utn.frba.dds.addons.notificationcreationaddon.NotificationMeanCreationAddOn;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Assertions;
 
 
 public class UserDetailTest {
@@ -23,7 +23,7 @@ public class UserDetailTest {
   @Test
   @DisplayName("When creating an user details with any empty field should raise error")
   public void cannotCreateUserDetailsWhenAnyFieldIsEmpty() throws Exception {
-    Assertions.assertThrows(Exception.class, () -> UserDetail.composedOf("", "Ibarra", "ibarraneta@gmail.com", "0123456789",new NotificationMeanCreationAddOn().wpp()), "Los campos no pueden estar en blanco.");
+    Assertions.assertThrows(Exception.class, () -> UserDetail.composedOf("", "Ibarra", "ibarraneta@gmail.com", "0123456789", new NotificationMeanCreationAddOn().wpp()), "Los campos no pueden estar en blanco.");
     Assertions.assertThrows(Exception.class, () -> UserDetail.composedOf("Hugo", "", "ibarraneta@gmail.com", "0123456789", new NotificationMeanCreationAddOn().wpp()), "Los campos no pueden estar en blanco.");
     Assertions.assertThrows(Exception.class, () -> UserDetail.composedOf("Hugo", "Ibarra", "", "0123456789", new NotificationMeanCreationAddOn().wpp()), "Los campos no pueden estar en blanco.");
     Assertions.assertThrows(Exception.class, () -> UserDetail.composedOf("Hugo", "Ibarra", "ibarraneta@gmail.com", "", new NotificationMeanCreationAddOn().wpp()), "Los campos no pueden estar en blanco.");

@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.services.incidentimpactrankingcalculator;
 
+import ar.edu.utn.frba.dds.property.ReadProperties;
 import ar.edu.utn.frba.dds.services.incidentimpactrankingcalculator.entities.BodyData;
 import ar.edu.utn.frba.dds.services.incidentimpactrankingcalculator.entities.ImpactResult;
 import java.io.IOException;
@@ -12,13 +13,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ServiceIncidentImpactRankingCalculator {
   private static ServiceIncidentImpactRankingCalculator instance = null;
   private static int maxEntriesQuantity = 200;
-  private static final String urlAPI = "http://localhost:8080/";
+  private final String urlApi;
   private Retrofit retrofit;
 
   private ServiceIncidentImpactRankingCalculator() {
+    ReadProperties readProp = ReadProperties.getInstance();
+    this.urlApi = readProp.getIncidentImpactRankingCalculatorUrl();
     this.retrofit =
         new Retrofit
-            .Builder().baseUrl(urlAPI).addConverterFactory(GsonConverterFactory.create()).build();
+            .Builder().baseUrl(urlApi).addConverterFactory(GsonConverterFactory.create()).build();
   }
 
   public static ServiceIncidentImpactRankingCalculator instance() {

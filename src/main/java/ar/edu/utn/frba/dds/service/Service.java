@@ -2,58 +2,40 @@ package ar.edu.utn.frba.dds.service;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "service_type")
 @Table(name = "service")
+@Setter
+@Getter
 public abstract class Service {
   @Id
   @GeneratedValue
-  @Setter
-  @Getter
   Integer id;
 
-  @Getter
   @Column(name = "name")
   public String name;
 
-  @Getter
   @Column(name = "description")
   public String description;
 
-  @Getter
-  @ManyToOne
-  @JoinColumn(name = "state_id", referencedColumnName = "id")
+  @Transient
   public State state;
 
-  @Getter
-  /*@OneToMany(cascade = CascadeType.PERSIST)
-  @JoinColumn(name = "section_id", referencedColumnName = "id")*/
   @Transient
   public List<Section> sections;
-
-  public String name() {
-    return this.name;
-  }
-
-  public State state() {
-    return this.state;
-  }
-
-  public String description() {
-    return this.description;
-  }
 
   public void addNewSection(Section newSection) {
     this.sections.add(newSection);
@@ -64,9 +46,9 @@ public abstract class Service {
   }
 
   public void synchronizeWith(Service updateService) {
-    this.name = updateService.name();
-    this.description = updateService.description();
-    this.state = updateService.state();
+    this.name = updateService.name;
+    this.description = updateService.description;
+    this.state = updateService.state;
     this.sections = updateService.sections();
   }
 }

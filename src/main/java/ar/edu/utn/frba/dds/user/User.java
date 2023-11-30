@@ -10,34 +10,30 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Table(name = "user")
+@Getter
+@Setter
 public class User {
   @Id
   @GeneratedValue
-  @Getter
-  @Setter
   Integer id;
 
-  @Getter
   @Column(name = "username")
   String username;
 
-  @Getter
   @Column(name = "password")
   String password;
 
-  @Getter
-  @ManyToOne(cascade = CascadeType.ALL)
+  @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "user_detail_id", referencedColumnName = "id")
   UserDetail details;
 
-  @Getter
   @Column(name = "authorization_role")
   @Enumerated(EnumType.STRING)
   AuthorizationRole authorizationRole;
@@ -61,7 +57,7 @@ public class User {
   }
 
   public User() {
-    //Do nothing -asalvidio
+    //Sobrecarga para que no rompa Hibernate
   }
 
   public User(

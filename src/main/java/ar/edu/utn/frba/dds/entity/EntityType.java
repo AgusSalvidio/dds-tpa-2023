@@ -4,12 +4,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
+@Entity
+@Table(name = "entity_type")
 @Getter
 @Setter
-@Entity
 public class EntityType {
   @Id
   @GeneratedValue
@@ -18,3 +20,4 @@ public class EntityType {
   @Column(name = "name")
   public String name;
 }
+

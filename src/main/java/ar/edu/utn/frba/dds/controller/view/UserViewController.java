@@ -3,7 +3,6 @@ package ar.edu.utn.frba.dds.controller.view;
 import ar.edu.utn.frba.dds.applicationcontext.ApplicationContext;
 import ar.edu.utn.frba.dds.user.User;
 import io.javalin.http.Context;
-import io.javalin.http.Handler;
 import io.javalin.http.HttpStatus;
 import java.util.HashMap;
 import java.util.Map;
@@ -40,7 +39,7 @@ public class UserViewController extends Controller {
     model.put("lastname", context.formParam("lastname"));
     model.put("email", context.formParam("email"));
     model.put("telephone", context.formParam("telephone"));
-    model.put("notificationmean", context.formParam("notificationmean"));
+    model.put("notificationMean", context.formParam("notificationMean"));
     model.put("username", context.formParam("username"));
     model.put("password", context.formParam("password"));
 
@@ -71,7 +70,6 @@ public class UserViewController extends Controller {
     model.put("buttonActionLabel", "Editar");
     model.put("title", "Editar Usuario");
 
-
     context.render("users/user-registration.hbs", model);
   }
 
@@ -82,7 +80,7 @@ public class UserViewController extends Controller {
     model.put("lastname", context.formParam("lastname"));
     model.put("email", context.formParam("email"));
     model.put("telephone", context.formParam("telephone"));
-    model.put("notificationmean", context.formParam("notificationmean"));
+    model.put("notificationMean", context.formParam("notificationMean"));
     model.put("username", context.formParam("username"));
     model.put("password", context.formParam("password"));
 
@@ -95,4 +93,3 @@ public class UserViewController extends Controller {
   }
 
 }
-

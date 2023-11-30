@@ -1,11 +1,11 @@
 package ar.edu.utn.frba.dds.service;
 
 import java.util.ArrayList;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "toilet")
+@DiscriminatorValue("toilet")
 public class Toilet extends Service {
 
 
@@ -14,7 +14,6 @@ public class Toilet extends Service {
   }
 
   public Toilet() {
-
   }
 
   public Toilet(String name, String description, State state) {

@@ -16,33 +16,37 @@ import lombok.Setter;
 
 @javax.persistence.Entity
 @Table(name = "user_detail")
+@Getter
+@Setter
 public class UserDetail {
   @Id
   @GeneratedValue
-  @Getter
-  @Setter
   Integer id;
 
-  @Getter
   @Column(name = "name")
   String name;
-  @Getter
+
   @Column(name = "lastname")
   String lastname;
-  @Getter
+
   @Column(name = "email")
   String email;
-  @Getter
+
   @Column(name = "telephone")
   String telephone;
-  /*
-  @Convert(converter =  NotificationMeanConverter.class)
-  @Column(name = "notificationmean")*/
-  @Getter
-  @Transient
+
+  @Convert(converter = NotificationMeanConverter.class)
+  @Column(name = "notification_mean")
   NotificationMean notificationMean;
+
   @Transient
+  //@OneToOne
+  //@JoinColumn(name = "preference_id", referencedColumnName = "id")
   UserPreference userPreference;
+
+  public UserDetail() {
+    //Sobrecarga para que no rompa Hibernate
+  }
 
   public UserDetail(String name, String lastname, String anEmail, String telephone,
                     NotificationMean notificationMean) {
@@ -52,10 +56,6 @@ public class UserDetail {
     this.telephone = telephone;
     this.notificationMean = notificationMean;
     this.userPreference = new UserPreference();
-  }
-
-  public UserDetail() {
-    //Do nothing -asalvidio
   }
 
   public String name() {

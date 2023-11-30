@@ -16,6 +16,8 @@ import ar.edu.utn.frba.dds.notification.notificationmean.NotificationMean;
 import ar.edu.utn.frba.dds.notification.notificationmean.NotifyByMail;
 import ar.edu.utn.frba.dds.notification.notificationmean.NotifyByWhatsApp;
 import ar.edu.utn.frba.dds.notification.notificationmean.TwilioAdapter;
+import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
+import ar.edu.utn.frba.dds.ranking.WeeklyRanking;
 import ar.edu.utn.frba.dds.service.Elevator;
 import ar.edu.utn.frba.dds.service.Escalator;
 import ar.edu.utn.frba.dds.service.Service;
@@ -44,6 +46,7 @@ public class Demo {
   private List<Community> communities = new ArrayList<>();
   private List<IncidentPerCommunity> incidentPerCommunities = new ArrayList<>();
   private List<State> states = new ArrayList<>();
+  private List<WeeklyRanking> rankings = new ArrayList<>();
 
   public List<User> users() {
     return this.users;
@@ -96,6 +99,10 @@ public class Demo {
     return this.states;
   }
 
+  public List<WeeklyRanking> rankings() {
+    return this.rankings;
+  }
+
   public Demo() throws Exception {
   }
 
@@ -110,65 +117,55 @@ public class Demo {
   public UserDetail ibarra() throws Exception {
     UserDetail userDetail = UserDetail.composedOf("Hugo",
         "Ibarra", "ibarraneta@gmail.com", "0123456789", this.wpp());
-    userDetail.setId(1);
     return userDetail;
   }
 
   public UserDetail basuraIntergalactica() throws Exception {
     UserDetail userDetail = UserDetail.composedOf("Basura",
         "Intergalactica", "basuraintergalactica@gmail.com", "0123456789", this.mail());
-    userDetail.setId(2);
     return userDetail;
   }
 
   public UserDetail basuraIntergalactica2() throws Exception {
     UserDetail userDetail = UserDetail.composedOf("Basura",
         "Intergalactica2", "basuraintergalactica2@gmail.com", "0123456789", this.wpp());
-    userDetail.setId(3);
     return userDetail;
   }
 
   public User hugo() throws Exception {
     User user = User.composedOf("admin", "admin", this.ibarra(), AuthorizationRole.ADMINISTRADOR);
-    user.setId(1);
     return user;
   }
 
   public User basura1() throws Exception {
     User user = User.composedOf("user",
         "user", this.basuraIntergalactica(), AuthorizationRole.USUARIO);
-    user.setId(2);
     return user;
   }
 
   public User basura2() throws Exception {
     User user = User.composedOf("entidad",
         "entidad", this.basuraIntergalactica2(), AuthorizationRole.ENTIDAD);
-    user.setId(3);
     return user;
   }
 
   public State inServiceState() {
     State state = State.composedOf("IN_SERVICE", "Normally working Service");
-    state.setId(1);
     return state;
   }
 
   public State notInServiceState() {
     State state = State.composedOf("NOT_IN_SERVICE", "Not working Service");
-    state.setId(2);
     return state;
   }
 
   public State openIncident() {
     State state = State.composedOf("OPEN", "Open Incident");
-    state.setId(3);
     return state;
   }
 
   public State closedIncident() {
     State state = State.composedOf("CLOSED", "Closed Incident");
-    state.setId(4);
     return state;
   }
 
@@ -227,7 +224,6 @@ public class Demo {
         this.curentDateTime(),
         this.hugo()
     );
-    incident.setId(1);
     return incident;
   }
 
@@ -238,7 +234,6 @@ public class Demo {
         this.curentDateTime(),
         this.basura1()
     );
-    incident.setId(2);
     return incident;
   }
 
@@ -249,7 +244,6 @@ public class Demo {
         this.curentDateTime(),
         this.basura2()
     );
-    incident.setId(3);
     return incident;
   }
 
@@ -260,7 +254,6 @@ public class Demo {
         this.curentDateTime(),
         this.basura2()
     );
-    incident.setId(4);
     return incident;
   }
 
@@ -275,7 +268,6 @@ public class Demo {
     location.setStreet("AV. FIGUEROA ALCORTA Y AV. PUEYRREDON");
     location.setNumber(100);
     location.setMunicipality(this.caba());
-    location.setId(1);
     return location;
   }
 
@@ -284,7 +276,6 @@ public class Demo {
     location.setStreet("AV. PUEYRREDON");
     location.setNumber(2111);
     location.setMunicipality(this.caba());
-    location.setId(2);
     return location;
   }
 
@@ -293,7 +284,6 @@ public class Demo {
     location.setStreet("AV. ALMAFUENTE");
     location.setNumber(300);
     location.setMunicipality(this.caba());
-    location.setId(3);
     return location;
   }
 
@@ -302,7 +292,6 @@ public class Demo {
     location.setStreet("BARTOLOME MITRE");
     location.setNumber(326);
     location.setMunicipality(this.caba());
-    location.setId(4);
     return location;
   }
 
@@ -311,21 +300,18 @@ public class Demo {
     location.setStreet("ALSINA");
     location.setNumber(1356);
     location.setMunicipality(this.caba());
-    location.setId(5);
     return location;
   }
 
   public EstablishmentType station() {
     EstablishmentType establishmentType = new EstablishmentType();
     establishmentType.setName("STATION");
-    establishmentType.setId(1);
     return establishmentType;
   }
 
   public EstablishmentType branch() {
     EstablishmentType establishmentType = new EstablishmentType();
     establishmentType.setName("BRANCH");
-    establishmentType.setId(2);
     return establishmentType;
   }
 
@@ -334,7 +320,6 @@ public class Demo {
     establishment.setType(this.station());
     establishment.setName("FACULTAD DE DERECHO");
     establishment.setLocation(this.locationA());
-    establishment.setId(1);
     return establishment;
   }
 
@@ -343,7 +328,6 @@ public class Demo {
     establishment.setType(this.station());
     establishment.setName("LAS HERAS");
     establishment.setLocation(this.locationB());
-    establishment.setId(2);
     return establishment;
   }
 
@@ -352,7 +336,6 @@ public class Demo {
     establishment.setType(this.station());
     establishment.setName("ONCE");
     establishment.setLocation(this.locationC());
-    establishment.setId(3);
     return establishment;
   }
 
@@ -361,7 +344,6 @@ public class Demo {
     establishment.setType(this.station());
     establishment.setName("HOSPITALES");
     establishment.setLocation(this.locationD());
-    establishment.setId(4);
     return establishment;
   }
 
@@ -370,7 +352,6 @@ public class Demo {
     establishment.setType(this.branch());
     establishment.setName("CASA MATRIZ");
     establishment.setLocation(this.locationE());
-    establishment.setId(5);
     return establishment;
   }
 
@@ -380,7 +361,6 @@ public class Demo {
         this.lasHerasStation(),
         Direction.FORWARD);
     transportLine.addNewIncident(this.notWorkingElevatorIncident());
-    transportLine.setId(1);
     return transportLine;
   }
 
@@ -390,7 +370,6 @@ public class Demo {
         this.onceStation(),
         Direction.RETURN);
     transportLine.addNewIncident(this.workingElevatorIncident());
-    transportLine.setId(2);
     return transportLine;
   }
 
@@ -401,25 +380,21 @@ public class Demo {
         Direction.FORWARD);
     transportLine.addNewIncident(this.notWorkingElevatorIncident());
     transportLine.addNewIncident(this.notWorkingEscalatorIncident());
-    transportLine.setId(3);
     return transportLine;
   }
 
   public Member memberA() throws Exception {
     Member member = Member.composedOf(this.hugo(), "Moderador");
-    member.setId(1);
     return member;
   }
 
   public Member memberB() throws Exception {
     Member member = Member.composedOf(this.basura1(), "Suscriptor");
-    member.setId(2);
     return member;
   }
 
   public Member memberC() throws Exception {
     Member member = Member.composedOf(this.basura2(), "Afectado");
-    member.setId(3);
     return member;
   }
 
@@ -427,7 +402,6 @@ public class Demo {
     Community community = Community.composedOf("Comunidad 1", "Comunidad de prueba");
     community.addMember(this.memberA());
     community.addMember(this.memberB());
-    community.setId(1);
     return community;
   }
 
@@ -436,7 +410,6 @@ public class Demo {
     community.addMember(this.memberA());
     community.addMember(this.memberB());
     community.addMember(this.memberC());
-    community.setId(2);
     return community;
   }
 
@@ -446,7 +419,6 @@ public class Demo {
         this.communityB()
     );
     incidentPerCommunity.setState(this.openIncident());
-    incidentPerCommunity.setId(1);
     return incidentPerCommunity;
   }
 
@@ -456,7 +428,6 @@ public class Demo {
         this.communityA()
     );
     incidentPerCommunity.setState(this.closedIncident());
-    incidentPerCommunity.setId(2);
     return incidentPerCommunity;
   }
 
@@ -466,7 +437,6 @@ public class Demo {
         this.communityA()
     );
     incidentPerCommunity.setState(this.closedIncident());
-    incidentPerCommunity.setId(3);
     return incidentPerCommunity;
   }
 
@@ -484,27 +454,21 @@ public class Demo {
     this.states.add(this.notInServiceState());
 
     Service elevatorA = this.elevatorA();
-    elevatorA.setId(1);
     this.services.add(elevatorA);
 
     Service elevatorB = this.elevatorB();
-    elevatorB.setId(2);
     this.services.add(elevatorB);
 
     Service escalatorA = this.escalatorA();
-    escalatorA.setId(3);
     this.services.add(escalatorA);
 
     Service escalatorB = this.escalatorB();
-    escalatorB.setId(4);
     this.services.add(escalatorB);
 
     Service toiletA = this.toiletA();
-    toiletA.setId(5);
     this.services.add(toiletA);
 
     Service toiletB = this.toiletB();
-    toiletB.setId(6);
     this.services.add(toiletB);
   }
 
@@ -563,6 +527,11 @@ public class Demo {
 
   }
 
+  public void addWeeklyRankings() {
+    //TODO
+  }
+
+  /*
   public void initialize() throws Exception {
     this.addUsers();
     this.addServices();
@@ -571,6 +540,11 @@ public class Demo {
     this.addCommunities();
     this.addIncidentsPerCommunity();
     this.addServiceHolders();
-
+  }
+  */
+  public void initialize(RelationalDatabasePersistenceSystem persistenceSystem) throws Exception {
+    persistenceSystem.startManagingUser(this.hugo());
+    persistenceSystem.startManagingUser(this.basura1());
+    persistenceSystem.startManagingUser(this.basura2());
   }
 }

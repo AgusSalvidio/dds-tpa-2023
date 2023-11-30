@@ -1,19 +1,14 @@
 package ar.edu.utn.frba.dds.controller.view;
 
 import ar.edu.utn.frba.dds.applicationcontext.ApplicationContext;
-import ar.edu.utn.frba.dds.community.Member;
 import ar.edu.utn.frba.dds.incident.IncidentPerCommunity;
-import ar.edu.utn.frba.dds.service.Service;
-import ar.edu.utn.frba.dds.service.State;
 import ar.edu.utn.frba.dds.user.User;
 import io.javalin.http.Context;
-import io.javalin.http.Handler;
 import io.javalin.http.HttpStatus;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class IncidentViewController extends Controller {
   ApplicationContext applicationContext;

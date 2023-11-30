@@ -1,10 +1,10 @@
 package ar.edu.utn.frba.dds.ranking;
 
 import ar.edu.utn.frba.dds.addons.rankingcreationaddon.RankingCreationAddOn;
+import java.util.Arrays;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import java.util.Arrays;
 
 public class WeeklyReportTest {
 

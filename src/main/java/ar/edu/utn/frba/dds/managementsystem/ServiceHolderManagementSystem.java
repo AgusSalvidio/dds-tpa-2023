@@ -1,16 +1,15 @@
 package ar.edu.utn.frba.dds.managementsystem;
 
-import ar.edu.utn.frba.dds.incident.IncidentPerCommunity;
-import ar.edu.utn.frba.dds.persistencesystem.MemoryBasedPersistenceSystem;
+import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
 import ar.edu.utn.frba.dds.serviceholder.ServiceHolder;
 import java.util.List;
 
 public class ServiceHolderManagementSystem {
 
-  MemoryBasedPersistenceSystem persistenceSystem;
+  RelationalDatabasePersistenceSystem persistenceSystem;
 
   public ServiceHolderManagementSystem(
-      MemoryBasedPersistenceSystem persistenceSystem) {
+      RelationalDatabasePersistenceSystem persistenceSystem) {
     this.persistenceSystem = persistenceSystem;
   }
 
@@ -23,12 +22,12 @@ public class ServiceHolderManagementSystem {
     return this.persistenceSystem.serviceHolders();
   }
 
-  private MemoryBasedPersistenceSystem persistenceSystem() {
+  private RelationalDatabasePersistenceSystem persistenceSystem() {
     return this.persistenceSystem;
   }
 
   public static ServiceHolderManagementSystem workingWith(
-      MemoryBasedPersistenceSystem persistenceSystem) {
+      RelationalDatabasePersistenceSystem persistenceSystem) {
     return new ServiceHolderManagementSystem(persistenceSystem);
   }
 
