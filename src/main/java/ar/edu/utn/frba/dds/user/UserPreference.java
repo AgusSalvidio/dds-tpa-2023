@@ -3,13 +3,14 @@ package ar.edu.utn.frba.dds.user;
 import ar.edu.utn.frba.dds.entity.Entity;
 import ar.edu.utn.frba.dds.location.Location;
 import ar.edu.utn.frba.dds.service.Service;
-import lombok.Getter;
-import lombok.Setter;
-
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Transient;
+import lombok.Getter;
+import lombok.Setter;
 
 //@javax.persistence.Entity
 //@Table(name = "user_preference")

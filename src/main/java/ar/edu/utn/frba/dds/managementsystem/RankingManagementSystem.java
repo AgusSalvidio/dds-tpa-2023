@@ -1,6 +1,5 @@
 package ar.edu.utn.frba.dds.managementsystem;
 
-import ar.edu.utn.frba.dds.persistencesystem.MemoryBasedPersistenceSystem;
 import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
 import ar.edu.utn.frba.dds.ranking.AverageClosingTimeRanking;
 import ar.edu.utn.frba.dds.ranking.GreaterDegreeOfImpactRanking;
@@ -30,7 +29,7 @@ public class RankingManagementSystem {
   }
 
   public static RankingManagementSystem workingWith(
-          RelationalDatabasePersistenceSystem persistenceSystem) {
+      RelationalDatabasePersistenceSystem persistenceSystem) {
     return new RankingManagementSystem(persistenceSystem);
   }
 
@@ -70,16 +69,13 @@ public class RankingManagementSystem {
     String rankingType = model.get("ranking-type").toString();
 
     switch (rankingType) {
-      case "Tiempo de cierre" ->
-          this.startManagingAverageClosingTimeRanking(
-              AverageClosingTimeRanking.composedOf(new AverageClosingTimeComparator()));
-      case "Mayor impacto" ->
-          this.startManagingGreaterDegreeOfImpactRanking(
-              GreaterDegreeOfImpactRanking.composedOf(
-                  new GreaterDegreeOfImpactComparator(), new CommunityComparator()));
-      case "Incidentes reportados" ->
-          this.startManagingMostReportedIncidentRanking(
-              MostReportedIncidentsRanking.composedOf(new MostReportedIncidentsComparator()));
+      case "Tiempo de cierre" -> this.startManagingAverageClosingTimeRanking(
+          AverageClosingTimeRanking.composedOf(new AverageClosingTimeComparator()));
+      case "Mayor impacto" -> this.startManagingGreaterDegreeOfImpactRanking(
+          GreaterDegreeOfImpactRanking.composedOf(
+              new GreaterDegreeOfImpactComparator(), new CommunityComparator()));
+      case "Incidentes reportados" -> this.startManagingMostReportedIncidentRanking(
+          MostReportedIncidentsRanking.composedOf(new MostReportedIncidentsComparator()));
       default -> {
 
       }

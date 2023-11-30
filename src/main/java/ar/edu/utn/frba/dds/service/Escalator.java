@@ -1,16 +1,17 @@
 package ar.edu.utn.frba.dds.service;
 
 import java.util.ArrayList;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
+@Entity
+@DiscriminatorValue("escalator")
 public class Escalator extends Service {
   public static Escalator composedOf(String name, String description, State state) {
     return new Escalator(name, description, state);
   }
 
   public Escalator() {
-    this.type = ServiceType.ESCALERA;
   }
 
   public Escalator(String name, String description, State state) {

@@ -4,29 +4,39 @@ import ar.edu.utn.frba.dds.establishment.Establishment;
 import ar.edu.utn.frba.dds.incident.Incident;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.*;
-
-import ar.edu.utn.frba.dds.serviceholder.Company;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import lombok.Getter;
 import lombok.Setter;
 
 @javax.persistence.Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "entity_type")
 @Table(name = "entity")
-@Getter
-@Setter
 public abstract class Entity {
   @Id
   @GeneratedValue
   Integer id;
 
+  @Getter
+  @Setter
+  @OneToOne
+  @JoinColumn(name = "entity_name_id", referencedColumnName = "id")
+  public EntityName name;
+
+  @Getter
+  @Setter
   @Transient
   public EntityType type;
 
-  public String name;
-
   @Transient
-  //@OneToMany
-  //@JoinColumn(name = "establishment_id", referencedColumnName = "id")
   public List<Establishment> establishments;
 
   @Transient
@@ -46,8 +56,7 @@ public abstract class Entity {
   }
 
   public String name() {
-    //return this.name.getName();
-    return this.name();
+    return this.name.getName();
   }
 
   public void addNewIncident(Incident newIncident) {

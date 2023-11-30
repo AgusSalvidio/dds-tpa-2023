@@ -1,24 +1,12 @@
 package ar.edu.utn.frba.dds.entity;
 
 import ar.edu.utn.frba.dds.incident.IncidentPerCommunity;
-
-import javax.persistence.*;
-
 import lombok.Getter;
 import lombok.Setter;
 
-//@javax.persistence.Entity
-//@Table(name = "entity_incident_summary")
 @Setter
 @Getter
 public class EntityIncidentSummary {
-  @Id
-  @GeneratedValue
-  Integer id;
-
-  //@ManyToOne
-  //@JoinColumn(name = "entity_id", referencedColumnName = "id")
-  //@JoinTable(name = "entity", joinColumns = { @JoinColumn(name = "entity_id", referencedColumnName = "id") })
   public Entity entity;
 
   //@OneToOne

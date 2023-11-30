@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.services.communitiesfusion;
 
+import ar.edu.utn.frba.dds.property.ReadProperties;
 import ar.edu.utn.frba.dds.services.communitiesfusion.entities.CommunityData;
 import ar.edu.utn.frba.dds.services.communitiesfusion.entities.FusionData;
 import ar.edu.utn.frba.dds.services.communitiesfusion.entities.FusionResult;
@@ -14,13 +15,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ServiceCommunitiesFusion {
   private static ServiceCommunitiesFusion instance = null;
   private static int maxEntriesQuantity = 200;
-  private static final String urlAPI = "http://localhost:3000/api/";
+  private final String urlApi;
   private Retrofit retrofit;
 
   private ServiceCommunitiesFusion() {
+    ReadProperties readProp = ReadProperties.getInstance();
+    this.urlApi = readProp.getCommunitiesFusionUrl();
     this.retrofit =
         new Retrofit
-            .Builder().baseUrl(urlAPI).addConverterFactory(GsonConverterFactory.create()).build();
+            .Builder().baseUrl(urlApi).addConverterFactory(GsonConverterFactory.create()).build();
   }
 
   public static ServiceCommunitiesFusion instance() {

@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.Comparator;
 
 public class AverageClosingTimeComparator implements Comparator<EntityIncidentSummary>,
-                                                     Serializable {
+    Serializable {
 
   @Override
   public int compare(

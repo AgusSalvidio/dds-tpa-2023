@@ -2,7 +2,6 @@ package ar.edu.utn.frba.dds.managementsystem;
 
 import ar.edu.utn.frba.dds.community.Community;
 import ar.edu.utn.frba.dds.eventnotificationsystem.notifiableevent.NotifiableEvent;
-import ar.edu.utn.frba.dds.persistencesystem.MemoryBasedPersistenceSystem;
 import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
 import ar.edu.utn.frba.dds.service.Service;
 import ar.edu.utn.frba.dds.user.User;
@@ -26,7 +25,7 @@ public class CommunityManagementSystem {
   }
 
   public static CommunityManagementSystem workingWith(
-          RelationalDatabasePersistenceSystem persistenceSystem) {
+      RelationalDatabasePersistenceSystem persistenceSystem) {
     return new CommunityManagementSystem(persistenceSystem);
   }
 

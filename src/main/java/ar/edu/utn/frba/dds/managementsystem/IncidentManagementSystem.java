@@ -4,10 +4,8 @@ import ar.edu.utn.frba.dds.community.Community;
 import ar.edu.utn.frba.dds.eventnotificationsystem.notifiableevent.NotifiableEvent;
 import ar.edu.utn.frba.dds.incident.Incident;
 import ar.edu.utn.frba.dds.incident.IncidentPerCommunity;
-import ar.edu.utn.frba.dds.persistencesystem.MemoryBasedPersistenceSystem;
 import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
 import ar.edu.utn.frba.dds.service.Service;
-import ar.edu.utn.frba.dds.service.State;
 import ar.edu.utn.frba.dds.user.User;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -29,7 +27,7 @@ public class IncidentManagementSystem {
   }
 
   public static IncidentManagementSystem workingWith(
-          RelationalDatabasePersistenceSystem persistenceSystem) {
+      RelationalDatabasePersistenceSystem persistenceSystem) {
     return new IncidentManagementSystem(persistenceSystem);
   }
 

@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.persistencesystem;
 
 import ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole;
 import ar.edu.utn.frba.dds.community.Community;
+import ar.edu.utn.frba.dds.demo.Demo;
 import ar.edu.utn.frba.dds.entity.Entity;
 import ar.edu.utn.frba.dds.entity.EntityType;
 import ar.edu.utn.frba.dds.entity.TransportLine;
@@ -27,6 +28,13 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 
 public class RelationalDatabasePersistenceSystem implements WithSimplePersistenceUnit {
+
+  Demo demo = new Demo();
+
+  public RelationalDatabasePersistenceSystem() throws Exception {
+    entityManager().clear();
+    this.demo.initialize(this);
+  }
 
   //--------------------------------------------------------------------------------------------
   //USERS
@@ -115,7 +123,9 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
     return entityManager().find(EntityType.class, id);
   }
 
-  public EstablishmentType establishmentTypeById(Integer id) { return entityManager().find(EstablishmentType.class, id); }
+  public EstablishmentType establishmentTypeById(Integer id) {
+    return entityManager().find(EstablishmentType.class, id);
+  }
 
   public TransportType transportTypeById(Integer id) {
     return entityManager().find(TransportType.class, id);
@@ -124,10 +134,6 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
   public Entity entityById(Integer id) {
     return entityManager().find(Entity.class, id);
   }
-
-
-
-
 
 
   //--------------------------------------------------------------------------------------------
@@ -171,22 +177,6 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
     entityManager().remove(object);
     transaction.commit();
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
   public void startManagingElevator(Elevator anElevator) {
@@ -361,17 +351,21 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
   //Hay que desarrollarlos pq no hay nada-!!!!!!!!!!!!!!!!!
   //Menos Mal que estoy escuchndo IRON MAIDEN
   public Service serviceIdentifiedBy(Integer serviceId) {
-    //return this.demo.services().stream().filter(service -> service.getId().equals(serviceId)).findFirst().orElse(null);
+    //return this.demo.services().stream().
+    // filter(service -> service.getId().equals(serviceId)).findFirst().orElse(null);
     return null;
   }
 
   public Community communityIdentifiedBy(Integer communityId) {
-    //return this.demo.communities().stream().filter(community -> community.getId().equals(communityId)).findFirst().orElse(null);
+    //return this.demo.communities().stream().
+    // filter(community -> community.getId().equals(communityId)).findFirst().orElse(null);
     return null;
   }
 
   public IncidentPerCommunity incidentPerCommunityIdentifiedBy(Integer anId) {
-    //return this.demo.incidentPerCommunities().stream().filter(incidentPerCommunity -> incidentPerCommunity.getId().equals(anId)).findFirst().orElse(null);
+    //return this.demo.incidentPerCommunities().stream().
+    // filter(incidentPerCommunity ->
+    // incidentPerCommunity.getId().equals(anId)).findFirst().orElse(null);
     return null;
   }
 
@@ -389,36 +383,36 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
   }
 
   public void closeIncidentPerCommunity(IncidentPerCommunity anIncidentPerCommunity) {
-    anIncidentPerCommunity.setState(State.composedOf("CLOSED", "CLOSED"));
+    anIncidentPerCommunity.close();
   }
 
   public void startManagingAverageClosingTimeRanking(
-          AverageClosingTimeRanking averageClosingTimeRanking) {
+      AverageClosingTimeRanking averageClosingTimeRanking) {
     //TODO
   }
 
   public void stopManagingAverageClosingTimeRanking(
-          AverageClosingTimeRanking averageClosingTimeRanking) {
+      AverageClosingTimeRanking averageClosingTimeRanking) {
     //TODO
   }
 
   public void startManagingGreaterDegreeOfImpactRanking(
-          GreaterDegreeOfImpactRanking greaterDegreeOfImpactRanking) {
+      GreaterDegreeOfImpactRanking greaterDegreeOfImpactRanking) {
     //TODO
   }
 
   public void stopManagingGreaterDegreeOfImpactRanking(
-          GreaterDegreeOfImpactRanking greaterDegreeOfImpactRanking) {
+      GreaterDegreeOfImpactRanking greaterDegreeOfImpactRanking) {
     //TODO
   }
 
   public void startManagingMostReportedIncidentRanking(
-          MostReportedIncidentsRanking mostReportedIncidentsRanking) {
+      MostReportedIncidentsRanking mostReportedIncidentsRanking) {
     //TODO
   }
 
   public void stopManagingMostReportedIncidentRanking(
-          MostReportedIncidentsRanking mostReportedIncidentsRanking) {
+      MostReportedIncidentsRanking mostReportedIncidentsRanking) {
     //TODO
   }
 

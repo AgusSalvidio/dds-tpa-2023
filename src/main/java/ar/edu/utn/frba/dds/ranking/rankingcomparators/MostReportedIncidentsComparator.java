@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.Comparator;
 
 public class MostReportedIncidentsComparator implements Comparator<EntityIncidentSummary>,
-                                                        Serializable {
+    Serializable {
 
   @Override
   public int compare(
@@ -19,11 +19,11 @@ public class MostReportedIncidentsComparator implements Comparator<EntityInciden
             incidentTimeCalculator.incidentsWithMoreThan24Hours(firstEntityIncidentSummary
                     .incidentPerCommunity()
                     .community().openIncidents())
-                    .size(),
+                .size(),
             incidentTimeCalculator.incidentsWithMoreThan24Hours(secondEntityIncidentSummary
                     .incidentPerCommunity()
                     .community().openIncidents())
-                    .size()
+                .size()
         );
   }
 }

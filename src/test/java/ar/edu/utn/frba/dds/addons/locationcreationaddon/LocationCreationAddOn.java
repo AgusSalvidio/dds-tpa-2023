@@ -21,6 +21,7 @@ public class LocationCreationAddOn {
     location.setMunicipality(this.municipality);
     return location;
   }
+
   public Location locationC() {
     Location location = new Location();
     location.setStreet("AV. ALMAFUENTE");
@@ -44,8 +45,6 @@ public class LocationCreationAddOn {
     location.setMunicipality(this.municipality);
     return location;
   }
-
-
 
 
 }

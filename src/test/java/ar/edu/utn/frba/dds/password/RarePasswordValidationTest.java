@@ -3,12 +3,11 @@ package ar.edu.utn.frba.dds.password;
 import ar.edu.utn.frba.dds.passwordvalidator.InvalidPassword;
 import ar.edu.utn.frba.dds.passwordvalidator.RarePasswordValidation;
 import ar.edu.utn.frba.dds.passwordvalidator.TopCommonPasswordsFileReader;
+import java.net.URISyntaxException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.net.URISyntaxException;
 
 public class RarePasswordValidationTest {
 

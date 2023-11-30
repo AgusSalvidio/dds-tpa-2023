@@ -6,7 +6,6 @@ import ar.edu.utn.frba.dds.ranking.rankingcomparators.CommunityComparator;
 import ar.edu.utn.frba.dds.ranking.rankingcomparators.GreaterDegreeOfImpactComparator;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;

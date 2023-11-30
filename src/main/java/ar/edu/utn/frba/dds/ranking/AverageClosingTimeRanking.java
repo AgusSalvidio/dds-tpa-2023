@@ -1,7 +1,6 @@
 package ar.edu.utn.frba.dds.ranking;
 
 import ar.edu.utn.frba.dds.ranking.rankingcomparators.AverageClosingTimeComparator;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;

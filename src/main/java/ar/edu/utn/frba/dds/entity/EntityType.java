@@ -1,9 +1,10 @@
 package ar.edu.utn.frba.dds.entity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-
-import ar.edu.utn.frba.dds.user.User;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 

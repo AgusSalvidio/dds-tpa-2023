@@ -1,10 +1,8 @@
 package ar.edu.utn.frba.dds.service;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import lombok.Getter;
 
 public class Section {

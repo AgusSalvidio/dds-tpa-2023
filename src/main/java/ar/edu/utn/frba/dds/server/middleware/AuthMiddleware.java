@@ -5,9 +5,7 @@ import ar.edu.utn.frba.dds.server.exception.AccessDeniedException;
 import ar.edu.utn.frba.dds.server.exception.AccessForbiddenException;
 import io.javalin.config.JavalinConfig;
 import io.javalin.http.Context;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Optional;
 
 public class AuthMiddleware {
 

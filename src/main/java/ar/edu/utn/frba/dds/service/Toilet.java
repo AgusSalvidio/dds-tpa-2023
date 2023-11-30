@@ -1,9 +1,11 @@
 package ar.edu.utn.frba.dds.service;
 
 import java.util.ArrayList;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
+@Entity
+@DiscriminatorValue("toilet")
 public class Toilet extends Service {
 
 
@@ -12,7 +14,6 @@ public class Toilet extends Service {
   }
 
   public Toilet() {
-    this.type = ServiceType.TOILET;
   }
 
   public Toilet(String name, String description, State state) {

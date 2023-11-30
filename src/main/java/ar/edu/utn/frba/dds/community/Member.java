@@ -1,9 +1,13 @@
 package ar.edu.utn.frba.dds.community;
 
 import ar.edu.utn.frba.dds.user.User;
-
-import javax.persistence.*;
-
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,7 +30,8 @@ public class Member {
   @Column(name = "role")
   String role;
 
-  public Member() {}
+  public Member() {
+  }
 
   public Member(User anUser, String role) {
     this.user = anUser;

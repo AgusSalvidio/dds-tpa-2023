@@ -46,7 +46,8 @@ public class ServiceIncidentImpactRankingCalculatorTest {
         .thenReturn(
             this.gson().fromJson(
                 new FileReader("src/main/resources/calculateImpactRankingTest.json"),
-                new TypeToken<List<ImpactResult>>() {}.getType()
+                new TypeToken<List<ImpactResult>>() {
+                }.getType()
             )
         );
 

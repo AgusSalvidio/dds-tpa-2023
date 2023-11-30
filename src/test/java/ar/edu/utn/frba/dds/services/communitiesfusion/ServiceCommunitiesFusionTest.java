@@ -61,7 +61,8 @@ public class ServiceCommunitiesFusionTest {
         .thenReturn(
             this.gson().fromJson(
                 new FileReader("src/main/resources/fusionTest.json"),
-                new TypeToken<FusionResult>() {}.getType()
+                new TypeToken<FusionResult>() {
+                }.getType()
             )
         );
 
@@ -86,7 +87,8 @@ public class ServiceCommunitiesFusionTest {
         .thenReturn(
             this.gson().fromJson(
                 new FileReader("src/main/resources/recommendationsTest.json"),
-                new TypeToken<RecommendationsResult>() {}.getType()
+                new TypeToken<RecommendationsResult>() {
+                }.getType()
             )
         );
 

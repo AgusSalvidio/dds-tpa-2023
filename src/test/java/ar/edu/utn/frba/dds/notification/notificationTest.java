@@ -26,7 +26,7 @@ public class notificationTest {
     Msg message = new Msg("Test msg", user);
 
     user.notifyMe(message);
-    Mockito.verify(mockMail,times(1)).notify(any());
+    Mockito.verify(mockMail, times(1)).notify(any());
   }
 
   @Test
@@ -35,10 +35,10 @@ public class notificationTest {
     NotificationMean mockWhatsApp = mock(NotifyByWhatsApp.class);
     UserDetail userDetail = new UserDetailCreationAddOn().basuraIntergalactica();
     userDetail.changeNotificationMean(mockWhatsApp);
-    User user = User.composedOf("ibarranetaYPF", "theBestPassword", userDetail,AuthorizationRole.ADMINISTRADOR);
+    User user = User.composedOf("ibarranetaYPF", "theBestPassword", userDetail, AuthorizationRole.ADMINISTRADOR);
     Msg message = new Msg("Test msg", user);
 
     user.notifyMe(message);
-    Mockito.verify(mockWhatsApp,times(1)).notify(any());
+    Mockito.verify(mockWhatsApp, times(1)).notify(any());
   }
 }

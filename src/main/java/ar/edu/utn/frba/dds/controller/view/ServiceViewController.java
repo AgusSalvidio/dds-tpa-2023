@@ -1,12 +1,9 @@
 package ar.edu.utn.frba.dds.controller.view;
 
 import ar.edu.utn.frba.dds.applicationcontext.ApplicationContext;
-import ar.edu.utn.frba.dds.notification.notificationmean.NotificationType;
 import ar.edu.utn.frba.dds.service.ServiceType;
 import io.javalin.http.Context;
-import io.javalin.http.Handler;
 import io.javalin.http.HttpStatus;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;

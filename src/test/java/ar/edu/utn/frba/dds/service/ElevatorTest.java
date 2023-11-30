@@ -40,9 +40,9 @@ public class ElevatorTest {
   public void elevatorIsInServiceTest() {
     Elevator elevator = Elevator.composedOf("Ascensor", "Ascensor con capacidad máxima de 3 personas", this.stateA());
 
-    Assertions.assertEquals("Ascensor", elevator.name());
-    Assertions.assertEquals("Ascensor con capacidad máxima de 3 personas", elevator.description());
-    Assertions.assertEquals("IN_SERVICE", elevator.state().name());
+    Assertions.assertEquals("Ascensor", elevator.getName());
+    Assertions.assertEquals("Ascensor con capacidad máxima de 3 personas", elevator.getDescription());
+    Assertions.assertEquals("IN_SERVICE", elevator.getState().getName());
   }
 
 }

@@ -9,7 +9,6 @@ import ar.edu.utn.frba.dds.service.Elevator;
 import ar.edu.utn.frba.dds.service.Escalator;
 import ar.edu.utn.frba.dds.service.State;
 import ar.edu.utn.frba.dds.user.User;
-
 import java.time.LocalDateTime;
 
 public class IncidentCreationAddOn {

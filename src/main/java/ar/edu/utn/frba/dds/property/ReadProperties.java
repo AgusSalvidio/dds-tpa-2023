@@ -1,6 +1,5 @@
 package ar.edu.utn.frba.dds.property;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -44,5 +43,13 @@ public class ReadProperties {
 
   public String getTwilioPhoneNumber() {
     return this.prop.getProperty("twilio.phoneNumber");
+  }
+
+  public String getIncidentImpactRankingCalculatorUrl() {
+    return this.prop.getProperty("incidentImpactRankingCalculator.url");
+  }
+
+  public String getCommunitiesFusionUrl() {
+    return this.prop.getProperty("communitiesFusion.url");
   }
 }

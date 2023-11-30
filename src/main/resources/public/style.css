@@ -79,9 +79,10 @@ body {
 }
 
 .offcanvas-body a:hover {
-   background-color: #1e7fe6;
-   color: #000000;
+    background-color: #1e7fe6;
+    color: #000000;
 }
+
 .dropdown-menu {
     background-color: #3393ff;
     color: #000000;

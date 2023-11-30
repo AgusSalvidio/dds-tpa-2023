@@ -2,9 +2,9 @@ package ar.edu.utn.frba.dds.incident;
 
 import ar.edu.utn.frba.dds.community.Community;
 import ar.edu.utn.frba.dds.service.State;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -42,11 +42,17 @@ public class IncidentPerCommunity {
   @Column(name = "dateTime")
   LocalDateTime dateTime;
 
+  @Setter
+  @Getter
+  @Column(name = "duration")
+  Double duration;
+
   public static IncidentPerCommunity composedOf(Incident incident, Community community) {
     return new IncidentPerCommunity(incident, community);
   }
 
-  public IncidentPerCommunity() {}
+  public IncidentPerCommunity() {
+  }
 
   public Incident incident() {
     return this.incident;
@@ -70,6 +76,7 @@ public class IncidentPerCommunity {
     this.community = community;
     this.state = State.composedOf("OPEN", "Open Incident");
     this.dateTime = LocalDateTime.now();
+    this.duration = 0.0;
   }
 
   public void synchronizeWith(IncidentPerCommunity updatedIncidentPerCommunity) {
@@ -81,7 +88,9 @@ public class IncidentPerCommunity {
 
   public void close() {
     this.state = State.composedOf("CLOSED", "Closed Incident");
-    this.dateTime = LocalDateTime.now();
+    LocalDateTime now = LocalDateTime.now();
+    this.duration = Double.valueOf(Math.abs(Duration.between(now, this.dateTime).toMinutes()));
+    this.dateTime = now;
   }
 
 }

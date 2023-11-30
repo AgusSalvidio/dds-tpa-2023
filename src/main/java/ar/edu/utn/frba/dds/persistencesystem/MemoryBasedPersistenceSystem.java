@@ -31,7 +31,7 @@ public class MemoryBasedPersistenceSystem implements PersistenceSystem {
   Demo demo = new Demo();
 
   public MemoryBasedPersistenceSystem() throws Exception {
-    this.demo.initialize();
+    //this.demo.initialize();
   }
 
   public void addObjectTypeToStore(String anObjectClassName) {

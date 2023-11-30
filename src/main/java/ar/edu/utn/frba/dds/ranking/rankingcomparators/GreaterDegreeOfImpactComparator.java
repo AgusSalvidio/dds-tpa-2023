@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.Comparator;
 
 public class GreaterDegreeOfImpactComparator implements Comparator<EntityIncidentSummary>,
-                                                        Serializable {
+    Serializable {
 
   //Criteria is defined in the next iteration
   @Override

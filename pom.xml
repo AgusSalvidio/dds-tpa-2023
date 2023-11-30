@@ -209,12 +209,6 @@
                                     ar/edu/utn/frba/dds/notification/**/*
                                 </exclude>
                                 <exclude>
-                                    ar/edu/utn/frba/dds/managementsystem/**/*
-                                </exclude>
-                                <exclude>
-                                    ar/edu/utn/frba/dds/persistencesystem/**/*
-                                </exclude>
-                                <exclude>
                                     ar/edu/utn/frba/dds/server/**/*
                                 </exclude>
                                 <exclude>
@@ -225,6 +219,15 @@
                                 </exclude>
                                 <exclude>
                                     ar/edu/utn/frba/dds/demo/**/*
+                                </exclude>
+                                <exclude>
+                                    ar/edu/utn/frba/dds/managementsystem/**/*
+                                </exclude>
+                                <exclude>
+                                    ar/edu/utn/frba/dds/eventnotificationsystem/**/*
+                                </exclude>
+                                <exclude>
+                                    ar/edu/utn/frba/dds/persistencesystem/**/*
                                 </exclude>
                             </excludes>
                         </configuration>

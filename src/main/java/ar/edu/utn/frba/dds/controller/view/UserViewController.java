@@ -2,12 +2,8 @@ package ar.edu.utn.frba.dds.controller.view;
 
 import ar.edu.utn.frba.dds.applicationcontext.ApplicationContext;
 import ar.edu.utn.frba.dds.user.User;
-import ar.edu.utn.frba.dds.notification.notificationmean.NotificationType;
 import io.javalin.http.Context;
-import io.javalin.http.Handler;
 import io.javalin.http.HttpStatus;
-
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,7 +30,6 @@ public class UserViewController extends Controller {
     model.put("registered_user", null);
     model.put("title", "Registro de Usuario");
     model.put("buttonActionLabel", "Registrar");
-    model.put("notificationtypes",Arrays.stream(NotificationType.values()).toList());
     context.render("users/user-registration.hbs", model);
   }
 
@@ -44,7 +39,7 @@ public class UserViewController extends Controller {
     model.put("lastname", context.formParam("lastname"));
     model.put("email", context.formParam("email"));
     model.put("telephone", context.formParam("telephone"));
-    model.put("notificationtype", context.formParam("notificationtype"));
+    model.put("notificationMean", context.formParam("notificationMean"));
     model.put("username", context.formParam("username"));
     model.put("password", context.formParam("password"));
 
@@ -71,11 +66,9 @@ public class UserViewController extends Controller {
     User userToEdit = this.applicationContext.userManagementSystem().userIdentifiedBy(id);
 
     model.put("registered_user", userToEdit);
-    model.put("notificationtypes",Arrays.stream(NotificationType.values()).toList());
     model.put("user", this.applicationContext.loggedUser(context));
     model.put("buttonActionLabel", "Editar");
     model.put("title", "Editar Usuario");
-
 
     context.render("users/user-registration.hbs", model);
   }
@@ -87,7 +80,7 @@ public class UserViewController extends Controller {
     model.put("lastname", context.formParam("lastname"));
     model.put("email", context.formParam("email"));
     model.put("telephone", context.formParam("telephone"));
-    model.put("notificationtype", context.formParam("notificationtype"));
+    model.put("notificationMean", context.formParam("notificationMean"));
     model.put("username", context.formParam("username"));
     model.put("password", context.formParam("password"));
 
@@ -100,4 +93,3 @@ public class UserViewController extends Controller {
   }
 
 }
-

@@ -56,11 +56,10 @@
 
             <div class="col-md-6">
                 <label for="services">Seleccionar notificacion:</label>
-                <select class="col-md-6" name="notificationtype">
+                <select class="col-md-6" name="notificationMean">
                     <option label="Seleccione Tipo..." value="" disabled selected></option>
-                    {{#each notificationtypes}}
-                        <option value={{this}}>{{this}}</option>
-                    {{/each}}
+                    <option value="wpp">wpp</option>
+                    <option value="email">email</option>
                 </select>
             </div>
 

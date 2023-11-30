@@ -2,9 +2,11 @@ package ar.edu.utn.frba.dds.managementsystem;
 
 import ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole;
 import ar.edu.utn.frba.dds.eventnotificationsystem.notifiableevent.NotifiableEvent;
-import ar.edu.utn.frba.dds.notification.notificationmean.*;
-import ar.edu.utn.frba.dds.persistencesystem.MemoryBasedPersistenceSystem;
-import ar.edu.utn.frba.dds.persistencesystem.PersistenceSystem;
+import ar.edu.utn.frba.dds.notification.notificationmean.JakartaAdapter;
+import ar.edu.utn.frba.dds.notification.notificationmean.NotificationMean;
+import ar.edu.utn.frba.dds.notification.notificationmean.NotifyByMail;
+import ar.edu.utn.frba.dds.notification.notificationmean.NotifyByWhatsApp;
+import ar.edu.utn.frba.dds.notification.notificationmean.TwilioAdapter;
 import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
 import ar.edu.utn.frba.dds.user.User;
 import ar.edu.utn.frba.dds.user.UserDetail;
@@ -27,7 +29,7 @@ public class UserManagementSystem {
   }
 
   public static UserManagementSystem workingWith(
-          RelationalDatabasePersistenceSystem persistenceSystem) {
+      RelationalDatabasePersistenceSystem persistenceSystem) {
     return new UserManagementSystem(persistenceSystem);
   }
 
@@ -84,11 +86,10 @@ public class UserManagementSystem {
     String username = model.get("username").toString();
     String password = model.get("password").toString();
     String telephone = model.get("telephone").toString();
-    NotificationType notificationType = NotificationType.valueOf(model.get("notificationtype").toString());
+    NotificationMean notificationMean =
+        this.convertToEntity(model.get("notificationMean").toString());
 
-    //NotificationMean notificationMean = new NotifyByWhatsApp(new TwilioAdapter());
-
-    UserDetail userDetail = new UserDetail(name, lastname, email, telephone, notificationType);
+    UserDetail userDetail = new UserDetail(name, lastname, email, telephone, notificationMean);
     this.startManagingDetail(userDetail);
 
     this.startManaging(
@@ -102,11 +103,10 @@ public class UserManagementSystem {
     String username = model.get("username").toString();
     String password = model.get("password").toString();
     String telephone = model.get("telephone").toString();
-    NotificationType notificationType = NotificationType.valueOf(model.get("notificationtype").toString());
+    NotificationMean notificationMean =
+        this.convertToEntity(model.get("notificationMean").toString());
 
-    NotificationMean notificationMean = new NotifyByWhatsApp(new TwilioAdapter());
-
-    UserDetail userDetail = new UserDetail(name, lastname, email, telephone, notificationType);
+    UserDetail userDetail = new UserDetail(name, lastname, email, telephone, notificationMean);
     userDetail.setId(userToUpdate.getDetails().getId());
 
     User updatedUser = User.composedOf(username,
@@ -114,7 +114,6 @@ public class UserManagementSystem {
     updatedUser.setId(userToUpdate.getId());
 
     this.updateWith(userToUpdate, updatedUser);
-
   }
 
   private NotificationMean convertToEntity(String str) {

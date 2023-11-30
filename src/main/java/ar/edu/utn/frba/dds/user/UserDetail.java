@@ -1,14 +1,16 @@
 package ar.edu.utn.frba.dds.user;
 
-import ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole;
 import ar.edu.utn.frba.dds.converters.NotificationMeanConverter;
 import ar.edu.utn.frba.dds.entity.Entity;
 import ar.edu.utn.frba.dds.notification.notificationmean.NotificationMean;
 import ar.edu.utn.frba.dds.service.Service;
-import ar.edu.utn.frba.dds.notification.notificationmean.NotificationType;
 import java.util.List;
-import javax.persistence.*;
-
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -33,11 +35,8 @@ public class UserDetail {
   @Column(name = "telephone")
   String telephone;
 
-  @Column(name = "notification_type")
-  @Enumerated(EnumType.STRING)
-  NotificationType notificationType;
-
-  @Transient
+  @Convert(converter = NotificationMeanConverter.class)
+  @Column(name = "notification_mean")
   NotificationMean notificationMean;
 
   @Transient
@@ -48,14 +47,15 @@ public class UserDetail {
   public UserDetail() {
     //Sobrecarga para que no rompa Hibernate
   }
+
   public UserDetail(String name, String lastname, String anEmail, String telephone,
-                    NotificationType notificationType) {
+                    NotificationMean notificationMean) {
     this.name = name;
     this.lastname = lastname;
     this.email = anEmail;
     this.telephone = telephone;
-    this.notificationType = notificationType;
-    //this.userPreference = new UserPreference();
+    this.notificationMean = notificationMean;
+    this.userPreference = new UserPreference();
   }
 
   public String name() {
@@ -79,17 +79,17 @@ public class UserDetail {
   }
 
   public static UserDetail composedOf(String name, String lastname, String anEmail,
-                                      String telephone, NotificationType notificationType)
+                                      String telephone, NotificationMean notificationMean)
       throws Exception {
     /*
         Implemented this way because its needed an AssertionChecker class that will be implemented
         in another issue later on. Also should be necesary to specify the field thats empty
      */
     if (name.isEmpty() || lastname.isEmpty() || anEmail.isEmpty()
-        || telephone.isEmpty() || notificationType == null) {
+        || telephone.isEmpty() || notificationMean == null) {
       throw new Exception("Los campos no pueden estar en blanco.");
     }
-    return new UserDetail(name, lastname, anEmail, telephone, notificationType);
+    return new UserDetail(name, lastname, anEmail, telephone, notificationMean);
   }
 
   public List<Service> services() {

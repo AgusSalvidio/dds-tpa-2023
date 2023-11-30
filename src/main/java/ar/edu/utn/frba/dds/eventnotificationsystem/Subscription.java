@@ -20,8 +20,9 @@ public class Subscription {
     return this.event;
   }
 
+
   public void receiveFrom(NotifiableEvent event, Object publisher) {
-    //this.subscriber.receiveFrom(event, publisher);
+    this.subscriber.receiveFrom(event, publisher);
   }
 
 }

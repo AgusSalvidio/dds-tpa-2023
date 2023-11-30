@@ -8,10 +8,8 @@ import ar.edu.utn.frba.dds.service.Elevator;
 import ar.edu.utn.frba.dds.service.Service;
 import ar.edu.utn.frba.dds.service.Toilet;
 import ar.edu.utn.frba.dds.user.User;
-
 import java.util.ArrayList;
 import java.util.Arrays;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
