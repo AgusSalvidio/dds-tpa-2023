@@ -37,10 +37,21 @@ public class UserManagementSystem {
     this.persistenceSystem().startManagingUser(anUser);
   }
 
+  public void updateWith(User anUser) {
+    this.persistenceSystem().updateManagingUser(anUser);
+  }
+
+  public void stopManaging(User anUser) {
+    this.persistenceSystem().stopManagingUser(anUser);
+  }
+
   public void startManagingDetail(UserDetail anUserDetail) {
     this.persistenceSystem().startManagingUserDetail(anUserDetail);
   }
 
+  public void updateDetailWith(UserDetail anUserDetail) {
+    this.persistenceSystem().updateManagingUserDetail(anUserDetail);
+  }
 
   public void stopManagingDetail(UserDetail anUserDetail) {
     this.persistenceSystem().stopManagingUserDetail(anUserDetail);
@@ -52,18 +63,6 @@ public class UserManagementSystem {
 
   public List<UserDetail> userDetails() {
     return this.persistenceSystem.userDetails();
-  }
-
-  public void stopManaging(User anUser) {
-    this.persistenceSystem().stopManagingUser(anUser);
-  }
-
-  public void updateWith(User currentUser, User updatedUser) {
-    currentUser.synchronizeWith(updatedUser);
-  }
-
-  public void updateDetailWith(UserDetail currentUserDetail, UserDetail updatedUserDetail) {
-    currentUserDetail.synchronizeWith(updatedUserDetail);
   }
 
   public User userIdentifiedBy(Integer anUserId) {
@@ -88,12 +87,14 @@ public class UserManagementSystem {
     String telephone = model.get("telephone").toString();
     NotificationMean notificationMean =
         this.convertToEntity(model.get("notificationMean").toString());
+    AuthorizationRole authorizationRole = AuthorizationRole.valueOf(
+            model.get("authorizationRole").toString());
 
     UserDetail userDetail = new UserDetail(name, lastname, email, telephone, notificationMean);
     this.startManagingDetail(userDetail);
 
     this.startManaging(
-        User.composedOf(username, password, userDetail, AuthorizationRole.USUARIO));
+        User.composedOf(username, password, userDetail, authorizationRole));
   }
 
   public void updateUserFrom(User userToUpdate, Map model) throws Exception {
@@ -105,15 +106,16 @@ public class UserManagementSystem {
     String telephone = model.get("telephone").toString();
     NotificationMean notificationMean =
         this.convertToEntity(model.get("notificationMean").toString());
+    AuthorizationRole authorizationRole = AuthorizationRole.valueOf(
+            model.get("authorizationRole").toString());
 
     UserDetail userDetail = new UserDetail(name, lastname, email, telephone, notificationMean);
     userDetail.setId(userToUpdate.getDetails().getId());
 
-    User updatedUser = User.composedOf(username,
-        password, userDetail, userToUpdate.authorizationRole());
+    User updatedUser = User.composedOf(username, password, userDetail, authorizationRole);
     updatedUser.setId(userToUpdate.getId());
 
-    this.updateWith(userToUpdate, updatedUser);
+    this.updateWith(updatedUser);
   }
 
   private NotificationMean convertToEntity(String str) {

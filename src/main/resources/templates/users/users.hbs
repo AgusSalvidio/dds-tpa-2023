@@ -33,6 +33,7 @@
                             <th>Apellido</th>
                             <th>Email</th>
                             <th>Teléfono</th>
+                            <th>Rol</th>
                             <th>Acciones</th>
                         </tr>
                         </thead>
@@ -44,6 +45,7 @@
                                 <td>{{this.details.lastname}}</td>
                                 <td>{{this.details.email}}</td>
                                 <td>{{this.details.telephone}}</td>
+                                <td>{{this.authorizationRole}}</td>
                                 <td class="px-4">
                                     <a href="/users/{{this.id}}/edit" class="btn-sm "><i
                                             class="fa-regular fa-pen-to-square"></i></a>

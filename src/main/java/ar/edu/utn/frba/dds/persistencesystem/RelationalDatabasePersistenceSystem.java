@@ -55,6 +55,14 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
     transaction.commit();
   }
 
+  public void updateManagingUser(User anUser) {
+    EntityTransaction transaction = entityManager().getTransaction();
+
+    transaction.begin();
+    entityManager().merge(anUser);
+    transaction.commit();
+  }
+
   public void stopManagingUser(User anUser) {
     EntityTransaction transaction = entityManager().getTransaction();
 
@@ -68,6 +76,14 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
 
     transaction.begin();
     entityManager().persist(anUserDetail);
+    transaction.commit();
+  }
+
+  public void updateManagingUserDetail(UserDetail anUserDetail) {
+    EntityTransaction transaction = entityManager().getTransaction();
+
+    transaction.begin();
+    entityManager().merge(anUserDetail);
     transaction.commit();
   }
 
