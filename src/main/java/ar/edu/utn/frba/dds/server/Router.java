@@ -34,6 +34,7 @@ public class Router {
   private static void initializeHomeEndpointsOn(
       Javalin app,
       ApplicationContext applicationContext) {
+
     app.get("/", new HomeViewController(applicationContext)::index);
     app.get("/home", new HomeViewController(applicationContext)::index);
   }
@@ -41,6 +42,7 @@ public class Router {
   private static void initializeAdministrationEndpointsOn(
       Javalin app,
       ApplicationContext applicationContext) {
+
     app.get("/administration",
         new AdministrationViewController(applicationContext)::index, ADMINISTRADOR, ENTIDAD);
   }
@@ -48,6 +50,7 @@ public class Router {
   private static void initializeLoginEndpointsOn(
       Javalin app,
       ApplicationContext applicationContext) {
+
     app.get("/login", new LoginViewController(applicationContext)::index);
     app.post("/login", new LoginViewController(applicationContext)::save);
   }
@@ -55,6 +58,7 @@ public class Router {
   private static void initializeLogoutEndpointsOn(
       Javalin app,
       ApplicationContext applicationContext) {
+
     app.get("/logout", new LogoutViewController(applicationContext)::index);
   }
 
@@ -86,12 +90,18 @@ public class Router {
           Javalin app,
           ApplicationContext applicationContext) {
 
-    app.get("/services", new ServiceViewController(applicationContext)::index,
-            ADMINISTRADOR, ENTIDAD);
+    app.get("/services",
+        new ServiceViewController(applicationContext)::index, ADMINISTRADOR, ENTIDAD);
     app.get("/services/register",
-            new ServiceViewController(applicationContext)::create, ADMINISTRADOR, ENTIDAD);
-    app.post("/services", new ServiceViewController(applicationContext)::save,
-            ADMINISTRADOR, ENTIDAD);
+        new ServiceViewController(applicationContext)::create, ADMINISTRADOR, ENTIDAD);
+    app.get("/services/{id}/edit",
+        new ServiceViewController(applicationContext)::edit, ADMINISTRADOR);
+    app.post("/services/{id}",
+        new ServiceViewController(applicationContext)::update, ADMINISTRADOR);
+    app.post("/services",
+        new ServiceViewController(applicationContext)::save, ADMINISTRADOR, ENTIDAD);
+    app.get("/services/{id}/delete",
+        new ServiceViewController(applicationContext)::delete, ADMINISTRADOR);
   }
 
 

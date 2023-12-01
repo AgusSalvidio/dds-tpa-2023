@@ -11,7 +11,7 @@
 
 <main>
     <div class="d-flex justify-content-end p-2">
-        <legend class="">Administrar Servicios</legend>
+        <legend class="">{{title}}</legend>
         <a
                 class="btn btn-md btn-custom"
                 href="/services/register"
@@ -41,10 +41,11 @@
                                 <td>{{this.description}}</td>
                                 <td>{{this.state.name}}</td>
                                 <td class="px-4">
-                                    <a class="btn-sm "><i
+                                    <a href="/services/{{this.id}}/edit" class="btn-sm "><i
                                             class="fa-regular fa-pen-to-square"></i></a>
-                                    <a class="btn-sm "><i class="fa-solid fa-xmark"
-                                                          style="color:red"></i></a>
+                                    <a href="/services/{{this.id}}/delete" class="btn-sm "><i
+                                            class="fa-solid fa-xmark"
+                                            style="color:red"></i></a>
                                 </td>
                             </tr>
                         {{else}}

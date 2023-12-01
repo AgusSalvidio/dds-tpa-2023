@@ -74,7 +74,7 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
   public User userNamed(String anUserName) {
     try {
       return entityManager().createQuery(
-                      "SELECT u FROM " + User.class.getName() + " u WHERE u.username = :username",
+                      "SELECT x FROM " + User.class.getName() + " x WHERE x.username = :username",
                       User.class)
               .setParameter("username", anUserName)
               .getSingleResult();
@@ -82,63 +82,43 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
       return null;
     }
   }
-  /*
-  public void startManagingUser(User anUser) {
-    EntityTransaction transaction = entityManager().getTransaction();
 
-    transaction.begin();
-    entityManager().persist(anUser);
-    transaction.commit();
+  //--------------------------------------------------------------------------------------------
+  //SERVICES
+  //--------------------------------------------------------------------------------------------
+  public State stateIdentifiedBy(Integer stateId) {
+    return entityManager().find(State.class, stateId);
   }
 
-  public void updateManagingUser(User anUser) {
-    EntityTransaction transaction = entityManager().getTransaction();
-
-    transaction.begin();
-    entityManager().merge(anUser);
-    transaction.commit();
+  public State stateNamed(String stateName) {
+    try {
+      return entityManager().createQuery(
+              "SELECT x FROM " + State.class.getName() + " x WHERE x.name = :name",
+              State.class)
+          .setParameter("name", stateName)
+          .getSingleResult();
+    } catch (NoResultException e) {
+      return null;
+    }
   }
 
-  public void stopManagingUser(User anUser) {
-    EntityTransaction transaction = entityManager().getTransaction();
-
-    transaction.begin();
-    entityManager().remove(anUser);
-    transaction.commit();
+  public Service serviceIdentifiedBy(Integer serviceId) {
+    return entityManager().find(Service.class, serviceId);
   }
 
-  public void startManagingUserDetail(UserDetail anUserDetail) {
-    EntityTransaction transaction = entityManager().getTransaction();
-
-    transaction.begin();
-    entityManager().persist(anUserDetail);
-    transaction.commit();
+  public Service serviceNamed(String serviceName) {
+    try {
+      return entityManager().createQuery(
+              "SELECT x FROM " + Service.class.getName() + " x WHERE x.name = :name",
+              Service.class)
+          .setParameter("name", serviceName)
+          .getSingleResult();
+    } catch (NoResultException e) {
+      return null;
+    }
   }
 
-  public void updateManagingUserDetail(UserDetail anUserDetail) {
-    EntityTransaction transaction = entityManager().getTransaction();
 
-    transaction.begin();
-    entityManager().merge(anUserDetail);
-    transaction.commit();
-  }
-
-  public void stopManagingUserDetail(UserDetail anUserDetail) {
-    EntityTransaction transaction = entityManager().getTransaction();
-
-    transaction.begin();
-    entityManager().remove(anUserDetail);
-    transaction.commit();
-  }
-
-  public List<User> users() {
-    return entityManager().createQuery("from " + User.class.getName()).getResultList();
-  }
-
-  public List<UserDetail> userDetails() {
-    return entityManager().createQuery("from " + UserDetail.class.getName()).getResultList();
-  }
-  */
 
   //--------------------------------------------------------------------------------------------
   //GET BY ID
@@ -374,11 +354,6 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
   //Agregados por FDM, faltaban todos
   //Hay que desarrollarlos pq no hay nada-!!!!!!!!!!!!!!!!!
   //Menos Mal que estoy escuchndo IRON MAIDEN
-  public Service serviceIdentifiedBy(Integer serviceId) {
-    //return this.demo.services().stream().
-    // filter(service -> service.getId().equals(serviceId)).findFirst().orElse(null);
-    return null;
-  }
 
   public Community communityIdentifiedBy(Integer communityId) {
     //return this.demo.communities().stream().

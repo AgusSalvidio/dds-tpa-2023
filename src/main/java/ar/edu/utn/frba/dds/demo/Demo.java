@@ -150,47 +150,42 @@ public class Demo {
   }
 
   public State inServiceState() {
-    State state = State.composedOf("IN_SERVICE", "Normally working Service");
+    State state = State.composedOf("EN_SERVICIO", "Servicio funcionando normalmente");
     return state;
   }
 
   public State notInServiceState() {
-    State state = State.composedOf("NOT_IN_SERVICE", "Not working Service");
+    State state = State.composedOf("FUERA_DE_SERVICIO", "Servicio no funcionando");
     return state;
   }
 
-  public Elevator elevatorA() {
-    return Elevator.composedOf("Ascensor Principal", "Ascensor Principal", this.inServiceState());
+  public Elevator elevatorA(State state) {
+    return Elevator.composedOf("Ascensor Principal", "Ascensor Principal", state);
   }
 
-  public Elevator elevatorB() {
-    return Elevator.composedOf("Ascensor Secundario",
-            "Ascensor Secundario", this.notInServiceState());
+  public Elevator elevatorB(State state) {
+    return Elevator.composedOf("Ascensor Secundario", "Ascensor Secundario", state);
   }
 
-  public Escalator escalatorA() {
-    return Escalator.composedOf("Escalera Mecanica Adaptada",
-            "Escalera Mecanica Adaptada", this.notInServiceState());
+  public Escalator escalatorA(State state) {
+    return Escalator.composedOf("Escalera Mecanica Adaptada", "Escalera Mecanica Adaptada", state);
   }
 
-  public Escalator escalatorB() {
-    return Escalator.composedOf("Escalera Nueva", "Escalera Nueva", this.inServiceState());
+  public Escalator escalatorB(State state) {
+    return Escalator.composedOf("Escalera Nueva", "Escalera Nueva", state);
   }
 
-  public Toilet toiletA() {
-    return Toilet.composedOf("Toilet Primer Piso",
-            "Toilet Primer Piso", this.inServiceState());
+  public Toilet toiletA(State state) {
+    return Toilet.composedOf("Toilet Primer Piso", "Toilet Primer Piso", state);
   }
 
-  public Toilet toiletB() {
-    return Toilet.composedOf("Toilet Segundo Piso",
-            "Toilet Segundo Piso", this.notInServiceState());
+  public Toilet toiletB(State state) {
+    return Toilet.composedOf("Toilet Segundo Piso", "Toilet Segundo Piso", state);
   }
 
 
 
-  //*************************************************
-
+  /*
   public State openIncident() {
     State state = State.composedOf("OPEN", "Open Incident");
     return state;
@@ -200,8 +195,6 @@ public class Demo {
     State state = State.composedOf("CLOSED", "Closed Incident");
     return state;
   }
-
-
 
   private LocalDateTime curentDateTime() {
     return LocalDateTime.of(2023, 7, 2, 23, 40);
@@ -537,7 +530,6 @@ public class Demo {
     //TODO
   }
 
-  /*
   public void initialize() throws Exception {
     this.addUsers();
     this.addServices();
@@ -556,12 +548,11 @@ public class Demo {
     //SERVICES & STATES
     persistenceSystem.startManaging(this.inServiceState());
     persistenceSystem.startManaging(this.notInServiceState());
-    persistenceSystem.startManaging(this.elevatorA());
-    persistenceSystem.startManaging(this.elevatorB());
-    persistenceSystem.startManaging(this.escalatorA());
-    persistenceSystem.startManaging(this.escalatorB());
-    persistenceSystem.startManaging(this.toiletA());
-    persistenceSystem.startManaging(this.toiletB());
-
+    persistenceSystem.startManaging(this.elevatorA(persistenceSystem.stateIdentifiedBy(1)));
+    persistenceSystem.startManaging(this.elevatorB(persistenceSystem.stateIdentifiedBy(2)));
+    persistenceSystem.startManaging(this.escalatorA(persistenceSystem.stateNamed("EN_SERVICIO")));
+    persistenceSystem.startManaging(this.escalatorB(persistenceSystem.stateNamed("FUERA_DE_SERVICIO")));
+    persistenceSystem.startManaging(this.toiletA(persistenceSystem.stateIdentifiedBy(1)));
+    persistenceSystem.startManaging(this.toiletB(persistenceSystem.stateNamed("FUERA_DE_SERVICIO")));
   }
 }

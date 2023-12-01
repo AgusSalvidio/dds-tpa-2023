@@ -33,27 +33,27 @@ public class UserManagementSystem {
     return new UserManagementSystem(persistenceSystem);
   }
 
-  public void startManaging(User anUser) {
+  public void startManagingUser(User anUser) {
     this.persistenceSystem().startManaging(anUser);
   }
 
-  public void updateWith(User anUser) {
+  public void updateUserWith(User anUser) {
     this.persistenceSystem().updateManaging(anUser);
   }
 
-  public void stopManaging(User anUser) {
+  public void stopManagingUser(User anUser) {
     this.persistenceSystem().stopManaging(anUser);
   }
 
-  public void startManagingDetail(UserDetail anUserDetail) {
+  public void startManagingUserDetail(UserDetail anUserDetail) {
     this.persistenceSystem().startManaging(anUserDetail);
   }
 
-  public void updateDetailWith(UserDetail anUserDetail) {
+  public void updateUserDetailWith(UserDetail anUserDetail) {
     this.persistenceSystem().updateManaging(anUserDetail);
   }
 
-  public void stopManagingDetail(UserDetail anUserDetail) {
+  public void stopManagingUserDetail(UserDetail anUserDetail) {
     this.persistenceSystem().stopManaging(anUserDetail);
   }
 
@@ -91,9 +91,9 @@ public class UserManagementSystem {
             model.get("authorizationRole").toString());
 
     UserDetail userDetail = new UserDetail(name, lastname, email, telephone, notificationMean);
-    this.startManagingDetail(userDetail);
+    this.startManagingUserDetail(userDetail);
 
-    this.startManaging(
+    this.startManagingUser(
         User.composedOf(username, password, userDetail, authorizationRole));
   }
 
@@ -115,7 +115,7 @@ public class UserManagementSystem {
     User updatedUser = User.composedOf(username, password, userDetail, authorizationRole);
     updatedUser.setId(userToUpdate.getId());
 
-    this.updateWith(updatedUser);
+    this.updateUserWith(updatedUser);
   }
 
   private NotificationMean convertToEntity(String str) {

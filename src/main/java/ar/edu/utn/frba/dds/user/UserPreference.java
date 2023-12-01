@@ -6,31 +6,15 @@ import ar.edu.utn.frba.dds.service.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Transient;
 import lombok.Getter;
 import lombok.Setter;
 
-//@javax.persistence.Entity
-//@Table(name = "user_preference")
 @Getter
 @Setter
 public class UserPreference {
-  @Id
-  @GeneratedValue
-  Integer id;
 
-  //@OneToMany
-  //@JoinTable(name = "user_preference_service")
-  //@JoinColumn(name = "user_id", referencedColumnName = "id")
-  @Transient
   List<Service> services = new ArrayList<>();
-
-  @Transient
   List<Entity> entities = new ArrayList<>();
-
-  @Transient
   List<Location> locations = new ArrayList<>();
 
   public List<Service> services() {

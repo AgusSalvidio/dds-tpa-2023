@@ -15,7 +15,7 @@ import javax.persistence.*;
 @Getter
 public abstract class Service {
   @Id
-  @GeneratedValue
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   Integer id;
 
   @Column(name = "name")

@@ -57,7 +57,7 @@ public class UserViewController extends Controller {
 
     User userToDelete = this.applicationContext.userManagementSystem().userIdentifiedBy(id);
 
-    this.applicationContext.userManagementSystem().stopManaging(userToDelete);
+    this.applicationContext.userManagementSystem().stopManagingUser(userToDelete);
     context.redirect("/users");
   }
 
