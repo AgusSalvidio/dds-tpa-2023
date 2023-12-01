@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import lombok.Getter;
@@ -25,7 +26,7 @@ public class Establishment {
   @GeneratedValue
   Integer id;
 
-  @ManyToOne
+  @OneToOne
   @JoinColumn(name = "establishment_type_id", referencedColumnName = "id")
   public EstablishmentType type;
 
