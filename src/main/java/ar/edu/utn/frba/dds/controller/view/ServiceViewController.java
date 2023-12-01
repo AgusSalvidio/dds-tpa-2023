@@ -50,7 +50,8 @@ public class ServiceViewController extends Controller {
   public void delete(Context context) throws Exception {
     Integer id = Integer.parseInt(context.pathParam("id"));
 
-    Service serviceToDelete = this.applicationContext.serviceManagementSystem().serviceIdentifiedBy(id);
+    Service serviceToDelete = this.applicationContext
+        .serviceManagementSystem().serviceIdentifiedBy(id);
 
     this.applicationContext.serviceManagementSystem().stopManagingService(serviceToDelete);
     context.redirect("/services");

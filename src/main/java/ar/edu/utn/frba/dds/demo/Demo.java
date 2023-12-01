@@ -551,8 +551,10 @@ public class Demo {
     persistenceSystem.startManaging(this.elevatorA(persistenceSystem.stateIdentifiedBy(1)));
     persistenceSystem.startManaging(this.elevatorB(persistenceSystem.stateIdentifiedBy(2)));
     persistenceSystem.startManaging(this.escalatorA(persistenceSystem.stateNamed("EN_SERVICIO")));
-    persistenceSystem.startManaging(this.escalatorB(persistenceSystem.stateNamed("FUERA_DE_SERVICIO")));
+    persistenceSystem
+        .startManaging(this.escalatorB(persistenceSystem.stateNamed("FUERA_DE_SERVICIO")));
     persistenceSystem.startManaging(this.toiletA(persistenceSystem.stateIdentifiedBy(1)));
-    persistenceSystem.startManaging(this.toiletB(persistenceSystem.stateNamed("FUERA_DE_SERVICIO")));
+    persistenceSystem
+        .startManaging(this.toiletB(persistenceSystem.stateNamed("FUERA_DE_SERVICIO")));
   }
 }

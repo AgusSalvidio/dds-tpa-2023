@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{{headMeta}}}
+</head>
+
+<body>
+<header>
+    {{{customAdministrationNavbar}}}
+</header>
+
+<main>
+
+    <section class="titles justify-content-center">
+        <h2 class="title">{{title}}</h2>
+    </section>
+    <section class="container">
+        <form class="row g-3 py-2" method="post"
+            {{#if registered_service}}
+              action="/services/{{registered_service.id}}" {{else}} action="/services" {{/if}}
+        >
+            <div class="col-md-6">
+                <label for="name" class="col-form-label">Nombre:</label>
+                <input type="text" {{#if registered_service}}
+                       value="{{registered_service.name}}" {{/if}} class="form-control" name="name"/>
+            </div>
+            <div class="col-md-6">
+                <label for="lastname" class="col-form-label">Descripcion:</label>
+                <input type="text" {{#if registered_service}}
+                       value="{{registered_service.description}}" {{/if}} class="form-control"
+                       name="description"/>
+            </div>
+            {{#if registered_service}}
+            {{else}}
+                <div class="col-md-6">
+                    <label for="serviceType">Tipo:</label>
+                    <select class="col-md-6" name="serviceType">
+                        <option label="Seleccione ..." value="" disabled selected></option>
+                        <option value="elevator">ASCENSOR</option>
+                        <option value="escalator">ESCALERA</option>
+                        <option value="toilet">BAÑO</option>
+                    </select>
+                </div>
+            {{/if}}
+            <div class="col-md-6">
+                <label for="state">Estado:</label>
+                <select class="col-md-6" name="state">
+                    <option label="Seleccione ..." value="" disabled selected></option>
+                    {{#each states}}
+                        <option value={{this.id}}>{{this.name}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            <div class="d-flex justify-content-center gap-2">
+                <button class="btn btn-custom"><a href="/services">Cancelar</a></button>
+                <button type="submit" class="btn btn-custom">{{buttonActionLabel}}</button>
+            </div>
+        </form>
+    </section>
+
+</main>
+
+<footer>
+</footer>
+{{{scripts}}}
+</body>
+</html>

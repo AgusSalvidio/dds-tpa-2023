@@ -91,12 +91,13 @@ public class ServiceManagementSystem {
 
     switch (serviceType) {
       case "elevator" ->
-              this.startManagingElevator(Elevator.composedOf(name, description, state));
+          this.startManagingElevator(Elevator.composedOf(name, description, state));
       case "escalator" ->
           this.startManagingEscalator(Escalator.composedOf(name, description, state));
       case "toilet" ->
           this.startManagingToilet(Toilet.composedOf(name, description, state));
-      default -> {}
+      default -> {
+      }
     }
   }
 
