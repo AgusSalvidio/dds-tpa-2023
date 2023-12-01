@@ -36,31 +36,6 @@ public class UserViewController extends Controller {
     context.render("users/user-registration.hbs", model);
   }
 
-  public void save(Context context) throws Exception {
-    Map<String, Object> model = new HashMap<>();
-    model.put("name", context.formParam("name"));
-    model.put("lastname", context.formParam("lastname"));
-    model.put("email", context.formParam("email"));
-    model.put("telephone", context.formParam("telephone"));
-    model.put("notificationMean", context.formParam("notificationMean"));
-    model.put("username", context.formParam("username"));
-    model.put("password", context.formParam("password"));
-    model.put("authorizationRole", context.formParam("authorizationRole"));
-
-    this.applicationContext.userManagementSystem().startManagingUserFrom(model);
-    context.status(HttpStatus.CREATED);
-    context.redirect("/users");
-  }
-
-  public void delete(Context context) throws Exception {
-    Integer id = Integer.parseInt(context.pathParam("id"));
-
-    User userToDelete = this.applicationContext.userManagementSystem().userIdentifiedBy(id);
-
-    this.applicationContext.userManagementSystem().stopManagingUser(userToDelete);
-    context.redirect("/users");
-  }
-
   public void edit(Context context) throws Exception {
     Map<String, Object> model = new HashMap<>();
 
@@ -96,4 +71,28 @@ public class UserViewController extends Controller {
     context.redirect("/users");
   }
 
+  public void save(Context context) throws Exception {
+    Map<String, Object> model = new HashMap<>();
+    model.put("name", context.formParam("name"));
+    model.put("lastname", context.formParam("lastname"));
+    model.put("email", context.formParam("email"));
+    model.put("telephone", context.formParam("telephone"));
+    model.put("notificationMean", context.formParam("notificationMean"));
+    model.put("username", context.formParam("username"));
+    model.put("password", context.formParam("password"));
+    model.put("authorizationRole", context.formParam("authorizationRole"));
+
+    this.applicationContext.userManagementSystem().startManagingUserFrom(model);
+    context.status(HttpStatus.CREATED);
+    context.redirect("/users");
+  }
+
+  public void delete(Context context) throws Exception {
+    Integer id = Integer.parseInt(context.pathParam("id"));
+
+    User userToDelete = this.applicationContext.userManagementSystem().userIdentifiedBy(id);
+
+    this.applicationContext.userManagementSystem().stopManagingUser(userToDelete);
+    context.redirect("/users");
+  }
 }

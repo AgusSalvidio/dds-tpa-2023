@@ -54,12 +54,24 @@ public class ServiceManagementSystem {
     this.persistenceSystem().startManaging(anElevator);
   }
 
+  public void updateElevatorWith(Elevator anElevator) {
+    this.persistenceSystem().updateManaging(anElevator);
+  }
+
   public void startManagingEscalator(Escalator anEscalator) {
     this.persistenceSystem().startManaging(anEscalator);
   }
 
+  public void updateEscalatorWith(Escalator anEscalator) {
+    this.persistenceSystem().updateManaging(anEscalator);
+  }
+
   public void startManagingToilet(Toilet toilet) {
     this.persistenceSystem().startManaging(toilet);
+  }
+
+  public void updateToiletWith(Toilet toilet) {
+    this.persistenceSystem().updateManaging(toilet);
   }
 
   public void stopManagingService(Service service) {
@@ -90,15 +102,40 @@ public class ServiceManagementSystem {
     State state = this.stateIdentifiedBy(stateId);
 
     switch (serviceType) {
-      case "elevator" ->
-          this.startManagingElevator(Elevator.composedOf(name, description, state));
-      case "escalator" ->
-          this.startManagingEscalator(Escalator.composedOf(name, description, state));
-      case "toilet" ->
-          this.startManagingToilet(Toilet.composedOf(name, description, state));
+      case "elevator" -> this.startManagingElevator(Elevator.composedOf(name, description, state));
+      case "escalator" -> this.startManagingEscalator(Escalator.composedOf(name, description, state));
+      case "toilet" -> this.startManagingToilet(Toilet.composedOf(name, description, state));
       default -> {
       }
     }
   }
 
+  public void updateServiceFrom(Service serviceToUpdate, Map model) throws Exception {
+    String name = model.get("name").toString();
+    String description = model.get("description").toString();
+    Integer stateId = Integer.valueOf(model.get("state").toString());
+    State state = this.stateIdentifiedBy(stateId);
+
+    String serviceType = serviceToUpdate.getClass().getSimpleName();
+    System.out.println(serviceType);
+    switch (serviceType) {
+      case "Elevator" -> {
+        Elevator updatedElevator = Elevator.composedOf(name, description, state);
+        updatedElevator.setId(serviceToUpdate.getId());
+        this.updateServiceWith(updatedElevator);
+      }
+      case "Wscalator" -> {
+        Escalator updatedEscalator = Escalator.composedOf(name, description, state);
+        updatedEscalator.setId(serviceToUpdate.getId());
+        this.updateServiceWith(updatedEscalator);
+      }
+      case "Toilet" -> {
+        Toilet updatedToilet = Toilet.composedOf(name, description, state);
+        updatedToilet.setId(serviceToUpdate.getId());
+        this.updateServiceWith(updatedToilet);
+      }
+      default -> {
+      }
+    }
+  }
 }

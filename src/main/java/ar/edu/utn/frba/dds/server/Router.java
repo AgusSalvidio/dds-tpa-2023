@@ -104,6 +104,27 @@ public class Router {
         new ServiceViewController(applicationContext)::delete, ADMINISTRADOR);
   }
 
+  //--------------------------------------------------------------------------------------------
+  //ESTABLECIMIENTOS
+  //--------------------------------------------------------------------------------------------
+  private static void initializeEstablishmentTypeEndpointsOn(
+      Javalin app,
+      ApplicationContext applicationContext) {
+
+    app.get("/establishment-type",
+        new EstablishmentTypeViewController(applicationContext)::index, ADMINISTRADOR, ENTIDAD);
+    app.get("/establishment-type/register",
+        new EstablishmentTypeViewController(applicationContext)::create, ADMINISTRADOR, ENTIDAD);
+    app.get("/establishment-type/{id}/edit",
+        new EstablishmentTypeViewController(applicationContext)::edit, ADMINISTRADOR);
+    app.post("/establishment-type/{id}",
+        new EstablishmentTypeViewController(applicationContext)::update, ADMINISTRADOR);
+    app.post("/establishment-type",
+        new EstablishmentTypeViewController(applicationContext)::save, ADMINISTRADOR, ENTIDAD);
+    app.get("/establishment-type/{id}/delete",
+        new EstablishmentTypeViewController(applicationContext)::delete, ADMINISTRADOR);
+  }
+
 
 
   //--------------------------------------------------------------------------------------------
@@ -125,24 +146,6 @@ public class Router {
         new EntityTypeViewController(applicationContext)::save, ADMINISTRADOR, ENTIDAD);
     app.get("/entity-type/{id}/delete",
         new EntityTypeViewController(applicationContext)::delete, ADMINISTRADOR);
-  }
-
-  private static void initializeEstablishmentTypeEndpointsOn(
-      Javalin app,
-      ApplicationContext applicationContext) {
-
-    app.get("/establishment-type",
-        new EstablishmentTypeViewController(applicationContext)::index, ADMINISTRADOR, ENTIDAD);
-    app.get("/establishment-type/register",
-        new EstablishmentTypeViewController(applicationContext)::create, ADMINISTRADOR, ENTIDAD);
-    app.get("/establishment-type/{id}/edit",
-        new EstablishmentTypeViewController(applicationContext)::edit, ADMINISTRADOR);
-    app.post("/establishment-type/{id}",
-        new EstablishmentTypeViewController(applicationContext)::update, ADMINISTRADOR);
-    app.post("/establishment-type",
-        new EstablishmentTypeViewController(applicationContext)::save, ADMINISTRADOR, ENTIDAD);
-    app.get("/establishment-type/{id}/delete",
-        new EstablishmentTypeViewController(applicationContext)::delete, ADMINISTRADOR);
   }
 
   private static void initializeTransportationTypeEndpointsOn(
@@ -286,8 +289,10 @@ public class Router {
     initializeLogoutEndpointsOn(app, applicationContext);         //OK
     //Usuarios
     initializeUserEndpointsOn(app, applicationContext);           //OK
-    //Servicios
-    initializeServiceEndpointsOn(app, applicationContext);
+    //Servicios y Estados
+    initializeServiceEndpointsOn(app, applicationContext);        //OK
+    //Establecimientos
+    initializeEstablishmentTypeEndpointsOn(app, applicationContext);
     /*
     //Parametricas
     initializeEntityTypeEndpointsOn(app, applicationContext);
@@ -302,7 +307,6 @@ public class Router {
 
 
     initializeServiceEndpointsOn(app, applicationContext);
-    initializeIncidentEndpointsOn(app, applicationContext);
     initializeServiceHolderEndpointsOn(app, applicationContext);
     */
   }
