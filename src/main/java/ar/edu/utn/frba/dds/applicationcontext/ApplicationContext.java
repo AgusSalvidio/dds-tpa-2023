@@ -1,8 +1,11 @@
 package ar.edu.utn.frba.dds.applicationcontext;
 
+import ar.edu.utn.frba.dds.controller.view.EstablishmentViewController;
 import ar.edu.utn.frba.dds.managementsystem.CommunityManagementSystem;
 import ar.edu.utn.frba.dds.managementsystem.EntityManagementSystem;
+import ar.edu.utn.frba.dds.managementsystem.EntityNameManagementSystem;
 import ar.edu.utn.frba.dds.managementsystem.EntityTypeManagementSystem;
+import ar.edu.utn.frba.dds.managementsystem.EstablishmentManagementSystem;
 import ar.edu.utn.frba.dds.managementsystem.EstablishmentTypeManagementSystem;
 import ar.edu.utn.frba.dds.managementsystem.IncidentManagementSystem;
 import ar.edu.utn.frba.dds.managementsystem.IncidentPerCommunityManagementSystem;
@@ -19,82 +22,12 @@ import java.util.List;
 public class ApplicationContext {
 
   RelationalDatabasePersistenceSystem persistenceSystem = new RelationalDatabasePersistenceSystem();
-  UserManagementSystem userManagementSystem = new UserManagementSystem(this.persistenceSystem);
-  EntityTypeManagementSystem entityTypeManagementSystem =
-      new EntityTypeManagementSystem(this.persistenceSystem);
-  EstablishmentTypeManagementSystem establishmentTypeManagementSystem =
-      new EstablishmentTypeManagementSystem(this.persistenceSystem);
-  TransportTypeManagementSystem transportTypeManagementSystem =
-      new TransportTypeManagementSystem((this.persistenceSystem));
-
-
-  IncidentManagementSystem incidentManagementSystem =
-      new IncidentManagementSystem(this.persistenceSystem);
-  EntityManagementSystem entityManagementSystem =
-      new EntityManagementSystem(this.persistenceSystem);
-  CommunityManagementSystem communityManagementSystem =
-      new CommunityManagementSystem(this.persistenceSystem);
-  IncidentPerCommunityManagementSystem incidentPerCommunityManagementSystem =
-      new IncidentPerCommunityManagementSystem(this.persistenceSystem);
-
-  ServiceHolderManagementSystem serviceHolderManagementSystem =
-      new ServiceHolderManagementSystem(this.persistenceSystem);
 
   public ApplicationContext() throws Exception {
   }
 
-  public User loggedUser(Context context) {
-    if (context.sessionAttribute("user_id") == null) {
-      return null;
-    } else {
-      Integer userId = context.sessionAttribute("user_id");
-      return this.userManagementSystem().userIdentifiedBy(userId);
-    }
-  }
-
   public UserManagementSystem userManagementSystem() {
-    return this.userManagementSystem;
-  }
-
-  public EntityTypeManagementSystem entityTypeManagementSystem() {
-    return this.entityTypeManagementSystem;
-  }
-
-  public EstablishmentTypeManagementSystem establishmentTypeManagementSystem() {
-    return this.establishmentTypeManagementSystem;
-  }
-
-  public TransportTypeManagementSystem transportTypeManagementSystem() {
-    return this.transportTypeManagementSystem;
-  }
-
-  public EntityManagementSystem entityManagementSystem() {
-    return this.entityManagementSystem;
-  }
-
-
-  public IncidentManagementSystem incidentManagementSystem() {
-    return this.incidentManagementSystem;
-  }
-
-  public CommunityManagementSystem communityManagementSystem() {
-    return this.communityManagementSystem;
-  }
-
-  public IncidentPerCommunityManagementSystem incidentPerCommunityManagementSystem() {
-    return this.incidentPerCommunityManagementSystem;
-  }
-
-  public ServiceHolderManagementSystem serviceHolderManagementSystem() {
-    return this.serviceHolderManagementSystem;
-  }
-
-  public void startManagingServiceHolder(ServiceHolder serviceHolder) {
-    this.persistenceSystem.startManagingServiceHolder(serviceHolder);
-  }
-
-  public List<ServiceHolder> serviceHolders() {
-    return this.serviceHolderManagementSystem.serviceHolders();
+    return new UserManagementSystem(this.persistenceSystem);
   }
 
   public User userIdentifiedBy(Integer anUserId) {
@@ -105,8 +38,52 @@ public class ApplicationContext {
     return this.userManagementSystem().userNamed(anUserName);
   }
 
+  public User loggedUser(Context context) {
+    if (context.sessionAttribute("user_id") == null) {
+      return null;
+    } else {
+      Integer userId = context.sessionAttribute("user_id");
+      return this.userManagementSystem().userIdentifiedBy(userId);
+    }
+  }
   public ServiceManagementSystem serviceManagementSystem() {
     return new ServiceManagementSystem(this.persistenceSystem);
   }
 
+  public EstablishmentTypeManagementSystem establishmentTypeManagementSystem() {
+    return new EstablishmentTypeManagementSystem(this.persistenceSystem);
+  }
+
+  public EstablishmentManagementSystem establishmentManagementSystem() {
+    return new EstablishmentManagementSystem(this.persistenceSystem);
+  }
+
+  public EntityTypeManagementSystem entityTypeManagementSystem() {
+    return new EntityTypeManagementSystem(this.persistenceSystem);
+  }
+
+  public EntityNameManagementSystem entityNameManagementSystem() {
+    return new EntityNameManagementSystem(this.persistenceSystem);
+  }
+
+  public EntityManagementSystem entityManagementSystem() {
+    return new EntityManagementSystem(this.persistenceSystem);
+  }
+
+
+  public IncidentManagementSystem incidentManagementSystem() {
+    return new IncidentManagementSystem(this.persistenceSystem);
+  }
+
+  public CommunityManagementSystem communityManagementSystem() {
+    return new CommunityManagementSystem(this.persistenceSystem);
+  }
+
+  public IncidentPerCommunityManagementSystem incidentPerCommunityManagementSystem() {
+    return new IncidentPerCommunityManagementSystem(this.persistenceSystem);
+  }
+
+  public ServiceHolderManagementSystem serviceHolderManagementSystem() {
+    return new ServiceHolderManagementSystem(this.persistenceSystem);
+  }
 }

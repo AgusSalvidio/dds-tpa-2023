@@ -1,17 +1,11 @@
 package ar.edu.utn.frba.dds.managementsystem;
 
-import ar.edu.utn.frba.dds.notification.notificationmean.JakartaAdapter;
-import ar.edu.utn.frba.dds.notification.notificationmean.NotificationMean;
-import ar.edu.utn.frba.dds.notification.notificationmean.NotifyByMail;
-import ar.edu.utn.frba.dds.notification.notificationmean.NotifyByWhatsApp;
-import ar.edu.utn.frba.dds.notification.notificationmean.TwilioAdapter;
 import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
 import ar.edu.utn.frba.dds.service.Elevator;
 import ar.edu.utn.frba.dds.service.Escalator;
 import ar.edu.utn.frba.dds.service.Service;
 import ar.edu.utn.frba.dds.service.State;
 import ar.edu.utn.frba.dds.service.Toilet;
-import ar.edu.utn.frba.dds.user.User;
 import java.util.List;
 import java.util.Map;
 
@@ -94,33 +88,14 @@ public class ServiceManagementSystem {
     return this.persistenceSystem.serviceNamed(serviceName);
   }
 
-  public void startManagingServiceFrom(Map model) {
-    String name = model.get("name").toString();
-    String description = model.get("description").toString();
-    String serviceType = model.get("serviceType").toString();
-    Integer stateId = Integer.valueOf(model.get("state").toString());
-    State state = this.stateIdentifiedBy(stateId);
-
-    switch (serviceType) {
-      case "elevator" ->
-          this.startManagingElevator(Elevator.composedOf(name, description, state));
-      case "escalator" ->
-          this.startManagingEscalator(Escalator.composedOf(name, description, state));
-      case "toilet" ->
-          this.startManagingToilet(Toilet.composedOf(name, description, state));
-      default -> {
-      }
-    }
-  }
-
-  public void updateServiceFrom(Service serviceToUpdate, Map model) throws Exception {
+  public void updateServiceFrom(Service serviceToUpdate, Map model) {
     String name = model.get("name").toString();
     String description = model.get("description").toString();
     Integer stateId = Integer.valueOf(model.get("state").toString());
     State state = this.stateIdentifiedBy(stateId);
 
     String serviceType = serviceToUpdate.getClass().getSimpleName();
-    System.out.println(serviceType);
+
     switch (serviceType) {
       case "Elevator" -> {
         Elevator updatedElevator = Elevator.composedOf(name, description, state);
@@ -137,6 +112,25 @@ public class ServiceManagementSystem {
         updatedToilet.setId(serviceToUpdate.getId());
         this.updateServiceWith(updatedToilet);
       }
+      default -> {
+      }
+    }
+  }
+
+  public void startManagingServiceFrom(Map model) {
+    String name = model.get("name").toString();
+    String description = model.get("description").toString();
+    String serviceType = model.get("serviceType").toString();
+    Integer stateId = Integer.valueOf(model.get("state").toString());
+    State state = this.stateIdentifiedBy(stateId);
+
+    switch (serviceType) {
+      case "elevator" ->
+          this.startManagingElevator(Elevator.composedOf(name, description, state));
+      case "escalator" ->
+          this.startManagingEscalator(Escalator.composedOf(name, description, state));
+      case "toilet" ->
+          this.startManagingToilet(Toilet.composedOf(name, description, state));
       default -> {
       }
     }

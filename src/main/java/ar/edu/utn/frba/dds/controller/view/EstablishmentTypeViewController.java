@@ -1,45 +1,40 @@
 package ar.edu.utn.frba.dds.controller.view;
 
 import ar.edu.utn.frba.dds.applicationcontext.ApplicationContext;
-import ar.edu.utn.frba.dds.datafile.DataFile;
-import ar.edu.utn.frba.dds.datafile.FieldString;
-import ar.edu.utn.frba.dds.datafile.FileDelimited;
 import ar.edu.utn.frba.dds.establishment.EstablishmentType;
 import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
-import io.javalin.util.FileUtil;
 import java.util.HashMap;
 import java.util.Map;
 
 public class EstablishmentTypeViewController {
 
   ApplicationContext applicationContext;
-  String pageTitle = "A/E de Tipo de Establecimientos";
-  String actionString = "establishment-type";
+  String pageTitle = "ABM de Tipo de Establecimientos";
+  String actionString = "/establishment-type";
   String listPage = "parameters/parameters.hbs";
   String unitPage = "parameters/parameters-registration.hbs";
-  String fileName = "entity-type.csv";
+  //String fileName = "entity-type.csv";
 
   public EstablishmentTypeViewController(ApplicationContext applicationContext) {
     super();
     this.applicationContext = applicationContext;
   }
 
-  public void index(Context context) throws Exception {
+  public void index(Context context) {
     Map<String, Object> model = new HashMap<>();
-    model.put("title", pageTitle);
     model.put("user", this.applicationContext.loggedUser(context));
+    model.put("title", pageTitle);
     model.put("action", actionString);
     model.put("object-list",
-        this.applicationContext.establishmentTypeManagementSystem()
-            .objectList(EstablishmentType.class.getName()));
+        this.applicationContext.establishmentTypeManagementSystem().establishmentTypes());
     context.render(listPage, model);
   }
 
   public void create(Context context) throws Exception {
     Map<String, Object> model = new HashMap<>();
-    model.put("title", pageTitle);
     model.put("user", this.applicationContext.loggedUser(context));
+    model.put("title", pageTitle);
     model.put("action", actionString);
     model.put("registered_object", null);
     model.put("buttonActionLabel", "Registrar");
@@ -48,43 +43,46 @@ public class EstablishmentTypeViewController {
 
   public void edit(Context context) throws Exception {
     Map<String, Object> model = new HashMap<>();
-    EstablishmentType object = this.applicationContext.establishmentTypeManagementSystem()
-        .establishmentTypeById(Integer.parseInt(context.pathParam("id")));
-    model.put("title", pageTitle);
+    Integer id = Integer.parseInt(context.pathParam("id"));
+    EstablishmentType establishmentTypeToEdit = this.applicationContext
+        .establishmentTypeManagementSystem().establishmentTypeIdentifiedBy(id);
     model.put("user", this.applicationContext.loggedUser(context));
+    model.put("title", pageTitle);
     model.put("action", actionString);
-    model.put("registered_object", object);
+    model.put("registered_object", establishmentTypeToEdit);
     model.put("buttonActionLabel", "Editar");
     context.render(unitPage, model);
   }
 
-  public void save(Context context) throws Exception {
-    EstablishmentType object = new EstablishmentType();
-    object.name = context.formParam("name");
-    this.applicationContext.establishmentTypeManagementSystem().startManaging(object);
-    context.status(HttpStatus.CREATED);
+  public void update(Context context) throws Exception {
+    Map<String, Object> model = new HashMap<>();
+    Integer id = Integer.parseInt(context.pathParam("id"));
+    EstablishmentType establishmentTypeToUpdate = this.applicationContext
+        .establishmentTypeManagementSystem().establishmentTypeIdentifiedBy(id);
+    model.put("name", context.formParam("name"));
+    this.applicationContext.establishmentTypeManagementSystem()
+        .updateEstablishmentTypeFrom(establishmentTypeToUpdate, model);
     context.redirect(actionString);
   }
 
-  public void update(Context context) throws Exception {
-    EstablishmentType object = this.applicationContext.establishmentTypeManagementSystem()
-        .establishmentTypeById(Integer.parseInt(context.pathParam("id")));
-    object.setId(Integer.parseInt(context.pathParam("id")));
-    object.name = context.formParam("name");
-    this.applicationContext.establishmentTypeManagementSystem().startManaging(object);
+  public void save(Context context) {
+    Map<String, Object> model = new HashMap<>();
+    model.put("name", context.formParam("name"));
+    this.applicationContext.establishmentTypeManagementSystem().startEstablishmentTypeFrom(model);
     context.status(HttpStatus.CREATED);
     context.redirect(actionString);
   }
 
   public void delete(Context context) throws Exception {
-    /*
     Integer id = Integer.parseInt(context.pathParam("id"));
-    User userToDelete = this.applicationContext.userManagementSystem().userIdentifiedBy(id);
-    this.applicationContext.userManagementSystem().stopManaging(userToDelete);
-    */
-    context.redirect(listPage);
+    EstablishmentType establishmentTypeToDelete = this.applicationContext
+        .establishmentTypeManagementSystem().establishmentTypeIdentifiedBy(id);
+    this.applicationContext.establishmentTypeManagementSystem()
+        .stopManagingEstablishmentType(establishmentTypeToDelete);
+    context.redirect(actionString);
   }
 
+  /*
   public void save_massive(Context context) throws Exception {
 
     context.uploadedFiles("files").forEach(uploadedFile ->
@@ -102,4 +100,5 @@ public class EstablishmentTypeViewController {
     dataFile.addField(new FieldString(0, "Type", 255));
     dataFile.addField(new FieldString(1, "Name", 255));
   }
+  */
 }

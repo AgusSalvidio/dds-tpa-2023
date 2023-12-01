@@ -1,27 +1,21 @@
 package ar.edu.utn.frba.dds.controller.view;
 
 import ar.edu.utn.frba.dds.applicationcontext.ApplicationContext;
-import ar.edu.utn.frba.dds.datafile.DataFile;
-import ar.edu.utn.frba.dds.datafile.FieldString;
-import ar.edu.utn.frba.dds.datafile.FileDelimited;
+import ar.edu.utn.frba.dds.entity.EntityName;
 import ar.edu.utn.frba.dds.entity.EntityType;
-import ar.edu.utn.frba.dds.establishment.EstablishmentType;
 import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
-import io.javalin.util.FileUtil;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EntityTypeViewController {
-
+public class EntityNameViewController {
   ApplicationContext applicationContext;
-  String pageTitle = "ABM de Tipo de Entidades";
-  String actionString = "/entity-type";
+  String pageTitle = "ABM de Nombre de Entidades";
+  String actionString = "/entity-name";
   String listPage = "parameters/parameters.hbs";
   String unitPage = "parameters/parameters-registration.hbs";
-  //String fileName = "entity-type.csv";
 
-  public EntityTypeViewController(ApplicationContext applicationContext) {
+  public EntityNameViewController(ApplicationContext applicationContext) {
     super();
     this.applicationContext = applicationContext;
   }
@@ -32,7 +26,7 @@ public class EntityTypeViewController {
     model.put("title", pageTitle);
     model.put("action", actionString);
     model.put("object-list",
-        this.applicationContext.entityTypeManagementSystem().entityTypes());
+        this.applicationContext.entityNameManagementSystem().entityNames());
     context.render(listPage, model);
   }
 
@@ -49,12 +43,12 @@ public class EntityTypeViewController {
   public void edit(Context context) throws Exception {
     Map<String, Object> model = new HashMap<>();
     Integer id = Integer.parseInt(context.pathParam("id"));
-    EntityType entityTypeToEdit =
-        this.applicationContext.entityTypeManagementSystem().entityTypeIdentifiedBy(id);
+    EntityName entityNameToEdit =
+        this.applicationContext.entityNameManagementSystem().entityNameIdentifiedBy(id);
     model.put("user", this.applicationContext.loggedUser(context));
     model.put("title", pageTitle);
     model.put("action", actionString);
-    model.put("registered_object", entityTypeToEdit);
+    model.put("registered_object", entityNameToEdit);
     model.put("buttonActionLabel", "Editar");
     context.render(unitPage, model);
   }
@@ -62,47 +56,28 @@ public class EntityTypeViewController {
   public void update(Context context) throws Exception {
     Map<String, Object> model = new HashMap<>();
     Integer id = Integer.parseInt(context.pathParam("id"));
-    EntityType entityTypeToUpdate =
-        this.applicationContext.entityTypeManagementSystem().entityTypeIdentifiedBy(id);
+    EntityName entityNameToUpdate =
+        this.applicationContext.entityNameManagementSystem().entityNameIdentifiedBy(id);
     model.put("name", context.formParam("name"));
     this.applicationContext
-        .entityTypeManagementSystem().updateEntityTypeFrom(entityTypeToUpdate, model);
+        .entityNameManagementSystem().updateEntityNameFrom(entityNameToUpdate, model);
     context.redirect(actionString);
   }
 
   public void save(Context context) {
     Map<String, Object> model = new HashMap<>();
     model.put("name", context.formParam("name"));
-    this.applicationContext.entityTypeManagementSystem().startEntityTypeFrom(model);
+    this.applicationContext.entityNameManagementSystem().startEntityNameFrom(model);
     context.status(HttpStatus.CREATED);
     context.redirect(actionString);
   }
 
   public void delete(Context context) throws Exception {
     Integer id = Integer.parseInt(context.pathParam("id"));
-    EntityType entityTypeToDelete =
-        this.applicationContext.entityTypeManagementSystem().entityTypeIdentifiedBy(id);
-    this.applicationContext.entityTypeManagementSystem().stopManagingEntityType(entityTypeToDelete);
+    EntityName entityNameToDelete =
+        this.applicationContext.entityNameManagementSystem().entityNameIdentifiedBy(id);
+    this.applicationContext.entityNameManagementSystem().stopManagingEntityName(entityNameToDelete);
     context.redirect(actionString);
   }
 
-  /*
-  public void save_massive(Context context) throws Exception {
-
-    context.uploadedFiles("files").forEach(uploadedFile ->
-        FileUtil.streamToFile(uploadedFile.content(), "./src/main/resources/upload/" + fileName));
-
-    String filePath = String.format("./src/main/resources/upload/%s", fileName);
-
-    DataFile dataFile = new FileDelimited("EntityType");
-    //Set Source Structure
-    dataFile.setFilePath(filePath);
-    dataFile.setRowDelimiter("CrLf");
-    dataFile.setColDelimiter(";");
-    dataFile.setFirstRowHasColumnNames(false);
-    //Set Source Fields
-    dataFile.addField(new FieldString(0, "Type", 255));
-    dataFile.addField(new FieldString(1, "Name", 255));
-  }
-   */
 }

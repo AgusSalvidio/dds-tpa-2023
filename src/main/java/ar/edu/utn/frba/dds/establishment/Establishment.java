@@ -10,8 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import lombok.Getter;
@@ -26,18 +25,17 @@ public class Establishment {
   @GeneratedValue
   Integer id;
 
-  @Transient
+  @ManyToOne
+  @JoinColumn(name = "establishment_type_id", referencedColumnName = "id")
   public EstablishmentType type;
 
   @Column(name = "name")
   public String name;
 
-  @OneToOne
-  @JoinColumn(name = "location_id", referencedColumnName = "id")
+  @Transient
   public Location location;
 
-  @OneToMany
-  @JoinColumn(name = "service_id", referencedColumnName = "id")
+  @Transient
   public List<Service> services;
 
   public static Establishment composedOf(

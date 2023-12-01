@@ -28,11 +28,6 @@ public class UserManagementSystem {
     return this.persistenceSystem;
   }
 
-  public static UserManagementSystem workingWith(
-      RelationalDatabasePersistenceSystem persistenceSystem) {
-    return new UserManagementSystem(persistenceSystem);
-  }
-
   public void startManagingUser(User anUser) {
     this.persistenceSystem().startManaging(anUser);
   }
@@ -61,10 +56,6 @@ public class UserManagementSystem {
     return this.persistenceSystem.objectList(User.class.getName());
   }
 
-  public List<Object> userDetails() {
-    return this.persistenceSystem.objectList(UserDetail.class.getName());
-  }
-
   public User userIdentifiedBy(Integer anUserId) {
     return this.persistenceSystem.userIdentifiedBy(anUserId);
   }
@@ -73,28 +64,13 @@ public class UserManagementSystem {
     return this.persistenceSystem.userNamed(anUserName);
   }
 
+  public List<Object> userDetails() {
+    return this.persistenceSystem.objectList(UserDetail.class.getName());
+  }
+
   public void receiveFrom(NotifiableEvent event, Object publisher) {
     /* For now, this system should have an implementation. This will be enhanced
      when the extracting the implementation from ManagementSystem -asalvidio*/
-  }
-
-  public void startManagingUserFrom(Map model) throws Exception {
-    String name = model.get("name").toString();
-    String lastname = model.get("lastname").toString();
-    String email = model.get("email").toString();
-    String username = model.get("username").toString();
-    String password = model.get("password").toString();
-    String telephone = model.get("telephone").toString();
-    NotificationMean notificationMean =
-        this.convertToEntity(model.get("notificationMean").toString());
-    AuthorizationRole authorizationRole = AuthorizationRole.valueOf(
-            model.get("authorizationRole").toString());
-
-    UserDetail userDetail = new UserDetail(name, lastname, email, telephone, notificationMean);
-    this.startManagingUserDetail(userDetail);
-
-    this.startManagingUser(
-        User.composedOf(username, password, userDetail, authorizationRole));
   }
 
   public void updateUserFrom(User userToUpdate, Map model) throws Exception {
@@ -116,6 +92,25 @@ public class UserManagementSystem {
     updatedUser.setId(userToUpdate.getId());
 
     this.updateUserWith(updatedUser);
+  }
+
+  public void startManagingUserFrom(Map model) throws Exception {
+    String name = model.get("name").toString();
+    String lastname = model.get("lastname").toString();
+    String email = model.get("email").toString();
+    String username = model.get("username").toString();
+    String password = model.get("password").toString();
+    String telephone = model.get("telephone").toString();
+    NotificationMean notificationMean =
+        this.convertToEntity(model.get("notificationMean").toString());
+    AuthorizationRole authorizationRole = AuthorizationRole.valueOf(
+        model.get("authorizationRole").toString());
+
+    UserDetail userDetail = new UserDetail(name, lastname, email, telephone, notificationMean);
+    this.startManagingUserDetail(userDetail);
+
+    this.startManagingUser(
+        User.composedOf(username, password, userDetail, authorizationRole));
   }
 
   private NotificationMean convertToEntity(String str) {

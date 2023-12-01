@@ -7,8 +7,10 @@ import static ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole.USUARIO;
 import ar.edu.utn.frba.dds.applicationcontext.ApplicationContext;
 import ar.edu.utn.frba.dds.controller.view.AdministrationViewController;
 import ar.edu.utn.frba.dds.controller.view.EntityTypeViewController;
+import ar.edu.utn.frba.dds.controller.view.EntityNameViewController;
 import ar.edu.utn.frba.dds.controller.view.EntityViewController;
 import ar.edu.utn.frba.dds.controller.view.EstablishmentTypeViewController;
+import ar.edu.utn.frba.dds.controller.view.EstablishmentViewController;
 import ar.edu.utn.frba.dds.controller.view.HomeViewController;
 import ar.edu.utn.frba.dds.controller.view.IncidentViewController;
 import ar.edu.utn.frba.dds.controller.view.LoginViewController;
@@ -18,7 +20,6 @@ import ar.edu.utn.frba.dds.controller.view.RankingViewController;
 import ar.edu.utn.frba.dds.controller.view.ServiceHolderViewController;
 import ar.edu.utn.frba.dds.controller.view.ServiceViewController;
 import ar.edu.utn.frba.dds.controller.view.TransportLineViewController;
-import ar.edu.utn.frba.dds.controller.view.TransportTypeViewController;
 import ar.edu.utn.frba.dds.controller.view.UserViewController;
 import io.javalin.Javalin;
 
@@ -63,7 +64,7 @@ public class Router {
   }
 
   //--------------------------------------------------------------------------------------------
-  //USUARIOS
+  //MAESTROS
   //--------------------------------------------------------------------------------------------
   private static void initializeUserEndpointsOn(
       Javalin app,
@@ -83,9 +84,6 @@ public class Router {
         new UserViewController(applicationContext)::delete, ADMINISTRADOR);
   }
 
-  //--------------------------------------------------------------------------------------------
-  //SERVICIOS
-  //--------------------------------------------------------------------------------------------
   private static void initializeServiceEndpointsOn(
           Javalin app,
           ApplicationContext applicationContext) {
@@ -104,8 +102,26 @@ public class Router {
         new ServiceViewController(applicationContext)::delete, ADMINISTRADOR);
   }
 
+  private static void initializeEstablishmentEndpointsOn(
+      Javalin app,
+      ApplicationContext applicationContext) {
+
+    app.get("/establishments",
+        new EstablishmentViewController(applicationContext)::index, ADMINISTRADOR, ENTIDAD);
+    app.get("/establishments/register",
+        new EstablishmentViewController(applicationContext)::create, ADMINISTRADOR, ENTIDAD);
+    app.get("/establishments/{id}/edit",
+        new EstablishmentViewController(applicationContext)::edit, ADMINISTRADOR);
+    app.post("/establishments/{id}",
+        new EstablishmentViewController(applicationContext)::update, ADMINISTRADOR);
+    app.post("/establishments",
+        new EstablishmentViewController(applicationContext)::save, ADMINISTRADOR, ENTIDAD);
+    app.get("/establishments/{id}/delete",
+        new EstablishmentViewController(applicationContext)::delete, ADMINISTRADOR);
+  }
+
   //--------------------------------------------------------------------------------------------
-  //ESTABLECIMIENTOS
+  //PARAMETRIA
   //--------------------------------------------------------------------------------------------
   private static void initializeEstablishmentTypeEndpointsOn(
       Javalin app,
@@ -125,11 +141,6 @@ public class Router {
         new EstablishmentTypeViewController(applicationContext)::delete, ADMINISTRADOR);
   }
 
-
-
-  //--------------------------------------------------------------------------------------------
-  //PARAMETRIA
-  //--------------------------------------------------------------------------------------------
   private static void initializeEntityTypeEndpointsOn(
       Javalin app,
       ApplicationContext applicationContext) {
@@ -148,23 +159,27 @@ public class Router {
         new EntityTypeViewController(applicationContext)::delete, ADMINISTRADOR);
   }
 
-  private static void initializeTransportationTypeEndpointsOn(
+  private static void initializeEntityNameEndpointsOn(
       Javalin app,
       ApplicationContext applicationContext) {
 
-    app.get("/transport-type",
-        new TransportTypeViewController(applicationContext)::index, ADMINISTRADOR, ENTIDAD);
-    app.get("/transport-type/register",
-        new TransportTypeViewController(applicationContext)::create, ADMINISTRADOR, ENTIDAD);
-    app.get("/transport-type/{id}/edit",
-        new TransportTypeViewController(applicationContext)::edit, ADMINISTRADOR);
-    app.post("/transport-type/{id}",
-        new TransportTypeViewController(applicationContext)::update, ADMINISTRADOR);
-    app.post("/transport-type",
-        new TransportTypeViewController(applicationContext)::save, ADMINISTRADOR, ENTIDAD);
-    app.get("/transport-type/{id}/delete",
-        new TransportTypeViewController(applicationContext)::delete, ADMINISTRADOR);
+    app.get("/entity-name",
+        new EntityNameViewController(applicationContext)::index, ADMINISTRADOR, ENTIDAD);
+    app.get("/entity-name/register",
+        new EntityNameViewController(applicationContext)::create, ADMINISTRADOR, ENTIDAD);
+    app.get("/entity-name/{id}/edit",
+        new EntityNameViewController(applicationContext)::edit, ADMINISTRADOR);
+    app.post("/entity-name/{id}",
+        new EntityNameViewController(applicationContext)::update, ADMINISTRADOR);
+    app.post("/entity-name",
+        new EntityNameViewController(applicationContext)::save, ADMINISTRADOR, ENTIDAD);
+    app.get("/entity-name/{id}/delete",
+        new EntityNameViewController(applicationContext)::delete, ADMINISTRADOR);
   }
+
+  //--------------------------------------------------------------------------------------------
+  //--------------------------------------------------------------------------------------------
+
 
 
   //--------------------------------------------------------------------------------------------
@@ -283,16 +298,20 @@ public class Router {
     ApplicationContext applicationContext = new ApplicationContext();
 
     //Principales
-    initializeHomeEndpointsOn(app, applicationContext);           //OK
-    initializeAdministrationEndpointsOn(app, applicationContext); //OK
-    initializeLoginEndpointsOn(app, applicationContext);          //OK
-    initializeLogoutEndpointsOn(app, applicationContext);         //OK
+    initializeHomeEndpointsOn(app, applicationContext);
+    initializeAdministrationEndpointsOn(app, applicationContext);
+    initializeLoginEndpointsOn(app, applicationContext);
+    initializeLogoutEndpointsOn(app, applicationContext);
     //Usuarios
-    initializeUserEndpointsOn(app, applicationContext);           //OK
+    initializeUserEndpointsOn(app, applicationContext);
     //Servicios y Estados
-    initializeServiceEndpointsOn(app, applicationContext);        //OK
-    //Establecimientos
+    initializeServiceEndpointsOn(app, applicationContext);
+    //Establecimientos y Tipos
     initializeEstablishmentTypeEndpointsOn(app, applicationContext);
+    initializeEstablishmentEndpointsOn(app, applicationContext);
+    //Entidades y Tipos,Nombres
+    initializeEntityTypeEndpointsOn(app, applicationContext);
+    initializeEntityNameEndpointsOn(app, applicationContext);
     /*
     //Parametricas
     initializeEntityTypeEndpointsOn(app, applicationContext);

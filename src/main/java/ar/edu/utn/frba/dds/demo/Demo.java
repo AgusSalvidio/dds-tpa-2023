@@ -5,6 +5,8 @@ import ar.edu.utn.frba.dds.community.Community;
 import ar.edu.utn.frba.dds.community.Member;
 import ar.edu.utn.frba.dds.entity.Direction;
 import ar.edu.utn.frba.dds.entity.Entity;
+import ar.edu.utn.frba.dds.entity.EntityName;
+import ar.edu.utn.frba.dds.entity.EntityType;
 import ar.edu.utn.frba.dds.entity.TransportLine;
 import ar.edu.utn.frba.dds.establishment.Establishment;
 import ar.edu.utn.frba.dds.establishment.EstablishmentType;
@@ -183,7 +185,61 @@ public class Demo {
     return Toilet.composedOf("Toilet Segundo Piso", "Toilet Segundo Piso", state);
   }
 
+  public EstablishmentType station() {
+    EstablishmentType establishmentType = new EstablishmentType();
+    establishmentType.setName("ESTACION");
+    return establishmentType;
+  }
 
+  public EstablishmentType branch() {
+    EstablishmentType establishmentType = new EstablishmentType();
+    establishmentType.setName("SUCURSAL");
+    return establishmentType;
+  }
+
+  public Establishment lawSchoolStation(EstablishmentType establishmentType) {
+    return Establishment.composedOf(establishmentType, "FACULTAD DE DERECHO", null);
+  }
+
+  public Establishment lasHerasStation(EstablishmentType establishmentType) {
+    return Establishment.composedOf(establishmentType, "LAS HERAS", null);
+  }
+
+  public Establishment onceStation(EstablishmentType establishmentType) {
+    return Establishment.composedOf(establishmentType, "ONCE", null);
+  }
+
+  public Establishment hospitalStation(EstablishmentType establishmentType) {
+    return Establishment.composedOf(establishmentType, "HOSPITALES", null);
+  }
+
+  public Establishment headquarterBranch(EstablishmentType establishmentType) {
+    return Establishment.composedOf(establishmentType, "CASA MATRIZ", null);
+  }
+
+  public EntityType subway() {
+    EntityType entityType = new EntityType();
+    entityType.setName("SUBTE");
+    return entityType;
+  }
+
+  public EntityType bank() {
+    EntityType entityType = new EntityType();
+    entityType.setName("BANCO");
+    return entityType;
+  }
+
+  public EntityName subwayHLine() {
+    EntityName entityName = new EntityName();
+    entityName.setName("SUBTE H");
+    return entityName;
+  }
+
+  public EntityName nationalBank() {
+    EntityName entityName = new EntityName();
+    entityName.setName("BANCO NACION");
+    return entityName;
+  }
 
   /*
   public State openIncident() {
@@ -302,57 +358,7 @@ public class Demo {
     return location;
   }
 
-  public EstablishmentType station() {
-    EstablishmentType establishmentType = new EstablishmentType();
-    establishmentType.setName("STATION");
-    return establishmentType;
-  }
 
-  public EstablishmentType branch() {
-    EstablishmentType establishmentType = new EstablishmentType();
-    establishmentType.setName("BRANCH");
-    return establishmentType;
-  }
-
-  public Establishment lawSchoolStation() {
-    Establishment establishment = new Establishment();
-    establishment.setType(this.station());
-    establishment.setName("FACULTAD DE DERECHO");
-    establishment.setLocation(this.locationA());
-    return establishment;
-  }
-
-  public Establishment lasHerasStation() {
-    Establishment establishment = new Establishment();
-    establishment.setType(this.station());
-    establishment.setName("LAS HERAS");
-    establishment.setLocation(this.locationB());
-    return establishment;
-  }
-
-  public Establishment onceStation() {
-    Establishment establishment = new Establishment();
-    establishment.setType(this.station());
-    establishment.setName("ONCE");
-    establishment.setLocation(this.locationC());
-    return establishment;
-  }
-
-  public Establishment hospitalStation() {
-    Establishment establishment = new Establishment();
-    establishment.setType(this.station());
-    establishment.setName("HOSPITALES");
-    establishment.setLocation(this.locationD());
-    return establishment;
-  }
-
-  public Establishment headquarterBranch() {
-    Establishment establishment = new Establishment();
-    establishment.setType(this.branch());
-    establishment.setName("CASA MATRIZ");
-    establishment.setLocation(this.locationE());
-    return establishment;
-  }
 
   public TransportLine entityA() throws Exception {
     TransportLine transportLine = TransportLine.composedOf(
@@ -554,5 +560,23 @@ public class Demo {
     persistenceSystem.startManaging(this.escalatorB(persistenceSystem.stateIdentifiedBy(2)));
     persistenceSystem.startManaging(this.toiletA(persistenceSystem.stateIdentifiedBy(1)));
     persistenceSystem.startManaging(this.toiletB(persistenceSystem.stateIdentifiedBy(2)));
+    //ESTABLISHMENTS & TYPES
+    persistenceSystem.startManaging(this.station());
+    persistenceSystem.startManaging(this.branch());
+    persistenceSystem.startManaging(
+        this.lawSchoolStation(persistenceSystem.establishmentTypeIdentifiedBy(1)));
+    persistenceSystem.startManaging(
+        this.lasHerasStation(persistenceSystem.establishmentTypeIdentifiedBy(1)));
+    persistenceSystem.startManaging(
+        this.onceStation(persistenceSystem.establishmentTypeIdentifiedBy(1)));
+    persistenceSystem.startManaging(
+        this.hospitalStation(persistenceSystem.establishmentTypeIdentifiedBy(1)));
+    persistenceSystem.startManaging(
+        this.headquarterBranch(persistenceSystem.establishmentTypeIdentifiedBy(2)));
+    //ENTITIES & TYPES & NAMES
+    persistenceSystem.startManaging(this.subway());
+    persistenceSystem.startManaging(this.bank());
+    persistenceSystem.startManaging(this.subwayHLine());
+    persistenceSystem.startManaging(this.nationalBank());
   }
 }

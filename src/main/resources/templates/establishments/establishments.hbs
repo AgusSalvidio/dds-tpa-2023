@@ -20,6 +20,7 @@
                         <thead>
                         <tr>
                             <th>Nombre</th>
+                            <th>Tipo</th>
                             <th>Acciones</th>
                         </tr>
                         </thead>
@@ -27,6 +28,7 @@
                         {{#each object-list}}
                             <tr>
                                 <td>{{this.name}}</td>
+                                <td>{{this.type.name}}</td>
                                 <td class="px-4">
                                     <a href="{{action}}/{{this.id}}/edit" class="btn-sm ">
                                         <i class="fa-regular fa-pen-to-square"></i>

@@ -27,8 +27,8 @@ public class EntityViewController {
     model.put("title", pageTitle);
     model.put("user", this.applicationContext.loggedUser(context));
     model.put("action", actionString);
-    model.put("object-list", this.applicationContext.entityTypeManagementSystem()
-        .objectList(Entity.class.getName()));
+    //model.put("object-list", this.applicationContext.entityTypeManagementSystem()
+    //    .objectList(Entity.class.getName()));
     context.render(listPage, model);
   }
 

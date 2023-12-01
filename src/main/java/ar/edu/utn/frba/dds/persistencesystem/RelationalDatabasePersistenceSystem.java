@@ -4,9 +4,11 @@ import ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole;
 import ar.edu.utn.frba.dds.community.Community;
 import ar.edu.utn.frba.dds.demo.Demo;
 import ar.edu.utn.frba.dds.entity.Entity;
+import ar.edu.utn.frba.dds.entity.EntityName;
 import ar.edu.utn.frba.dds.entity.EntityType;
 import ar.edu.utn.frba.dds.entity.TransportLine;
 import ar.edu.utn.frba.dds.entity.TransportType;
+import ar.edu.utn.frba.dds.establishment.Establishment;
 import ar.edu.utn.frba.dds.establishment.EstablishmentType;
 import ar.edu.utn.frba.dds.incident.Incident;
 import ar.edu.utn.frba.dds.incident.IncidentPerCommunity;
@@ -118,18 +120,79 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
     }
   }
 
+  //--------------------------------------------------------------------------------------------
+  //ESTABLISHMENTS
+  //--------------------------------------------------------------------------------------------
+  public EstablishmentType establishmentTypeIdentifiedBy(Integer id) {
+    return entityManager().find(EstablishmentType.class, id);
+  }
 
+  public EstablishmentType establishmentTypeNamed(String establishmentTypeName) {
+    try {
+      return entityManager().createQuery(
+              "SELECT x FROM " + EstablishmentType.class.getName() + " x WHERE x.name = :name",
+              EstablishmentType.class)
+          .setParameter("name", establishmentTypeName)
+          .getSingleResult();
+    } catch (NoResultException e) {
+      return null;
+    }
+  }
+
+  public Establishment establishmentIdentifiedBy(Integer id) {
+    return entityManager().find(Establishment.class, id);
+  }
+
+  public Establishment establishmentNamed(String establishmentName) {
+    try {
+      return entityManager().createQuery(
+              "SELECT x FROM " + Establishment.class.getName() + " x WHERE x.name = :name",
+              Establishment.class)
+          .setParameter("name", establishmentName)
+          .getSingleResult();
+    } catch (NoResultException e) {
+      return null;
+    }
+  }
 
   //--------------------------------------------------------------------------------------------
-  //GET BY ID
+  //ENTITIES
   //--------------------------------------------------------------------------------------------
-  public EntityType entityTypeById(Integer id) {
+  public EntityType entityTypeIdentifiedBy(Integer id) {
     return entityManager().find(EntityType.class, id);
   }
 
-  public EstablishmentType establishmentTypeById(Integer id) {
-    return entityManager().find(EstablishmentType.class, id);
+  public EntityType entityTypeNamed(String entityTypeName) {
+    try {
+      return entityManager().createQuery(
+              "SELECT x FROM " + EntityType.class.getName() + " x WHERE x.name = :name",
+              EntityType.class)
+          .setParameter("name", entityTypeName)
+          .getSingleResult();
+    } catch (NoResultException e) {
+      return null;
+    }
   }
+
+  public EntityName entityNameIdentifiedBy(Integer id) {
+    return entityManager().find(EntityName.class, id);
+  }
+
+  public EntityName entityNameNamed(String entityNameName) {
+    try {
+      return entityManager().createQuery(
+              "SELECT x FROM " + EntityName.class.getName() + " x WHERE x.name = :name",
+              EntityName.class)
+          .setParameter("name", entityNameName)
+          .getSingleResult();
+    } catch (NoResultException e) {
+      return null;
+    }
+  }
+  //--------------------------------------------------------------------------------------------
+  //GET BY ID
+  //--------------------------------------------------------------------------------------------
+
 
   public TransportType transportTypeById(Integer id) {
     return entityManager().find(TransportType.class, id);
