@@ -3,34 +3,28 @@
 <head>
     {{{headMeta}}}
 </head>
-
 <body>
 <header>
     {{{customAdministrationNavbar}}}
 </header>
-
 <main>
-
     <section class="titles justify-content-center">
         <h2 class="title">{{title}}</h2>
     </section>
     <section class="container">
-        <form class="row g-3 py-2" method="post"
-            {{#if registered_service}}
-              action="/services/{{registered_service.id}}" {{else}} action="/services" {{/if}}
-        >
+        <form class="row g-3 py-2" method="post" {{#if registered_object}}
+              action="{{action}}/{{registered_object.id}}" {{else}} action="{{action}}" {{/if}}>
             <div class="col-md-6">
                 <label for="name" class="col-form-label">Nombre:</label>
-                <input type="text" {{#if registered_service}}
-                       value="{{registered_service.name}}" {{/if}} class="form-control" name="name"/>
+                <input type="text" {{#if registered_object}}
+                       value="{{registered_object.name}}" {{/if}} class="form-control" name="name"/>
             </div>
             <div class="col-md-6">
-                <label for="lastname" class="col-form-label">Descripcion:</label>
-                <input type="text" {{#if registered_service}}
-                       value="{{registered_service.description}}" {{/if}} class="form-control"
-                       name="description"/>
+                <label for="description" class="col-form-label">Descripcion:</label>
+                <input type="text" {{#if registered_object}}
+                       value="{{registered_object.description}}" {{/if}} class="form-control" name="description"/>
             </div>
-            {{#if registered_service}}
+            {{#if registered_object}}
             {{else}}
                 <div class="col-md-6">
                     <label for="serviceType">Tipo:</label>
@@ -51,15 +45,14 @@
                     {{/each}}
                 </select>
             </div>
-            <div class="d-flex justify-content-center gap-2">
-                <button class="btn btn-custom"><a href="/services">Cancelar</a></button>
-                <button type="submit" class="btn btn-custom">{{buttonActionLabel}}</button>
+            <div class="d-flex justify-content-center gap-2 col-md-12">
+                <a class="btn btn-secondary" href="{{action}}"><i class="fa fa-arrow-left" aria-hidden="true"></i>Cancelar</a>
+                <button type="submit" class="btn btn-primary"><i class="fa fab fad fas far fa-save"
+                                                                 aria-hidden="true"></i>{{buttonActionLabel}}</button>
             </div>
         </form>
     </section>
-
 </main>
-
 <footer>
 </footer>
 {{{scripts}}}

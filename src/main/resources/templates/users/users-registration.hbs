@@ -3,55 +3,46 @@
 <head>
     {{{headMeta}}}
 </head>
-
 <body>
 <header>
     {{{customAdministrationNavbar}}}
 </header>
-
 <main>
-
     <section class="titles justify-content-center">
         <h2 class="title">{{title}}</h2>
     </section>
     <section class="container">
-        <form class="row g-3 py-2" method="post"
-            {{#if registered_user}}
-              action="/users/{{registered_user.id}}" {{else}} action="/users" {{/if}}
-        >
+        <form class="row g-3 py-2" method="post" {{#if registered_object}}
+              action="{{action}}/{{registered_object.id}}" {{else}} action="{{action}}" {{/if}}>
             <div class="col-md-6">
                 <label for="name" class="col-form-label">Nombre:</label>
-                <input type="text" {{#if registered_user}}
-                       value="{{registered_user.details.name}}" {{/if}} class="form-control" name="name"/>
+                <input type="text" {{#if registered_object}}
+                       value="{{registered_object.details.name}}" {{/if}} class="form-control" name="name"/>
             </div>
             <div class="col-md-6">
                 <label for="lastname" class="col-form-label">Apellido:</label>
-                <input type="text" {{#if registered_user}}
-                       value="{{registered_user.details.lastname}}" {{/if}} class="form-control"
-                       name="lastname"/>
+                <input type="text" {{#if registered_object}}
+                       value="{{registered_object.details.lastname}}" {{/if}} class="form-control" name="lastname"/>
             </div>
             <div class="col-md-6">
                 <label for="email" class="col-form-label">Email:</label>
-                <input type="text" {{#if registered_user}}
-                       value="{{registered_user.details.email}}" {{/if}} class="form-control" name="email"/>
+                <input type="text" {{#if registered_object}}
+                       value="{{registered_object.details.email}}" {{/if}} class="form-control" name="email"/>
             </div>
             <div class="col-md-6">
                 <label for="telephone" class="col-form-label">Teléfono:</label>
-                <input type="text" {{#if registered_user}}
-                       value="{{registered_user.details.telephone}}" {{/if}} class="form-control"
-                       name="telephone"/>
+                <input type="text" {{#if registered_object}}
+                       value="{{registered_object.details.telephone}}" {{/if}} class="form-control" name="telephone"/>
             </div>
             <div class="col-md-6">
                 <label for="username" class="col-form-label">Usuario:</label>
-                <input type="text" {{#if registered_user}}
-                       value="{{registered_user.username}}" {{/if}} class="form-control"
-                       name="username"/>
+                <input type="text" {{#if registered_object}}
+                       value="{{registered_object.username}}" {{/if}} class="form-control" name="username"/>
             </div>
             <div class="col-md-6">
                 <label for="password" class="col-form-label">Contraseña:</label>
-                <input type="password" {{#if registered_user}}
-                       value="{{registered_user.password}}" {{/if}} class="form-control"
-                       name="password"/>
+                <input type="password" {{#if registered_object}}
+                       value="{{registered_object.password}}" {{/if}} class="form-control" name="password"/>
             </div>
             <div class="col-md-6">
                 <label for="notificationMean">Medio de notificación:</label>
@@ -70,15 +61,15 @@
                     {{/each}}
                 </select>
             </div>
-            <div class="d-flex justify-content-center gap-2">
-                <button class="btn btn-custom"><a href="/users">Cancelar</a></button>
-                <button type="submit" class="btn btn-custom">{{buttonActionLabel}}</button>
+            <div class="d-flex justify-content-center gap-2 col-md-12">
+                <a class="btn btn-secondary" href="{{action}}"><i class="fa fa-arrow-left"
+                                                                  aria-hidden="true"></i>Cancelar</a>
+                <button type="submit" class="btn btn-primary"><i class="fa fab fad fas far fa-save"
+                                                                 aria-hidden="true"></i>{{buttonActionLabel}}</button>
             </div>
         </form>
     </section>
-
 </main>
-
 <footer>
 </footer>
 {{{scripts}}}

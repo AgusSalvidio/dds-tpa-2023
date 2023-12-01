@@ -12,6 +12,11 @@ import java.util.Map;
 public class UserViewController extends Controller {
 
   ApplicationContext applicationContext;
+  String pageTitle = "ABM de Usuarios";
+  String actionString = "/users";
+  String listPage = "users/users.hbs";
+  String unitPage = "users/users-registration.hbs";
+
 
   public UserViewController(ApplicationContext applicationContext) {
     super();
@@ -20,79 +25,69 @@ public class UserViewController extends Controller {
 
   public void index(Context context) throws Exception {
     Map<String, Object> model = new HashMap<>();
-    model.put("users", this.applicationContext.userManagementSystem().users());
     model.put("user", this.applicationContext.loggedUser(context));
-    model.put("title", "Administrar Usuarios");
-    context.render("users/users.hbs", model);
+    model.put("title", pageTitle);
+    model.put("action", actionString);
+    model.put("object-list", this.applicationContext.userManagementSystem().users());
+    context.render(listPage, model);
   }
 
   public void create(Context context) throws Exception {
     Map<String, Object> model = new HashMap<>();
     model.put("user", this.applicationContext.loggedUser(context));
-    model.put("registered_user", null);
-    model.put("title", "Registro de Usuario");
-    model.put("authorizationRoles", Arrays.stream(AuthorizationRole.values()).toList());
+    model.put("title", pageTitle);
+    model.put("action", actionString);
+    model.put("registered_object", null);
     model.put("buttonActionLabel", "Registrar");
-    context.render("users/user-registration.hbs", model);
+    model.put("authorizationRoles", Arrays.stream(AuthorizationRole.values()).toList());
+    context.render(unitPage, model);
   }
 
   public void edit(Context context) throws Exception {
     Map<String, Object> model = new HashMap<>();
-
     Integer id = Integer.parseInt(context.pathParam("id"));
-
     User userToEdit = this.applicationContext.userManagementSystem().userIdentifiedBy(id);
-
-    model.put("registered_user", userToEdit);
     model.put("user", this.applicationContext.loggedUser(context));
-    model.put("title", "Editar Usuario");
-    model.put("authorizationRoles", Arrays.stream(AuthorizationRole.values()).toList());
+    model.put("title", pageTitle);
+    model.put("action", actionString);
+    model.put("registered_object", userToEdit);
     model.put("buttonActionLabel", "Editar");
-
-    context.render("users/user-registration.hbs", model);
+    model.put("authorizationRoles", Arrays.stream(AuthorizationRole.values()).toList());
+    context.render(unitPage, model);
   }
 
   public void update(Context context) throws Exception {
     Map<String, Object> model = new HashMap<>();
-    model.put("name", context.formParam("name"));
-    model.put("lastname", context.formParam("lastname"));
-    model.put("email", context.formParam("email"));
-    model.put("telephone", context.formParam("telephone"));
-    model.put("notificationMean", context.formParam("notificationMean"));
-    model.put("username", context.formParam("username"));
-    model.put("password", context.formParam("password"));
-    model.put("authorizationRole", context.formParam("authorizationRole"));
-
     Integer id = Integer.parseInt(context.pathParam("id"));
-
     User userToUpdate = this.applicationContext.userManagementSystem().userIdentifiedBy(id);
-
+    assignParameters(context, model);
     this.applicationContext.userManagementSystem().updateUserFrom(userToUpdate, model);
-    context.redirect("/users");
+    context.redirect(actionString);
   }
 
   public void save(Context context) throws Exception {
     Map<String, Object> model = new HashMap<>();
-    model.put("name", context.formParam("name"));
-    model.put("lastname", context.formParam("lastname"));
-    model.put("email", context.formParam("email"));
-    model.put("telephone", context.formParam("telephone"));
-    model.put("notificationMean", context.formParam("notificationMean"));
-    model.put("username", context.formParam("username"));
-    model.put("password", context.formParam("password"));
-    model.put("authorizationRole", context.formParam("authorizationRole"));
-
+    assignParameters(context, model);
     this.applicationContext.userManagementSystem().startManagingUserFrom(model);
     context.status(HttpStatus.CREATED);
-    context.redirect("/users");
+    context.redirect(actionString);
   }
 
   public void delete(Context context) throws Exception {
     Integer id = Integer.parseInt(context.pathParam("id"));
-
     User userToDelete = this.applicationContext.userManagementSystem().userIdentifiedBy(id);
-
     this.applicationContext.userManagementSystem().stopManagingUser(userToDelete);
-    context.redirect("/users");
+    context.redirect(actionString);
+  }
+
+  private void assignParameters(Context context, Map<String, Object> model) {
+    model.put("name", context.formParam("name"));
+    model.put("lastname", context.formParam("lastname"));
+    model.put("email", context.formParam("email"));
+    model.put("telephone", context.formParam("telephone"));
+    model.put("username", context.formParam("username"));
+    model.put("password", context.formParam("password"));
+    model.put("notificationMean", context.formParam("notificationMean"));
+    model.put("authorizationRole", context.formParam("authorizationRole"));
   }
 }

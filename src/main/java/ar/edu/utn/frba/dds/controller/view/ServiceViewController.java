@@ -10,6 +10,10 @@ import java.util.Map;
 public class ServiceViewController extends Controller {
 
   ApplicationContext applicationContext;
+  String pageTitle = "ABM de Servicios";
+  String actionString = "/services";
+  String listPage = "services/services.hbs";
+  String unitPage = "services/services-registration.hbs";
 
   public ServiceViewController(ApplicationContext applicationContext) {
     super();
@@ -18,74 +22,70 @@ public class ServiceViewController extends Controller {
 
   public void index(Context context) {
     Map<String, Object> model = new HashMap<>();
-    model.put("services", this.applicationContext.serviceManagementSystem().services());
     model.put("user", this.applicationContext.loggedUser(context));
-    model.put("title", "Administrar Servicios");
-    context.render("services/services.hbs", model);
+    model.put("title", pageTitle);
+    model.put("action", actionString);
+    model.put("object-list", this.applicationContext.serviceManagementSystem().services());
+    context.render(listPage, model);
   }
 
-  public void create(Context context) {
+  public void create(Context context) throws Exception {
     Map<String, Object> model = new HashMap<>();
     model.put("user", this.applicationContext.loggedUser(context));
-    model.put("title", "Registro de Servicios");
+    model.put("title", pageTitle);
+    model.put("action", actionString);
+    model.put("registered_object", null);
+    model.put("buttonActionLabel", "Registrar");
     model.put("states",
         this.applicationContext.serviceManagementSystem().states());
-    model.put("buttonActionLabel", "Registrar");
-
-    context.render("services/service-registration.hbs", model);
+    context.render(unitPage, model);
   }
 
   public void edit(Context context) throws Exception {
     Map<String, Object> model = new HashMap<>();
-
     Integer id = Integer.parseInt(context.pathParam("id"));
-
     Service serviceToEdit =
         this.applicationContext.serviceManagementSystem().serviceIdentifiedBy(id);
-
-    model.put("registered_service", serviceToEdit);
     model.put("user", this.applicationContext.loggedUser(context));
-    model.put("title", "Editar Servicio");
+    model.put("title", pageTitle);
+    model.put("action", actionString);
+    model.put("registered_object", serviceToEdit);
+    model.put("buttonActionLabel", "Editar");
     model.put("states",
         this.applicationContext.serviceManagementSystem().states());
-    model.put("buttonActionLabel", "Editar");
-
-    context.render("services/service-registration.hbs", model);
+    context.render(unitPage, model);
   }
 
   public void update(Context context) throws Exception {
     Map<String, Object> model = new HashMap<>();
-    model.put("name", context.formParam("name"));
-    model.put("description", context.formParam("description"));
-    model.put("state", context.formParam("state"));
-
     Integer id = Integer.parseInt(context.pathParam("id"));
     Service serviceToUpdate =
         this.applicationContext.serviceManagementSystem().serviceIdentifiedBy(id);
-
+    assignParameters(context, model);
     this.applicationContext.serviceManagementSystem().updateServiceFrom(serviceToUpdate, model);
-    context.redirect("/services");
+    context.redirect(actionString);
   }
 
   public void save(Context context) {
     Map<String, Object> model = new HashMap<>();
-    model.put("name", context.formParam("name"));
-    model.put("description", context.formParam("description"));
+    assignParameters(context, model);
     model.put("serviceType", context.formParam("serviceType"));
-    model.put("state", context.formParam("state"));
-
     this.applicationContext.serviceManagementSystem().startManagingServiceFrom(model);
     context.status(HttpStatus.CREATED);
-    context.redirect("/services");
+    context.redirect(actionString);
   }
 
   public void delete(Context context) throws Exception {
     Integer id = Integer.parseInt(context.pathParam("id"));
-
     Service serviceToDelete = this.applicationContext
         .serviceManagementSystem().serviceIdentifiedBy(id);
-
     this.applicationContext.serviceManagementSystem().stopManagingService(serviceToDelete);
-    context.redirect("/services");
+    context.redirect(actionString);
+  }
+
+  private void assignParameters(Context context, Map<String, Object> model) {
+    model.put("name", context.formParam("name"));
+    model.put("description", context.formParam("description"));
+    model.put("state", context.formParam("state"));
   }
 }
