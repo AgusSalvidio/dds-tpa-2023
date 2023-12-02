@@ -12,28 +12,78 @@
         <h2 class="title">{{title}}</h2>
     </section>
     <section class="container">
-        <form class="row g-3 py-2" method="post" {{#if registered_object}}
-              action="{{action}}/{{registered_object.id}}" {{else}} action="{{action}}" {{/if}}>
-            <div class="col-md-6">
-                <label for="name" class="col-form-label">Nombre:</label>
-                <input type="text" {{#if registered_object}}
-                       value="{{registered_object.name}}" {{/if}} class="form-control" name="name"/>
+        <form class="row g-3 py-2" method="post" {{#if registered_object}} action="{{action}}/{{registered_object.id}}" {{else}} action="{{action}}" {{/if}}>
+            <div class="col-md-2">
+                <label for="id" class="col-form-label">ID</label>
+                <input type="text" {{#if registered_object}} value="{{registered_object.id}}" {{/if}} class="form-control" name="id" disabled/>
             </div>
+            <div class="col-md-4"></div>
             <div class="col-md-6">
-            </div>
-            <div class="col-md-6">
-                <label for="type">Tipo:</label>
-                <select class="col-md-6" name="type">
+                <label for="type" class="col-form-label">Tipo:</label>
+                <select class="col-md-6 form-control" name="type">
                     <option label="Seleccione ..." value="" disabled selected></option>
                     {{#each types}}
                         <option value={{this.id}}>{{this.name}}</option>
                     {{/each}}
                 </select>
             </div>
+            <div class="col-md-6">
+                <label for="name" class="col-form-label">Nombre:</label>
+                <input type="text" {{#if registered_object}} value="{{registered_object.name}}" {{/if}} class="form-control" name="name"/>
+            </div>
+            <div class="col-md-6">
+                <label for="location" class="col-form-label">Dirección:</label>
+                <select class="col-md-6 form-control" name="location">
+                    <option label="Seleccione ..." value="" disabled selected></option>
+                    {{#each locations}}
+                        <option value={{this.id}}>{{this.street}} - Numero {{this.number}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            <div class="col-md-12">
+            </div>
+            <div class="col-md-12">
+                <div class="px-1">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th class="col-2">ID</th>
+                                    <th class="col-10">Nombre</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {{#each services}}
+                                    <tr>
+                                        <td>{{this.id}}</td>
+                                        <td>{{this.name}}</td>
+                                    </tr>
+                                {{else}}
+                                    <tr>
+                                        <td colspan="6">No hay Servicios Asociados</td>
+                                    </tr>
+                                {{/each}}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+            </div>
             <div class="d-flex justify-content-center gap-2 col-md-12">
-                <a class="btn btn-secondary" href="{{action}}"><i class="fa fa-arrow-left" aria-hidden="true"></i>Cancelar</a>
-                <button type="submit" class="btn btn-primary"><i class="fa fab fad fas far fa-save"
-                                                                 aria-hidden="true"></i>{{buttonActionLabel}}</button>
+                <a class="btn btn-secondary" href="{{action}}">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i>Cancelar
+                </a>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa fab fad fas far fa-save" aria-hidden="true">
+                    </i>{{buttonActionLabel}}
+                </button>
+                <a class="btn btn-primary" href="{{action}}-add-service/{{registered_object.id}}">
+                    <i class="fa-regular fa-file"></i>
+                    Agregar Servicio
+                </a>
             </div>
         </form>
     </section>

@@ -3,6 +3,8 @@ package ar.edu.utn.frba.dds.managementsystem;
 import ar.edu.utn.frba.dds.establishment.Establishment;
 import ar.edu.utn.frba.dds.establishment.EstablishmentType;
 import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
+import ar.edu.utn.frba.dds.service.Service;
+
 import java.util.List;
 import java.util.Map;
 
@@ -35,6 +37,10 @@ public class EstablishmentManagementSystem {
 
   public List<Object> establishments() {
     return this.persistenceSystem.objectList(Establishment.class.getName());
+  }
+
+  public List<Service> establishmentsServicesNotById(Integer Id) {
+    return this.persistenceSystem.establishmentsServicesNotById(Id);
   }
 
   public Establishment establishmentIdentifiedBy(Integer anEstablishmentId) {

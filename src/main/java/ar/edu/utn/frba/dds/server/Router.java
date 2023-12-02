@@ -119,7 +119,11 @@ public class Router {
     app.post("/establishments",
         new EstablishmentViewController(applicationContext)::save, ADMINISTRADOR, ENTIDAD);
     app.get("/establishments/{id}/delete",
-        new EstablishmentViewController(applicationContext)::delete, ADMINISTRADOR);
+            new EstablishmentViewController(applicationContext)::delete, ADMINISTRADOR);
+    app.get("/establishments-add-service/{id}",
+            new EstablishmentViewController(applicationContext)::createservice, ADMINISTRADOR);
+    app.post("/establishments-save-service",
+            new EstablishmentViewController(applicationContext)::updateservice, ADMINISTRADOR);
   }
 
   private static void initializeEntitiesEndpointsOn(

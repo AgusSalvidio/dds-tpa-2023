@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{{headMeta}}}
+</head>
+<body>
+<header>
+    {{{customAdministrationNavbar}}}
+</header>
+<main>
+    <section class="titles justify-content-center">
+        <h2 class="title">{{title}} - AGREGADO DE SERVICIOS</h2>
+    </section>
+    <section class="container">
+        <form class="row g-3 py-2" method="post" {{#if registered_object}} action="{{action}}-save-service/" {{else}} action="{{action}}-add-service" {{/if}}>
+            <div class="col-md-2">
+                <label for="id" class="col-form-label">ID</label>
+                <input type="text" {{#if registered_object}} value="{{registered_object.id}}" {{/if}} class="form-control" name="id"/>
+            </div>
+            <div class="col-md-10"></div>
+            <div class="col-md-6">
+                <label for="name" class="col-form-label">Nombre:</label>
+                <input type="text" {{#if registered_object}} value="{{registered_object.name}}" {{/if}} class="form-control" name="name" disabled/>
+            </div>
+            <div class="col-md-6">
+                <label for="service" class="col-form-label">Dirección:</label>
+                <select class="col-md-6 form-control" name="service">
+                    <option label="Seleccione ..." value="" disabled selected></option>
+                    {{#each services}}
+                        <option value={{this.id}}>{{this.name}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            <div class="col-md-12">
+            </div>
+            <div class="col-md-12">
+            </div>
+            <div class="d-flex justify-content-center gap-2 col-md-12">
+                <a class="btn btn-secondary" href="{{action}}">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i>Cancelar
+                </a>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa fab fad fas far fa-save" aria-hidden="true">
+                    </i>{{buttonActionLabel}}
+                </button>
+            </div>
+        </form>
+    </section>
+</main>
+<footer>
+</footer>
+{{{scripts}}}
+</body>
+</html>
