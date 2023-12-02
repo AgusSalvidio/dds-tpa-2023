@@ -1,12 +1,7 @@
 package ar.edu.utn.frba.dds.location;
 
-import ar.edu.utn.frba.dds.services.georef.entities.Municipality;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,7 +20,8 @@ public class Location {
   @Column(name = "number")
   public Integer number;
 
-  @Transient
+  @ManyToOne
+  @JoinColumn(name = "municipality_id", referencedColumnName = "id")
   public Municipality municipality;
 
   public Location() {
