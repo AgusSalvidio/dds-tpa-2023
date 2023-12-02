@@ -75,10 +75,10 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
   public User userNamed(String name) {
     try {
       return entityManager().createQuery(
-                      "SELECT x FROM " + User.class.getName() + " x WHERE x.username = :username",
-                      User.class)
-              .setParameter("username", name)
-              .getSingleResult();
+              "SELECT x FROM " + User.class.getName() + " x WHERE x.username = :username",
+              User.class)
+          .setParameter("username", name)
+          .getSingleResult();
     } catch (NoResultException e) {
       return null;
     }
@@ -284,8 +284,6 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
       return null;
     }
   }
-
-
 
 
   //--------------------------------------------------------------------------------------------

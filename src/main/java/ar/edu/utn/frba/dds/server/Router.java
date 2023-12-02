@@ -5,7 +5,24 @@ import static ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole.ENTIDAD;
 import static ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole.USUARIO;
 
 import ar.edu.utn.frba.dds.applicationcontext.ApplicationContext;
-import ar.edu.utn.frba.dds.controller.view.*;
+import ar.edu.utn.frba.dds.controller.view.AdministrationViewController;
+import ar.edu.utn.frba.dds.controller.view.DepartmentViewController;
+import ar.edu.utn.frba.dds.controller.view.EntityNameViewController;
+import ar.edu.utn.frba.dds.controller.view.EntityTypeViewController;
+import ar.edu.utn.frba.dds.controller.view.EntityViewController;
+import ar.edu.utn.frba.dds.controller.view.EstablishmentTypeViewController;
+import ar.edu.utn.frba.dds.controller.view.EstablishmentViewController;
+import ar.edu.utn.frba.dds.controller.view.HomeViewController;
+import ar.edu.utn.frba.dds.controller.view.IncidentViewController;
+import ar.edu.utn.frba.dds.controller.view.LocationViewController;
+import ar.edu.utn.frba.dds.controller.view.LoginViewController;
+import ar.edu.utn.frba.dds.controller.view.LogoutViewController;
+import ar.edu.utn.frba.dds.controller.view.MunicipalityViewController;
+import ar.edu.utn.frba.dds.controller.view.ProvinceViewController;
+import ar.edu.utn.frba.dds.controller.view.RankingViewController;
+import ar.edu.utn.frba.dds.controller.view.ServiceHolderViewController;
+import ar.edu.utn.frba.dds.controller.view.ServiceViewController;
+import ar.edu.utn.frba.dds.controller.view.UserViewController;
 import io.javalin.Javalin;
 
 public class Router {
@@ -70,8 +87,8 @@ public class Router {
   }
 
   private static void initializeServiceEndpointsOn(
-          Javalin app,
-          ApplicationContext applicationContext) {
+      Javalin app,
+      ApplicationContext applicationContext) {
 
     app.get("/services",
         new ServiceViewController(applicationContext)::index, ADMINISTRADOR, ENTIDAD);
@@ -181,75 +198,75 @@ public class Router {
   }
 
   private static void initializeProvinceEndpointsOn(
-          Javalin app,
-          ApplicationContext applicationContext) {
+      Javalin app,
+      ApplicationContext applicationContext) {
 
     app.get("/province",
-            new ProvinceViewController(applicationContext)::index, ADMINISTRADOR, ENTIDAD);
+        new ProvinceViewController(applicationContext)::index, ADMINISTRADOR, ENTIDAD);
     app.get("/province/register",
-            new ProvinceViewController(applicationContext)::create, ADMINISTRADOR, ENTIDAD);
+        new ProvinceViewController(applicationContext)::create, ADMINISTRADOR, ENTIDAD);
     app.get("/province/{id}/edit",
-            new ProvinceViewController(applicationContext)::edit, ADMINISTRADOR);
+        new ProvinceViewController(applicationContext)::edit, ADMINISTRADOR);
     app.post("/province/{id}",
-            new ProvinceViewController(applicationContext)::update, ADMINISTRADOR);
+        new ProvinceViewController(applicationContext)::update, ADMINISTRADOR);
     app.post("/province",
-            new ProvinceViewController(applicationContext)::save, ADMINISTRADOR, ENTIDAD);
+        new ProvinceViewController(applicationContext)::save, ADMINISTRADOR, ENTIDAD);
     app.get("/province/{id}/delete",
-            new ProvinceViewController(applicationContext)::delete, ADMINISTRADOR);
+        new ProvinceViewController(applicationContext)::delete, ADMINISTRADOR);
   }
 
   private static void initializeDepartmentEndpointsOn(
-          Javalin app,
-          ApplicationContext applicationContext) {
+      Javalin app,
+      ApplicationContext applicationContext) {
 
     app.get("/department",
-            new DepartmentViewController(applicationContext)::index, ADMINISTRADOR, ENTIDAD);
+        new DepartmentViewController(applicationContext)::index, ADMINISTRADOR, ENTIDAD);
     app.get("/department/register",
-            new DepartmentViewController(applicationContext)::create, ADMINISTRADOR, ENTIDAD);
+        new DepartmentViewController(applicationContext)::create, ADMINISTRADOR, ENTIDAD);
     app.get("/department/{id}/edit",
-            new DepartmentViewController(applicationContext)::edit, ADMINISTRADOR);
+        new DepartmentViewController(applicationContext)::edit, ADMINISTRADOR);
     app.post("/department/{id}",
-            new DepartmentViewController(applicationContext)::update, ADMINISTRADOR);
+        new DepartmentViewController(applicationContext)::update, ADMINISTRADOR);
     app.post("/department",
-            new DepartmentViewController(applicationContext)::save, ADMINISTRADOR, ENTIDAD);
+        new DepartmentViewController(applicationContext)::save, ADMINISTRADOR, ENTIDAD);
     app.get("/department/{id}/delete",
-            new DepartmentViewController(applicationContext)::delete, ADMINISTRADOR);
+        new DepartmentViewController(applicationContext)::delete, ADMINISTRADOR);
   }
 
   private static void initializeMunicipalityEndpointsOn(
-          Javalin app,
-          ApplicationContext applicationContext) {
+      Javalin app,
+      ApplicationContext applicationContext) {
 
     app.get("/municipality",
-            new MunicipalityViewController(applicationContext)::index, ADMINISTRADOR, ENTIDAD);
+        new MunicipalityViewController(applicationContext)::index, ADMINISTRADOR, ENTIDAD);
     app.get("/municipality/register",
-            new MunicipalityViewController(applicationContext)::create, ADMINISTRADOR, ENTIDAD);
+        new MunicipalityViewController(applicationContext)::create, ADMINISTRADOR, ENTIDAD);
     app.get("/municipality/{id}/edit",
-            new MunicipalityViewController(applicationContext)::edit, ADMINISTRADOR);
+        new MunicipalityViewController(applicationContext)::edit, ADMINISTRADOR);
     app.post("/municipality/{id}",
-            new MunicipalityViewController(applicationContext)::update, ADMINISTRADOR);
+        new MunicipalityViewController(applicationContext)::update, ADMINISTRADOR);
     app.post("/municipality",
-            new MunicipalityViewController(applicationContext)::save, ADMINISTRADOR, ENTIDAD);
+        new MunicipalityViewController(applicationContext)::save, ADMINISTRADOR, ENTIDAD);
     app.get("/municipality/{id}/delete",
-            new MunicipalityViewController(applicationContext)::delete, ADMINISTRADOR);
+        new MunicipalityViewController(applicationContext)::delete, ADMINISTRADOR);
   }
 
   private static void initializeLocationEndpointsOn(
-          Javalin app,
-          ApplicationContext applicationContext) {
+      Javalin app,
+      ApplicationContext applicationContext) {
 
     app.get("/location",
-            new LocationViewController(applicationContext)::index, ADMINISTRADOR, ENTIDAD);
+        new LocationViewController(applicationContext)::index, ADMINISTRADOR, ENTIDAD);
     app.get("/location/register",
-            new LocationViewController(applicationContext)::create, ADMINISTRADOR, ENTIDAD);
+        new LocationViewController(applicationContext)::create, ADMINISTRADOR, ENTIDAD);
     app.get("/location/{id}/edit",
-            new LocationViewController(applicationContext)::edit, ADMINISTRADOR);
+        new LocationViewController(applicationContext)::edit, ADMINISTRADOR);
     app.post("/location/{id}",
-            new LocationViewController(applicationContext)::update, ADMINISTRADOR);
+        new LocationViewController(applicationContext)::update, ADMINISTRADOR);
     app.post("/location",
-            new LocationViewController(applicationContext)::save, ADMINISTRADOR, ENTIDAD);
+        new LocationViewController(applicationContext)::save, ADMINISTRADOR, ENTIDAD);
     app.get("/location/{id}/delete",
-            new LocationViewController(applicationContext)::delete, ADMINISTRADOR);
+        new LocationViewController(applicationContext)::delete, ADMINISTRADOR);
   }
 
   //--------------------------------------------------------------------------------------------

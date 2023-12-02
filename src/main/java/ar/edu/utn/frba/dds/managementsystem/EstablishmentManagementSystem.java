@@ -3,7 +3,6 @@ package ar.edu.utn.frba.dds.managementsystem;
 import ar.edu.utn.frba.dds.establishment.Establishment;
 import ar.edu.utn.frba.dds.establishment.EstablishmentType;
 import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
-import ar.edu.utn.frba.dds.user.User;
 import java.util.List;
 import java.util.Map;
 
@@ -69,6 +68,6 @@ public class EstablishmentManagementSystem {
 
     this.startManagingEstablishment(
         Establishment.composedOf(establishmentType, name, null));
-    }
+  }
 
 }

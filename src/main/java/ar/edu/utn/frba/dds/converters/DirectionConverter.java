@@ -26,17 +26,16 @@ public class DirectionConverter implements AttributeConverter<Direction, String>
   @Override
   public Direction convertToEntityAttribute(String str) {
     Direction obj = null;
-    if (obj != null) {
-      switch (str) {
-        case "IDA":
-          obj = Direction.FORWARD;
-          break;
-        case "VUELTA":
-          obj = Direction.RETURN;
-          break;
-        default:
-          throw new IllegalStateException("Unexpected value: " + str);
-      }
+
+    switch (str) {
+      case "IDA":
+        obj = Direction.FORWARD;
+        break;
+      case "VUELTA":
+        obj = Direction.RETURN;
+        break;
+      default:
+        throw new IllegalStateException("Unexpected value: " + str);
     }
     return obj;
   }

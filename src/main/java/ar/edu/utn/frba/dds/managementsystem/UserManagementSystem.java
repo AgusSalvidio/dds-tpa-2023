@@ -83,7 +83,7 @@ public class UserManagementSystem {
     NotificationMean notificationMean =
         this.convertToEntity(model.get("notificationMean").toString());
     AuthorizationRole authorizationRole = AuthorizationRole.valueOf(
-            model.get("authorizationRole").toString());
+        model.get("authorizationRole").toString());
 
     UserDetail userDetail = new UserDetail(name, lastname, email, telephone, notificationMean);
     userDetail.setId(userToUpdate.getDetails().getId());

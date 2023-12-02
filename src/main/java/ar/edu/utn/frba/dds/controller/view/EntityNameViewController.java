@@ -2,7 +2,6 @@ package ar.edu.utn.frba.dds.controller.view;
 
 import ar.edu.utn.frba.dds.applicationcontext.ApplicationContext;
 import ar.edu.utn.frba.dds.entity.EntityName;
-import ar.edu.utn.frba.dds.entity.EntityType;
 import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
 import java.util.HashMap;

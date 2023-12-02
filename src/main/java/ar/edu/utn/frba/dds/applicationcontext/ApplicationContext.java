@@ -1,6 +1,20 @@
 package ar.edu.utn.frba.dds.applicationcontext;
 
-import ar.edu.utn.frba.dds.managementsystem.*;
+import ar.edu.utn.frba.dds.managementsystem.CommunityManagementSystem;
+import ar.edu.utn.frba.dds.managementsystem.DepartmentManagementSystem;
+import ar.edu.utn.frba.dds.managementsystem.EntityManagementSystem;
+import ar.edu.utn.frba.dds.managementsystem.EntityNameManagementSystem;
+import ar.edu.utn.frba.dds.managementsystem.EntityTypeManagementSystem;
+import ar.edu.utn.frba.dds.managementsystem.EstablishmentManagementSystem;
+import ar.edu.utn.frba.dds.managementsystem.EstablishmentTypeManagementSystem;
+import ar.edu.utn.frba.dds.managementsystem.IncidentManagementSystem;
+import ar.edu.utn.frba.dds.managementsystem.IncidentPerCommunityManagementSystem;
+import ar.edu.utn.frba.dds.managementsystem.LocationManagementSystem;
+import ar.edu.utn.frba.dds.managementsystem.MunicipalityManagementSystem;
+import ar.edu.utn.frba.dds.managementsystem.ProvinceManagementSystem;
+import ar.edu.utn.frba.dds.managementsystem.ServiceHolderManagementSystem;
+import ar.edu.utn.frba.dds.managementsystem.ServiceManagementSystem;
+import ar.edu.utn.frba.dds.managementsystem.UserManagementSystem;
 import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
 import ar.edu.utn.frba.dds.user.User;
 import io.javalin.http.Context;
@@ -32,6 +46,7 @@ public class ApplicationContext {
       return this.userManagementSystem().userIdentifiedBy(userId);
     }
   }
+
   public ServiceManagementSystem serviceManagementSystem() {
     return new ServiceManagementSystem(this.persistenceSystem);
   }
@@ -51,14 +66,10 @@ public class ApplicationContext {
   public EntityNameManagementSystem entityNameManagementSystem() {
     return new EntityNameManagementSystem(this.persistenceSystem);
   }
+
   public EntityManagementSystem entityManagementSystem() {
     return new EntityManagementSystem(this.persistenceSystem);
   }
-
-
-
-
-
 
 
   public IncidentManagementSystem incidentManagementSystem() {
@@ -76,6 +87,7 @@ public class ApplicationContext {
   public ServiceHolderManagementSystem serviceHolderManagementSystem() {
     return new ServiceHolderManagementSystem(this.persistenceSystem);
   }
+
   /*
   AGREGADO POR FDM 01-12-2023
   */

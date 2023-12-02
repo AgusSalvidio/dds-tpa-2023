@@ -1,10 +1,7 @@
 package ar.edu.utn.frba.dds.managementsystem;
 
-import ar.edu.utn.frba.dds.entity.EntityType;
 import ar.edu.utn.frba.dds.location.Location;
-import ar.edu.utn.frba.dds.location.Municipality;
 import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
-
 import java.util.List;
 import java.util.Map;
 

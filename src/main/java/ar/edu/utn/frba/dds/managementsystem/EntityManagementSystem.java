@@ -7,13 +7,7 @@ import ar.edu.utn.frba.dds.entity.EntityType;
 import ar.edu.utn.frba.dds.entity.Organization;
 import ar.edu.utn.frba.dds.entity.TransportLine;
 import ar.edu.utn.frba.dds.establishment.Establishment;
-import ar.edu.utn.frba.dds.location.Location;
 import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
-import ar.edu.utn.frba.dds.service.Elevator;
-import ar.edu.utn.frba.dds.service.Escalator;
-import ar.edu.utn.frba.dds.service.Service;
-import ar.edu.utn.frba.dds.service.State;
-import ar.edu.utn.frba.dds.service.Toilet;
 import java.util.List;
 import java.util.Map;
 
