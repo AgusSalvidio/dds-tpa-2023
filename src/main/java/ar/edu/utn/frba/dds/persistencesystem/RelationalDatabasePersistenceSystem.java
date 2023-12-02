@@ -189,129 +189,21 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
       return null;
     }
   }
-  //--------------------------------------------------------------------------------------------
-  //GET BY ID
-  //--------------------------------------------------------------------------------------------
 
-
-  public TransportType transportTypeById(Integer id) {
-    return entityManager().find(TransportType.class, id);
+  public Entity entityIdentifiedBy(Integer entityId) {
+    return entityManager().find(Entity.class, entityId);
   }
 
-  public Entity entityById(Integer id) {
-    return entityManager().find(Entity.class, id);
-  }
-
-
-  //--------------------------------------------------------------------------------------------
-  //ENTITY-TYPE
-  //--------------------------------------------------------------------------------------------
-  public List<EntityType> entityTypes() {
-    return entityManager().createQuery("from " + EntityType.class.getName()).getResultList();
-  }
-
-  public void startManagingEntityType(EntityType object) {
-    EntityTransaction transaction = entityManager().getTransaction();
-    transaction.begin();
-    entityManager().persist(object);
-    transaction.commit();
-  }
-
-  public void stopManagingEntityType(EntityType object) {
-    EntityTransaction transaction = entityManager().getTransaction();
-    transaction.begin();
-    entityManager().remove(object);
-    transaction.commit();
-  }
-
-  //--------------------------------------------------------------------------------------------
-  //TRANSPORTATION-TYPE
-  //--------------------------------------------------------------------------------------------
-  public List<TransportType> transportTypes() {
-    return entityManager().createQuery("from " + TransportType.class.getName()).getResultList();
-  }
-
-  public void startManagingTransportType(TransportType object) {
-    EntityTransaction transaction = entityManager().getTransaction();
-    transaction.begin();
-    entityManager().persist(object);
-    transaction.commit();
-  }
-
-  public void stopManagingTransportType(TransportType object) {
-    EntityTransaction transaction = entityManager().getTransaction();
-    transaction.begin();
-    entityManager().remove(object);
-    transaction.commit();
-  }
-
-
-  public void startManagingElevator(Elevator anElevator) {
-    EntityTransaction transaction = entityManager().getTransaction();
-
-    transaction.begin();
-    entityManager().persist(anElevator);
-    transaction.commit();
-  }
-
-  public void startManagingEscalator(Escalator anEscalator) {
-    EntityTransaction transaction = entityManager().getTransaction();
-
-    transaction.begin();
-    entityManager().persist(anEscalator);
-    transaction.commit();
-  }
-
-  public void startManagingToilet(Toilet toilet) {
-    EntityTransaction transaction = entityManager().getTransaction();
-
-    transaction.begin();
-    entityManager().persist(toilet);
-    transaction.commit();
-  }
-
-  public void stopManagingEscalator(Escalator anEscalator) {
-    EntityTransaction transaction = entityManager().getTransaction();
-
-    transaction.begin();
-    entityManager().remove(anEscalator);
-    transaction.commit();
-  }
-
-  public void stopManagingElevator(Elevator anElevator) {
-    EntityTransaction transaction = entityManager().getTransaction();
-
-    transaction.begin();
-    entityManager().remove(anElevator);
-    transaction.commit();
-  }
-
-  public void stopManagingToilet(Toilet toilet) {
-    EntityTransaction transaction = entityManager().getTransaction();
-
-    transaction.begin();
-    entityManager().remove(toilet);
-    transaction.commit();
-  }
-
-  public void startManagingState(State state) {
-    EntityTransaction transaction = entityManager().getTransaction();
-
-    transaction.begin();
-    entityManager().persist(state);
-    transaction.commit();
-  }
-
-  public void stopManagingState(State state) {
-    EntityTransaction transaction = entityManager().getTransaction();
-
-    transaction.begin();
-    entityManager().remove(state);
-    transaction.commit();
-  }
-
-  public List<Service> services() {
-    return entityManager().createQuery("from " + Service.class.getName()).getResultList();
+  public Entity entityNamed(String entityName) {
+    try {
+      return entityManager().createQuery(
+              "SELECT x FROM " + Entity.class.getName() + " x WHERE x.name = :name",
+              Entity.class)
+          .setParameter("name", entityName)
+          .getSingleResult();
+    } catch (NoResultException e) {
+      return null;
+    }
   }
 
   public void startManagingAuthorizationRole(AuthorizationRole authorizationRole) {

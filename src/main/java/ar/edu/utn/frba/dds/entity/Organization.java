@@ -5,4 +5,7 @@ import javax.persistence.DiscriminatorValue;
 @javax.persistence.Entity
 @DiscriminatorValue("organization")
 public class Organization extends Entity {
+  public Organization() {
+  }
+
 }

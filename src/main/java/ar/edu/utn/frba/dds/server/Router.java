@@ -15,11 +15,9 @@ import ar.edu.utn.frba.dds.controller.view.HomeViewController;
 import ar.edu.utn.frba.dds.controller.view.IncidentViewController;
 import ar.edu.utn.frba.dds.controller.view.LoginViewController;
 import ar.edu.utn.frba.dds.controller.view.LogoutViewController;
-import ar.edu.utn.frba.dds.controller.view.OrganizationViewController;
 import ar.edu.utn.frba.dds.controller.view.RankingViewController;
 import ar.edu.utn.frba.dds.controller.view.ServiceHolderViewController;
 import ar.edu.utn.frba.dds.controller.view.ServiceViewController;
-import ar.edu.utn.frba.dds.controller.view.TransportLineViewController;
 import ar.edu.utn.frba.dds.controller.view.UserViewController;
 import io.javalin.Javalin;
 
@@ -120,6 +118,24 @@ public class Router {
         new EstablishmentViewController(applicationContext)::delete, ADMINISTRADOR);
   }
 
+  private static void initializeEntitiesEndpointsOn(
+      Javalin app,
+      ApplicationContext applicationContext) {
+
+    app.get("/entities",
+        new EntityViewController(applicationContext)::index, ADMINISTRADOR, ENTIDAD);
+    app.get("/entities/register",
+        new EntityViewController(applicationContext)::create, ADMINISTRADOR, ENTIDAD);
+    app.get("/entities/{id}/edit",
+        new EntityViewController(applicationContext)::edit, ADMINISTRADOR);
+    app.post("/entities/{id}",
+        new EntityViewController(applicationContext)::update, ADMINISTRADOR);
+    app.post("/entities",
+        new EntityViewController(applicationContext)::save, ADMINISTRADOR, ENTIDAD);
+    app.get("/entities/{id}/delete",
+        new EntityViewController(applicationContext)::delete, ADMINISTRADOR);
+  }
+
   //--------------------------------------------------------------------------------------------
   //PARAMETRIA
   //--------------------------------------------------------------------------------------------
@@ -178,68 +194,6 @@ public class Router {
   }
 
   //--------------------------------------------------------------------------------------------
-  //--------------------------------------------------------------------------------------------
-
-
-
-  //--------------------------------------------------------------------------------------------
-  //ENTIDADES
-  //--------------------------------------------------------------------------------------------
-  private static void initializeEntitiesEndpointsOn(
-      Javalin app,
-      ApplicationContext applicationContext) {
-
-    app.get("/entities",
-        new EntityViewController(applicationContext)::index, ADMINISTRADOR, ENTIDAD);
-    app.get("/entities/register",
-        new EntityViewController(applicationContext)::create, ADMINISTRADOR, ENTIDAD);
-    app.get("/entities/{id}/edit",
-        new EntityViewController(applicationContext)::edit, ADMINISTRADOR);
-    app.post("/entities/{id}",
-        new EntityViewController(applicationContext)::update, ADMINISTRADOR);
-    app.post("/entities",
-        new EntityViewController(applicationContext)::save, ADMINISTRADOR, ENTIDAD);
-    app.get("/entities/{id}/delete",
-        new EntityViewController(applicationContext)::delete, ADMINISTRADOR);
-  }
-
-  private static void initializeOrganizationEndpointsOn(
-      Javalin app,
-      ApplicationContext applicationContext) {
-
-    app.get("/organizations",
-        new OrganizationViewController(applicationContext)::index, ADMINISTRADOR, ENTIDAD);
-    app.get("/organizations/register",
-        new OrganizationViewController(applicationContext)::create, ADMINISTRADOR, ENTIDAD);
-    app.get("/organizations/{id}/edit",
-        new OrganizationViewController(applicationContext)::edit, ADMINISTRADOR);
-    app.post("/organizations/{id}",
-        new OrganizationViewController(applicationContext)::update, ADMINISTRADOR);
-    app.post("/organizations",
-        new OrganizationViewController(applicationContext)::save, ADMINISTRADOR, ENTIDAD);
-    app.get("/organizations/{id}/delete",
-        new OrganizationViewController(applicationContext)::delete, ADMINISTRADOR);
-  }
-
-  private static void initializeTransportLinesEndpointsOn(
-      Javalin app,
-      ApplicationContext applicationContext) {
-    app.get("/transport-lines",
-        new TransportLineViewController(applicationContext)::index, ADMINISTRADOR, ENTIDAD);
-    app.get("/transport-lines/register",
-        new TransportLineViewController(applicationContext)::create, ADMINISTRADOR, ENTIDAD);
-    app.get("/transport-lines/{id}/edit",
-        new TransportLineViewController(applicationContext)::edit, ADMINISTRADOR);
-    app.post("/transport-lines/{id}",
-        new TransportLineViewController(applicationContext)::update, ADMINISTRADOR);
-    app.post("/transport-lines",
-        new TransportLineViewController(applicationContext)::save, ADMINISTRADOR, ENTIDAD);
-    app.get("/transport-lines/{id}/delete",
-        new TransportLineViewController(applicationContext)::delete, ADMINISTRADOR);
-  }
-
-
-  //--------------------------------------------------------------------------------------------
   //RANKING
   //--------------------------------------------------------------------------------------------
   private static void initializeRankingEndpointsOn(
@@ -254,8 +208,8 @@ public class Router {
         new RankingViewController(applicationContext)::impactDegree, ADMINISTRADOR, ENTIDAD);
   }
 
-
-
+  //--------------------------------------------------------------------------------------------
+  //--------------------------------------------------------------------------------------------
 
   private static void initializeIncidentEndpointsOn(
       Javalin app,
@@ -292,9 +246,7 @@ public class Router {
   }
 
   private static void initializeEndpoints() throws Exception {
-
     Javalin app = app();
-
     ApplicationContext applicationContext = new ApplicationContext();
 
     //Principales
@@ -312,20 +264,12 @@ public class Router {
     //Entidades y Tipos,Nombres
     initializeEntityTypeEndpointsOn(app, applicationContext);
     initializeEntityNameEndpointsOn(app, applicationContext);
-    /*
-    //Parametricas
-    initializeEntityTypeEndpointsOn(app, applicationContext);
-    initializeEstablishmentTypeEndpointsOn(app, applicationContext);
-    initializeTransportationTypeEndpointsOn(app, applicationContext);
-    //Entidades
     initializeEntitiesEndpointsOn(app, applicationContext);
-    initializeOrganizationEndpointsOn(app, applicationContext);
-    initializeTransportLinesEndpointsOn(app, applicationContext);
     //Rankings
-    initializeRankingEndpointsOn(app, applicationContext);
+    //initializeRankingEndpointsOn(app, applicationContext);
 
-
-    initializeServiceEndpointsOn(app, applicationContext);
+    /*
+   initializeServiceEndpointsOn(app, applicationContext);
     initializeServiceHolderEndpointsOn(app, applicationContext);
     */
   }
