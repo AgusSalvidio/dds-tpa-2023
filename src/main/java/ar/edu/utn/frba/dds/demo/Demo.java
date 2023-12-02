@@ -200,6 +200,15 @@ public class Demo {
     return establishmentType;
   }
 
+  public Establishment createEstablishment(String name, EstablishmentType establishmentType, Location location, List<Service> services) {
+    Establishment establishment = new Establishment();
+    establishment.setName(name);
+    establishment.setType(establishmentType);
+    establishment.setLocation(location);
+    establishment.setServices(services);
+    return establishment;
+  }
+
   public Establishment lawSchoolStation(EstablishmentType establishmentType, Location location) {
     return Establishment.composedOf(establishmentType, "FACULTAD DE DERECHO", location);
   }
@@ -698,15 +707,26 @@ public class Demo {
     persistenceSystem.startManaging(onceStationhospitalStationAddress);
     persistenceSystem.startManaging(headquarterBranchAddress);
     //SERVICES & STATES
+    Service elevatorA = this.elevatorA(persistenceSystem.stateIdentifiedBy(1));
+    Service elevatorB = this.elevatorA(persistenceSystem.stateIdentifiedBy(2));
     persistenceSystem.startManaging(this.inServiceState());
     persistenceSystem.startManaging(this.notInServiceState());
-    persistenceSystem.startManaging(this.elevatorA(persistenceSystem.stateIdentifiedBy(1)));
-    persistenceSystem.startManaging(this.elevatorB(persistenceSystem.stateIdentifiedBy(2)));
+    persistenceSystem.startManaging(elevatorA);
+    persistenceSystem.startManaging(elevatorB);
     persistenceSystem.startManaging(this.escalatorA(persistenceSystem.stateIdentifiedBy(1)));
     persistenceSystem.startManaging(this.escalatorB(persistenceSystem.stateIdentifiedBy(2)));
     persistenceSystem.startManaging(this.toiletA(persistenceSystem.stateIdentifiedBy(1)));
     persistenceSystem.startManaging(this.toiletB(persistenceSystem.stateIdentifiedBy(2)));
     //ESTABLISHMENTS & TYPES
+
+    List<Service> services = new ArrayList<>();
+    services.add(elevatorA);
+    services.add(elevatorB);
+    persistenceSystem.startManaging(this.station());
+    persistenceSystem.startManaging(this.branch());
+    persistenceSystem.startManaging(this.createEstablishment("ESTADIO PEDRO BIDEGAIN", persistenceSystem.establishmentTypeIdentifiedBy(1), sanLorenzo, services ));
+
+    /*
     persistenceSystem.startManaging(this.station());
     persistenceSystem.startManaging(this.branch());
     persistenceSystem.startManaging(
@@ -719,6 +739,8 @@ public class Demo {
         this.hospitalStation(persistenceSystem.establishmentTypeIdentifiedBy(1), sanLorenzo));
     persistenceSystem.startManaging(
         this.headquarterBranch(persistenceSystem.establishmentTypeIdentifiedBy(2), headquarterBranchAddress));
+
+     */
     //ENTITIES & TYPES & NAMES
     persistenceSystem.startManaging(this.subway());
     persistenceSystem.startManaging(this.bank());
