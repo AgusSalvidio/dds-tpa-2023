@@ -1,16 +1,6 @@
 package ar.edu.utn.frba.dds.applicationcontext;
 
-import ar.edu.utn.frba.dds.managementsystem.CommunityManagementSystem;
-import ar.edu.utn.frba.dds.managementsystem.EntityManagementSystem;
-import ar.edu.utn.frba.dds.managementsystem.EntityNameManagementSystem;
-import ar.edu.utn.frba.dds.managementsystem.EntityTypeManagementSystem;
-import ar.edu.utn.frba.dds.managementsystem.EstablishmentManagementSystem;
-import ar.edu.utn.frba.dds.managementsystem.EstablishmentTypeManagementSystem;
-import ar.edu.utn.frba.dds.managementsystem.IncidentManagementSystem;
-import ar.edu.utn.frba.dds.managementsystem.IncidentPerCommunityManagementSystem;
-import ar.edu.utn.frba.dds.managementsystem.ServiceHolderManagementSystem;
-import ar.edu.utn.frba.dds.managementsystem.ServiceManagementSystem;
-import ar.edu.utn.frba.dds.managementsystem.UserManagementSystem;
+import ar.edu.utn.frba.dds.managementsystem.*;
 import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
 import ar.edu.utn.frba.dds.user.User;
 import io.javalin.http.Context;
@@ -85,5 +75,23 @@ public class ApplicationContext {
 
   public ServiceHolderManagementSystem serviceHolderManagementSystem() {
     return new ServiceHolderManagementSystem(this.persistenceSystem);
+  }
+  /*
+  AGREGADO POR FDM 01-12-2023
+  */
+  public ProvinceManagementSystem provinceManagementSystem() {
+    return new ProvinceManagementSystem(this.persistenceSystem);
+  }
+
+  public DepartmentManagementSystem departmentManagementSystem() {
+    return new DepartmentManagementSystem(this.persistenceSystem);
+  }
+
+  public MunicipalityManagementSystem municipalityManagementSystem() {
+    return new MunicipalityManagementSystem(this.persistenceSystem);
+  }
+
+  public LocationManagementSystem locationManagementSystem() {
+    return new LocationManagementSystem(this.persistenceSystem);
   }
 }

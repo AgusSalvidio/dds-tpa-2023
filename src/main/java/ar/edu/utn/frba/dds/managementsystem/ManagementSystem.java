@@ -31,7 +31,7 @@ public abstract class ManagementSystem {
     this.persistenceSystem.startManaging(object);
   }
 
-  public void stopManagingEntityType(Object object) {
+  public void stopManaging(Object object) {
     this.persistenceSystem.stopManaging(object);
   }
 

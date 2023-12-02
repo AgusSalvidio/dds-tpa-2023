@@ -12,6 +12,10 @@ import ar.edu.utn.frba.dds.establishment.Establishment;
 import ar.edu.utn.frba.dds.establishment.EstablishmentType;
 import ar.edu.utn.frba.dds.incident.Incident;
 import ar.edu.utn.frba.dds.incident.IncidentPerCommunity;
+import ar.edu.utn.frba.dds.location.Department;
+import ar.edu.utn.frba.dds.location.Location;
+import ar.edu.utn.frba.dds.location.Municipality;
+import ar.edu.utn.frba.dds.location.Province;
 import ar.edu.utn.frba.dds.ranking.AverageClosingTimeRanking;
 import ar.edu.utn.frba.dds.ranking.GreaterDegreeOfImpactRanking;
 import ar.edu.utn.frba.dds.ranking.MostReportedIncidentsRanking;
@@ -83,6 +87,35 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
     } catch (NoResultException e) {
       return null;
     }
+  }
+
+  //--------------------------------------------------------------------------------------------
+  //GET BY ID
+  //--------------------------------------------------------------------------------------------
+
+
+  public TransportType transportTypeById(Integer id) {
+    return entityManager().find(TransportType.class, id);
+  }
+
+  public Entity entityById(Integer id) {
+    return entityManager().find(Entity.class, id);
+  }
+
+  public Province provinceById(Integer id) {
+    return entityManager().find(Province.class, id);
+  }
+
+  public Department departmentById(Integer id) {
+    return entityManager().find(Department.class, id);
+  }
+
+  public Municipality municipalityById(Integer id) {
+    return entityManager().find(Municipality.class, id);
+  }
+
+  public Location locationById(Integer id) {
+    return entityManager().find(Location.class, id);
   }
 
   //--------------------------------------------------------------------------------------------
