@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -33,7 +34,8 @@ public class Establishment {
   @Column(name = "name")
   public String name;
 
-  @Transient
+  @ManyToOne
+  @JoinColumn(name = "location_id", referencedColumnName = "id")
   public Location location;
 
   @Transient

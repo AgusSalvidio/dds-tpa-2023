@@ -12,7 +12,10 @@ import ar.edu.utn.frba.dds.establishment.Establishment;
 import ar.edu.utn.frba.dds.establishment.EstablishmentType;
 import ar.edu.utn.frba.dds.incident.Incident;
 import ar.edu.utn.frba.dds.incident.IncidentPerCommunity;
+import ar.edu.utn.frba.dds.location.Department;
 import ar.edu.utn.frba.dds.location.Location;
+import ar.edu.utn.frba.dds.location.Municipality;
+import ar.edu.utn.frba.dds.location.Province;
 import ar.edu.utn.frba.dds.notification.notificationmean.JakartaAdapter;
 import ar.edu.utn.frba.dds.notification.notificationmean.NotificationMean;
 import ar.edu.utn.frba.dds.notification.notificationmean.NotifyByMail;
@@ -28,7 +31,6 @@ import ar.edu.utn.frba.dds.service.Toilet;
 import ar.edu.utn.frba.dds.serviceholder.Company;
 import ar.edu.utn.frba.dds.serviceholder.GovermentDepartment;
 import ar.edu.utn.frba.dds.serviceholder.ServiceHolder;
-import ar.edu.utn.frba.dds.services.georef.entities.Municipality;
 import ar.edu.utn.frba.dds.user.User;
 import ar.edu.utn.frba.dds.user.UserDetail;
 import java.time.LocalDateTime;
@@ -197,24 +199,24 @@ public class Demo {
     return establishmentType;
   }
 
-  public Establishment lawSchoolStation(EstablishmentType establishmentType) {
-    return Establishment.composedOf(establishmentType, "FACULTAD DE DERECHO", null);
+  public Establishment lawSchoolStation(EstablishmentType establishmentType, Location location) {
+    return Establishment.composedOf(establishmentType, "FACULTAD DE DERECHO", location);
   }
 
-  public Establishment lasHerasStation(EstablishmentType establishmentType) {
-    return Establishment.composedOf(establishmentType, "LAS HERAS", null);
+  public Establishment lasHerasStation(EstablishmentType establishmentType, Location location) {
+    return Establishment.composedOf(establishmentType, "LAS HERAS", location);
   }
 
-  public Establishment onceStation(EstablishmentType establishmentType) {
-    return Establishment.composedOf(establishmentType, "ONCE", null);
+  public Establishment onceStation(EstablishmentType establishmentType, Location location) {
+    return Establishment.composedOf(establishmentType, "ONCE", location);
   }
 
-  public Establishment hospitalStation(EstablishmentType establishmentType) {
-    return Establishment.composedOf(establishmentType, "HOSPITALES", null);
+  public Establishment hospitalStation(EstablishmentType establishmentType, Location location) {
+    return Establishment.composedOf(establishmentType, "HOSPITALES", location);
   }
 
-  public Establishment headquarterBranch(EstablishmentType establishmentType) {
-    return Establishment.composedOf(establishmentType, "CASA MATRIZ", null);
+  public Establishment headquarterBranch(EstablishmentType establishmentType, Location location) {
+    return Establishment.composedOf(establishmentType, "CASA MATRIZ", location);
   }
 
   public EntityType subway() {
@@ -239,6 +241,106 @@ public class Demo {
     EntityName entityName = new EntityName();
     entityName.setName("BANCO NACION");
     return entityName;
+  }
+
+  public Province capitalFederal() {
+    Province province = new Province();
+    province.setName("CAPIAL FEDERAL");
+    return province;
+  }
+
+  public Province buenosAires() {
+    Province province = new Province();
+    province.setName("BUENOS AIRES");
+    return province;
+  }
+
+  public Province cordoba() {
+    Province province = new Province();
+    province.setName("CORDOBA");
+    return province;
+  }
+
+  public Department comunaUno(Province province) {
+    Department department = new Department();
+    department.setName("COMUNA 1");
+    department.setProvince(province);
+    return department;
+  }
+
+  public Department comunaDos(Province province) {
+    Department department = new Department();
+    department.setName("COMUNA 2");
+    department.setProvince(province);
+    return department;
+  }
+
+  public Department lanusOeste(Province province) {
+    Department department = new Department();
+    department.setName("LANUS OESTE");
+    department.setProvince(province);
+    return department;
+  }
+
+  public Department cordobaCapital(Province province) {
+    Department department = new Department();
+    department.setName("CORDOBA CAPITAL");
+    department.setProvince(province);
+    return department;
+  }
+
+  public Municipality almagro(Department department) {
+    Municipality municipality = new Municipality();
+    municipality.setName("ALMAGRO");
+    municipality.setDepartment(department);
+    return municipality;
+  }
+
+  public Municipality boedo(Department department) {
+    Municipality municipality = new Municipality();
+    municipality.setName("BOEDO");
+    municipality.setDepartment(department);
+    return municipality;
+  }
+
+  public Location sanLorenzo(Municipality municipality) {
+    Location location = new Location();
+    location.setStreet("AV. LA PLATA");
+    location.setNumber(1770);
+    location.setMunicipality(municipality);
+    return location;
+  }
+
+  public Location addressUno(Municipality municipality) {
+    Location location = new Location();
+    location.setStreet("AV. LA PLATA");
+    location.setNumber(1771);
+    location.setMunicipality(municipality);
+    return location;
+  }
+
+  public Location addressDos(Municipality municipality) {
+    Location location = new Location();
+    location.setStreet("AV. LA PLATA");
+    location.setNumber(1772);
+    location.setMunicipality(municipality);
+    return location;
+  }
+
+  public Location addressTres(Municipality municipality) {
+    Location location = new Location();
+    location.setStreet("AV. LA PLATA");
+    location.setNumber(1773);
+    location.setMunicipality(municipality);
+    return location;
+  }
+
+  public Location addressCuatro(Municipality municipality) {
+    Location location = new Location();
+    location.setStreet("AV. LA PLATA");
+    location.setNumber(1774);
+    location.setMunicipality(municipality);
+    return location;
   }
 
   /*
@@ -551,6 +653,35 @@ public class Demo {
     persistenceSystem.startManaging(this.hugo());
     persistenceSystem.startManaging(this.basura1());
     persistenceSystem.startManaging(this.basura2());
+    //LOCATION - OBJECTS
+    Province capitalFederal = this.capitalFederal();
+    Province buenosAires = this.capitalFederal();
+    Province cordoba = this.capitalFederal();
+    Department comunaUno = this.comunaUno(capitalFederal);
+    Department comunaDos = this.comunaDos(capitalFederal);
+    Department lanusOeste = this.lanusOeste(buenosAires);
+    Department cordobaCapital = this.cordobaCapital(cordoba);
+    Municipality almagro = this.almagro(comunaUno);
+    Municipality boedo = this.boedo(comunaDos);
+    Location sanLorenzo = this.sanLorenzo(boedo);
+    Location lawSchoolStationAddress = this.addressUno(boedo);
+    Location lasHerasStationAddress = this.addressDos(boedo);
+    Location onceStationhospitalStationAddress = this.addressTres(boedo);
+    Location headquarterBranchAddress = this.addressCuatro(boedo);
+    persistenceSystem.startManaging(capitalFederal);
+    persistenceSystem.startManaging(buenosAires);
+    persistenceSystem.startManaging(cordoba);
+    persistenceSystem.startManaging(comunaUno);
+    persistenceSystem.startManaging(comunaDos);
+    persistenceSystem.startManaging(lanusOeste);
+    persistenceSystem.startManaging(cordobaCapital);
+    persistenceSystem.startManaging(almagro);
+    persistenceSystem.startManaging(boedo);
+    persistenceSystem.startManaging(sanLorenzo);
+    persistenceSystem.startManaging(lawSchoolStationAddress);
+    persistenceSystem.startManaging(lasHerasStationAddress);
+    persistenceSystem.startManaging(onceStationhospitalStationAddress);
+    persistenceSystem.startManaging(headquarterBranchAddress);
     //SERVICES & STATES
     persistenceSystem.startManaging(this.inServiceState());
     persistenceSystem.startManaging(this.notInServiceState());
@@ -564,19 +695,23 @@ public class Demo {
     persistenceSystem.startManaging(this.station());
     persistenceSystem.startManaging(this.branch());
     persistenceSystem.startManaging(
-        this.lawSchoolStation(persistenceSystem.establishmentTypeIdentifiedBy(1)));
+        this.lawSchoolStation(persistenceSystem.establishmentTypeIdentifiedBy(1),lawSchoolStationAddress));
     persistenceSystem.startManaging(
-        this.lasHerasStation(persistenceSystem.establishmentTypeIdentifiedBy(1)));
+        this.lasHerasStation(persistenceSystem.establishmentTypeIdentifiedBy(1), lasHerasStationAddress));
     persistenceSystem.startManaging(
-        this.onceStation(persistenceSystem.establishmentTypeIdentifiedBy(1)));
+        this.onceStation(persistenceSystem.establishmentTypeIdentifiedBy(1), onceStationhospitalStationAddress));
     persistenceSystem.startManaging(
-        this.hospitalStation(persistenceSystem.establishmentTypeIdentifiedBy(1)));
+        this.hospitalStation(persistenceSystem.establishmentTypeIdentifiedBy(1), sanLorenzo));
     persistenceSystem.startManaging(
-        this.headquarterBranch(persistenceSystem.establishmentTypeIdentifiedBy(2)));
+        this.headquarterBranch(persistenceSystem.establishmentTypeIdentifiedBy(2), headquarterBranchAddress));
     //ENTITIES & TYPES & NAMES
     persistenceSystem.startManaging(this.subway());
     persistenceSystem.startManaging(this.bank());
     persistenceSystem.startManaging(this.subwayHLine());
     persistenceSystem.startManaging(this.nationalBank());
+
+
+
+
   }
 }
