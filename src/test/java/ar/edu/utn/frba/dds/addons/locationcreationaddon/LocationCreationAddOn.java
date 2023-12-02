@@ -1,7 +1,8 @@
 package ar.edu.utn.frba.dds.addons.locationcreationaddon;
 
 import ar.edu.utn.frba.dds.location.Location;
-import ar.edu.utn.frba.dds.services.georef.entities.Municipality;
+import ar.edu.utn.frba.dds.location.Municipality;
+
 
 public class LocationCreationAddOn {
   private Municipality municipality = new MunicipalityCreationAddOn().caba();

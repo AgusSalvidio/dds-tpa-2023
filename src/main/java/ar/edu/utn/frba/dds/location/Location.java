@@ -20,7 +20,7 @@ public class Location {
   @Column(name = "number")
   public Integer number;
 
-  @ManyToOne
+  @OneToOne
   @JoinColumn(name = "municipality_id", referencedColumnName = "id")
   public Municipality municipality;
 

@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.demo;
 import ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole;
 import ar.edu.utn.frba.dds.community.Community;
 import ar.edu.utn.frba.dds.community.Member;
+import ar.edu.utn.frba.dds.controller.view.EstablishmentViewController;
 import ar.edu.utn.frba.dds.entity.Direction;
 import ar.edu.utn.frba.dds.entity.Entity;
 import ar.edu.utn.frba.dds.entity.EntityName;
@@ -119,51 +120,38 @@ public class Demo {
     return new NotifyByMail(new JakartaAdapter());
   }
 
-  public UserDetail ibarra() throws Exception {
-    UserDetail userDetail = UserDetail.composedOf("Hugo",
-        "Ibarra", "ibarraneta@gmail.com", "0123456789", this.wpp());
-    return userDetail;
+  public UserDetail userDetailA() throws Exception {
+    return UserDetail.composedOf("nombreA", "apellidoA", "a@gmail.com", "0123456789", this.wpp());
   }
 
-  public UserDetail basuraIntergalactica() throws Exception {
-    UserDetail userDetail = UserDetail.composedOf("Basura",
-        "Intergalactica", "basuraintergalactica@gmail.com", "0123456789", this.mail());
-    return userDetail;
+  public UserDetail userDetailB() throws Exception {
+    return UserDetail.composedOf("nombreB", "apellidoB", "b@gmail.com", "0123456789", this.mail());
   }
 
-  public UserDetail basuraIntergalactica2() throws Exception {
-    UserDetail userDetail = UserDetail.composedOf("Basura",
-        "Intergalactica2", "basuraintergalactica2@gmail.com", "0123456789", this.wpp());
-    return userDetail;
+  public UserDetail userDetailC() throws Exception {
+    return UserDetail.composedOf("nombreC", "apellidoC", "c@gmail.com", "0123456789", this.wpp());
   }
 
-  public User hugo() throws Exception {
-    User user = User.composedOf("admin", "admin", this.ibarra(), AuthorizationRole.ADMINISTRADOR);
-    return user;
+  public User userAdmin() throws Exception {
+    return User.composedOf("admin", "admin", this.userDetailA(), AuthorizationRole.ADMINISTRADOR);
   }
 
-  public User basura1() throws Exception {
-    User user = User.composedOf("user",
-        "user", this.basuraIntergalactica(), AuthorizationRole.USUARIO);
-    return user;
+  public User userEntity() throws Exception {
+    return User.composedOf("entidad", "entidad", this.userDetailB(), AuthorizationRole.ENTIDAD);
   }
 
-  public User basura2() throws Exception {
-    User user = User.composedOf("entidad",
-        "entidad", this.basuraIntergalactica2(), AuthorizationRole.ENTIDAD);
-    return user;
+  public User userUser() throws Exception {
+    return User.composedOf("user", "user", this.userDetailC(), AuthorizationRole.USUARIO);
   }
 
-  public State inServiceState() {
-    State state = State.composedOf("EN_SERVICIO", "Servicio funcionando normalmente");
-    return state;
+  public State inService() {
+    return State.composedOf("EN_SERVICIO", "Servicio funcionando normalmente");
   }
 
-  public State notInServiceState() {
-    State state = State.composedOf("FUERA_DE_SERVICIO", "Servicio no funcionando");
-    return state;
+  public State notInService() {
+    return State.composedOf("FUERA_DE_SERVICIO", "Servicio no funcionando");
   }
-
+  // ****************
   public Elevator elevatorA(State state) {
     return Elevator.composedOf("Ascensor Principal", "Ascensor Principal", state);
   }
@@ -186,85 +174,6 @@ public class Demo {
 
   public Toilet toiletB(State state) {
     return Toilet.composedOf("Toilet Segundo Piso", "Toilet Segundo Piso", state);
-  }
-
-  public EstablishmentType station() {
-    EstablishmentType establishmentType = new EstablishmentType();
-    establishmentType.setName("ESTACION");
-    return establishmentType;
-  }
-
-  public EstablishmentType branch() {
-    EstablishmentType establishmentType = new EstablishmentType();
-    establishmentType.setName("SUCURSAL");
-    return establishmentType;
-  }
-
-  public Establishment createEstablishment(String name, EstablishmentType establishmentType, Location location, List<Service> services) {
-    Establishment establishment = new Establishment();
-    establishment.setName(name);
-    establishment.setType(establishmentType);
-    establishment.setLocation(location);
-    establishment.setServices(services);
-    return establishment;
-  }
-
-  public Establishment lawSchoolStation(EstablishmentType establishmentType, Location location) {
-    return Establishment.composedOf(establishmentType, "FACULTAD DE DERECHO", location);
-  }
-
-  public Establishment lasHerasStation(EstablishmentType establishmentType, Location location) {
-    return Establishment.composedOf(establishmentType, "LAS HERAS", location);
-  }
-
-  public Establishment onceStation(EstablishmentType establishmentType, Location location) {
-    return Establishment.composedOf(establishmentType, "ONCE", location);
-  }
-
-  public Establishment hospitalStation(EstablishmentType establishmentType, Location location) {
-    return Establishment.composedOf(establishmentType, "HOSPITALES", location);
-  }
-
-  public Establishment headquarterBranch(EstablishmentType establishmentType, Location location) {
-    return Establishment.composedOf(establishmentType, "CASA MATRIZ", location);
-  }
-
-  public EntityType subway() {
-    EntityType entityType = new EntityType();
-    entityType.setName("SUBTE");
-    return entityType;
-  }
-
-  public EntityType bank() {
-    EntityType entityType = new EntityType();
-    entityType.setName("BANCO");
-    return entityType;
-  }
-
-  public TransportLine entityA(EntityName entityName, EntityType entityType) throws Exception {
-    TransportLine transportLine = TransportLine.composedOf(null, null, Direction.RETURN);
-    transportLine.setName(entityName);
-    transportLine.setType(entityType);
-    return transportLine;
-  }
-
-  public Organization entityB(EntityName entityName, EntityType entityType) throws Exception {
-    Organization organization = new Organization();
-    organization.setName(entityName);
-    organization.setType(entityType);
-    return organization;
-  }
-
-  public EntityName subwayHLine() {
-    EntityName entityName = new EntityName();
-    entityName.setName("SUBTE H");
-    return entityName;
-  }
-
-  public EntityName nationalBank() {
-    EntityName entityName = new EntityName();
-    entityName.setName("BANCO NACION");
-    return entityName;
   }
 
   public Province capitalFederal() {
@@ -365,6 +274,90 @@ public class Demo {
     location.setNumber(1774);
     location.setMunicipality(municipality);
     return location;
+  }
+
+  public EstablishmentType station() {
+    EstablishmentType establishmentType = new EstablishmentType();
+    establishmentType.setName("ESTACION");
+    return establishmentType;
+  }
+
+  public EstablishmentType branch() {
+    EstablishmentType establishmentType = new EstablishmentType();
+    establishmentType.setName("SUCURSAL");
+    return establishmentType;
+  }
+
+  public Establishment lawSchoolStation(EstablishmentType establishmentType, Location location, List<Service> services) {
+    Establishment establishment = Establishment.composedOf(establishmentType, "FACULTAD DE DERECHO", location);
+    establishment.setServices(services);
+    return establishment;
+  }
+
+  public Establishment lasHerasStation(EstablishmentType establishmentType, Location location) {
+    return Establishment.composedOf(establishmentType, "LAS HERAS", location);
+  }
+
+  public Establishment onceStation(EstablishmentType establishmentType, Location location) {
+    return Establishment.composedOf(establishmentType, "ONCE", location);
+  }
+
+  public Establishment hospitalStation(EstablishmentType establishmentType, Location location) {
+    return Establishment.composedOf(establishmentType, "HOSPITALES", location);
+  }
+
+  public Establishment headquarterBranch(EstablishmentType establishmentType, Location location) {
+    return Establishment.composedOf(establishmentType, "CASA MATRIZ", location);
+  }
+
+  public EntityName subwayHLine() {
+    EntityName entityName = new EntityName();
+    entityName.setName("SUBTE H");
+    return entityName;
+  }
+
+  public EntityName nationalBank() {
+    EntityName entityName = new EntityName();
+    entityName.setName("BANCO NACION");
+    return entityName;
+  }
+
+  public EntityType subway() {
+    EntityType entityType = new EntityType();
+    entityType.setName("SUBTE");
+    return entityType;
+  }
+
+  public EntityType bank() {
+    EntityType entityType = new EntityType();
+    entityType.setName("BANCO");
+    return entityType;
+  }
+
+  public Organization entityB(EntityName entityName, EntityType entityType) throws Exception {
+    Organization organization = new Organization();
+    organization.setName(entityName);
+    organization.setType(entityType);
+    return organization;
+  }
+
+  public TransportLine entityA(EntityName entityName, EntityType entityType, Establishment departure, Establishment arrival, Direction direction) throws Exception {
+    TransportLine transportLine = TransportLine.composedOf(departure, arrival, direction);
+    transportLine.setName(entityName);
+    transportLine.setType(entityType);
+    return transportLine;
+  }
+
+  // ******************************
+
+
+  public Establishment createEstablishment(String name, EstablishmentType establishmentType, Location location, List<Service> services) {
+    Establishment establishment = new Establishment();
+    establishment.setName(name);
+    establishment.setType(establishmentType);
+    establishment.setLocation(location);
+    establishment.setServices(services);
+    return establishment;
   }
 
   /*
@@ -674,85 +667,105 @@ public class Demo {
   */
   public void initialize(RelationalDatabasePersistenceSystem persistenceSystem) throws Exception {
     //USERS
-    persistenceSystem.startManaging(this.hugo());
-    persistenceSystem.startManaging(this.basura1());
-    persistenceSystem.startManaging(this.basura2());
-    //LOCATION - OBJECTS
-    Province capitalFederal = this.capitalFederal();
-    Province buenosAires = this.capitalFederal();
-    Province cordoba = this.capitalFederal();
-    Department comunaUno = this.comunaUno(capitalFederal);
-    Department comunaDos = this.comunaDos(capitalFederal);
-    Department lanusOeste = this.lanusOeste(buenosAires);
-    Department cordobaCapital = this.cordobaCapital(cordoba);
-    Municipality almagro = this.almagro(comunaUno);
-    Municipality boedo = this.boedo(comunaDos);
-    Location sanLorenzo = this.sanLorenzo(boedo);
-    Location lawSchoolStationAddress = this.addressUno(boedo);
-    Location lasHerasStationAddress = this.addressDos(boedo);
-    Location onceStationhospitalStationAddress = this.addressTres(boedo);
-    Location headquarterBranchAddress = this.addressCuatro(boedo);
-    persistenceSystem.startManaging(capitalFederal);
-    persistenceSystem.startManaging(buenosAires);
-    persistenceSystem.startManaging(cordoba);
-    persistenceSystem.startManaging(comunaUno);
-    persistenceSystem.startManaging(comunaDos);
-    persistenceSystem.startManaging(lanusOeste);
-    persistenceSystem.startManaging(cordobaCapital);
-    persistenceSystem.startManaging(almagro);
-    persistenceSystem.startManaging(boedo);
-    persistenceSystem.startManaging(sanLorenzo);
-    persistenceSystem.startManaging(lawSchoolStationAddress);
-    persistenceSystem.startManaging(lasHerasStationAddress);
-    persistenceSystem.startManaging(onceStationhospitalStationAddress);
-    persistenceSystem.startManaging(headquarterBranchAddress);
+    persistenceSystem.startManaging(this.userAdmin());
+    persistenceSystem.startManaging(this.userEntity());
+    persistenceSystem.startManaging(this.userUser());
+    User admin = persistenceSystem.userIdentifiedBy(1);
+    User entity = persistenceSystem.userIdentifiedBy(2);
+    User user = persistenceSystem.userIdentifiedBy(3);
+
     //SERVICES & STATES
-    Service elevatorA = this.elevatorA(persistenceSystem.stateIdentifiedBy(1));
-    Service elevatorB = this.elevatorA(persistenceSystem.stateIdentifiedBy(2));
-    persistenceSystem.startManaging(this.inServiceState());
-    persistenceSystem.startManaging(this.notInServiceState());
-    persistenceSystem.startManaging(elevatorA);
-    persistenceSystem.startManaging(elevatorB);
-    persistenceSystem.startManaging(this.escalatorA(persistenceSystem.stateIdentifiedBy(1)));
-    persistenceSystem.startManaging(this.escalatorB(persistenceSystem.stateIdentifiedBy(2)));
-    persistenceSystem.startManaging(this.toiletA(persistenceSystem.stateIdentifiedBy(1)));
-    persistenceSystem.startManaging(this.toiletB(persistenceSystem.stateIdentifiedBy(2)));
+    persistenceSystem.startManaging(this.inService());
+    persistenceSystem.startManaging(this.notInService());
+    State inService = persistenceSystem.stateIdentifiedBy(1);
+    State notInService = persistenceSystem.stateIdentifiedBy(2);
+
+    persistenceSystem.startManaging(this.elevatorA(inService));
+    persistenceSystem.startManaging(this.elevatorB(notInService));
+    persistenceSystem.startManaging(this.escalatorA(inService));
+    persistenceSystem.startManaging(this.escalatorB(notInService));
+    persistenceSystem.startManaging(this.toiletA(inService));
+    persistenceSystem.startManaging(this.toiletB(notInService));
+    Service elevatorA = persistenceSystem.serviceIdentifiedBy(1);
+    Service elevatorB = persistenceSystem.serviceIdentifiedBy(2);
+    Service escalatorA = persistenceSystem.serviceIdentifiedBy(3);
+    Service escalatorB = persistenceSystem.serviceIdentifiedBy(4);
+    Service toiletA = persistenceSystem.serviceIdentifiedBy(5);
+    Service toiletB = persistenceSystem.serviceIdentifiedBy(6);
+
+    List<Service> servicesA = new ArrayList<>();
+    servicesA.add(elevatorA);
+    servicesA.add(escalatorA);
+    servicesA.add(toiletA);
+    List<Service> servicesB = new ArrayList<>();
+    servicesB.add(elevatorB);
+    servicesB.add(escalatorB);
+    servicesB.add(toiletB);
+
+
+    //LOCATIONS
+    persistenceSystem.startManaging(this.capitalFederal());
+    persistenceSystem.startManaging(this.buenosAires());
+    persistenceSystem.startManaging(this.cordoba());
+    Province capitalFederal = persistenceSystem.provinceIdentifiedBy(1);
+    Province buenosAires = persistenceSystem.provinceIdentifiedBy(2);
+    Province cordoba = persistenceSystem.provinceIdentifiedBy(3);
+
+    persistenceSystem.startManaging(this.comunaUno(capitalFederal));
+    persistenceSystem.startManaging(this.comunaDos(capitalFederal));
+    persistenceSystem.startManaging(this.lanusOeste(buenosAires));
+    persistenceSystem.startManaging(this.cordobaCapital(cordoba));
+    Department comunaUno = persistenceSystem.departmentIdentifiedBy(1);
+    Department comunaDos = persistenceSystem.departmentIdentifiedBy(2);
+    Department lanusOeste = persistenceSystem.departmentIdentifiedBy(3);
+    Department cordobaCapital = persistenceSystem.departmentIdentifiedBy(4);
+
+    persistenceSystem.startManaging(this.almagro(comunaUno));
+    persistenceSystem.startManaging(this.boedo(comunaDos));
+    Municipality almagro = persistenceSystem.municipalityIdentifiedBy(1);
+    Municipality boedo = persistenceSystem.municipalityIdentifiedBy(2);
+
+    persistenceSystem.startManaging(this.addressUno(boedo));
+    persistenceSystem.startManaging(this.addressDos(boedo));
+    persistenceSystem.startManaging(this.addressTres(boedo));
+    persistenceSystem.startManaging(this.addressCuatro(boedo));
+    persistenceSystem.startManaging(this.sanLorenzo(boedo));
+    Location addressUno = persistenceSystem.locationIdentifiedBy(1);
+    Location addressDos = persistenceSystem.locationIdentifiedBy(2);
+    Location addressTres = persistenceSystem.locationIdentifiedBy(3);
+    Location addressCuatro = persistenceSystem.locationIdentifiedBy(4);
+    Location sanLorenzo = persistenceSystem.locationIdentifiedBy(5);
+
     //ESTABLISHMENTS & TYPES
-
-    List<Service> services = new ArrayList<>();
-    services.add(elevatorA);
-    services.add(elevatorB);
     persistenceSystem.startManaging(this.station());
     persistenceSystem.startManaging(this.branch());
-    persistenceSystem.startManaging(this.createEstablishment("ESTADIO PEDRO BIDEGAIN", persistenceSystem.establishmentTypeIdentifiedBy(1), sanLorenzo, services ));
+    EstablishmentType station = persistenceSystem.establishmentTypeIdentifiedBy(1);
+    EstablishmentType branch = persistenceSystem.establishmentTypeIdentifiedBy(2);
 
-    /*
-    persistenceSystem.startManaging(this.station());
-    persistenceSystem.startManaging(this.branch());
-    persistenceSystem.startManaging(
-        this.lawSchoolStation(persistenceSystem.establishmentTypeIdentifiedBy(1),lawSchoolStationAddress));
-    persistenceSystem.startManaging(
-        this.lasHerasStation(persistenceSystem.establishmentTypeIdentifiedBy(1), lasHerasStationAddress));
-    persistenceSystem.startManaging(
-        this.onceStation(persistenceSystem.establishmentTypeIdentifiedBy(1), onceStationhospitalStationAddress));
-    persistenceSystem.startManaging(
-        this.hospitalStation(persistenceSystem.establishmentTypeIdentifiedBy(1), sanLorenzo));
-    persistenceSystem.startManaging(
-        this.headquarterBranch(persistenceSystem.establishmentTypeIdentifiedBy(2), headquarterBranchAddress));
+    persistenceSystem.startManaging(this.lawSchoolStation(station, addressUno, servicesA));
+    persistenceSystem.startManaging(this.lasHerasStation(station, addressDos));
+    persistenceSystem.startManaging(this.onceStation(station, addressTres));
+    persistenceSystem.startManaging(this.hospitalStation(station, sanLorenzo));
+    persistenceSystem.startManaging(this.headquarterBranch(branch, addressCuatro));
+    Establishment lawSchoolStation = persistenceSystem.establishmentIdentifiedBy(1);
+    Establishment lasHerasStation = persistenceSystem.establishmentIdentifiedBy(2);
+    Establishment onceStation = persistenceSystem.establishmentIdentifiedBy(3);
+    Establishment hospitalStation = persistenceSystem.establishmentIdentifiedBy(4);
+    Establishment headquarterBranch = persistenceSystem.establishmentIdentifiedBy(5);
 
-     */
     //ENTITIES & TYPES & NAMES
-    persistenceSystem.startManaging(this.subway());
-    persistenceSystem.startManaging(this.bank());
     persistenceSystem.startManaging(this.subwayHLine());
     persistenceSystem.startManaging(this.nationalBank());
-    persistenceSystem.startManaging(this.entityA(
-        persistenceSystem.entityNameIdentifiedBy(1), persistenceSystem.entityTypeIdentifiedBy(1)));
-    persistenceSystem.startManaging(this.entityB(
-        persistenceSystem.entityNameIdentifiedBy(2), persistenceSystem.entityTypeIdentifiedBy(2)));
+    EntityName subwayHLine = persistenceSystem.entityNameIdentifiedBy(1);
+    EntityName nationalBank = persistenceSystem.entityNameIdentifiedBy(2);
 
+    persistenceSystem.startManaging(this.subway());
+    persistenceSystem.startManaging(this.bank());
+    EntityType subway = persistenceSystem.entityTypeIdentifiedBy(1);
+    EntityType bank = persistenceSystem.entityTypeIdentifiedBy(1);
 
-
+    persistenceSystem.startManaging(this.entityA(subwayHLine, subway, lawSchoolStation, onceStation, Direction.RETURN));
+    persistenceSystem.startManaging(this.entityB(nationalBank, bank));
 
   }
 }

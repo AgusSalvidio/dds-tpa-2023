@@ -7,7 +7,6 @@ import ar.edu.utn.frba.dds.entity.Entity;
 import ar.edu.utn.frba.dds.entity.EntityName;
 import ar.edu.utn.frba.dds.entity.EntityType;
 import ar.edu.utn.frba.dds.entity.TransportLine;
-import ar.edu.utn.frba.dds.entity.TransportType;
 import ar.edu.utn.frba.dds.establishment.Establishment;
 import ar.edu.utn.frba.dds.establishment.EstablishmentType;
 import ar.edu.utn.frba.dds.incident.Incident;
@@ -20,14 +19,10 @@ import ar.edu.utn.frba.dds.ranking.AverageClosingTimeRanking;
 import ar.edu.utn.frba.dds.ranking.GreaterDegreeOfImpactRanking;
 import ar.edu.utn.frba.dds.ranking.MostReportedIncidentsRanking;
 import ar.edu.utn.frba.dds.ranking.WeeklyRanking;
-import ar.edu.utn.frba.dds.service.Elevator;
-import ar.edu.utn.frba.dds.service.Escalator;
 import ar.edu.utn.frba.dds.service.Service;
 import ar.edu.utn.frba.dds.service.State;
-import ar.edu.utn.frba.dds.service.Toilet;
 import ar.edu.utn.frba.dds.serviceholder.ServiceHolder;
 import ar.edu.utn.frba.dds.user.User;
-import ar.edu.utn.frba.dds.user.UserDetail;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 import java.util.List;
 import javax.persistence.EntityTransaction;
@@ -73,16 +68,16 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
   //--------------------------------------------------------------------------------------------
   //USERS
   //--------------------------------------------------------------------------------------------
-  public User userIdentifiedBy(Integer anUserId) {
-    return entityManager().find(User.class, anUserId);
+  public User userIdentifiedBy(Integer id) {
+    return entityManager().find(User.class, id);
   }
 
-  public User userNamed(String anUserName) {
+  public User userNamed(String name) {
     try {
       return entityManager().createQuery(
                       "SELECT x FROM " + User.class.getName() + " x WHERE x.username = :username",
                       User.class)
-              .setParameter("username", anUserName)
+              .setParameter("username", name)
               .getSingleResult();
     } catch (NoResultException e) {
       return null;
@@ -93,10 +88,6 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
   //GET BY ID
   //--------------------------------------------------------------------------------------------
 
-
-  public TransportType transportTypeById(Integer id) {
-    return entityManager().find(TransportType.class, id);
-  }
 
   public Entity entityById(Integer id) {
     return entityManager().find(Entity.class, id);
@@ -121,36 +112,91 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
   //--------------------------------------------------------------------------------------------
   //SERVICES
   //--------------------------------------------------------------------------------------------
-  public State stateIdentifiedBy(Integer stateId) {
-    return entityManager().find(State.class, stateId);
+  public State stateIdentifiedBy(Integer id) {
+    return entityManager().find(State.class, id);
   }
 
-  public State stateNamed(String stateName) {
+  public State stateNamed(String name) {
     try {
       return entityManager().createQuery(
               "SELECT x FROM " + State.class.getName() + " x WHERE x.name = :name",
               State.class)
-          .setParameter("name", stateName)
+          .setParameter("name", name)
           .getSingleResult();
     } catch (NoResultException e) {
       return null;
     }
   }
 
-  public Service serviceIdentifiedBy(Integer serviceId) {
-    return entityManager().find(Service.class, serviceId);
+  public Service serviceIdentifiedBy(Integer id) {
+    return entityManager().find(Service.class, id);
   }
 
-  public Service serviceNamed(String serviceName) {
+  public Service serviceNamed(String name) {
     try {
       return entityManager().createQuery(
               "SELECT x FROM " + Service.class.getName() + " x WHERE x.name = :name",
               Service.class)
-          .setParameter("name", serviceName)
+          .setParameter("name", name)
           .getSingleResult();
     } catch (NoResultException e) {
       return null;
     }
+  }
+
+  //--------------------------------------------------------------------------------------------
+  //LOCATIONS
+  //--------------------------------------------------------------------------------------------
+  public Province provinceIdentifiedBy(Integer id) {
+    return entityManager().find(Province.class, id);
+  }
+
+  public Province provinceNamed(String name) {
+    try {
+      return entityManager().createQuery(
+              "SELECT x FROM " + Province.class.getName() + " x WHERE x.name = :name",
+              Province.class)
+          .setParameter("name", name)
+          .getSingleResult();
+    } catch (NoResultException e) {
+      return null;
+    }
+  }
+
+  public Department departmentIdentifiedBy(Integer id) {
+    return entityManager().find(Department.class, id);
+  }
+
+  public Department departmentNamed(String name) {
+    try {
+      return entityManager().createQuery(
+              "SELECT x FROM " + Department.class.getName() + " x WHERE x.name = :name",
+              Department.class)
+          .setParameter("name", name)
+          .getSingleResult();
+    } catch (NoResultException e) {
+      return null;
+    }
+  }
+
+  public Municipality municipalityIdentifiedBy(Integer id) {
+    return entityManager().find(Municipality.class, id);
+  }
+
+  public Municipality municipalityNamed(String name) {
+    try {
+      return entityManager().createQuery(
+              "SELECT x FROM " + Municipality.class.getName() + " x WHERE x.name = :name",
+              Municipality.class)
+          .setParameter("name", name)
+          .getSingleResult();
+    } catch (NoResultException e) {
+      return null;
+    }
+  }
+
+  public Location locationIdentifiedBy(Integer id) {
+    return entityManager().find(Location.class, id);
   }
 
   //--------------------------------------------------------------------------------------------
@@ -160,12 +206,12 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
     return entityManager().find(EstablishmentType.class, id);
   }
 
-  public EstablishmentType establishmentTypeNamed(String establishmentTypeName) {
+  public EstablishmentType establishmentTypeNamed(String name) {
     try {
       return entityManager().createQuery(
               "SELECT x FROM " + EstablishmentType.class.getName() + " x WHERE x.name = :name",
               EstablishmentType.class)
-          .setParameter("name", establishmentTypeName)
+          .setParameter("name", name)
           .getSingleResult();
     } catch (NoResultException e) {
       return null;
@@ -176,12 +222,12 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
     return entityManager().find(Establishment.class, id);
   }
 
-  public Establishment establishmentNamed(String establishmentName) {
+  public Establishment establishmentNamed(String name) {
     try {
       return entityManager().createQuery(
               "SELECT x FROM " + Establishment.class.getName() + " x WHERE x.name = :name",
               Establishment.class)
-          .setParameter("name", establishmentName)
+          .setParameter("name", name)
           .getSingleResult();
     } catch (NoResultException e) {
       return null;
@@ -195,12 +241,12 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
     return entityManager().find(EntityType.class, id);
   }
 
-  public EntityType entityTypeNamed(String entityTypeName) {
+  public EntityType entityTypeNamed(String name) {
     try {
       return entityManager().createQuery(
               "SELECT x FROM " + EntityType.class.getName() + " x WHERE x.name = :name",
               EntityType.class)
-          .setParameter("name", entityTypeName)
+          .setParameter("name", name)
           .getSingleResult();
     } catch (NoResultException e) {
       return null;
@@ -211,34 +257,40 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
     return entityManager().find(EntityName.class, id);
   }
 
-  public EntityName entityNameNamed(String entityNameName) {
+  public EntityName entityNameNamed(String name) {
     try {
       return entityManager().createQuery(
               "SELECT x FROM " + EntityName.class.getName() + " x WHERE x.name = :name",
               EntityName.class)
-          .setParameter("name", entityNameName)
+          .setParameter("name", name)
           .getSingleResult();
     } catch (NoResultException e) {
       return null;
     }
   }
 
-  public Entity entityIdentifiedBy(Integer entityId) {
-    return entityManager().find(Entity.class, entityId);
+  public Entity entityIdentifiedBy(Integer id) {
+    return entityManager().find(Entity.class, id);
   }
 
-  public Entity entityNamed(String entityName) {
+  public Entity entityNamed(String name) {
     try {
       return entityManager().createQuery(
               "SELECT x FROM " + Entity.class.getName() + " x WHERE x.name = :name",
               Entity.class)
-          .setParameter("name", entityName)
+          .setParameter("name", name)
           .getSingleResult();
     } catch (NoResultException e) {
       return null;
     }
   }
 
+
+
+
+  //--------------------------------------------------------------------------------------------
+  //REVISAR
+  //--------------------------------------------------------------------------------------------
   public void startManagingAuthorizationRole(AuthorizationRole authorizationRole) {
     EntityTransaction transaction = entityManager().getTransaction();
     transaction.begin();

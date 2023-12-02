@@ -6,6 +6,8 @@ import ar.edu.utn.frba.dds.entity.EntityName;
 import ar.edu.utn.frba.dds.entity.EntityType;
 import ar.edu.utn.frba.dds.entity.Organization;
 import ar.edu.utn.frba.dds.entity.TransportLine;
+import ar.edu.utn.frba.dds.establishment.Establishment;
+import ar.edu.utn.frba.dds.location.Location;
 import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
 import ar.edu.utn.frba.dds.service.Elevator;
 import ar.edu.utn.frba.dds.service.Escalator;
@@ -67,7 +69,7 @@ public class EntityManagementSystem {
   }
 
   public void updateEntityFrom(Entity entityToUpdate, Map model) {
-    Integer nameId = Integer.valueOf(model.get("type").toString());
+    Integer nameId = Integer.valueOf(model.get("name").toString());
     EntityName name = this.persistenceSystem.entityNameIdentifiedBy(nameId);
     Integer typeId = Integer.valueOf(model.get("type").toString());
     EntityType type = this.persistenceSystem.entityTypeIdentifiedBy(typeId);
@@ -83,10 +85,16 @@ public class EntityManagementSystem {
         this.updateEntityWith(updatedOrganization);
       }
       case "TransportLine" -> {
+        Integer departureId = Integer.valueOf(model.get("departure").toString());
+        Establishment departure = this.persistenceSystem.establishmentIdentifiedBy(departureId);
+        Integer arrivalId = Integer.valueOf(model.get("arrival").toString());
+        Establishment arrival = this.persistenceSystem.establishmentIdentifiedBy(arrivalId);
+
         TransportLine updatedTransportLine =
-            TransportLine.composedOf(null, null, Direction.RETURN);
+            TransportLine.composedOf(departure, arrival, Direction.RETURN);
         updatedTransportLine.setName(name);
         updatedTransportLine.setType(type);
+
         this.updateEntityWith(updatedTransportLine);
       }
       default -> {
@@ -95,7 +103,7 @@ public class EntityManagementSystem {
   }
 
   public void startManagingEntityFrom(Map model) {
-    Integer nameId = Integer.valueOf(model.get("type").toString());
+    Integer nameId = Integer.valueOf(model.get("name").toString());
     EntityName name = this.persistenceSystem.entityNameIdentifiedBy(nameId);
     Integer typeId = Integer.valueOf(model.get("type").toString());
     EntityType type = this.persistenceSystem.entityTypeIdentifiedBy(typeId);
@@ -109,10 +117,16 @@ public class EntityManagementSystem {
         this.startManagingOrganization(organization);
       }
       case "transportLine" -> {
+        Integer departureId = Integer.valueOf(model.get("departure").toString());
+        Establishment departure = this.persistenceSystem.establishmentIdentifiedBy(departureId);
+        Integer arrivalId = Integer.valueOf(model.get("arrival").toString());
+        Establishment arrival = this.persistenceSystem.establishmentIdentifiedBy(arrivalId);
+
         TransportLine transportLine =
-            TransportLine.composedOf(null, null, Direction.RETURN);
+            TransportLine.composedOf(departure, arrival, Direction.RETURN);
         transportLine.setName(name);
         transportLine.setType(type);
+
         this.startManagingTransportLine(transportLine);
       }
       default -> {

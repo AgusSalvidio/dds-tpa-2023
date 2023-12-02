@@ -43,6 +43,8 @@ public class EntityViewController extends Controller {
         this.applicationContext.entityNameManagementSystem().entityNames());
     model.put("types",
         this.applicationContext.entityTypeManagementSystem().entityTypes());
+    model.put("establishments",
+        this.applicationContext.establishmentManagementSystem().establishments());
     context.render(unitPage, model);
   }
 
@@ -60,6 +62,8 @@ public class EntityViewController extends Controller {
         this.applicationContext.entityNameManagementSystem().entityNames());
     model.put("types",
         this.applicationContext.entityTypeManagementSystem().entityTypes());
+    model.put("establishments",
+        this.applicationContext.establishmentManagementSystem().establishments());
     context.render(unitPage, model);
   }
 
@@ -68,14 +72,17 @@ public class EntityViewController extends Controller {
     Integer id = Integer.parseInt(context.pathParam("id"));
     Entity entityToUpdate =
         this.applicationContext.entityManagementSystem().entityIdentifiedBy(id);
-    assignParameters(context, model);
+    assignParameters(context, model, entityToUpdate.getClass().getSimpleName());
     this.applicationContext.entityManagementSystem().updateEntityFrom(entityToUpdate, model);
     context.redirect(actionString);
   }
+
   public void save(Context context) {
     Map<String, Object> model = new HashMap<>();
-    assignParameters(context, model);
     model.put("entity", context.formParam("entity"));
+    String entity = model.get("entity").toString();
+    System.out.println(entity);
+    assignParameters(context, model, entity);
     this.applicationContext.entityManagementSystem().startManagingEntityFrom(model);
     context.status(HttpStatus.CREATED);
     context.redirect(actionString);
@@ -89,9 +96,14 @@ public class EntityViewController extends Controller {
     context.redirect(actionString);
   }
 
-  private void assignParameters(Context context, Map<String, Object> model) {
+  private void assignParameters(Context context, Map<String, Object> model, String entity) {
     model.put("name", context.formParam("name"));
     model.put("type", context.formParam("type"));
+    if (entity.equals("transportLine") || entity.equals("TransportLine")) {
+      model.put("departure", context.formParam("departure"));
+      model.put("arrival", context.formParam("arrival"));
+      model.put("direction", context.formParam("direction"));
+    }
   }
 
   /*

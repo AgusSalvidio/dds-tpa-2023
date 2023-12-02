@@ -17,7 +17,7 @@ public class Municipality {
     @Column(name = "name")
     public String name;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "department_id", referencedColumnName = "id")
     public Department department;
 

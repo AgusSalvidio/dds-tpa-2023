@@ -18,7 +18,7 @@ public class Department {
     @Column(name = "name")
     public String name;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "province_id", referencedColumnName = "id")
     public Province province;
 

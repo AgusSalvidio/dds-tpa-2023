@@ -2,10 +2,11 @@ package ar.edu.utn.frba.dds.entity;
 
 import ar.edu.utn.frba.dds.converters.DirectionConverter;
 import ar.edu.utn.frba.dds.establishment.Establishment;
-import java.util.ArrayList;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.DiscriminatorValue;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,10 +17,14 @@ import lombok.Setter;
 @Getter
 public class TransportLine extends Entity {
 
-  @Transient
+  @OneToOne
+  @JoinColumn(name = "establishment_departure_id", referencedColumnName = "id")
+  //@Transient
   public Establishment departure;
 
-  @Transient
+  @OneToOne
+  @JoinColumn(name = "establishment_arrival_id", referencedColumnName = "id")
+  //@Transient
   public Establishment arrival;
 
   @Convert(converter = DirectionConverter.class)

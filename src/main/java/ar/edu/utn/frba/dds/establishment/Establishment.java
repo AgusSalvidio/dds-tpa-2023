@@ -30,12 +30,7 @@ public class Establishment {
   @JoinColumn(name = "location_id", referencedColumnName = "id")
   public Location location;
 
-  @ManyToMany(cascade = { CascadeType.ALL })
-  @JoinTable(
-          name = "establishment_services",
-          joinColumns = { @JoinColumn(name = "establishment_id") },
-          inverseJoinColumns = { @JoinColumn(name = "service_id", referencedColumnName = "id") }
-  )
+  @ManyToMany
   public List<Service> services;
 
   public static Establishment composedOf(
