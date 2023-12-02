@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import lombok.Getter;
@@ -34,7 +34,7 @@ public abstract class Service {
   @Column(name = "description")
   public String description;
 
-  @ManyToOne
+  @OneToOne
   @JoinColumn(name = "service_state_id", referencedColumnName = "id")
   public State state;
 

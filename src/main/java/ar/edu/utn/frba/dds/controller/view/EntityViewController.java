@@ -2,87 +2,101 @@ package ar.edu.utn.frba.dds.controller.view;
 
 import ar.edu.utn.frba.dds.applicationcontext.ApplicationContext;
 import ar.edu.utn.frba.dds.entity.Entity;
+import ar.edu.utn.frba.dds.service.Service;
 import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EntityViewController {
+public class EntityViewController extends Controller {
 
   ApplicationContext applicationContext;
 
-  String pageTitle = "A/E de Entidades";
-  String actionString = "entity";
+  String pageTitle = "ABM de Entidades";
+  String actionString = "/entities";
   String listPage = "entities/entities.hbs";
-  String unitPage = "entities/entities-registration-massive.hbs";
-  String fileName = "entity.csv";
+  String unitPage = "entities/entities-registration.hbs";
+  //String fileName = "entity.csv";
 
   public EntityViewController(ApplicationContext applicationContext) {
     super();
     this.applicationContext = applicationContext;
   }
 
-  public void index(Context context) throws Exception {
+  public void index(Context context) {
     Map<String, Object> model = new HashMap<>();
-    model.put("title", pageTitle);
     model.put("user", this.applicationContext.loggedUser(context));
+    model.put("title", pageTitle);
     model.put("action", actionString);
-    //model.put("object-list", this.applicationContext.entityTypeManagementSystem()
-    //    .objectList(Entity.class.getName()));
+    model.put("object-list", this.applicationContext.entityManagementSystem().entities());
     context.render(listPage, model);
   }
 
   public void create(Context context) throws Exception {
     Map<String, Object> model = new HashMap<>();
-    model.put("title", pageTitle);
     model.put("user", this.applicationContext.loggedUser(context));
+    model.put("title", pageTitle);
     model.put("action", actionString);
     model.put("registered_object", null);
     model.put("buttonActionLabel", "Registrar");
+    model.put("names",
+        this.applicationContext.entityNameManagementSystem().entityNames());
+    model.put("types",
+        this.applicationContext.entityTypeManagementSystem().entityTypes());
     context.render(unitPage, model);
   }
 
   public void edit(Context context) throws Exception {
     Map<String, Object> model = new HashMap<>();
-    Entity object = this.applicationContext.entityManagementSystem()
-        .entityById(Integer.parseInt(context.pathParam("id")));
-    model.put("title", pageTitle);
+    Integer id = Integer.parseInt(context.pathParam("id"));
+    Entity entityToEdit =
+        this.applicationContext.entityManagementSystem().entityIdentifiedBy(id);
     model.put("user", this.applicationContext.loggedUser(context));
+    model.put("title", pageTitle);
     model.put("action", actionString);
-    model.put("registered_object", object);
+    model.put("registered_object", entityToEdit);
     model.put("buttonActionLabel", "Editar");
+    model.put("names",
+        this.applicationContext.entityNameManagementSystem().entityNames());
+    model.put("types",
+        this.applicationContext.entityTypeManagementSystem().entityTypes());
     context.render(unitPage, model);
   }
 
-  public void save(Context context) throws Exception {
-    /*
-    Entity object = new Entity();
-    object.name = context.formParam("name");
-    this.applicationContext.entityManagementSystem().startManaging(object);
-    context.status(HttpStatus.CREATED);
-    context.redirect(actionString);
-    */
-  }
-
   public void update(Context context) throws Exception {
-    Entity object = this.applicationContext.entityManagementSystem()
-        .entityById(Integer.parseInt(context.pathParam("id")));
-    this.applicationContext.entityManagementSystem().startManaging(object);
+    Map<String, Object> model = new HashMap<>();
+    Integer id = Integer.parseInt(context.pathParam("id"));
+    Entity entityToUpdate =
+        this.applicationContext.entityManagementSystem().entityIdentifiedBy(id);
+    assignParameters(context, model);
+    this.applicationContext.entityManagementSystem().updateEntityFrom(entityToUpdate, model);
+    context.redirect(actionString);
+  }
+  public void save(Context context) {
+    Map<String, Object> model = new HashMap<>();
+    assignParameters(context, model);
+    model.put("entity", context.formParam("entity"));
+    this.applicationContext.entityManagementSystem().startManagingEntityFrom(model);
     context.status(HttpStatus.CREATED);
     context.redirect(actionString);
   }
 
   public void delete(Context context) throws Exception {
-    /*
     Integer id = Integer.parseInt(context.pathParam("id"));
-    User userToDelete = this.applicationContext.userManagementSystem().userIdentifiedBy(id);
-    this.applicationContext.userManagementSystem().stopManaging(userToDelete);
-    */
-    context.redirect(listPage);
+    Entity entityToDelete = this.applicationContext
+        .entityManagementSystem().entityIdentifiedBy(id);
+    this.applicationContext.entityManagementSystem().stopManagingEntity(entityToDelete);
+    context.redirect(actionString);
   }
 
+  private void assignParameters(Context context, Map<String, Object> model) {
+    model.put("name", context.formParam("name"));
+    model.put("type", context.formParam("type"));
+  }
+
+  /*
   public void save_massive(Context context) throws Exception {
-    /*
+
     context.uploadedFiles("files").forEach(uploadedFile ->
             FileUtil.streamToFile(uploadedFile.content(),
             "./src/main/resources/upload/" + fileName));
@@ -98,7 +112,6 @@ public class EntityViewController {
     //Set Source Fields
     dataFile.addField(new FieldString(0, "Type", 255));
     dataFile.addField(new FieldString(1, "Name", 255));
-    */
   }
-
+  */
 }

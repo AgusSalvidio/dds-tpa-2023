@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{{headMeta}}}
+</head>
+<body>
+<header>
+    {{{customAdministrationNavbar}}}
+</header>
+<main>
+    <section class="titles justify-content-center">
+        <h2 class="title">{{title}}</h2>
+    </section>
+    <section class="container">
+        <form class="row g-3 py-2" method="post" {{#if registered_object}}
+              action="{{action}}/{{registered_object.id}}" {{else}} action="{{action}}" {{/if}}>
+            {{#if registered_object}}
+            {{else}}
+            {{/if}}
+            <div class="col-md-6">
+                <label for="entity">Entidad:</label>
+                <select class="col-md-6" name="entity">
+                    <option label="Seleccione ..." value="" disabled selected></option>
+                    <option value="organization">ORGANIZACION</option>
+                    <option value="transportLine">LINEA DE TRANSPORTE</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label for="name">Nombre:</label>
+                <select class="col-md-6" name="name">
+                    <option label="Seleccione ..." value="" disabled selected></option>
+                    {{#each names}}
+                        <option value={{this.id}}>{{this.name}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label for="type">Tipo:</label>
+                <select class="col-md-6" name="type">
+                    <option label="Seleccione ..." value="" disabled selected></option>
+                    {{#each types}}
+                        <option value={{this.id}}>{{this.name}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            <div class="d-flex justify-content-center gap-2 col-md-12">
+                <a class="btn btn-secondary" href="{{action}}"><i class="fa fa-arrow-left" aria-hidden="true"></i>Cancelar</a>
+                <button type="submit" class="btn btn-primary"><i class="fa fab fad fas far fa-save"
+                                                                 aria-hidden="true"></i>{{buttonActionLabel}}</button>
+            </div>
+        </form>
+    </section>
+</main>
+<footer>
+</footer>
+{{{scripts}}}
+</body>
+</html>

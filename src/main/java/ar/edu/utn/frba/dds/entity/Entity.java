@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -20,20 +21,19 @@ import lombok.Setter;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "entity_type")
 @Table(name = "entity")
+@Getter
+@Setter
 public abstract class Entity {
   @Id
-  @GeneratedValue
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   Integer id;
 
-  @Getter
-  @Setter
   @OneToOne
   @JoinColumn(name = "entity_name_id", referencedColumnName = "id")
   public EntityName name;
 
-  @Getter
-  @Setter
-  @Transient
+  @OneToOne
+  @JoinColumn(name = "entity_type_id", referencedColumnName = "id")
   public EntityType type;
 
   @Transient

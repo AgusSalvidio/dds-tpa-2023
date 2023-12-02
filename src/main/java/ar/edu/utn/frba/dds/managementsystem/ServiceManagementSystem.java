@@ -102,7 +102,7 @@ public class ServiceManagementSystem {
         updatedElevator.setId(serviceToUpdate.getId());
         this.updateServiceWith(updatedElevator);
       }
-      case "Wscalator" -> {
+      case "Escalator" -> {
         Escalator updatedEscalator = Escalator.composedOf(name, description, state);
         updatedEscalator.setId(serviceToUpdate.getId());
         this.updateServiceWith(updatedEscalator);
