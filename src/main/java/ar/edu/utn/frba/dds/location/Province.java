@@ -13,7 +13,7 @@ import java.util.List;
 @Getter
 public class Province {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
 
     @Column(name = "name")

@@ -7,6 +7,7 @@ import ar.edu.utn.frba.dds.entity.Direction;
 import ar.edu.utn.frba.dds.entity.Entity;
 import ar.edu.utn.frba.dds.entity.EntityName;
 import ar.edu.utn.frba.dds.entity.EntityType;
+import ar.edu.utn.frba.dds.entity.Organization;
 import ar.edu.utn.frba.dds.entity.TransportLine;
 import ar.edu.utn.frba.dds.establishment.Establishment;
 import ar.edu.utn.frba.dds.establishment.EstablishmentType;
@@ -229,6 +230,20 @@ public class Demo {
     EntityType entityType = new EntityType();
     entityType.setName("BANCO");
     return entityType;
+  }
+
+  public TransportLine entityA(EntityName entityName, EntityType entityType) throws Exception {
+    TransportLine transportLine = TransportLine.composedOf(null, null, Direction.RETURN);
+    transportLine.setName(entityName);
+    transportLine.setType(entityType);
+    return transportLine;
+  }
+
+  public Organization entityB(EntityName entityName, EntityType entityType) throws Exception {
+    Organization organization = new Organization();
+    organization.setName(entityName);
+    organization.setType(entityType);
+    return organization;
   }
 
   public EntityName subwayHLine() {
@@ -709,6 +724,10 @@ public class Demo {
     persistenceSystem.startManaging(this.bank());
     persistenceSystem.startManaging(this.subwayHLine());
     persistenceSystem.startManaging(this.nationalBank());
+    persistenceSystem.startManaging(this.entityA(
+        persistenceSystem.entityNameIdentifiedBy(1), persistenceSystem.entityTypeIdentifiedBy(1)));
+    persistenceSystem.startManaging(this.entityB(
+        persistenceSystem.entityNameIdentifiedBy(2), persistenceSystem.entityTypeIdentifiedBy(2)));
 
 
 

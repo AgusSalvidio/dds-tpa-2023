@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Getter
 public class Municipality {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
 
     @Column(name = "name")
