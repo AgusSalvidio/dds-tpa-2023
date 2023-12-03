@@ -1,102 +1,81 @@
 package ar.edu.utn.frba.dds.incident;
 
+import ar.edu.utn.frba.dds.community.Community;
+import ar.edu.utn.frba.dds.establishment.Establishment;
 import ar.edu.utn.frba.dds.service.Service;
 import ar.edu.utn.frba.dds.user.User;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import java.util.List;
+import javax.persistence.*;
+
 import lombok.Getter;
 import lombok.Setter;
 
-//@Entity
+@Entity
 @Table(name = "incident")
+@Getter
+@Setter
 public class Incident {
   @Id
   @GeneratedValue
-  @Getter
-  @Setter
   Integer id;
 
-  @Getter
   @OneToOne
-  Service service;
+  ar.edu.utn.frba.dds.entity.Entity entity;
 
-  @Getter
-  @Column(name = "date_time")
-  LocalDateTime dateTime;
+  @OneToOne
+  Establishment establishment;
 
-  @Getter
+  @Column(name = "establishment_service_id")
+  Integer establishmentServiceId;
+
+  @Column(name = "report_date_time")
+  LocalDateTime reportDateTime;
+
+  @Column(name = "close_date_time")
+  LocalDateTime closeDateTime;
+
+  @Column(name = "time_incident")
+  Integer timeIncident;
+
   @Column(name = "observation")
   String observations;
 
-  @Getter
   @OneToOne
   User user;
 
+  @OneToMany
+  List<Community> communities;
+
   public Incident() {
-
-  }
-
-  public static Incident composedOf(
-      Service service,
-      String observations,
-      LocalDateTime localDateTime,
-      User user) {
-    return new Incident(service, observations, localDateTime, user);
-  }
-
-  public Incident(
-      Service service,
-      String observations,
-      LocalDateTime dateTime,
-      User user) {
-    this.service = service;
-    this.observations = observations;
-    this.dateTime = dateTime;
-    this.user = user;
+    this.setCloseDateTime(null);
+    this.setTimeIncident(0);
   }
 
   public Service service() {
-    return this.service;
+    return this.establishment.services.get(establishmentServiceId);
   }
 
-  public LocalDateTime dateTime() {
-    return this.dateTime;
+  public void closeIncident() {
+    this.setCloseDateTime(LocalDateTime.now());
+    this.setTimeIncident(lifeTime());
   }
 
-  public String observations() {
-    return this.observations;
-  }
-
-  public User user() {
-    return this.user;
-  }
-
-  public void synchronizeWith(Incident updatedIncident) {
-    this.service = updatedIncident.service();
-    this.observations = updatedIncident.observations();
-    this.dateTime = updatedIncident.dateTime();
-    this.user = updatedIncident.user();
-  }
-
-  public long closingTime() {
-    LocalDateTime now = LocalDateTime.now();
-
-    Duration durationOfIncident = Duration.between(now, this.dateTime);
-
-    return Math.abs(durationOfIncident.toHours());
+  public Integer lifeTime() {
+    Duration durationTime = Duration.between(this.closeDateTime, this.reportDateTime);
+    Long hour = Math.abs(durationTime.toHours());
+    return hour.intValue();
   }
 
   public boolean reported24HoursAgo() {
     LocalDateTime now = LocalDateTime.now();
 
-    Duration durationOfIncident = Duration.between(now, this.dateTime);
+    //Duration durationOfIncident = Duration.between(now, this.dateTime);
 
-    return Math.abs(durationOfIncident.toHours()) >= 24;
+    // return Math.abs(durationOfIncident.toHours()) >= 24;
+
+    return false;
   }
 
 }

@@ -2,6 +2,9 @@ package ar.edu.utn.frba.dds.controller.view;
 
 import ar.edu.utn.frba.dds.applicationcontext.ApplicationContext;
 import ar.edu.utn.frba.dds.entity.Entity;
+import ar.edu.utn.frba.dds.establishment.Establishment;
+import ar.edu.utn.frba.dds.location.Location;
+import ar.edu.utn.frba.dds.service.Service;
 import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
 import java.util.HashMap;
@@ -16,6 +19,7 @@ public class EntityViewController extends Controller {
   String listPage = "entities/entities.hbs";
   String unitPage = "entities/entities-registration.hbs";
   //String fileName = "entity.csv";
+  String establishmentPage = "entities/entities-add-establishment.hbs";
 
   public EntityViewController(ApplicationContext applicationContext) {
     super();
@@ -42,8 +46,6 @@ public class EntityViewController extends Controller {
         this.applicationContext.entityNameManagementSystem().entityNames());
     model.put("types",
         this.applicationContext.entityTypeManagementSystem().entityTypes());
-    model.put("establishments",
-        this.applicationContext.establishmentManagementSystem().establishments());
     context.render(unitPage, model);
   }
 
@@ -61,8 +63,6 @@ public class EntityViewController extends Controller {
         this.applicationContext.entityNameManagementSystem().entityNames());
     model.put("types",
         this.applicationContext.entityTypeManagementSystem().entityTypes());
-    model.put("establishments",
-        this.applicationContext.establishmentManagementSystem().establishments());
     context.render(unitPage, model);
   }
 
@@ -103,6 +103,35 @@ public class EntityViewController extends Controller {
       model.put("arrival", context.formParam("arrival"));
       model.put("direction", context.formParam("direction"));
     }
+  }
+
+  public void createestablishment(Context context) throws Exception {
+    Map<String, Object> model = new HashMap<>();
+    Integer id = Integer.parseInt(context.pathParam("id"));
+    Entity entityToUpdate =
+            this.applicationContext.entityManagementSystem().entityIdentifiedBy(id);
+    model.put("user", this.applicationContext.loggedUser(context));
+    model.put("title", pageTitle);
+    model.put("action", actionString);
+    model.put("registered_object", entityToUpdate);
+    model.put("buttonActionLabel", "Editar");
+    model.put("establishments",
+            this.applicationContext.establishmentManagementSystem().establishments());
+    context.render(establishmentPage, model);
+  }
+
+  public void updateestablishment(Context context) {
+    Integer id = Integer.valueOf(context.formParam("id"));
+    Integer establishmentId = Integer.valueOf(context.formParam("establishment"));
+
+    Entity entityToUpdate =
+            this.applicationContext.entityManagementSystem().entityIdentifiedBy(id);
+    Establishment establishment =
+            this.applicationContext.establishmentManagementSystem().establishmentIdentifiedBy(establishmentId);
+    entityToUpdate.addNewEstablishment(establishment);
+    this.applicationContext
+            .entityManagementSystem().updateEntityWith(entityToUpdate);
+    context.redirect(actionString);
   }
 
   /*

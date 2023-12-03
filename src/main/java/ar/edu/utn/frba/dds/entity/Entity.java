@@ -4,16 +4,8 @@ import ar.edu.utn.frba.dds.establishment.Establishment;
 import ar.edu.utn.frba.dds.incident.Incident;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -36,7 +28,7 @@ public abstract class Entity {
   @JoinColumn(name = "entity_type_id", referencedColumnName = "id")
   public EntityType type;
 
-  @Transient
+  @OneToMany
   public List<Establishment> establishments;
 
   @Transient
@@ -49,10 +41,6 @@ public abstract class Entity {
 
   public void addNewEstablishment(Establishment newEstablishment) {
     this.establishments.add(newEstablishment);
-  }
-
-  public List<Establishment> getEstablishments() {
-    return this.establishments;
   }
 
   public String name() {

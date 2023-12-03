@@ -15,6 +15,28 @@
         <form class="row g-3 py-2" method="post" {{#if registered_object}}
               action="{{action}}/{{registered_object.id}}" {{else}} action="{{action}}" {{/if}}>
             {{#if registered_object}}
+                <div class="col-md-6">
+                    <label for="entity" class="col-form-label">Entidad:</label>
+                    <select class="col-md-6 form-control" name="entity" onchange="showFields(this)">
+                        <option label="Seleccione ..." value="" disabled selected></option>
+                        <option value="organization" {{#if "registered_object.entity_type == organization" }} selected {{/if}}>ORGANIZACION</option>
+                        <option value="transportLine" {{#if "registered_object.entity_type == transport_line"}} selected {{/if}}>LINEA DE TRANSPORTE</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                </div>
+                <div class="col-md-6">
+                    <label for="name" class="col-form-label">Nombre:</label>
+                    <select class="col-md-6 form-control" name="name">
+                        <option value={{registered_object.name.id}} selected > {{registered_object.name.name}}</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="type" class="col-form-label">Tipo:</label>
+                    <select class="col-md-6 form-control" name="type">
+                        <option value={{registered_object.type.id}} selected> {{registered_object.type.name}}</option>
+                    </select>
+                </div>
             {{else}}
                 <div class="col-md-6">
                     <label for="entity" class="col-form-label">Entidad:</label>
@@ -71,10 +93,46 @@
                     <option value="return">VUELTA</option>
                 </select>
             </div>
+            <div class="col-md-12">
+            </div>
+            <div class="col-md-12">
+                <div class="px-1">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th class="col-2">ID</th>
+                                    <th class="col-10">Nombre</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {{#each registered_object.establishments}}
+                                    <tr>
+                                        <td>{{this.id}}</td>
+                                        <td>{{this.name}}</td>
+                                    </tr>
+                                {{else}}
+                                    <tr>
+                                        <td colspan="6">No hay Establecimientos</td>
+                                    </tr>
+                                {{/each}}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+            </div>
             <div class="d-flex justify-content-center gap-2 col-md-12">
                 <a class="btn btn-secondary" href="{{action}}"><i class="fa fa-arrow-left" aria-hidden="true"></i>Cancelar</a>
                 <button type="submit" class="btn btn-primary"><i class="fa fab fad fas far fa-save"
                                                                  aria-hidden="true"></i>{{buttonActionLabel}}</button>
+                <a class="btn btn-primary" href="{{action}}-add-establishment/{{registered_object.id}}">
+                    <i class="fa-regular fa-file"></i>
+                    Agregar Establecimiento
+                </a>
             </div>
         </form>
     </section>

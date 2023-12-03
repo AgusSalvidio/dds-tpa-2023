@@ -51,8 +51,8 @@ public class IncidentManagementSystem {
     return this.persistenceSystem().incidents();
   }
 
-  public void updateWith(Incident currentIncident, Incident updateIncident) {
-    currentIncident.synchronizeWith(updateIncident);
+  public void updateIncidentWith(Incident anIncident) {
+    this.persistenceSystem().updateManaging(anIncident);
   }
 
   public void startManagingIncidentFrom(Map model) {
@@ -70,7 +70,8 @@ public class IncidentManagementSystem {
 
     Community community = this.persistenceSystem.communityIdentifiedBy(communityId);
 
-    Incident incident = Incident.composedOf(service, observation, dateTime, user);
+    //Incident incident = Incident.composedOf(service, observation, dateTime, user);
+    Incident incident = new Incident();
 
     this.startManaging(incident);
     this.startManagingIncidentPerCommunity(incident, community);

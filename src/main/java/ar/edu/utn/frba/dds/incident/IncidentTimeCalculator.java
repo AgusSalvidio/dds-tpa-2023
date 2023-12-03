@@ -18,11 +18,14 @@ public class IncidentTimeCalculator {
     return incidentsWithMoreThan24Hours;
   }
 
-  public double averageClosingTimeOf(List<Incident> incidents) {
+  public Integer averageClosingTimeOf(List<Incident> incidents) {
     OptionalDouble average;
 
-    average = incidents.stream().mapToDouble(Incident::closingTime).average();
+    //average = incidents.stream().mapToDouble(Incident::closingTime).average();
 
-    return average.isPresent() ? average.getAsDouble() : 0;
+
+    //return average.isPresent() ? average.getAsDouble() : 0;
+
+    return 0;
   }
 }
