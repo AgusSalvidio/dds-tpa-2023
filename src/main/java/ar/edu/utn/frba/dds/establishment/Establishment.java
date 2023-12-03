@@ -12,7 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.Getter;
@@ -34,7 +33,7 @@ public class Establishment {
   @Column(name = "name")
   public String name;
 
-  @ManyToOne
+  @OneToOne
   @JoinColumn(name = "location_id", referencedColumnName = "id")
   public Location location;
 

@@ -8,6 +8,7 @@ import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class EstablishmentViewController extends Controller {
 
@@ -115,8 +116,8 @@ public class EstablishmentViewController extends Controller {
   }
 
   public void updateservice(Context context) {
-    Integer id = Integer.parseInt(context.pathParam("id"));
-    Integer serviceId = Integer.parseInt(context.pathParam("service"));
+    Integer id = Integer.valueOf(context.formParam("id"));
+    Integer serviceId = Integer.valueOf(context.formParam("service"));
 
     Establishment establishmentToUpdate =
         this.applicationContext.establishmentManagementSystem().establishmentIdentifiedBy(id);
