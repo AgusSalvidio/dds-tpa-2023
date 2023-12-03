@@ -6,6 +6,7 @@ import static ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole.USUARIO;
 
 import ar.edu.utn.frba.dds.applicationcontext.ApplicationContext;
 import ar.edu.utn.frba.dds.controller.view.AdministrationViewController;
+import ar.edu.utn.frba.dds.controller.view.CommunityViewController;
 import ar.edu.utn.frba.dds.controller.view.DepartmentViewController;
 import ar.edu.utn.frba.dds.controller.view.EntityNameViewController;
 import ar.edu.utn.frba.dds.controller.view.EntityTypeViewController;
@@ -142,6 +143,32 @@ public class Router {
         new EntityViewController(applicationContext)::save, ADMINISTRADOR, ENTIDAD);
     app.get("/entities/{id}/delete",
         new EntityViewController(applicationContext)::delete, ADMINISTRADOR);
+    app.get("/entities-add-establishment/{id}",
+        new EntityViewController(applicationContext)::createestablishment, ADMINISTRADOR);
+    app.post("/entities-save-establishment",
+        new EntityViewController(applicationContext)::updateestablishment, ADMINISTRADOR);
+  }
+
+  private static void initializeCommunityEndpointsOn(
+      Javalin app,
+      ApplicationContext applicationContext) {
+
+    app.get("/communities",
+        new CommunityViewController(applicationContext)::index, ADMINISTRADOR, ENTIDAD);
+    app.get("/communities/register",
+        new CommunityViewController(applicationContext)::create, ADMINISTRADOR, ENTIDAD);
+    app.get("/communities/{id}/edit",
+        new CommunityViewController(applicationContext)::edit, ADMINISTRADOR);
+    app.post("/communities/{id}",
+        new CommunityViewController(applicationContext)::update, ADMINISTRADOR);
+    app.post("/communities",
+        new CommunityViewController(applicationContext)::save, ADMINISTRADOR, ENTIDAD);
+    app.get("/communities/{id}/delete",
+        new CommunityViewController(applicationContext)::delete, ADMINISTRADOR);
+    app.get("/communities/{id}/add-member",
+        new CommunityViewController(applicationContext)::addMember, ADMINISTRADOR);
+    app.post("/communities/{id}/save-member",
+        new CommunityViewController(applicationContext)::saveMember, ADMINISTRADOR);
   }
 
   //--------------------------------------------------------------------------------------------
@@ -350,6 +377,8 @@ public class Router {
     initializeEntityTypeEndpointsOn(app, applicationContext);
     initializeEntityNameEndpointsOn(app, applicationContext);
     initializeEntitiesEndpointsOn(app, applicationContext);
+    //Comunidades
+    initializeCommunityEndpointsOn(app, applicationContext);
     //Rankings
     //initializeRankingEndpointsOn(app, applicationContext);
 

@@ -2,43 +2,46 @@ package ar.edu.utn.frba.dds.community;
 
 import ar.edu.utn.frba.dds.user.User;
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import lombok.Getter;
 import lombok.Setter;
 
-//@Entity
+@Entity
 @Table(name = "member")
+@Setter
+@Getter
 public class Member {
   @Id
-  @GeneratedValue
-  @Setter
-  @Getter
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   Integer id;
 
-  @Getter
   @OneToOne
-  @JoinTable(name = "user")
   @JoinColumn(name = "user_id", referencedColumnName = "id")
   User user;
 
-  @Getter
   @Column(name = "role")
-  String role;
+  @Enumerated(EnumType.STRING)
+  MemberRole role;
 
   public Member() {
   }
 
-  public Member(User anUser, String role) {
+  public Member(User anUser, MemberRole role) {
     this.user = anUser;
     this.role = role;
   }
 
-  public static Member composedOf(User anUser, String role) {
+  public static Member composedOf(User anUser, MemberRole role) {
     return new Member(anUser, role);
   }
 
@@ -46,7 +49,7 @@ public class Member {
     return this.user;
   }
 
-  public String role() {
+  public MemberRole role() {
     return this.role;
   }
 

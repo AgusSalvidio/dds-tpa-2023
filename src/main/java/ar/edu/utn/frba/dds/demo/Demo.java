@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.demo;
 import ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole;
 import ar.edu.utn.frba.dds.community.Community;
 import ar.edu.utn.frba.dds.community.Member;
+import ar.edu.utn.frba.dds.community.MemberRole;
 import ar.edu.utn.frba.dds.entity.Direction;
 import ar.edu.utn.frba.dds.entity.Entity;
 import ar.edu.utn.frba.dds.entity.EntityName;
@@ -349,6 +350,14 @@ public class Demo {
     return transportLine;
   }
 
+  public Community communityA() {
+    return Community.composedOf("Comunidad 1", "Comunidad de prueba 1");
+  }
+
+  public Community communityB(){
+    return Community.composedOf("Comunidad 2", "Comunidad de prueba 2");
+  }
+
   /*
   public State openIncident() {
     State state = State.composedOf("OPEN", "Open Incident");
@@ -659,9 +668,9 @@ public class Demo {
     persistenceSystem.startManaging(this.userAdmin());
     persistenceSystem.startManaging(this.userEntity());
     persistenceSystem.startManaging(this.userUser());
-    //User admin = persistenceSystem.userIdentifiedBy(1);
-    //User entity = persistenceSystem.userIdentifiedBy(2);
-    //User user = persistenceSystem.userIdentifiedBy(3);
+    User admin = persistenceSystem.userIdentifiedBy(1);
+    User entity = persistenceSystem.userIdentifiedBy(2);
+    User user = persistenceSystem.userIdentifiedBy(3);
 
     //SERVICES & STATES
     persistenceSystem.startManaging(this.inService());
@@ -754,6 +763,18 @@ public class Demo {
     persistenceSystem.startManaging(
         this.entityA(subwayLineH, subway, lawSchoolStation, onceStation, Direction.RETURN));
     persistenceSystem.startManaging(this.entityB(nationalBank, bank));
+
+    //COMMUNITIES
+    //persistenceSystem.startManaging(this.communityA());
+    //persistenceSystem.startManaging(this.communityB());
+    //Community communityA = persistenceSystem.communityIdentifiedBy(1);
+    //Community communityB = persistenceSystem.communityIdentifiedBy(2);
+
+    Community communityA = this.communityA();
+    communityA.addMemberComposedOf(admin, MemberRole.MODERADOR);
+    communityA.addMemberComposedOf(user, MemberRole.AFECTADO);
+    persistenceSystem.startManaging(communityA);
+    persistenceSystem.startManaging(this.communityB());
 
   }
 }

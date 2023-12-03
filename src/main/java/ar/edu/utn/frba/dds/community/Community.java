@@ -7,56 +7,44 @@ import ar.edu.utn.frba.dds.user.User;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import lombok.Getter;
 import lombok.Setter;
 
-//@javax.persistence.Entity
+@javax.persistence.Entity
 @Table(name = "community")
+@Setter
+@Getter
 public class Community {
   @Id
-  @GeneratedValue
-  @Setter
-  @Getter
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   Integer id;
 
-  @Getter
   @Column(name = "name")
   String name;
 
-  @Getter
   @Column(name = "description")
   String description;
 
-  @ManyToMany
-  //@JoinColumn(name = "member_id", referencedColumnName = "id")
-  @JoinTable(name = "community_member",
-      joinColumns = {@JoinColumn(name = "member_id", referencedColumnName = "id")},
-      inverseJoinColumns = {@JoinColumn(name = "community_id")})
+  @OneToMany(cascade = CascadeType.ALL)
+  @JoinColumn(name = "member_id", referencedColumnName = "id")
   List<Member> members;
 
-  @ManyToMany
-  //@JoinColumn(name = "service_id", referencedColumnName = "id")
-  @JoinTable(name = "community_service",
-      joinColumns = {@JoinColumn(name = "service_id", referencedColumnName = "id")},
-      inverseJoinColumns = {@JoinColumn(name = "community_id")})
+  @Transient
   List<Service> services;
 
-  @OneToMany(mappedBy = "entity")
-  @JoinTable(name = "community_entity")
-  @JoinColumn(name = "entity_id", referencedColumnName = "id")
+  @Transient
   List<Entity> entities;
 
-  @OneToMany
-  @JoinTable(name = "community_incident")
-  @JoinColumn(name = "incident_id", referencedColumnName = "id")
+  @Transient
   List<Incident> openIncidents;
 
   public static Community composedOf(String name, String description) {
@@ -123,14 +111,14 @@ public class Community {
   public List<Member> moderators() {
     return this.members().stream()
         .filter(member -> member.role()
-            .equals("Moderador"))
+            .equals(MemberRole.MODERADOR))
         .collect(Collectors.toList());
   }
 
   public List<Member> affected() {
     return this.members().stream()
         .filter(member -> member.role()
-            .equals("Afectado"))
+            .equals(MemberRole.AFECTADO))
         .collect(Collectors.toList());
   }
 
@@ -143,7 +131,7 @@ public class Community {
 
   }
 
-  private void addMemberComposedOf(User anUser, String role) {
+  public void addMemberComposedOf(User anUser, MemberRole role) {
     Member newMember = Member.composedOf(anUser, role);
     this.members.add(newMember);
   }
@@ -153,15 +141,15 @@ public class Community {
   }
 
   public void addModerator(User anUser) {
-    this.addMemberComposedOf(anUser, "Moderador");
+    this.addMemberComposedOf(anUser, MemberRole.MODERADOR);
   }
 
   public void addUser(User anUser) {
-    this.addMemberComposedOf(anUser, "Suscriptor");
+    this.addMemberComposedOf(anUser, MemberRole.SUSCRIPTOR);
   }
 
   public void addAffected(User anUser) {
-    this.addMemberComposedOf(anUser, "Afectado");
+    this.addMemberComposedOf(anUser, MemberRole.AFECTADO);
   }
 
   public void removeUser(User anUser) {

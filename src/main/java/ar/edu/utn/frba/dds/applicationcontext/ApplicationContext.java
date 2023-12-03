@@ -71,7 +71,6 @@ public class ApplicationContext {
     return new EntityManagementSystem(this.persistenceSystem);
   }
 
-
   public IncidentManagementSystem incidentManagementSystem() {
     return new IncidentManagementSystem(this.persistenceSystem);
   }

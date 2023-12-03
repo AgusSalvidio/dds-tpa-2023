@@ -1,6 +1,9 @@
 package ar.edu.utn.frba.dds.managementsystem;
 
+import ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole;
 import ar.edu.utn.frba.dds.community.Community;
+import ar.edu.utn.frba.dds.community.MemberRole;
+import ar.edu.utn.frba.dds.entity.EntityName;
 import ar.edu.utn.frba.dds.eventnotificationsystem.notifiableevent.NotifiableEvent;
 import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
 import ar.edu.utn.frba.dds.service.Service;
@@ -24,38 +27,58 @@ public class CommunityManagementSystem {
     return this.persistenceSystem;
   }
 
-  public static CommunityManagementSystem workingWith(
-      RelationalDatabasePersistenceSystem persistenceSystem) {
-    return new CommunityManagementSystem(persistenceSystem);
+  public void startManagingCommunity(Community community) {
+    this.persistenceSystem().startManaging(community);
   }
 
-  public void startManaging(Community community) {
-    this.persistenceSystem().startManagingCommunity(community);
+  public void updateCommunityWith(Community community) {
+    this.persistenceSystem().updateManaging(community);
   }
 
-  public void stopManaging(Community community) {
-    this.persistenceSystem().stopManagingCommunity(community);
+  public void stopManagingCommunity(Community community) {
+    this.persistenceSystem().stopManaging(community);
   }
 
-  public List<Community> communities() {
-    return this.persistenceSystem().communities();
+  public List<Object> communities() {
+    return this.persistenceSystem.objectList(Community.class.getName());
   }
 
-  public void updateWith(Community currentCommunity, Community updatedCommunity) {
-    currentCommunity.synchronizeWith(updatedCommunity);
+  public Community communityIdentifiedBy(Integer communityId) {
+    return this.persistenceSystem.communityIdentifiedBy(communityId);
   }
 
-  public void startManagingCommunityForm(Map model) {
+  public Community communityNamed(String communityNamed) {
+    return this.persistenceSystem.communityNamed(communityNamed);
+  }
+
+  public void updateCommunityFrom(Community communityToUpdate, Map<String, Object> model) {
     String name = model.get("name").toString();
     String description = model.get("description").toString();
 
-    this.startManaging(Community.composedOf(name, description));
+    Community updatedCommunity = Community.composedOf(name, description);
+    updatedCommunity.setId(communityToUpdate.getId());
+
+    this.updateCommunityWith(updatedCommunity);
   }
 
-  public void receiveFrom(NotifiableEvent event, Object publisher) {
-    /* For now, this system should have an implementation. This will be enhanced
-     when the extracting the implementation from ManagementSystem -asalvidio*/
+  public void startManagingCommunityForm(Map<String, Object> model) {
+    String name = model.get("name").toString();
+    String description = model.get("description").toString();
+
+    this.startManagingCommunity(Community.composedOf(name, description));
   }
+
+  public void updateCommunityMemberFrom(Community communityToUpdate, Map<String, Object> model) {
+    Integer userId = Integer.valueOf(model.get("user").toString());
+    User user = this.persistenceSystem.userIdentifiedBy(userId);
+    MemberRole role = MemberRole.valueOf(model.get("role").toString());
+    communityToUpdate.addMemberComposedOf(user, role);
+    this.updateCommunityWith(communityToUpdate);
+  }
+
+}
+  /*
+
 
   public List<Community> communitiesForUser(User anUser) {
     return this.communities().stream()
@@ -71,7 +94,6 @@ public class CommunityManagementSystem {
         .flatMap(community -> community.services().stream())
         .collect(Collectors.toList());
   }
+  */
 
-
-}
 

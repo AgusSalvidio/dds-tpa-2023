@@ -16,10 +16,10 @@ public class MemberTest {
   public void createAMemberTest() throws Exception {
 
     User user = this.ibarraneta();
-    Member member = Member.composedOf(user, "Suscriptor");
+    Member member = Member.composedOf(user, MemberRole.SUSCRIPTOR);
 
     Assertions.assertEquals(member.user(), user);
-    Assertions.assertEquals(member.role(), "Suscriptor");
+    Assertions.assertEquals(member.role(), MemberRole.SUSCRIPTOR);
 
   }
 
@@ -28,10 +28,10 @@ public class MemberTest {
   public void createAModeratorMemberTest() throws Exception {
 
     User user = this.ibarraneta();
-    Member member = Member.composedOf(user, "Moderador");
+    Member member = Member.composedOf(user, MemberRole.MODERADOR);
 
     Assertions.assertEquals(member.user(), user);
-    Assertions.assertEquals(member.role(), "Moderador");
+    Assertions.assertEquals(member.role(), MemberRole.MODERADOR);
 
   }
 

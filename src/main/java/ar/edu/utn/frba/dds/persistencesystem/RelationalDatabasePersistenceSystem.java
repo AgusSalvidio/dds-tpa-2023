@@ -298,6 +298,24 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
     }
   }
 
+  //--------------------------------------------------------------------------------------------
+  //COMMUNITIES
+  //--------------------------------------------------------------------------------------------
+  public Community communityIdentifiedBy(Integer id) {
+    return entityManager().find(Community.class, id);
+  }
+
+  public Community communityNamed(String name) {
+    try {
+      return entityManager().createQuery(
+              "SELECT x FROM " + Community.class.getName() + " x WHERE x.name = :name",
+              Community.class)
+          .setParameter("name", name)
+          .getSingleResult();
+    } catch (NoResultException e) {
+      return null;
+    }
+  }
 
   //--------------------------------------------------------------------------------------------
   //REVISAR
@@ -341,44 +359,9 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
     return entityManager().createQuery("from " + Incident.class.getName()).getResultList();
   }
 
-  public void startManagingTransportLine(TransportLine transportLine) {
-    EntityTransaction transaction = entityManager().getTransaction();
-
-    transaction.begin();
-    entityManager().persist(transportLine);
-    transaction.commit();
-  }
-
-  public void stopManagingTransportLine(TransportLine transportLine) {
-    EntityTransaction transaction = entityManager().getTransaction();
-
-    transaction.begin();
-    entityManager().remove(transportLine);
-    transaction.commit();
-  }
 
   public List<Entity> entities() {
     return entityManager().createQuery("from " + Entity.class.getName()).getResultList();
-  }
-
-  public void startManagingCommunity(Community community) {
-    EntityTransaction transaction = entityManager().getTransaction();
-
-    transaction.begin();
-    entityManager().persist(community);
-    transaction.commit();
-  }
-
-  public void stopManagingCommunity(Community community) {
-    EntityTransaction transaction = entityManager().getTransaction();
-
-    transaction.begin();
-    entityManager().remove(community);
-    transaction.commit();
-  }
-
-  public List<Community> communities() {
-    return entityManager().createQuery("from " + Community.class.getName()).getResultList();
   }
 
   public void startManagingIncidentPerCommunity(IncidentPerCommunity anIncidentPerCommunity) {
@@ -406,11 +389,7 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
   //Hay que desarrollarlos pq no hay nada-!!!!!!!!!!!!!!!!!
   //Menos Mal que estoy escuchndo IRON MAIDEN
 
-  public Community communityIdentifiedBy(Integer communityId) {
-    //return this.demo.communities().stream().
-    // filter(community -> community.getId().equals(communityId)).findFirst().orElse(null);
-    return null;
-  }
+
 
   public IncidentPerCommunity incidentPerCommunityIdentifiedBy(Integer anId) {
     //return this.demo.incidentPerCommunities().stream().

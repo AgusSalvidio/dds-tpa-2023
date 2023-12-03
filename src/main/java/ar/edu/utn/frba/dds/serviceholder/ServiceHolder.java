@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.serviceholder;
 
 import ar.edu.utn.frba.dds.community.Member;
+import ar.edu.utn.frba.dds.community.MemberRole;
 import ar.edu.utn.frba.dds.entity.Entity;
 import ar.edu.utn.frba.dds.service.Service;
 import ar.edu.utn.frba.dds.user.User;
@@ -65,14 +66,14 @@ public abstract class ServiceHolder {
   public List<Member> analysts() {
     return this.members().stream()
         .filter(member -> member.role()
-            .equals("Analista"))
+            .equals(MemberRole.ANALISTA))
         .collect(Collectors.toList());
   }
 
   public List<Member> moderators() {
     return this.members().stream()
         .filter(member -> member.role()
-            .equals("Moderador"))
+            .equals(MemberRole.MODERADOR))
         .collect(Collectors.toList());
   }
 
@@ -85,17 +86,17 @@ public abstract class ServiceHolder {
 
   }
 
-  private void addMemberComposedOf(User anUser, String role) {
+  private void addMemberComposedOf(User anUser, MemberRole role) {
     Member newMember = Member.composedOf(anUser, role);
     this.members.add(newMember);
   }
 
   public void addAnalyst(User anUser) {
-    this.addMemberComposedOf(anUser, "Analista");
+    this.addMemberComposedOf(anUser, MemberRole.ANALISTA);
   }
 
   public void addModerator(User anUser) {
-    this.addMemberComposedOf(anUser, "Moderador");
+    this.addMemberComposedOf(anUser, MemberRole.MODERADOR);
   }
 
   public void removeUser(User anUser) {
