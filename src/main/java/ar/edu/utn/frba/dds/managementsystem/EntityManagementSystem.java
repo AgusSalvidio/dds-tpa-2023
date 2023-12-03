@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.managementsystem;
 
+import ar.edu.utn.frba.dds.community.Community;
 import ar.edu.utn.frba.dds.entity.Direction;
 import ar.edu.utn.frba.dds.entity.Entity;
 import ar.edu.utn.frba.dds.entity.EntityName;
@@ -8,6 +9,7 @@ import ar.edu.utn.frba.dds.entity.Organization;
 import ar.edu.utn.frba.dds.entity.TransportLine;
 import ar.edu.utn.frba.dds.establishment.Establishment;
 import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
+import ar.edu.utn.frba.dds.service.Service;
 import java.util.List;
 import java.util.Map;
 
@@ -62,6 +64,7 @@ public class EntityManagementSystem {
     return this.persistenceSystem.entityNamed(entityName);
   }
 
+  /*
   public void updateEntityFrom(Entity entityToUpdate, Map model) {
     Integer nameId = Integer.valueOf(model.get("name").toString());
     EntityName name = this.persistenceSystem.entityNameIdentifiedBy(nameId);
@@ -83,9 +86,10 @@ public class EntityManagementSystem {
         Establishment departure = this.persistenceSystem.establishmentIdentifiedBy(departureId);
         Integer arrivalId = Integer.valueOf(model.get("arrival").toString());
         Establishment arrival = this.persistenceSystem.establishmentIdentifiedBy(arrivalId);
+        Direction direction = Direction.valueOf(model.get("direction").toString());
 
         TransportLine updatedTransportLine =
-            TransportLine.composedOf(departure, arrival, Direction.RETURN);
+            TransportLine.composedOf(departure, arrival, direction);
         updatedTransportLine.setName(name);
         updatedTransportLine.setType(type);
 
@@ -94,6 +98,19 @@ public class EntityManagementSystem {
       default -> {
       }
     }
+  }
+  */
+
+  public void updateEntityFrom(Entity entityToUpdate, Map model) {
+    Integer nameId = Integer.valueOf(model.get("name").toString());
+    EntityName name = this.persistenceSystem.entityNameIdentifiedBy(nameId);
+    Integer typeId = Integer.valueOf(model.get("type").toString());
+    EntityType type = this.persistenceSystem.entityTypeIdentifiedBy(typeId);
+
+    entityToUpdate.setName(name);
+    entityToUpdate.setType(type);
+
+    this.updateEntityWith(entityToUpdate);
   }
 
   public void startManagingEntityFrom(Map model) {
@@ -127,4 +144,12 @@ public class EntityManagementSystem {
       }
     }
   }
+
+  public void updateEntityEstablishmentFrom(Entity entityToUpdate, Map<String, Object> model) {
+    Integer establishmentId = Integer.valueOf(model.get("establishment").toString());
+    Establishment establishment = this.persistenceSystem.establishmentIdentifiedBy(establishmentId);
+    entityToUpdate.addNewEstablishment(establishment);
+    this.updateEntityWith(entityToUpdate);
+  }
+
 }

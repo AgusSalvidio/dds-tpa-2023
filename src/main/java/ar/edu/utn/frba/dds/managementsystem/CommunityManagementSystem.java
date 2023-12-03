@@ -51,6 +51,7 @@ public class CommunityManagementSystem {
     return this.persistenceSystem.communityNamed(communityNamed);
   }
 
+  /*
   public void updateCommunityFrom(Community communityToUpdate, Map<String, Object> model) {
     String name = model.get("name").toString();
     String description = model.get("description").toString();
@@ -59,6 +60,17 @@ public class CommunityManagementSystem {
     updatedCommunity.setId(communityToUpdate.getId());
 
     this.updateCommunityWith(updatedCommunity);
+  }
+   */
+
+  public void updateCommunityFrom(Community communityToUpdate, Map<String, Object> model) {
+    String name = model.get("name").toString();
+    String description = model.get("description").toString();
+
+    communityToUpdate.setName(name);
+    communityToUpdate.setDescription(description);
+
+    this.updateCommunityWith(communityToUpdate);
   }
 
   public void startManagingCommunityForm(Map<String, Object> model) {
@@ -78,8 +90,6 @@ public class CommunityManagementSystem {
 
 }
   /*
-
-
   public List<Community> communitiesForUser(User anUser) {
     return this.communities().stream()
         .filter(community -> community.members().stream()

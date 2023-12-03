@@ -19,8 +19,8 @@
                     <label for="entity" class="col-form-label">Entidad:</label>
                     <select class="col-md-6 form-control" name="entity" onchange="showFields(this)">
                         <option label="Seleccione ..." value="" disabled selected></option>
-                        <option value="organization" {{#if "registered_object.entity_type == organization" }} selected {{/if}}>ORGANIZACION</option>
-                        <option value="transportLine" {{#if "registered_object.entity_type == transport_line"}} selected {{/if}}>LINEA DE TRANSPORTE</option>
+                        <option value="organization">ORGANIZACION</option>
+                        <option value="transportLine">LINEA DE TRANSPORTE</option>
                     </select>
                 </div>
                 <div class="col-md-6">
@@ -71,7 +71,7 @@
                 <label for="departure" class="col-form-label">Estación Origen:</label>
                 <select class="col-md-6 form-control" name="departure">
                     <option label="Seleccione ..." value="" disabled selected></option>
-                    {{#each establishments}}
+                    {{#each stations}}
                         <option value={{this.id}}>{{this.name}}</option>
                     {{/each}}
                 </select>
@@ -80,7 +80,7 @@
                 <label for="arrival" class="col-form-label">Estación Destino:</label>
                 <select class="col-md-6 form-control" name="arrival">
                     <option label="Seleccione ..." value="" disabled selected></option>
-                    {{#each establishments}}
+                    {{#each stations}}
                         <option value={{this.id}}>{{this.name}}</option>
                     {{/each}}
                 </select>
@@ -93,56 +93,59 @@
                     <option value="return">VUELTA</option>
                 </select>
             </div>
-            <div class="col-md-12">
-            </div>
-            <div class="col-md-12">
-                <div class="px-1">
-                    <div class="row">
-                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                            <table class="table table-striped">
-                                <thead>
-                                <tr>
-                                    <th class="col-2">ID</th>
-                                    <th class="col-10">Nombre</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {{#each registered_object.establishments}}
+            {{#if registered_object}}
+                <div class="col-md-12">
+                </div>
+                <div class="col-md-12">
+                    <div class="px-1">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                <table class="table table-striped">
+                                    <thead>
                                     <tr>
-                                        <td>{{this.id}}</td>
-                                        <td>{{this.name}}</td>
+                                        <th class="col-6">Nombre</th>
+                                        <th class="col-6">Tipo</th>
                                     </tr>
-                                {{else}}
-                                    <tr>
-                                        <td colspan="6">No hay Establecimientos</td>
-                                    </tr>
-                                {{/each}}
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                    {{#each registered_object.establishments}}
+                                        <tr>
+                                            <td>{{this.name}}</td>
+                                            <td>{{this.type.name}}</td>
+                                        </tr>
+                                    {{else}}
+                                        <tr>
+                                            <td colspan="6">No hay Establecimientos Asociados</td>
+                                        </tr>
+                                    {{/each}}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-12">
-            </div>
+                <div class="col-md-12">
+                </div>
+            {{/if}}
             <div class="d-flex justify-content-center gap-2 col-md-12">
                 <a class="btn btn-secondary" href="{{action}}"><i class="fa fa-arrow-left" aria-hidden="true"></i>Cancelar</a>
                 <button type="submit" class="btn btn-primary"><i class="fa fab fad fas far fa-save"
                                                                  aria-hidden="true"></i>{{buttonActionLabel}}</button>
-                <a class="btn btn-primary" href="{{action}}-add-establishment/{{registered_object.id}}">
-                    <i class="fa-regular fa-file"></i>
-                    Agregar Establecimiento
-                </a>
+                {{#if registered_object}}
+                    <a class="btn btn-primary" href="{{action}}/{{registered_object.id}}/add-establishment">
+                        <i class="fa-regular fa-file"></i>
+                        Agregar Establecimiento
+                    </a>
+                {{/if}}
             </div>
         </form>
-    </section>
     </section>
 </main>
 <script>
     function showFields(select) {
-        var departure  = document.getElementById("departure");
-        var arrival  = document.getElementById("arrival");
-        var direction  = document.getElementById("direction");
+        var departure = document.getElementById("departure");
+        var arrival = document.getElementById("arrival");
+        var direction = document.getElementById("direction");
 
         if (select.value === "transportLine") {
             departure.style.display = "block";

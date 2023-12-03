@@ -44,6 +44,7 @@ public class EntityTypeManagementSystem {
     return this.persistenceSystem.entityTypeNamed(typeNamed);
   }
 
+  /*
   public void updateEntityTypeFrom(
       EntityType entityTypeToUpdate,
       Map<String, Object> model) {
@@ -54,6 +55,17 @@ public class EntityTypeManagementSystem {
     updatedEntityType.setId(entityTypeToUpdate.getId());
 
     this.updateEntityTypeWith(updatedEntityType);
+  }
+  */
+
+  public void updateEntityTypeFrom(
+      EntityType entityTypeToUpdate,
+      Map<String, Object> model) {
+    String name = model.get("name").toString();
+
+    entityTypeToUpdate.setName(name);
+
+    this.updateEntityTypeWith(entityTypeToUpdate);
   }
 
   public void startEntityTypeFrom(Map<String, Object> model) {

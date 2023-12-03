@@ -28,7 +28,7 @@ public abstract class Entity {
   @JoinColumn(name = "entity_type_id", referencedColumnName = "id")
   public EntityType type;
 
-  @OneToMany
+  @ManyToMany
   public List<Establishment> establishments;
 
   @Transient

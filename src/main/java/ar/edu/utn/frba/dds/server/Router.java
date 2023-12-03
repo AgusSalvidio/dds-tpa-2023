@@ -121,10 +121,10 @@ public class Router {
         new EstablishmentViewController(applicationContext)::save, ADMINISTRADOR, ENTIDAD);
     app.get("/establishments/{id}/delete",
             new EstablishmentViewController(applicationContext)::delete, ADMINISTRADOR);
-    app.get("/establishments-add-service/{id}",
-            new EstablishmentViewController(applicationContext)::createservice, ADMINISTRADOR);
-    app.post("/establishments-save-service",
-            new EstablishmentViewController(applicationContext)::updateservice, ADMINISTRADOR);
+    app.get("/establishments/{id}/add-service",
+        new EstablishmentViewController(applicationContext)::addService, ADMINISTRADOR);
+    app.post("/establishments/{id}/save-service",
+        new EstablishmentViewController(applicationContext)::saveService, ADMINISTRADOR);
   }
 
   private static void initializeEntitiesEndpointsOn(
@@ -143,10 +143,10 @@ public class Router {
         new EntityViewController(applicationContext)::save, ADMINISTRADOR, ENTIDAD);
     app.get("/entities/{id}/delete",
         new EntityViewController(applicationContext)::delete, ADMINISTRADOR);
-    app.get("/entities-add-establishment/{id}",
-        new EntityViewController(applicationContext)::createestablishment, ADMINISTRADOR);
-    app.post("/entities-save-establishment",
-        new EntityViewController(applicationContext)::updateestablishment, ADMINISTRADOR);
+    app.get("/entities/{id}/add-establishment",
+        new EntityViewController(applicationContext)::addEstablishment, ADMINISTRADOR);
+    app.post("/entities/{id}/save-establishment",
+        new EntityViewController(applicationContext)::saveEstablishment, ADMINISTRADOR);
   }
 
   private static void initializeCommunityEndpointsOn(

@@ -88,6 +88,7 @@ public class ServiceManagementSystem {
     return this.persistenceSystem.serviceNamed(serviceName);
   }
 
+  /*
   public void updateServiceFrom(Service serviceToUpdate, Map model) {
     String name = model.get("name").toString();
     String description = model.get("description").toString();
@@ -116,7 +117,21 @@ public class ServiceManagementSystem {
       }
     }
   }
+  */
 
+  public void updateServiceFrom(Service serviceToUpdate, Map model) {
+    String name = model.get("name").toString();
+    String description = model.get("description").toString();
+    Integer stateId = Integer.valueOf(model.get("state").toString());
+    State state = this.stateIdentifiedBy(stateId);
+
+    serviceToUpdate.setName(name);
+    serviceToUpdate.setDescription(description);
+    serviceToUpdate.setState(state);
+
+    this.updateServiceWith(serviceToUpdate);
+  }
+  
   public void startManagingServiceFrom(Map model) {
     String name = model.get("name").toString();
     String description = model.get("description").toString();

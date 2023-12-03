@@ -44,6 +44,7 @@ public class EstablishmentTypeManagementSystem {
     return this.persistenceSystem.establishmentTypeNamed(typeNamed);
   }
 
+  /*
   public void updateEstablishmentTypeFrom(
       EstablishmentType establishmentTypeToUpdate,
       Map<String, Object> model) {
@@ -54,6 +55,17 @@ public class EstablishmentTypeManagementSystem {
     updatedEstablishmentType.setId(establishmentTypeToUpdate.getId());
 
     this.updateEstablishmentTypeWith(updatedEstablishmentType);
+  }
+  */
+
+  public void updateEstablishmentTypeFrom(
+      EstablishmentType establishmentTypeToUpdate,
+      Map<String, Object> model) {
+    String name = model.get("name").toString();
+
+    establishmentTypeToUpdate.setName(name);
+
+    this.updateEstablishmentTypeWith(establishmentTypeToUpdate);
   }
 
   public void startEstablishmentTypeFrom(Map<String, Object> model) {

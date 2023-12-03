@@ -758,7 +758,7 @@ public class Demo {
     persistenceSystem.startManaging(this.subway());
     persistenceSystem.startManaging(this.bank());
     EntityType subway = persistenceSystem.entityTypeIdentifiedBy(1);
-    EntityType bank = persistenceSystem.entityTypeIdentifiedBy(1);
+    EntityType bank = persistenceSystem.entityTypeIdentifiedBy(2);
 
     persistenceSystem.startManaging(
         this.entityA(subwayLineH, subway, lawSchoolStation, onceStation, Direction.RETURN));

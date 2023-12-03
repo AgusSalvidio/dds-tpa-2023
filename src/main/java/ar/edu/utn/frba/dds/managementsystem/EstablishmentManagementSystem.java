@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.managementsystem;
 
 import ar.edu.utn.frba.dds.establishment.Establishment;
 import ar.edu.utn.frba.dds.establishment.EstablishmentType;
+import ar.edu.utn.frba.dds.location.Location;
 import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
 import ar.edu.utn.frba.dds.service.Service;
 import java.util.List;
@@ -50,29 +51,55 @@ public class EstablishmentManagementSystem {
     return this.persistenceSystem.establishmentNamed(anEstablishmentName);
   }
 
+  /*
   public void updateEstablishmentFrom(Establishment establishmentToUpdate, Map model) {
     String name = model.get("name").toString();
     Integer establishmentTypeId = Integer.valueOf(model.get("type").toString());
-
     EstablishmentType establishmentType =
         this.persistenceSystem.establishmentTypeIdentifiedBy(establishmentTypeId);
+    Integer locationId = Integer.valueOf(model.get("location").toString());
+    Location location = this.persistenceSystem.locationIdentifiedBy(locationId);
 
     Establishment updatedEstablishment =
-        Establishment.composedOf(establishmentType, name, null);
+        Establishment.composedOf(establishmentType, name, location);
     updatedEstablishment.setId(establishmentToUpdate.getId());
 
     this.updateEstablishmentWith(updatedEstablishment);
+  }
+  */
+
+  public void updateEstablishmentFrom(Establishment establishmentToUpdate, Map model) {
+    String name = model.get("name").toString();
+    Integer establishmentTypeId = Integer.valueOf(model.get("type").toString());
+    EstablishmentType establishmentType =
+        this.persistenceSystem.establishmentTypeIdentifiedBy(establishmentTypeId);
+    Integer locationId = Integer.valueOf(model.get("location").toString());
+    Location location = this.persistenceSystem.locationIdentifiedBy(locationId);
+
+    establishmentToUpdate.setType(establishmentType);
+    establishmentToUpdate.setName(name);
+    establishmentToUpdate.setLocation(location);
+
+    this.updateEstablishmentWith(establishmentToUpdate);
   }
 
   public void startManagingEstablishmentFrom(Map model) {
     String name = model.get("name").toString();
     Integer establishmentTypeId = Integer.valueOf(model.get("type").toString());
-
     EstablishmentType establishmentType =
         this.persistenceSystem.establishmentTypeIdentifiedBy(establishmentTypeId);
+    Integer locationId = Integer.valueOf(model.get("location").toString());
+    Location location = this.persistenceSystem.locationIdentifiedBy(locationId);
 
     this.startManagingEstablishment(
-        Establishment.composedOf(establishmentType, name, null));
+        Establishment.composedOf(establishmentType, name, location));
+  }
+
+  public void updateEstablishmentServiceFrom(Establishment establishmentToUpdate, Map model) {
+    Integer serviceId = Integer.valueOf(model.get("service").toString());
+    Service service = this.persistenceSystem.serviceIdentifiedBy(serviceId);
+    establishmentToUpdate.addNewService(service);
+    this.updateEstablishmentWith(establishmentToUpdate);
   }
 
 }

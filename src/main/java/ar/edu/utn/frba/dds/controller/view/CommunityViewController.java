@@ -82,7 +82,7 @@ public class CommunityViewController extends Controller {
     context.redirect(actionString);
   }
 
-  public void addMember(Context context) throws Exception {
+  public void addMember(Context context) {
     Map<String, Object> model = new HashMap<>();
     Integer id = Integer.parseInt(context.pathParam("id"));
     Community communityToEdit =

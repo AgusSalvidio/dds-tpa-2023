@@ -1,11 +1,14 @@
 package ar.edu.utn.frba.dds.controller.view;
 
 import ar.edu.utn.frba.dds.applicationcontext.ApplicationContext;
+import ar.edu.utn.frba.dds.community.Community;
+import ar.edu.utn.frba.dds.community.MemberRole;
 import ar.edu.utn.frba.dds.establishment.Establishment;
 import ar.edu.utn.frba.dds.location.Location;
 import ar.edu.utn.frba.dds.service.Service;
 import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -45,8 +48,6 @@ public class EstablishmentViewController extends Controller {
         this.applicationContext.establishmentTypeManagementSystem().establishmentTypes());
     model.put("locations",
         this.applicationContext.locationManagementSystem().objectList(Location.class.getName()));
-    model.put("services",
-        this.applicationContext.serviceManagementSystem().services());
     context.render(unitPage, model);
   }
 
@@ -64,7 +65,7 @@ public class EstablishmentViewController extends Controller {
         this.applicationContext.establishmentTypeManagementSystem().establishmentTypes());
     model.put("locations",
         this.applicationContext.locationManagementSystem().objectList(Location.class.getName()));
-    model.put("services", establishmentToEdit.services);
+    model.put("services", establishmentToEdit.getServices());
     context.render(unitPage, model);
   }
 
@@ -96,7 +97,7 @@ public class EstablishmentViewController extends Controller {
     context.redirect(actionString);
   }
 
-  public void createservice(Context context) throws Exception {
+  public void addService(Context context) throws Exception {
     Map<String, Object> model = new HashMap<>();
     Integer id = Integer.parseInt(context.pathParam("id"));
     Establishment establishmentToEdit =
@@ -105,32 +106,24 @@ public class EstablishmentViewController extends Controller {
     model.put("title", pageTitle);
     model.put("action", actionString);
     model.put("registered_object", establishmentToEdit);
-    model.put("buttonActionLabel", "Editar");
-    model.put("types",
-        this.applicationContext.establishmentTypeManagementSystem().establishmentTypes());
-    model.put("locations",
-        this.applicationContext.locationManagementSystem().objectList(Location.class.getName()));
-    model.put("services",
-        this.applicationContext.serviceManagementSystem().services());
+    model.put("buttonActionLabel", "Agregar");
+    model.put("services", this.applicationContext.serviceManagementSystem().services());
     context.render(servicePage, model);
   }
 
-  public void updateservice(Context context) {
-    Integer id = Integer.valueOf(context.formParam("id"));
-    Integer serviceId = Integer.valueOf(context.formParam("service"));
-
-    Establishment establishmentToUpdate =
+  public void saveService(Context context) {
+    Map<String, Object> model = new HashMap<>();
+    Integer id = Integer.parseInt(context.pathParam("id"));
+    Establishment establishmentToEdit =
         this.applicationContext.establishmentManagementSystem().establishmentIdentifiedBy(id);
-    Service service =
-        this.applicationContext.serviceManagementSystem().serviceIdentifiedBy(serviceId);
-    establishmentToUpdate.addNewService(service);
-    this.applicationContext
-        .establishmentManagementSystem().updateEstablishmentWith(establishmentToUpdate);
-    context.redirect(actionString);
+    model.put("service", context.formParam("service"));
+    this.applicationContext.establishmentManagementSystem().updateEstablishmentServiceFrom(establishmentToEdit, model);
+    context.redirect(actionString + "/" + id + "/edit");
   }
 
   private void assignParameters(Context context, Map<String, Object> model) {
     model.put("name", context.formParam("name"));
     model.put("type", context.formParam("type"));
+    model.put("location", context.formParam("location"));
   }
 }
