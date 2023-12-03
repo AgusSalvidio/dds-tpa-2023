@@ -17,8 +17,8 @@
             {{#if registered_object}}
             {{else}}
                 <div class="col-md-6">
-                    <label for="entity">Entidad:</label>
-                    <select class="col-md-6" name="entity" onchange="showFields(this)">
+                    <label for="entity" class="col-form-label">Entidad:</label>
+                    <select class="col-md-6 form-control" name="entity" onchange="showFields(this)">
                         <option label="Seleccione ..." value="" disabled selected></option>
                         <option value="organization">ORGANIZACION</option>
                         <option value="transportLine">LINEA DE TRANSPORTE</option>
@@ -27,8 +27,8 @@
                 <div class="col-md-6">
                 </div>
                 <div class="col-md-6">
-                    <label for="name">Nombre:</label>
-                    <select class="col-md-6" name="name">
+                    <label for="name" class="col-form-label">Nombre:</label>
+                    <select class="col-md-6 form-control" name="name">
                         <option label="Seleccione ..." value="" disabled selected></option>
                         {{#each names}}
                             <option value={{this.id}}>{{this.name}}</option>
@@ -36,8 +36,8 @@
                     </select>
                 </div>
                 <div class="col-md-6">
-                    <label for="type">Tipo:</label>
-                    <select class="col-md-6" name="type">
+                    <label for="type" class="col-form-label">Tipo:</label>
+                    <select class="col-md-6 form-control" name="type">
                         <option label="Seleccione ..." value="" disabled selected></option>
                         {{#each types}}
                             <option value={{this.id}}>{{this.name}}</option>
@@ -46,8 +46,8 @@
                 </div>
             {{/if}}
             <div id="departure" class="col-md-6" style="display: none;">
-                <label for="departure">Estación Origen:</label>
-                <select class="col-md-6" name="departure">
+                <label for="departure" class="col-form-label">Estación Origen:</label>
+                <select class="col-md-6 form-control" name="departure">
                     <option label="Seleccione ..." value="" disabled selected></option>
                     {{#each establishments}}
                         <option value={{this.id}}>{{this.name}}</option>
@@ -55,8 +55,8 @@
                 </select>
             </div>
             <div id="arrival" class="col-md-6" style="display: none;">
-                <label for="arrival">Estación Destino:</label>
-                <select class="col-md-6" name="arrival">
+                <label for="arrival" class="col-form-label">Estación Destino:</label>
+                <select class="col-md-6 form-control" name="arrival">
                     <option label="Seleccione ..." value="" disabled selected></option>
                     {{#each establishments}}
                         <option value={{this.id}}>{{this.name}}</option>
@@ -64,8 +64,8 @@
                 </select>
             </div>
             <div id="direction" class="col-md-6" style="display: none;">
-                <label for="direction">Sentido:</label>
-                <select class="col-md-6" name="direction">
+                <label for="direction" class="col-form-label">Sentido:</label>
+                <select class="col-md-6 form-control" name="direction">
                     <option label="Seleccione ..." value="" disabled selected></option>
                     <option value="forward">IDA</option>
                     <option value="return">VUELTA</option>

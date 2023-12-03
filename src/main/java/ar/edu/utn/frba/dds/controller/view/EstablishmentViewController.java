@@ -43,9 +43,9 @@ public class EstablishmentViewController extends Controller {
     model.put("types",
         this.applicationContext.establishmentTypeManagementSystem().establishmentTypes());
     model.put("locations",
-            this.applicationContext.locationManagementSystem().objectList(Location.class.getName()));
+        this.applicationContext.locationManagementSystem().objectList(Location.class.getName()));
     model.put("services",
-            this.applicationContext.serviceManagementSystem().services());
+        this.applicationContext.serviceManagementSystem().services());
     context.render(unitPage, model);
   }
 
@@ -62,8 +62,8 @@ public class EstablishmentViewController extends Controller {
     model.put("types",
         this.applicationContext.establishmentTypeManagementSystem().establishmentTypes());
     model.put("locations",
-            this.applicationContext.locationManagementSystem().objectList(Location.class.getName()));
-    model.put("services", establishmentToEdit.services );
+        this.applicationContext.locationManagementSystem().objectList(Location.class.getName()));
+    model.put("services", establishmentToEdit.services);
     context.render(unitPage, model);
   }
 
@@ -99,31 +99,32 @@ public class EstablishmentViewController extends Controller {
     Map<String, Object> model = new HashMap<>();
     Integer id = Integer.parseInt(context.pathParam("id"));
     Establishment establishmentToEdit =
-            this.applicationContext.establishmentManagementSystem().establishmentIdentifiedBy(id);
+        this.applicationContext.establishmentManagementSystem().establishmentIdentifiedBy(id);
     model.put("user", this.applicationContext.loggedUser(context));
     model.put("title", pageTitle);
     model.put("action", actionString);
     model.put("registered_object", establishmentToEdit);
     model.put("buttonActionLabel", "Editar");
     model.put("types",
-            this.applicationContext.establishmentTypeManagementSystem().establishmentTypes());
+        this.applicationContext.establishmentTypeManagementSystem().establishmentTypes());
     model.put("locations",
-            this.applicationContext.locationManagementSystem().objectList(Location.class.getName()));
+        this.applicationContext.locationManagementSystem().objectList(Location.class.getName()));
     model.put("services",
-            this.applicationContext.serviceManagementSystem().services());
+        this.applicationContext.serviceManagementSystem().services());
     context.render(servicePage, model);
   }
 
   public void updateservice(Context context) {
-    Integer id = Integer.valueOf(context.formParam("id").toString());
-    Integer service_id = Integer.valueOf(context.formParam("service").toString());
+    Integer id = Integer.parseInt(context.pathParam("id"));
+    Integer serviceId = Integer.parseInt(context.pathParam("service"));
 
     Establishment establishmentToUpdate =
-            this.applicationContext.establishmentManagementSystem().establishmentIdentifiedBy(id);
-    Service service = this.applicationContext.serviceManagementSystem().serviceIdentifiedBy(service_id);
+        this.applicationContext.establishmentManagementSystem().establishmentIdentifiedBy(id);
+    Service service =
+        this.applicationContext.serviceManagementSystem().serviceIdentifiedBy(serviceId);
     establishmentToUpdate.addNewService(service);
     this.applicationContext
-            .establishmentManagementSystem().updateEstablishmentWith(establishmentToUpdate);
+        .establishmentManagementSystem().updateEstablishmentWith(establishmentToUpdate);
     context.redirect(actionString);
   }
 

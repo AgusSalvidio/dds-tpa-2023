@@ -27,8 +27,8 @@
             {{#if registered_object}}
             {{else}}
                 <div class="col-md-6">
-                    <label for="serviceType">Tipo:</label>
-                    <select class="col-md-6" name="serviceType">
+                    <label for="serviceType" class="col-form-label">Tipo:</label>
+                    <select class="col-md-6 form-control" name="serviceType">
                         <option label="Seleccione ..." value="" disabled selected></option>
                         <option value="elevator">ASCENSOR</option>
                         <option value="escalator">ESCALERA</option>
@@ -37,8 +37,8 @@
                 </div>
             {{/if}}
             <div class="col-md-6">
-                <label for="state">Estado:</label>
-                <select class="col-md-6" name="state">
+                <label for="state" class="col-form-label">Estado:</label>
+                <select class="col-md-6 form-control" name="state">
                     <option label="Seleccione ..." value="" disabled selected></option>
                     {{#each states}}
                         <option value={{this.id}}>{{this.name}}</option>

@@ -45,16 +45,16 @@
                        value="{{registered_object.password}}" {{/if}} class="form-control" name="password"/>
             </div>
             <div class="col-md-6">
-                <label for="notificationMean">Medio de notificación:</label>
-                <select class="col-md-6" name="notificationMean">
+                <label for="notificationMean" class="col-form-label">Medio de notificación:</label>
+                <select class="col-md-6 form-control" name="notificationMean">
                     <option label="Seleccione ..." value="" disabled selected></option>
                     <option value="wpp">WHATSAPP</option>
                     <option value="email">EMAIL</option>
                 </select>
             </div>
             <div class="col-md-6">
-                <label for="authorizationRole">Rol:</label>
-                <select class="col-md-6" name="authorizationRole">
+                <label for="authorizationRole" class="col-form-label">Rol:</label>
+                <select class="col-md-6 form-control" name="authorizationRole">
                     <option label="Seleccione ..." value="" disabled selected></option>
                     {{#each authorizationRoles}}
                         <option value={{this}}>{{this}}</option>

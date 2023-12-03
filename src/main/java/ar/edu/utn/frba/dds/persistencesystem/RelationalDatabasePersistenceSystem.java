@@ -68,15 +68,14 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
   public List<Service> establishmentsServicesNotById(Integer id) {
     try {
       return entityManager().createQuery(
-              "from " + Service.class.getName() + " where id not in " +
-                      "( select services_id from establishment_service " +
-                      "where Establishment_id = " + id.toString() + " )", Service.class)
-              .getResultList();
+              "from " + Service.class.getName() + " where id not in "
+                  + "( select services_id from establishment_service "
+                  + "where Establishment_id = " + id.toString() + " )", Service.class)
+          .getResultList();
     } catch (NoResultException e) {
       return null;
     }
   }
-
 
 
   //--------------------------------------------------------------------------------------------
