@@ -50,6 +50,9 @@ public class CommunityManagementSystem {
   public Community communityNamed(String communityNamed) {
     return this.persistenceSystem.communityNamed(communityNamed);
   }
+  public List<Object> communitiesForUser(User anUser) {
+    return this.persistenceSystem.objectList(Community.class.getName());
+  }
 
   /*
   public void updateCommunityFrom(Community communityToUpdate, Map<String, Object> model) {

@@ -282,6 +282,31 @@ public class Router {
         new MunicipalityViewController(applicationContext)::delete, ADMINISTRADOR);
   }
 
+  +  //--------------------------------------------------------------------------------------------
+  //INCIDENTES
+  //--------------------------------------------------------------------------------------------
+  private static void initializeIncidentEndpointsOn(
+          Javalin app,
+          ApplicationContext applicationContext) {
+
+    app.get("/incidents", new IncidentViewController(applicationContext)::index,
+            ADMINISTRADOR, ENTIDAD, USUARIO);
+    app.get("/incidents/register", new IncidentViewController(applicationContext)::create,
+            ADMINISTRADOR, ENTIDAD, USUARIO);
+    app.post("/incidents",
+            new IncidentViewController(applicationContext)::save, ADMINISTRADOR, ENTIDAD, USUARIO);
+/*
+    app.get("/incidents/{id}/review", new IncidentViewController(applicationContext)::review,
+            ADMINISTRADOR, ENTIDAD, USUARIO);
+    app.post("/incidents/{id}/review", new IncidentViewController(applicationContext)::close,
+            ADMINISTRADOR, ENTIDAD, USUARIO);
+    app.post("/incidents/filter", new IncidentViewController(applicationContext)::filter,
+            ADMINISTRADOR, ENTIDAD, USUARIO);
+    app.get("/incidents/{id}/close", new IncidentViewController(applicationContext)::close,
+            ADMINISTRADOR, ENTIDAD, USUARIO);
+ */
+  }
+
   private static void initializeLocationEndpointsOn(
       Javalin app,
       ApplicationContext applicationContext) {
@@ -317,27 +342,6 @@ public class Router {
 
   //--------------------------------------------------------------------------------------------
   //--------------------------------------------------------------------------------------------
-
-  private static void initializeIncidentEndpointsOn(
-      Javalin app,
-      ApplicationContext applicationContext) {
-
-    app.get("/incidents", new IncidentViewController(applicationContext)::index,
-        ADMINISTRADOR, ENTIDAD, USUARIO);
-    app.get("/incidents/register", new IncidentViewController(applicationContext)::create,
-        ADMINISTRADOR, ENTIDAD, USUARIO);
-    app.post("/incidents",
-        new IncidentViewController(applicationContext)::save, ADMINISTRADOR, ENTIDAD, USUARIO);
-    app.get("/incidents/{id}/review", new IncidentViewController(applicationContext)::review,
-        ADMINISTRADOR, ENTIDAD, USUARIO);
-    app.post("/incidents/{id}/review", new IncidentViewController(applicationContext)::close,
-        ADMINISTRADOR, ENTIDAD, USUARIO);
-    app.post("/incidents/filter", new IncidentViewController(applicationContext)::filter,
-        ADMINISTRADOR, ENTIDAD, USUARIO);
-    app.get("/incidents/{id}/close", new IncidentViewController(applicationContext)::close,
-        ADMINISTRADOR, ENTIDAD, USUARIO);
-
-  }
 
   private static void initializeServiceHolderEndpointsOn(
       Javalin app,
@@ -379,6 +383,8 @@ public class Router {
     initializeEntitiesEndpointsOn(app, applicationContext);
     //Comunidades
     initializeCommunityEndpointsOn(app, applicationContext);
+    //Incidentes
+    initializeIncidentEndpointsOn(app, applicationContext);
     //Rankings
     //initializeRankingEndpointsOn(app, applicationContext);
 
