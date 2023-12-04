@@ -3,77 +3,58 @@
 <head>
     {{{headMeta}}}
 </head>
-
 <body>
 <header>
-    {{{customHomeNavbar}}}
+    {{{customAdministrationNavbar}}}
 </header>
-
 <main>
-
     <section class="titles justify-content-center">
         <h2 class="title">{{title}}</h2>
     </section>
     <section class="container">
-        <form class="row g-3 py-2" method="post"
-            {{#if registered_incident}}
-              action="/incidents/{{registered_incident.id}}/review" {{else}}
-              action="/incidents" {{/if}}
-        >
-            <div class="col-md-6">
-                <label for="services">Seleccionar servicio:</label>
-                <select class="col-md-6" name="services" {{#if registered_incident}}
-                        disabled
-                {{/if}}>
-                    {{#if registered_incident}}
-                        <option value={{registered_incident.incident.service.id}}>{{registered_incident.incident.service.name}}</option>
-                    {{else}}
-                        <option label="Seleccione Servicio..." value="" disabled
-                                selected></option>
-                        {{#each services}}
-                            <option value={{this.id}}>{{this.name}}</option>
-                        {{else}}
-                        {{/each}}
-                    {{/if}}
-                </select>
-            </div>
-            <div class="col-md-6">
-                <label for="communities">Seleccionar comunidad:</label>
-                <select class="col-md-6" name="communities" {{#if registered_incident}}
-                        disabled
-                {{/if}}>
+        <form class="row g-3 py-2" method="post" {{#if registered_object}}
+              action="incidents/{{registered_object.id}}" {{else}} action="{{action}}" {{/if}}>
 
-                    {{#if registered_incident}}
-                        <option value={{registered_incident.community.id}}>{{registered_incident.community.name}}</option>
-                    {{else}}
-                        <option label="Seleccione Comunidad..." value="" disabled
-                                selected></option>
-                        {{#each communities}}
-                            <option value={{this.id}}>{{this.name}}</option>
-                        {{else}}
-                        {{/each}}
-                    {{/if}}
+            <div class="col-md-6">
+                <label for="entities" class="col-form-label">Entidad:</label>
+                <select class="col-md-6 form-control" name="entity">
+                    <option label="Seleccione ..." value="" disabled selected></option>
+                    {{#each entities}}
+                        <option value={{this.id}}>{{this.name.name}}</option>
+                    {{/each}}
                 </select>
             </div>
             <div class="col-md-6">
-                <textarea name="observations"
-                          rows="4" cols="108"
-                    {{#if registered_incident}}
-                          disabled
-                    {{/if}}
-                >{{#if registered_incident}}
-                    {{registered_incident.incident.observations}}
-                {{/if}}</textarea>
+                <label for="establishments" class="col-form-label">Establecimiento:</label>
+                <select class="col-md-6 form-control" name="establishment">
+                    <option label="Seleccione ..." value="" disabled selected></option>
+                    {{#each establishments}}
+                        <option value={{this.id}}>{{this.name}}</option>
+                    {{/each}}
+                </select>
             </div>
-            <div class="d-flex justify-content-center gap-2">
-                <button class="btn btn-custom"><a href="/incidents">Cancelar</a></button>
-                <button type="submit" class="btn btn-custom">{{buttonActionLabel}}</button>
+            <div class="col-md-6">
+                <label for="services" class="col-form-label">Servicio:</label>
+                <select class="col-md-6 form-control" name="service">
+                    <option label="Seleccione ..." value="" disabled selected></option>
+                    {{#each services}}
+                        <option value={{this.id}}>{{this.name}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            <div class="col-md-12">
+                <label for="name" class="col-form-label">Observaciones:</label>
+                <input type="text" {{#if registered_object}}
+                       value="{{registered_object.observations}}" {{/if}} class="form-control" name="observations"/>
+            </div>
+            <div class="d-flex justify-content-center gap-2 col-md-12">
+                <a class="btn btn-secondary" href="incidents"><i class="fa fa-arrow-left" aria-hidden="true"></i>Cancelar</a>
+                <button type="submit" class="btn btn-primary"><i class="fa fab fad fas far fa-save"
+                                                                 aria-hidden="true"></i>Registrar</button>
             </div>
         </form>
     </section>
-
 </main>
-
 <footer>
 </footer>
 {{{scripts}}}

@@ -1,14 +1,19 @@
 package ar.edu.utn.frba.dds.incident;
 
+import ar.edu.utn.frba.dds.entity.*;
 import ar.edu.utn.frba.dds.community.Community;
 import ar.edu.utn.frba.dds.establishment.Establishment;
 import ar.edu.utn.frba.dds.service.Service;
+import ar.edu.utn.frba.dds.service.State;
 import ar.edu.utn.frba.dds.user.User;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
+import javax.persistence.Entity;
 
+import com.fasterxml.jackson.databind.exc.InvalidNullException;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,8 +32,8 @@ public class Incident {
   @OneToOne
   Establishment establishment;
 
-  @Column(name = "establishment_service_id")
-  Integer establishmentServiceId;
+  @OneToOne
+  Service service;
 
   @Column(name = "report_date_time")
   LocalDateTime reportDateTime;
@@ -48,16 +53,24 @@ public class Incident {
   @OneToMany
   List<Community> communities;
 
+  @OneToOne
+  @JoinColumn(name = "service_state_id", referencedColumnName = "id")
+  State state;
+
+  @Column(name = "is_close")
+  Boolean isClosed;
+
   public Incident() {
     this.setCloseDateTime(null);
     this.setTimeIncident(0);
-  }
-
-  public Service service() {
-    return this.establishment.services.get(establishmentServiceId);
+    this.setObservations("");
+    this.communities = new ArrayList<>();
+    this.setState(null);
+    this.setIsClosed(false);
   }
 
   public void closeIncident() {
+    this.setIsClosed(true);
     this.setCloseDateTime(LocalDateTime.now());
     this.setTimeIncident(lifeTime());
   }

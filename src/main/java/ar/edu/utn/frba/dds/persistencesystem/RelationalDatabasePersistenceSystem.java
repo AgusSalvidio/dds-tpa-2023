@@ -317,6 +317,10 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
     }
   }
 
+  public List<Community> communitiesByUser() {
+    return entityManager().createQuery("from " + Community.class.getName()).getResultList();
+  }
+
   //--------------------------------------------------------------------------------------------
   //REVISAR
   //--------------------------------------------------------------------------------------------

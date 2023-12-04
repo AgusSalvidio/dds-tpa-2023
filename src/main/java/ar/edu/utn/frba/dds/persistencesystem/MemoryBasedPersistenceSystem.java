@@ -121,10 +121,13 @@ public class MemoryBasedPersistenceSystem implements PersistenceSystem {
   }
 
   public IncidentPerCommunity incidentPerCommunityIdentifiedBy(Integer anId) {
+    /*
     return this.demo.incidentPerCommunities().stream()
         .filter(incidentPerCommunity -> incidentPerCommunity.getId().equals(anId))
         .findFirst()
         .orElse(null);
+     */
+    return null;
   }
 
 
@@ -236,13 +239,18 @@ public class MemoryBasedPersistenceSystem implements PersistenceSystem {
   public void startManagingIncidentPerCommunity(IncidentPerCommunity anIncidentPerCommunity) {
     Integer generatedId;
     if (!this.demo.incidentPerCommunities().isEmpty()) {
+      /*
       IncidentPerCommunity lastIncident = this.demo.incidentPerCommunities()
           .get(this.demo.incidentPerCommunities().size() - 1);
       generatedId = lastIncident.getId() + 1;
+
+       */
     } else {
       generatedId = 1;
     }
+    /*
     anIncidentPerCommunity.setId(generatedId);
+    */
     this.demo.incidentPerCommunities().add(anIncidentPerCommunity);
   }
 

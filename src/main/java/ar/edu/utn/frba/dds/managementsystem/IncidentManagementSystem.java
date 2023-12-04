@@ -1,13 +1,18 @@
 package ar.edu.utn.frba.dds.managementsystem;
 
 import ar.edu.utn.frba.dds.community.Community;
+import ar.edu.utn.frba.dds.entity.*;
+import ar.edu.utn.frba.dds.establishment.Establishment;
 import ar.edu.utn.frba.dds.eventnotificationsystem.notifiableevent.NotifiableEvent;
 import ar.edu.utn.frba.dds.incident.Incident;
 import ar.edu.utn.frba.dds.incident.IncidentPerCommunity;
 import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
 import ar.edu.utn.frba.dds.service.Service;
 import ar.edu.utn.frba.dds.user.User;
+import net.bytebuddy.asm.Advice;
+
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -56,25 +61,15 @@ public class IncidentManagementSystem {
   }
 
   public void startManagingIncidentFrom(Map model) {
-    String serviceIdStr = (String) model.get("service");
-    Integer serviceId = Integer.parseInt(serviceIdStr);
-
-    Service service = this.persistenceSystem.serviceIdentifiedBy(serviceId);
-    LocalDateTime dateTime = (LocalDateTime) model.get("datetime");
-
-    String observation = (String) model.get("observations");
-    User user = (User) model.get("user");
-
-    String communityIdStr = (String) model.get("community");
-    Integer communityId = Integer.parseInt(communityIdStr);
-
-    Community community = this.persistenceSystem.communityIdentifiedBy(communityId);
-
-    //Incident incident = Incident.composedOf(service, observation, dateTime, user);
     Incident incident = new Incident();
-
+    incident.setEntity(this.persistenceSystem.entityById(Integer.valueOf(model.get("entity").toString())));
+    incident.setEstablishment(this.persistenceSystem.establishmentIdentifiedBy(Integer.valueOf(model.get("establishment").toString())));
+    incident.setService(this.persistenceSystem.serviceIdentifiedBy(Integer.valueOf(model.get("service").toString())));
+    incident.setReportDateTime((LocalDateTime) model.get("reportDateTime"));
+    incident.setUser((User) model.get("user"));
+    incident.setObservations((String) model.get("observations"));
+    incident.setCommunities(this.persistenceSystem.communitiesByUser());
     this.startManaging(incident);
-    this.startManagingIncidentPerCommunity(incident, community);
   }
 
   public void receiveFrom(NotifiableEvent event, Object publisher) {

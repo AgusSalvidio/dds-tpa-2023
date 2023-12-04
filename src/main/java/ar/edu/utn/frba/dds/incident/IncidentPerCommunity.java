@@ -13,38 +13,17 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-//@Entity
-@Table(name = "incident_per_community")
+@Setter
+@Getter
 public class IncidentPerCommunity {
-  @Id
-  @GeneratedValue
-  @Setter
-  @Getter
-  Integer id;
-
-  @Getter
-  @OneToOne
-  @JoinColumn(name = "incident_id", referencedColumnName = "id")
   Incident incident;
 
-  @Getter
-  @OneToOne
-  @JoinColumn(name = "community_id", referencedColumnName = "id")
   Community community;
 
-  @Setter
-  @Getter
-  @OneToOne
-  @JoinColumn(name = "state_id", referencedColumnName = "id")
   State state;
 
-  @Getter
-  @Column(name = "dateTime")
   LocalDateTime dateTime;
 
-  @Setter
-  @Getter
-  @Column(name = "duration")
   Double duration;
 
   public static IncidentPerCommunity composedOf(Incident incident, Community community) {
