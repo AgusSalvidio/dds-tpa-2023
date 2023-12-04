@@ -4,7 +4,6 @@ import ar.edu.utn.frba.dds.entity.*;
 import ar.edu.utn.frba.dds.community.Community;
 import ar.edu.utn.frba.dds.establishment.Establishment;
 import ar.edu.utn.frba.dds.service.Service;
-import ar.edu.utn.frba.dds.service.State;
 import ar.edu.utn.frba.dds.user.User;
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -53,10 +52,6 @@ public class Incident {
   @ManyToMany
   List<Community> communities;
 
-  @OneToOne
-  @JoinColumn(name = "service_state_id", referencedColumnName = "id")
-  State state;
-
   @Column(name = "is_close")
   Boolean isClosed;
 
@@ -65,7 +60,6 @@ public class Incident {
     this.setTimeIncident(0);
     this.setObservations("");
     this.communities = new ArrayList<>();
-    this.setState(null);
     this.setIsClosed(false);
   }
 
@@ -79,16 +73,6 @@ public class Incident {
     Duration durationTime = Duration.between(this.closeDateTime, this.reportDateTime);
     Long hour = Math.abs(durationTime.toHours());
     return hour.intValue();
-  }
-
-  public boolean reported24HoursAgo() {
-    LocalDateTime now = LocalDateTime.now();
-
-    //Duration durationOfIncident = Duration.between(now, this.dateTime);
-
-    // return Math.abs(durationOfIncident.toHours()) >= 24;
-
-    return false;
   }
 
 }

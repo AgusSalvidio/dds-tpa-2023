@@ -361,3 +361,26 @@ body.auth-fluid-pages[data-sidenav-size=condensed] {
     margin: 0 auto 20px auto;
     max-width: 700px;
 }
+
+body.home-bg .account-pages {
+    align-items: center;
+    display: flex;
+    min-height: 100vh;
+}
+
+.home-bg.enlarged,
+.home-fluid-pages.enlarged,
+body.home-fluid-pages[data-sidenav-size=condensed] {
+    min-height: 100px;
+}
+
+.home-fluid {
+    position: relative;
+    display: small;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: row;
+    align-items: stretch;
+    background: url("bg-home.png") center;
+    background-size: cover;
+}

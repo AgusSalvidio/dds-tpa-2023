@@ -10,12 +10,12 @@ public class IncidentTimeCalculator {
     List<Incident> incidentsWithMoreThan24Hours = new ArrayList<>();
 
     for (Incident incident : incidents) {
-      if (incident.reported24HoursAgo()) {
-        incidentsWithMoreThan24Hours.add(incident);
-      }
+      //if (incident.reported24HoursAgo()) { incidentsWithMoreThan24Hours.add(incident);
+      //}
     }
 
-    return incidentsWithMoreThan24Hours;
+    //return incidentsWithMoreThan24Hours;
+    return null;
   }
 
   public Integer averageClosingTimeOf(List<Incident> incidents) {

@@ -36,15 +36,21 @@
                                 <td>{{this.user.username}}</td>
                                 <td>{{this.service.name}}</td>
                                 <td>{{this.observations}}</td>
-                                <td>{{this.state.name}}</td>
+                                <td>
+                                {{#if this.isClosed}}
+                                    CERRADO
+                                {{else}}
+                                    ABIERTO
+                                {{/if}}
+                                </td>
                                 <td>{{this.reportDateTime}}</td>
                                 <td class="px-4">
-                                    {{#if (isOpen this.state.name)}}
-                                        <a href="/incidents/{{this.id}}/review" class="btn-sm "><i
-                                                class="fa-solid fa-magnifying-glass-location"></i></a>
-                                        <a href="/incidents/{{this.id}}/close" class="btn-sm "><i class="fa-solid fa-lock"
-                                                                                                  style="color:red"></i></a>
-                                    {{/if}}
+                                    <a href="/incidents/{{this.id}}/review" class="btn-sm ">
+                                        <i class="fa-solid fa-magnifying-glass-location"></i>
+                                    </a>
+                                    <a href="/incidents/{{this.id}}/close" class="btn-sm ">
+                                        <i class="fa-solid fa-lock" style="color:red"></i>
+                                    </a>
                                 </td>
                             </tr>
                         {{else}}
