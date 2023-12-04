@@ -23,7 +23,7 @@ import lombok.Setter;
 @Setter
 public class Incident {
   @Id
-  @GeneratedValue
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   Integer id;
 
   @OneToOne
@@ -50,7 +50,7 @@ public class Incident {
   @OneToOne
   User user;
 
-  @OneToMany
+  @ManyToMany
   List<Community> communities;
 
   @OneToOne

@@ -25,6 +25,7 @@ public class IncidentViewController {
   }
 
   public void index(Context context) throws Exception {
+    pageTitle = "Consulta de Incidentes";
     Map<String, Object> model = new HashMap<>();
     model.put("user", this.applicationContext.loggedUser(context));
     model.put("title", pageTitle);
@@ -63,7 +64,7 @@ public class IncidentViewController {
     model.put("user", this.applicationContext.loggedUser(context));
     this.applicationContext.incidentManagementSystem().startManagingIncidentFrom(model);
     context.status(HttpStatus.CREATED);
-    context.redirect("/incidents");
+    context.redirect("/");
   }
 
   public void close(Context context) throws Exception {
