@@ -1,16 +1,11 @@
 package ar.edu.utn.frba.dds.managementsystem;
 
-import ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole;
 import ar.edu.utn.frba.dds.community.Community;
 import ar.edu.utn.frba.dds.community.MemberRole;
-import ar.edu.utn.frba.dds.entity.EntityName;
-import ar.edu.utn.frba.dds.eventnotificationsystem.notifiableevent.NotifiableEvent;
 import ar.edu.utn.frba.dds.persistencesystem.RelationalDatabasePersistenceSystem;
-import ar.edu.utn.frba.dds.service.Service;
 import ar.edu.utn.frba.dds.user.User;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class CommunityManagementSystem {
   RelationalDatabasePersistenceSystem persistenceSystem;
@@ -50,6 +45,7 @@ public class CommunityManagementSystem {
   public Community communityNamed(String communityNamed) {
     return this.persistenceSystem.communityNamed(communityNamed);
   }
+
   public List<Object> communitiesForUser(User anUser) {
     return this.persistenceSystem.objectList(Community.class.getName());
   }

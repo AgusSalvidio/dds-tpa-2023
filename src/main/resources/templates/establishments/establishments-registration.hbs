@@ -40,38 +40,38 @@
                 </select>
             </div>
             {{#if registered_object}}
-            <div class="col-md-12">
-            </div>
-            <div class="col-md-12">
-                <div class="px-1">
-                    <div class="row">
-                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                            <table class="table table-striped">
-                                <thead>
-                                <tr>
-                                    <th class="col-6">Nombre</th>
-                                    <th class="col-6">Descripción</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {{#each services}}
+                <div class="col-md-12">
+                </div>
+                <div class="col-md-12">
+                    <div class="px-1">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                <table class="table table-striped">
+                                    <thead>
                                     <tr>
-                                        <td>{{this.name}}</td>
-                                        <td>{{this.description}}</td>
+                                        <th class="col-6">Nombre</th>
+                                        <th class="col-6">Descripción</th>
                                     </tr>
-                                {{else}}
-                                    <tr>
-                                        <td colspan="6">No hay Servicios Asociados</td>
-                                    </tr>
-                                {{/each}}
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                    {{#each services}}
+                                        <tr>
+                                            <td>{{this.name}}</td>
+                                            <td>{{this.description}}</td>
+                                        </tr>
+                                    {{else}}
+                                        <tr>
+                                            <td colspan="6">No hay Servicios Asociados</td>
+                                        </tr>
+                                    {{/each}}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-12">
-            </div>
+                <div class="col-md-12">
+                </div>
             {{/if}}
             <div class="d-flex justify-content-center gap-2 col-md-12">
                 <a class="btn btn-secondary" href="{{action}}">
@@ -82,10 +82,10 @@
                     </i>{{buttonActionLabel}}
                 </button>
                 {{#if registered_object}}
-                <a class="btn btn-primary" href="{{action}}/{{registered_object.id}}/add-service">
-                    <i class="fa-regular fa-file"></i>
-                    Agregar Servicio
-                </a>
+                    <a class="btn btn-primary" href="{{action}}/{{registered_object.id}}/add-service">
+                        <i class="fa-regular fa-file"></i>
+                        Agregar Servicio
+                    </a>
                 {{/if}}
             </div>
         </form>

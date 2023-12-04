@@ -9,7 +9,6 @@ import ar.edu.utn.frba.dds.services.incidentimpactrankingcalculator.entities.Bod
 import ar.edu.utn.frba.dds.services.incidentimpactrankingcalculator.entities.EntityData;
 import ar.edu.utn.frba.dds.services.incidentimpactrankingcalculator.entities.Result;
 import io.javalin.http.Context;
-import io.javalin.http.HttpStatus;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -33,7 +32,8 @@ public class RankingViewController {
 
     List<Incident> incidents = this.applicationContext.incidentManagementSystem().incidents();
 
-    //Crear un mapa donde la clave es el nombre de la entidad y el valor es la sumatoria del timeIncident
+    //Crear un mapa donde la clave es el nombre de la entidad
+    // y el valor es la sumatoria del timeIncident
     Map<String, Double> sumatoriaPorEntidad = incidents.stream()
         .collect(Collectors.groupingBy(incident -> incident.getEntity().getName().getName(),
             Collectors.summingDouble(Incident::getTimeIncident)));
@@ -122,7 +122,8 @@ public class RankingViewController {
     context.render("rankings/rankings.hbs", model);
     /*
     for(Result result:results) {
-      System.out.println("name: " + result.getName() + " -> impactLevel: " + result.getImpactLevel());
+      System.out.println("name: " + result.getName() +
+      " -> impactLevel: " + result.getImpactLevel());
     }
     */
   }

@@ -120,7 +120,7 @@ public class Router {
     app.post("/establishments",
         new EstablishmentViewController(applicationContext)::save, ADMINISTRADOR, ENTIDAD);
     app.get("/establishments/{id}/delete",
-            new EstablishmentViewController(applicationContext)::delete, ADMINISTRADOR);
+        new EstablishmentViewController(applicationContext)::delete, ADMINISTRADOR);
     app.get("/establishments/{id}/add-service",
         new EstablishmentViewController(applicationContext)::addService, ADMINISTRADOR);
     app.post("/establishments/{id}/save-service",
@@ -286,16 +286,16 @@ public class Router {
   //INCIDENTES
   //--------------------------------------------------------------------------------------------
   private static void initializeIncidentEndpointsOn(
-          Javalin app,
-          ApplicationContext applicationContext) {
+      Javalin app,
+      ApplicationContext applicationContext) {
 
     app.get("/incidents", new IncidentViewController(applicationContext)::index,
-            ADMINISTRADOR, ENTIDAD, USUARIO);
+        ADMINISTRADOR, ENTIDAD, USUARIO);
     app.get("/incidents/register", new IncidentViewController(applicationContext)::create,
-            ADMINISTRADOR, ENTIDAD, USUARIO);
+        ADMINISTRADOR, ENTIDAD, USUARIO);
     app.post("/incidents",
-            new IncidentViewController(applicationContext)::save, ADMINISTRADOR, ENTIDAD, USUARIO);
-/*
+        new IncidentViewController(applicationContext)::save, ADMINISTRADOR, ENTIDAD, USUARIO);
+    /*
     app.get("/incidents/{id}/review", new IncidentViewController(applicationContext)::review,
             ADMINISTRADOR, ENTIDAD, USUARIO);
     app.post("/incidents/{id}/review", new IncidentViewController(applicationContext)::close,
@@ -304,7 +304,7 @@ public class Router {
             ADMINISTRADOR, ENTIDAD, USUARIO);
     app.get("/incidents/{id}/close", new IncidentViewController(applicationContext)::close,
             ADMINISTRADOR, ENTIDAD, USUARIO);
- */
+     */
   }
 
   private static void initializeLocationEndpointsOn(

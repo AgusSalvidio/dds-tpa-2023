@@ -1,7 +1,6 @@
 package ar.edu.utn.frba.dds.controller.view;
 
 import ar.edu.utn.frba.dds.applicationcontext.ApplicationContext;
-import ar.edu.utn.frba.dds.authorizationrole.AuthorizationRole;
 import ar.edu.utn.frba.dds.community.Community;
 import ar.edu.utn.frba.dds.community.MemberRole;
 import io.javalin.http.Context;
@@ -62,7 +61,8 @@ public class CommunityViewController extends Controller {
     Community communityToUpdate =
         this.applicationContext.communityManagementSystem().communityIdentifiedBy(id);
     assignParameters(context, model);
-    this.applicationContext.communityManagementSystem().updateCommunityFrom(communityToUpdate, model);
+    this.applicationContext.communityManagementSystem()
+        .updateCommunityFrom(communityToUpdate, model);
     context.redirect(actionString);
   }
 
@@ -105,7 +105,8 @@ public class CommunityViewController extends Controller {
         this.applicationContext.communityManagementSystem().communityIdentifiedBy(id);
     model.put("user", context.formParam("user"));
     model.put("role", context.formParam("role"));
-    this.applicationContext.communityManagementSystem().updateCommunityMemberFrom(communityToUpdate, model);
+    this.applicationContext.communityManagementSystem()
+        .updateCommunityMemberFrom(communityToUpdate, model);
     context.redirect(actionString + "/" + id + "/edit");
   }
 

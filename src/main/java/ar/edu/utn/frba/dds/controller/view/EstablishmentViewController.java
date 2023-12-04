@@ -1,17 +1,12 @@
 package ar.edu.utn.frba.dds.controller.view;
 
 import ar.edu.utn.frba.dds.applicationcontext.ApplicationContext;
-import ar.edu.utn.frba.dds.community.Community;
-import ar.edu.utn.frba.dds.community.MemberRole;
 import ar.edu.utn.frba.dds.establishment.Establishment;
 import ar.edu.utn.frba.dds.location.Location;
-import ar.edu.utn.frba.dds.service.Service;
 import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class EstablishmentViewController extends Controller {
 
@@ -117,7 +112,8 @@ public class EstablishmentViewController extends Controller {
     Establishment establishmentToEdit =
         this.applicationContext.establishmentManagementSystem().establishmentIdentifiedBy(id);
     model.put("service", context.formParam("service"));
-    this.applicationContext.establishmentManagementSystem().updateEstablishmentServiceFrom(establishmentToEdit, model);
+    this.applicationContext.establishmentManagementSystem()
+        .updateEstablishmentServiceFrom(establishmentToEdit, model);
     context.redirect(actionString + "/" + id + "/edit");
   }
 

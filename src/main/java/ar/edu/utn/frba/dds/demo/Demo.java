@@ -52,19 +52,58 @@ public class Demo {
   private List<IncidentPerCommunity> incidentPerCommunities = new ArrayList<>();
   private List<State> states = new ArrayList<>();
   private List<WeeklyRanking> rankings = new ArrayList<>();
-  public List<User> users() {return this.users;}
-  public List<UserDetail> userDetails() {return this.userDetails;}
-  public List<Service> services() {return this.services;}
-  public List<ServiceHolder> serviceHolders() {return this.serviceHolders;}
-  public List<Incident> incidents() {return this.incidents;}
-  public List<Location> locations() {return this.locations;}
-  public List<Establishment> establishments() {return this.establishments;}
-  public List<Entity> entities() {return this.entities;}
-  public List<Member> members() {return this.members;}
-  public List<Community> communities() {return this.communities;}
-  public List<IncidentPerCommunity> incidentPerCommunities() {return this.incidentPerCommunities;}
-  public List<State> states() {return this.states;}
-  public List<WeeklyRanking> rankings() {return this.rankings;}
+
+  public List<User> users() {
+    return this.users;
+  }
+
+  public List<UserDetail> userDetails() {
+    return this.userDetails;
+  }
+
+  public List<Service> services() {
+    return this.services;
+  }
+
+  public List<ServiceHolder> serviceHolders() {
+    return this.serviceHolders;
+  }
+
+  public List<Incident> incidents() {
+    return this.incidents;
+  }
+
+  public List<Location> locations() {
+    return this.locations;
+  }
+
+  public List<Establishment> establishments() {
+    return this.establishments;
+  }
+
+  public List<Entity> entities() {
+    return this.entities;
+  }
+
+  public List<Member> members() {
+    return this.members;
+  }
+
+  public List<Community> communities() {
+    return this.communities;
+  }
+
+  public List<IncidentPerCommunity> incidentPerCommunities() {
+    return this.incidentPerCommunities;
+  }
+
+  public List<State> states() {
+    return this.states;
+  }
+
+  public List<WeeklyRanking> rankings() {
+    return this.rankings;
+  }
 
   public Demo() throws Exception {
   }
@@ -116,6 +155,7 @@ public class Demo {
   public UserDetail userDetailJ() throws Exception {
     return UserDetail.composedOf("Carmen", "Moreno", "cm@gmail.com", "0123456789", this.wpp());
   }
+
   public UserDetail userDetailK() throws Exception {
     return UserDetail.composedOf("Maria", "Fernandez", "mf@gmail.com", "0123456789", this.mail());
   }
@@ -179,15 +219,16 @@ public class Demo {
   public User userUserL() throws Exception {
     return User.composedOf("userl", "userl", this.userDetailD(), AuthorizationRole.USUARIO);
   }
+
   public Community communityA() {
     return Community.composedOf("Comunidad 1", "Comunidad 1");
   }
 
-  public Community communityB(){
+  public Community communityB() {
     return Community.composedOf("Comunidad 2", "Comunidad 2");
   }
 
-  public Community communityC(){
+  public Community communityC() {
     return Community.composedOf("Comunidad 3", "Comunidad 3");
   }
 
@@ -431,7 +472,8 @@ public class Demo {
     incident.setIsClosed(true);
     incident.setReportDateTime(start);
     incident.setCloseDateTime(finish);
-    incident.setTimeIncident((double) Math.abs(Duration.between(incident.getCloseDateTime(), incident.getReportDateTime()).toMinutes()));
+    incident.setTimeIncident((double) Math.abs(Duration
+        .between(incident.getCloseDateTime(), incident.getReportDateTime()).toMinutes()));
     return incident;
   }
 

@@ -6,7 +6,6 @@ import ar.edu.utn.frba.dds.demo.Demo;
 import ar.edu.utn.frba.dds.entity.Entity;
 import ar.edu.utn.frba.dds.entity.EntityName;
 import ar.edu.utn.frba.dds.entity.EntityType;
-import ar.edu.utn.frba.dds.entity.TransportLine;
 import ar.edu.utn.frba.dds.establishment.Establishment;
 import ar.edu.utn.frba.dds.establishment.EstablishmentType;
 import ar.edu.utn.frba.dds.incident.Incident;
@@ -392,7 +391,6 @@ public class RelationalDatabasePersistenceSystem implements WithSimplePersistenc
   //Agregados por FDM, faltaban todos
   //Hay que desarrollarlos pq no hay nada-!!!!!!!!!!!!!!!!!
   //Menos Mal que estoy escuchndo IRON MAIDEN
-
 
 
   public IncidentPerCommunity incidentPerCommunityIdentifiedBy(Integer anId) {

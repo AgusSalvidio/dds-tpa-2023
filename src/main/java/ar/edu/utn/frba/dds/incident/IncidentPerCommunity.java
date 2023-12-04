@@ -4,12 +4,6 @@ import ar.edu.utn.frba.dds.community.Community;
 import ar.edu.utn.frba.dds.service.State;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 

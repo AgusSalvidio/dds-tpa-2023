@@ -131,7 +131,7 @@ public class ServiceManagementSystem {
 
     this.updateServiceWith(serviceToUpdate);
   }
-  
+
   public void startManagingServiceFrom(Map model) {
     String name = model.get("name").toString();
     String description = model.get("description").toString();

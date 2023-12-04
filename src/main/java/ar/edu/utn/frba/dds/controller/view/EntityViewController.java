@@ -2,9 +2,6 @@ package ar.edu.utn.frba.dds.controller.view;
 
 import ar.edu.utn.frba.dds.applicationcontext.ApplicationContext;
 import ar.edu.utn.frba.dds.entity.Entity;
-import ar.edu.utn.frba.dds.establishment.Establishment;
-import ar.edu.utn.frba.dds.location.Location;
-import ar.edu.utn.frba.dds.service.Service;
 import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
 import java.util.HashMap;
@@ -122,7 +119,8 @@ public class EntityViewController extends Controller {
     Entity entityToEdit =
         this.applicationContext.entityManagementSystem().entityIdentifiedBy(id);
     model.put("establishment", context.formParam("establishment"));
-    this.applicationContext.entityManagementSystem().updateEntityEstablishmentFrom(entityToEdit, model);
+    this.applicationContext.entityManagementSystem()
+        .updateEntityEstablishmentFrom(entityToEdit, model);
     context.redirect(actionString + "/" + id + "/edit");
   }
 

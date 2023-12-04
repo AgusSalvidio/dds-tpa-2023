@@ -2,7 +2,6 @@ package ar.edu.utn.frba.dds.controller.view;
 
 import ar.edu.utn.frba.dds.applicationcontext.ApplicationContext;
 import ar.edu.utn.frba.dds.incident.IncidentPerCommunity;
-import ar.edu.utn.frba.dds.location.Province;
 import ar.edu.utn.frba.dds.user.User;
 import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
@@ -31,7 +30,7 @@ public class IncidentViewController {
     model.put("title", pageTitle);
     model.put("action", actionString);
     model.put("object-list",
-            this.applicationContext.incidentManagementSystem().incidents());
+        this.applicationContext.incidentManagementSystem().incidents());
     context.render(listPage, model);
   }
 
@@ -43,13 +42,13 @@ public class IncidentViewController {
     model.put("registered_object", null);
     model.put("buttonActionLabel", "Registrar");
     model.put("entities",
-            this.applicationContext.entityManagementSystem().entities());
+        this.applicationContext.entityManagementSystem().entities());
     model.put("establishments",
-            this.applicationContext.establishmentManagementSystem().establishments());
+        this.applicationContext.establishmentManagementSystem().establishments());
     model.put("services",
-            this.applicationContext.serviceManagementSystem().services());
+        this.applicationContext.serviceManagementSystem().services());
     model.put("communities",
-            this.applicationContext.communityManagementSystem().communities());
+        this.applicationContext.communityManagementSystem().communities());
     context.render(unitPage, model);
     context.render("incidents/incident-registration.hbs", model);
   }
