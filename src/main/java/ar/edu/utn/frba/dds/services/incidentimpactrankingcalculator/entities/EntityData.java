@@ -29,4 +29,7 @@ public class EntityData {
   public List<Double> getIncidentsDuration() {
     return this.incidentsDuration.stream().collect(Collectors.toList());
   }
+
+  public void setIncidentsDuration(ArrayList<Object> objects) {
+  }
 }

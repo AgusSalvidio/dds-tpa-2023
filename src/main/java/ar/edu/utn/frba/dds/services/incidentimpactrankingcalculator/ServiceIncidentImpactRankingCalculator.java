@@ -2,7 +2,7 @@ package ar.edu.utn.frba.dds.services.incidentimpactrankingcalculator;
 
 import ar.edu.utn.frba.dds.property.ReadProperties;
 import ar.edu.utn.frba.dds.services.incidentimpactrankingcalculator.entities.BodyData;
-import ar.edu.utn.frba.dds.services.incidentimpactrankingcalculator.entities.ImpactResult;
+import ar.edu.utn.frba.dds.services.incidentimpactrankingcalculator.entities.Result;
 import java.io.IOException;
 import java.util.List;
 import retrofit2.Call;
@@ -31,11 +31,11 @@ public class ServiceIncidentImpactRankingCalculator {
     return instance;
   }
 
-  public List<ImpactResult> calculateImpactRanking(BodyData bodyData) throws IOException {
+  public List<Result> calculateImpactRanking(BodyData bodyData) throws IOException {
     IncidentImpactRankingCalculatorService apiService =
         this.retrofit.create(IncidentImpactRankingCalculatorService.class);
-    Call<List<ImpactResult>> call = apiService.calculateImpactRanking(bodyData);
-    Response<List<ImpactResult>> response = call.execute();
+    Call<List<Result>> call = apiService.calculateImpactRanking(bodyData);
+    Response<List<Result>> response = call.execute();
     return response.body();
   }
 }

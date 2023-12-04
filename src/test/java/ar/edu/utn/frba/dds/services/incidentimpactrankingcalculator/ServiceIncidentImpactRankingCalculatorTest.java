@@ -6,7 +6,7 @@ import static org.mockito.Mockito.when;
 
 import ar.edu.utn.frba.dds.addons.ownapiservicecreationaddon.BodyDataCreationAddOn;
 import ar.edu.utn.frba.dds.services.incidentimpactrankingcalculator.entities.BodyData;
-import ar.edu.utn.frba.dds.services.incidentimpactrankingcalculator.entities.ImpactResult;
+import ar.edu.utn.frba.dds.services.incidentimpactrankingcalculator.entities.Result;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -29,9 +29,9 @@ public class ServiceIncidentImpactRankingCalculatorTest {
     ServiceIncidentImpactRankingCalculator apiService = ServiceIncidentImpactRankingCalculator.instance();
     BodyData bodyData = new BodyDataCreationAddOn().bodyData();
 
-    List<ImpactResult> results = apiService.calculateImpactRanking(bodyData);
+    List<Result> results = apiService.calculateImpactRanking(bodyData);
 
-    for(ImpactResult result:results) {
+    for(Result result:results) {
       System.out.println("name: " + result.getName() + " -> impactLevel: " + result.getImpactLevel());
     }
   }
@@ -46,12 +46,12 @@ public class ServiceIncidentImpactRankingCalculatorTest {
         .thenReturn(
             this.gson().fromJson(
                 new FileReader("src/main/resources/calculateImpactRankingTest.json"),
-                new TypeToken<List<ImpactResult>>() {
+                new TypeToken<List<Result>>() {
                 }.getType()
             )
         );
 
-    List<ImpactResult> results = mockApi.calculateImpactRanking(bodyData);
+    List<Result> results = mockApi.calculateImpactRanking(bodyData);
 
     Assertions.assertEquals(results.size(), 3);
     Assertions.assertEquals(results.get(0).getName(), "entityTwo");

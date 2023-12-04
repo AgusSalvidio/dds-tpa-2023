@@ -52,8 +52,8 @@ public class EntityManagementSystem {
     this.persistenceSystem().updateManaging(anEntity);
   }
 
-  public List<Object> entities() {
-    return this.persistenceSystem.objectList(Entity.class.getName());
+  public List<Entity> entities() {
+    return this.persistenceSystem.entities();
   }
 
   public Entity entityIdentifiedBy(Integer entityId) {

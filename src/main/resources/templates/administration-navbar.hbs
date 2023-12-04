@@ -7,7 +7,8 @@
                         <a class="nav-link" href="/">Home</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
                             Incidentes
                         </a>
                         <ul class="dropdown-menu">
@@ -22,15 +23,29 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/rankings">Rankings</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                           aria-expanded="false">
-                            Maestros
-                        </a>
-                        {{#if (hasAdminAccess user.authorizationRole)}}
+                    {{#if (hasAdminAccess user.authorizationRole)}}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                Rankings
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/rankings/average-closing-time">Tiempo de Cierre</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/rankings/greater-amount">Cantidad de Incidentes</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/rankings/impact-degree/cfn">Grado de Impacto</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                Maestros
+                            </a>
                             <ul class="dropdown-menu">
                                 <li class="nav-item">
                                     <a class="nav-link" href="/entities">Entidades</a>
@@ -48,14 +63,12 @@
                                     <a class="nav-link" href="/users">Miembros</a>
                                 </li>
                             </ul>
-                        {{/if}}
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                           aria-expanded="false">
-                            Parametria
-                        </a>
-                        {{#if (hasAdminAccess user.authorizationRole)}}
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                Parametria
+                            </a>
                             <ul class="dropdown-menu">
                                 <li class="nav-item">
                                     <a class="nav-link" href="/establishment-type">Tipo de Establecimientos</a>
@@ -79,21 +92,21 @@
                                     <a class="nav-link" href="/location">Direcciones</a>
                                 </li>
                             </ul>
-                        {{/if}}
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                           aria-expanded="false">
-                            Seguridad
-                        </a>
-                        {{#if (hasAdminAccess user.authorizationRole)}}
-                            <ul class="dropdown-menu">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/users">Usuarios</a>
-                                </li>
-                            </ul>
-                        {{/if}}
-                    </li>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                Seguridad
+                            </a>
+                            {{#if (hasAdminAccess user.authorizationRole)}}
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/users">Usuarios</a>
+                                    </li>
+                                </ul>
+                            {{/if}}
+                        </li>
+                    {{/if}}
                 </ul>
                 <ul class="navbar-nav justify-content-end flex-grow-1 pe-2">
                     <li class="nav-item dropdown">

@@ -3,25 +3,43 @@
 <head>
     {{{headMeta}}}
 </head>
-
 <body>
 <header>
-    {{{customHomeNavbar}}}
+    {{{customAdministrationNavbar}}}
 </header>
-
 <main>
     <div class="d-flex justify-content-end p-2">
         <legend class="">{{title}}</legend>
     </div>
-    <section class="px-2">
-        <div class="d-flex justify-content-center gap-2">
-            <button class="btn btn-custom"><a href="/rankings">Tiempo de Cierre</a></button>
-            <button class="btn btn-custom"><a href="/rankings">Cantidad de Incidentes</a></button>
-            <button class="btn btn-custom"><a href="/rankings/impact-degree/cfn">Grado de Impacto</a></button>
+    <section>
+        <div class="px-1">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Resultado</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{#each results}}
+                            <tr>
+                                <td>{{this.name}}</td>
+                                <td>{{this.impactLevel}}</td>
+                            </tr>
+                        {{else}}
+                            <tr>
+                                <td colspan="6">No hay Registros en el Sistema</td>
+                            </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </section>
 </main>
-
 <footer>
 </footer>
 {{{scripts}}}

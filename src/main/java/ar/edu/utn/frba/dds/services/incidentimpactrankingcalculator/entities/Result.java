@@ -5,7 +5,12 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class ImpactResult {
+public class Result {
   public String name;
   public Double impactLevel;
+
+  public Result(String name, Double impactLevel) {
+    this.name = name;
+    this.impactLevel = impactLevel;
+  }
 }

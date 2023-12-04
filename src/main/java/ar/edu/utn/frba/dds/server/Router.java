@@ -332,8 +332,10 @@ public class Router {
       Javalin app,
       ApplicationContext applicationContext) {
 
-    app.get("/rankings",
-        new RankingViewController(applicationContext)::index, ADMINISTRADOR, ENTIDAD);
+    app.get("/rankings/average-closing-time",
+        new RankingViewController(applicationContext)::averageClosingTime, ADMINISTRADOR, ENTIDAD);
+    app.get("/rankings/greater-amount",
+        new RankingViewController(applicationContext)::greaterAmount, ADMINISTRADOR, ENTIDAD);
     app.get("/rankings/impact-degree/cfn",
         new RankingViewController(applicationContext)::cfn, ADMINISTRADOR, ENTIDAD);
     app.post("/rankings/impact-degree",
@@ -386,7 +388,7 @@ public class Router {
     //Incidentes
     initializeIncidentEndpointsOn(app, applicationContext);
     //Rankings
-    //initializeRankingEndpointsOn(app, applicationContext);
+    initializeRankingEndpointsOn(app, applicationContext);
 
     /*
    initializeServiceEndpointsOn(app, applicationContext);
