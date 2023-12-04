@@ -1,6 +1,5 @@
 package ar.edu.utn.frba.dds.incident;
 
-import ar.edu.utn.frba.dds.entity.*;
 import ar.edu.utn.frba.dds.community.Community;
 import ar.edu.utn.frba.dds.establishment.Establishment;
 import ar.edu.utn.frba.dds.service.Service;
@@ -9,10 +8,15 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.*;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-
-import com.fasterxml.jackson.databind.exc.InvalidNullException;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,12 +30,15 @@ public class Incident {
   Integer id;
 
   @OneToOne
+  @JoinColumn(name = "entity_id", referencedColumnName = "id")
   ar.edu.utn.frba.dds.entity.Entity entity;
 
   @OneToOne
+  @JoinColumn(name = "establishment_id", referencedColumnName = "id")
   Establishment establishment;
 
   @OneToOne
+  @JoinColumn(name = "service_id", referencedColumnName = "id")
   Service service;
 
   @Column(name = "report_date_time")
@@ -41,12 +48,13 @@ public class Incident {
   LocalDateTime closeDateTime;
 
   @Column(name = "time_incident")
-  Integer timeIncident;
+  Double timeIncident;
 
   @Column(name = "observation")
   String observations;
 
   @OneToOne
+  @JoinColumn(name = "user_id", referencedColumnName = "id")
   User user;
 
   @ManyToMany
@@ -57,7 +65,7 @@ public class Incident {
 
   public Incident() {
     this.setCloseDateTime(null);
-    this.setTimeIncident(0);
+    this.setTimeIncident(0.0);
     this.setObservations("");
     this.communities = new ArrayList<>();
     this.setIsClosed(false);
@@ -69,10 +77,14 @@ public class Incident {
     this.setTimeIncident(lifeTime());
   }
 
-  public Integer lifeTime() {
+  public Double lifeTime() {
+    return Double.valueOf(
+        Math.abs(Duration.between(this.closeDateTime, this.reportDateTime).toMinutes()));
+    /*
     Duration durationTime = Duration.between(this.closeDateTime, this.reportDateTime);
     Long hour = Math.abs(durationTime.toHours());
     return hour.intValue();
+    */
   }
 
 }

@@ -419,21 +419,33 @@ public class Demo {
     return organization;
   }
 
-  private LocalDateTime curentDateTime() {
-    return LocalDateTime.of(2023, 12, 1, 8, 0);
-  }
-
-  public Incident incidentA(Entity entity, Establishment establishment, Service service, User user, List<Community> communities) {
+  public Incident incidentClosed(
+      Entity entity, Establishment establishment, Service service, User user,
+      List<Community> communities, LocalDateTime start, LocalDateTime finish) {
     Incident incident = new Incident();
     incident.setEntity(entity);
     incident.setEstablishment(establishment);
     incident.setService(service);
     incident.setUser(user);
     incident.setCommunities(communities);
-    incident.setReportDateTime(LocalDateTime.of(2023, 12, 1, 8, 0));
-    incident.setCloseDateTime(LocalDateTime.of(2023, 12, 1, 10, 0));
+    incident.setIsClosed(true);
+    incident.setReportDateTime(start);
+    incident.setCloseDateTime(finish);
+    incident.setTimeIncident((double) Math.abs(Duration.between(incident.getCloseDateTime(), incident.getReportDateTime()).toMinutes()));
+    return incident;
+  }
 
-    incident.setTimeIncident(Integer.valueOf((int) Math.abs(Duration.between(incident.getCloseDateTime(), incident.getReportDateTime()).toHours())));
+  public Incident incidentOpened(
+      Entity entity, Establishment establishment, Service service, User user,
+      List<Community> communities, LocalDateTime start, LocalDateTime finish) {
+    Incident incident = new Incident();
+    incident.setEntity(entity);
+    incident.setEstablishment(establishment);
+    incident.setService(service);
+    incident.setUser(user);
+    incident.setCommunities(communities);
+    incident.setIsClosed(false);
+    incident.setReportDateTime(start);
     return incident;
   }
 
@@ -481,10 +493,13 @@ public class Demo {
     communityB.addMemberComposedOf(userH, MemberRole.AFECTADO);
     communityB.addMemberComposedOf(userI, MemberRole.AFECTADO);
     communityB.addMemberComposedOf(userJ, MemberRole.AFECTADO);
+    communityB.addMemberComposedOf(userA, MemberRole.AFECTADO);
+    communityB.addMemberComposedOf(userL, MemberRole.AFECTADO);
     persistenceSystem.startManaging(communityB);
     Community communityC = this.communityC();
     communityC.addMemberComposedOf(userK, MemberRole.AFECTADO);
     communityC.addMemberComposedOf(userL, MemberRole.AFECTADO);
+    communityC.addMemberComposedOf(userA, MemberRole.AFECTADO);
     persistenceSystem.startManaging(communityC);
     //SERVICES & STATES
     persistenceSystem.startManaging(this.inService());
@@ -512,8 +527,8 @@ public class Demo {
     servicesB.add(escalatorB);
     servicesB.add(toiletB);
     List<Service> servicesC = new ArrayList<>();
-    servicesC.add(elevatorA);
-    servicesC.add(escalatorB);
+    servicesC.add(toiletA);
+    servicesC.add(toiletB);
     //LOCATIONS
     persistenceSystem.startManaging(this.buenosAires());
     Province buenosAires = persistenceSystem.provinceIdentifiedBy(1);
@@ -541,11 +556,11 @@ public class Demo {
     persistenceSystem.startManaging(this.lawSchoolStation(station, locationA, servicesA));
     persistenceSystem.startManaging(this.hospitalStation(station, locationB, toiletB));
     persistenceSystem.startManaging(this.puerreydonStation(station, locationC, servicesB));
-    persistenceSystem.startManaging(this.italySquareStation(station,locationD, elevatorB));
+    persistenceSystem.startManaging(this.italySquareStation(station, locationD, elevatorB));
     persistenceSystem.startManaging(this.headquarterBranch(branch, locationE, servicesC));
-    persistenceSystem.startManaging(this.alsinaBranch(branch, locationF, escalatorA));
+    persistenceSystem.startManaging(this.alsinaBranch(branch, locationF, elevatorA));
     Establishment lawSchoolStation = persistenceSystem.establishmentIdentifiedBy(1);
-    Establishment lasHerasStation = persistenceSystem.establishmentIdentifiedBy(2);
+    Establishment hospitalStation = persistenceSystem.establishmentIdentifiedBy(2);
     Establishment puerreydonStation = persistenceSystem.establishmentIdentifiedBy(3);
     Establishment italySquareStation = persistenceSystem.establishmentIdentifiedBy(4);
     Establishment headquarterBranch = persistenceSystem.establishmentIdentifiedBy(5);
@@ -564,19 +579,19 @@ public class Demo {
     EntityType subway = persistenceSystem.entityTypeIdentifiedBy(1);
     EntityType bank = persistenceSystem.entityTypeIdentifiedBy(2);
     persistenceSystem.startManaging(
-        this.entityA(subwayLineH, subway, lawSchoolStation, lasHerasStation, Direction.FORWARD));
+        this.entityA(subwayLineH, subway, lawSchoolStation, hospitalStation, Direction.FORWARD));
     Entity entityA = persistenceSystem.entityIdentifiedBy(1);
     entityA.addNewEstablishment(lawSchoolStation);
     persistenceSystem.updateManaging(entityA);
-    entityA.addNewEstablishment(lasHerasStation);
+    entityA.addNewEstablishment(hospitalStation);
     persistenceSystem.updateManaging(entityA);
     persistenceSystem.startManaging(
         this.entityB(subwayLineD, subway, italySquareStation, puerreydonStation, Direction.RETURN));
     Entity entityB = persistenceSystem.entityIdentifiedBy(2);
     entityB.addNewEstablishment(italySquareStation);
-    persistenceSystem.updateManaging(entityA);
+    persistenceSystem.updateManaging(entityB);
     entityB.addNewEstablishment(puerreydonStation);
-    persistenceSystem.updateManaging(entityA);
+    persistenceSystem.updateManaging(entityB);
     persistenceSystem.startManaging(this.entityC(nationalBank, bank));
     Entity entityC = persistenceSystem.entityIdentifiedBy(3);
     entityC.addNewEstablishment(headquarterBranch);
@@ -588,9 +603,120 @@ public class Demo {
     entityC.addNewEstablishment(headquarterBranch);
     persistenceSystem.updateManaging(entityD);
     //INCIDENTS
-    List<Community> communities = new ArrayList<>();
-    communities.add(communityA);
-    persistenceSystem.startManaging(this.incidentA(entityA, italySquareStation, elevatorB, userA, communities));
+    List<Community> communitiesA = new ArrayList<>();
+    communitiesA.add(communityA);
+    List<Community> communitiesB = new ArrayList<>();
+    communitiesB.add(communityB);
+    List<Community> communitiesC = new ArrayList<>();
+    communitiesC.add(communityC);
+    List<Community> communitiesABC = new ArrayList<>();
+    communitiesABC.add(communityA);
+    communitiesABC.add(communityB);
+    communitiesABC.add(communityC);
+    List<Community> communitiesBC = new ArrayList<>();
+    communitiesBC.add(communityB);
+    communitiesBC.add(communityC);
+
+    persistenceSystem.startManaging(this.incidentClosed(
+        entityA, lawSchoolStation, elevatorA, userA, communitiesABC,
+        LocalDateTime.of(2023, 12, 1, 8, 0),
+        LocalDateTime.of(2023, 12, 1, 10, 0)));
+
+    persistenceSystem.startManaging(this.incidentClosed(
+        entityA, hospitalStation, toiletB, userB, communitiesA,
+        LocalDateTime.of(2023, 12, 1, 9, 0),
+        LocalDateTime.of(2023, 12, 1, 9, 30)));
+
+    persistenceSystem.startManaging(this.incidentClosed(
+        entityA, lawSchoolStation, escalatorA, userC, communitiesA,
+        LocalDateTime.of(2023, 12, 1, 11, 0),
+        LocalDateTime.of(2023, 12, 3, 12, 10)));
+
+    persistenceSystem.startManaging(this.incidentClosed(
+        entityA, lawSchoolStation, toiletA, userA, communitiesABC,
+        LocalDateTime.of(2023, 12, 3, 8, 0),
+        LocalDateTime.of(2023, 12, 3, 10, 0)));
+
+    persistenceSystem.startManaging(this.incidentOpened(
+        entityA, lawSchoolStation, toiletA, userA, communitiesABC,
+        LocalDateTime.of(2023, 12, 4, 5, 30),
+        null));
+
+    persistenceSystem.startManaging(this.incidentOpened(
+        entityA, hospitalStation, toiletB, userB, communitiesA,
+        LocalDateTime.of(2023, 12, 4, 9, 45),
+        null));
+
+    persistenceSystem.startManaging(this.incidentClosed(
+        entityB, italySquareStation, elevatorB, userE, communitiesB,
+        LocalDateTime.of(2023, 12, 1, 6, 0),
+        LocalDateTime.of(2023, 12, 3, 10, 0)));
+
+    persistenceSystem.startManaging(this.incidentClosed(
+        entityB, puerreydonStation, escalatorB, userF, communitiesB,
+        LocalDateTime.of(2023, 12, 1, 5, 10),
+        LocalDateTime.of(2023, 12, 1, 6, 0)));
+
+    persistenceSystem.startManaging(this.incidentClosed(
+        entityB, puerreydonStation, toiletB, userL, communitiesBC,
+        LocalDateTime.of(2023, 12, 2, 20, 20),
+        LocalDateTime.of(2023, 12, 2, 22, 30)));
+
+    persistenceSystem.startManaging(this.incidentClosed(
+        entityB, puerreydonStation, elevatorB, userG, communitiesBC,
+        LocalDateTime.of(2023, 12, 3, 14, 25),
+        LocalDateTime.of(2023, 12, 3, 17, 55)));
+
+    persistenceSystem.startManaging(this.incidentClosed(
+        entityB, puerreydonStation, toiletB, userL, communitiesB,
+        LocalDateTime.of(2023, 12, 3, 8, 5),
+        LocalDateTime.of(2023, 12, 3, 11, 45)));
+
+    persistenceSystem.startManaging(this.incidentClosed(
+        entityB, puerreydonStation, toiletB, userL, communitiesB,
+        LocalDateTime.of(2023, 12, 3, 18, 5),
+        LocalDateTime.of(2023, 12, 3, 22, 45)));
+
+    persistenceSystem.startManaging(this.incidentOpened(
+        entityB, italySquareStation, elevatorB, userI, communitiesB,
+        LocalDateTime.of(2023, 12, 4, 10, 30),
+        null));
+
+    persistenceSystem.startManaging(this.incidentOpened(
+        entityB, puerreydonStation, elevatorB, userI, communitiesB,
+        LocalDateTime.of(2023, 12, 4, 10, 37),
+        null));
+
+    persistenceSystem.startManaging(this.incidentOpened(
+        entityB, puerreydonStation, escalatorB, userJ, communitiesB,
+        LocalDateTime.of(2023, 12, 4, 10, 0),
+        null));
+
+    persistenceSystem.startManaging(this.incidentClosed(
+        entityC, headquarterBranch, toiletA, userK, communitiesC,
+        LocalDateTime.of(2023, 12, 2, 10, 15),
+        LocalDateTime.of(2023, 12, 4, 17, 25)));
+
+    persistenceSystem.startManaging(this.incidentClosed(
+        entityC, headquarterBranch, toiletB, userK, communitiesC,
+        LocalDateTime.of(2023, 12, 3, 12, 25),
+        LocalDateTime.of(2023, 12, 3, 13, 0)));
+
+    persistenceSystem.startManaging(this.incidentClosed(
+        entityC, alsinaBranch, elevatorA, userK, communitiesC,
+        LocalDateTime.of(2023, 12, 1, 10, 0),
+        LocalDateTime.of(2023, 12, 3, 18, 0)));
+
+    persistenceSystem.startManaging(this.incidentOpened(
+        entityC, headquarterBranch, toiletB, userK, communitiesC,
+        LocalDateTime.of(2023, 12, 4, 10, 3),
+        null));
+
+    persistenceSystem.startManaging(this.incidentClosed(
+        entityD, headquarterBranch, toiletA, userK, communitiesC,
+        LocalDateTime.of(2023, 12, 4, 8, 30),
+        LocalDateTime.of(2023, 12, 4, 14, 50)));
 
   }
+
 }
