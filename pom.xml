@@ -112,6 +112,10 @@
     </dependencies>
 
     <build>
+
+        <finalName>ejercicio</finalName>
+
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
