@@ -50,32 +50,40 @@ public class IncidentCreationAddOn {
   }
 
   public Incident notWorkingElevatorIncident() throws Exception {
-
+    /*
     return Incident.composedOf(
         this.elevator(),
         this.notWorkingElevatorObservation(),
         this.curentDateTime(),
         this.ibarraneta()
     );
+    */
+    return null;
   }
 
   public Incident workingElevatorIncident() throws Exception {
-
+    /*
     return Incident.composedOf(
         this.elevator(),
         this.notWorkingElevatorObservation(),
         this.curentDateTime(),
         this.ibarraneta()
     );
+
+     */
+    return null;
   }
 
   public Incident notWorkingEscalatorIncident() throws Exception {
-
+/*
     return Incident.composedOf(
         this.escalator(),
         this.notWorkingEscalatorObservation(),
         this.anotherDateTime(),
         this.ibarraneta()
     );
+
+ */
+    return null;
   }
 }
