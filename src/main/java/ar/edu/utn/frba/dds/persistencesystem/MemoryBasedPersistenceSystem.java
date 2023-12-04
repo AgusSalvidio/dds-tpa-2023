@@ -236,24 +236,6 @@ public class MemoryBasedPersistenceSystem implements PersistenceSystem {
     return this.demo.communities();
   }
 
-  public void startManagingIncidentPerCommunity(IncidentPerCommunity anIncidentPerCommunity) {
-    Integer generatedId;
-    if (!this.demo.incidentPerCommunities().isEmpty()) {
-      /*
-      IncidentPerCommunity lastIncident = this.demo.incidentPerCommunities()
-          .get(this.demo.incidentPerCommunities().size() - 1);
-      generatedId = lastIncident.getId() + 1;
-
-       */
-    } else {
-      generatedId = 1;
-    }
-    /*
-    anIncidentPerCommunity.setId(generatedId);
-    */
-    this.demo.incidentPerCommunities().add(anIncidentPerCommunity);
-  }
-
   public void stopManagingIncidentPerCommunity(IncidentPerCommunity anIncidentPerCommunity) {
     //TODO
   }

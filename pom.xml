@@ -238,6 +238,9 @@
                                 <exclude>
                                     ar/edu/utn/frba/dds/persistencesystem/**/*
                                 </exclude>
+                                <exclude>
+                                    ar/edu/utn/frba/dds/incident/**/*
+                                </exclude>
                             </excludes>
                         </configuration>
                     </execution>

@@ -507,27 +507,25 @@ public class Demo {
     persistenceSystem.startManaging(this.userUserJ());
     persistenceSystem.startManaging(this.userUserK());
     persistenceSystem.startManaging(this.userUserL());
-    User admin = persistenceSystem.userIdentifiedBy(1);
-    User entity = persistenceSystem.userIdentifiedBy(2);
+    //User admin = persistenceSystem.userIdentifiedBy(1);
+    //User entity = persistenceSystem.userIdentifiedBy(2);
     User userA = persistenceSystem.userIdentifiedBy(3);
     User userB = persistenceSystem.userIdentifiedBy(4);
     User userC = persistenceSystem.userIdentifiedBy(5);
     User userD = persistenceSystem.userIdentifiedBy(6);
-    User userE = persistenceSystem.userIdentifiedBy(7);
-    User userF = persistenceSystem.userIdentifiedBy(8);
-    User userG = persistenceSystem.userIdentifiedBy(9);
-    User userH = persistenceSystem.userIdentifiedBy(10);
-    User userI = persistenceSystem.userIdentifiedBy(11);
-    User userJ = persistenceSystem.userIdentifiedBy(12);
-    User userK = persistenceSystem.userIdentifiedBy(13);
-    User userL = persistenceSystem.userIdentifiedBy(14);
-    //COMMUNITIES
     Community communityA = this.communityA();
     communityA.addMemberComposedOf(userA, MemberRole.AFECTADO);
     communityA.addMemberComposedOf(userB, MemberRole.AFECTADO);
     communityA.addMemberComposedOf(userC, MemberRole.AFECTADO);
     communityA.addMemberComposedOf(userD, MemberRole.AFECTADO);
     persistenceSystem.startManaging(communityA);
+    User userE = persistenceSystem.userIdentifiedBy(7);
+    User userF = persistenceSystem.userIdentifiedBy(8);
+    User userG = persistenceSystem.userIdentifiedBy(9);
+    User userH = persistenceSystem.userIdentifiedBy(10);
+    User userI = persistenceSystem.userIdentifiedBy(11);
+    User userJ = persistenceSystem.userIdentifiedBy(12);
+    User userL = persistenceSystem.userIdentifiedBy(14);
     Community communityB = this.communityB();
     communityB.addMemberComposedOf(userE, MemberRole.AFECTADO);
     communityB.addMemberComposedOf(userF, MemberRole.AFECTADO);
@@ -538,12 +536,12 @@ public class Demo {
     communityB.addMemberComposedOf(userA, MemberRole.AFECTADO);
     communityB.addMemberComposedOf(userL, MemberRole.AFECTADO);
     persistenceSystem.startManaging(communityB);
+    User userK = persistenceSystem.userIdentifiedBy(13);
     Community communityC = this.communityC();
     communityC.addMemberComposedOf(userK, MemberRole.AFECTADO);
     communityC.addMemberComposedOf(userL, MemberRole.AFECTADO);
     communityC.addMemberComposedOf(userA, MemberRole.AFECTADO);
     persistenceSystem.startManaging(communityC);
-    //SERVICES & STATES
     persistenceSystem.startManaging(this.inService());
     persistenceSystem.startManaging(this.notInService());
     State inService = persistenceSystem.stateIdentifiedBy(1);
@@ -571,7 +569,6 @@ public class Demo {
     List<Service> servicesC = new ArrayList<>();
     servicesC.add(toiletA);
     servicesC.add(toiletB);
-    //LOCATIONS
     persistenceSystem.startManaging(this.buenosAires());
     Province buenosAires = persistenceSystem.provinceIdentifiedBy(1);
     persistenceSystem.startManaging(this.cabaD(buenosAires));
@@ -601,25 +598,16 @@ public class Demo {
     persistenceSystem.startManaging(this.italySquareStation(station, locationD, elevatorB));
     persistenceSystem.startManaging(this.headquarterBranch(branch, locationE, servicesC));
     persistenceSystem.startManaging(this.alsinaBranch(branch, locationF, elevatorA));
-    Establishment lawSchoolStation = persistenceSystem.establishmentIdentifiedBy(1);
-    Establishment hospitalStation = persistenceSystem.establishmentIdentifiedBy(2);
-    Establishment puerreydonStation = persistenceSystem.establishmentIdentifiedBy(3);
-    Establishment italySquareStation = persistenceSystem.establishmentIdentifiedBy(4);
-    Establishment headquarterBranch = persistenceSystem.establishmentIdentifiedBy(5);
-    Establishment alsinaBranch = persistenceSystem.establishmentIdentifiedBy(6);
-    //ENTITIES & TYPES & NAMES
     persistenceSystem.startManaging(this.subwayLineH());
     persistenceSystem.startManaging(this.subwayLineD());
     persistenceSystem.startManaging(this.nationalBank());
     persistenceSystem.startManaging(this.icbcBank());
-    EntityName subwayLineH = persistenceSystem.entityNameIdentifiedBy(1);
-    EntityName subwayLineD = persistenceSystem.entityNameIdentifiedBy(2);
-    EntityName nationalBank = persistenceSystem.entityNameIdentifiedBy(3);
-    EntityName icbcBank = persistenceSystem.entityNameIdentifiedBy(4);
     persistenceSystem.startManaging(this.subway());
     persistenceSystem.startManaging(this.bank());
     EntityType subway = persistenceSystem.entityTypeIdentifiedBy(1);
-    EntityType bank = persistenceSystem.entityTypeIdentifiedBy(2);
+    Establishment lawSchoolStation = persistenceSystem.establishmentIdentifiedBy(1);
+    Establishment hospitalStation = persistenceSystem.establishmentIdentifiedBy(2);
+    EntityName subwayLineH = persistenceSystem.entityNameIdentifiedBy(1);
     persistenceSystem.startManaging(
         this.entityA(subwayLineH, subway, lawSchoolStation, hospitalStation, Direction.FORWARD));
     Entity entityA = persistenceSystem.entityIdentifiedBy(1);
@@ -627,6 +615,9 @@ public class Demo {
     persistenceSystem.updateManaging(entityA);
     entityA.addNewEstablishment(hospitalStation);
     persistenceSystem.updateManaging(entityA);
+    Establishment puerreydonStation = persistenceSystem.establishmentIdentifiedBy(3);
+    Establishment italySquareStation = persistenceSystem.establishmentIdentifiedBy(4);
+    EntityName subwayLineD = persistenceSystem.entityNameIdentifiedBy(2);
     persistenceSystem.startManaging(
         this.entityB(subwayLineD, subway, italySquareStation, puerreydonStation, Direction.RETURN));
     Entity entityB = persistenceSystem.entityIdentifiedBy(2);
@@ -634,12 +625,17 @@ public class Demo {
     persistenceSystem.updateManaging(entityB);
     entityB.addNewEstablishment(puerreydonStation);
     persistenceSystem.updateManaging(entityB);
+    Establishment headquarterBranch = persistenceSystem.establishmentIdentifiedBy(5);
+    EntityName nationalBank = persistenceSystem.entityNameIdentifiedBy(3);
+    EntityType bank = persistenceSystem.entityTypeIdentifiedBy(2);
     persistenceSystem.startManaging(this.entityC(nationalBank, bank));
     Entity entityC = persistenceSystem.entityIdentifiedBy(3);
     entityC.addNewEstablishment(headquarterBranch);
     persistenceSystem.updateManaging(entityC);
+    Establishment alsinaBranch = persistenceSystem.establishmentIdentifiedBy(6);
     entityC.addNewEstablishment(alsinaBranch);
     persistenceSystem.updateManaging(entityC);
+    EntityName icbcBank = persistenceSystem.entityNameIdentifiedBy(4);
     persistenceSystem.startManaging(this.entityD(icbcBank, bank));
     Entity entityD = persistenceSystem.entityIdentifiedBy(4);
     entityC.addNewEstablishment(headquarterBranch);
@@ -651,16 +647,16 @@ public class Demo {
     communitiesB.add(communityB);
     List<Community> communitiesC = new ArrayList<>();
     communitiesC.add(communityC);
-    List<Community> communitiesABC = new ArrayList<>();
-    communitiesABC.add(communityA);
-    communitiesABC.add(communityB);
-    communitiesABC.add(communityC);
-    List<Community> communitiesBC = new ArrayList<>();
-    communitiesBC.add(communityB);
-    communitiesBC.add(communityC);
+    List<Community> communitiesAbc = new ArrayList<>();
+    communitiesAbc.add(communityA);
+    communitiesAbc.add(communityB);
+    communitiesAbc.add(communityC);
+    List<Community> communitiesBc = new ArrayList<>();
+    communitiesBc.add(communityB);
+    communitiesBc.add(communityC);
 
     persistenceSystem.startManaging(this.incidentClosed(
-        entityA, lawSchoolStation, elevatorA, userA, communitiesABC,
+        entityA, lawSchoolStation, elevatorA, userA, communitiesAbc,
         LocalDateTime.of(2023, 12, 1, 8, 0),
         LocalDateTime.of(2023, 12, 1, 10, 0)));
 
@@ -675,12 +671,12 @@ public class Demo {
         LocalDateTime.of(2023, 12, 3, 12, 10)));
 
     persistenceSystem.startManaging(this.incidentClosed(
-        entityA, lawSchoolStation, toiletA, userA, communitiesABC,
+        entityA, lawSchoolStation, toiletA, userA, communitiesAbc,
         LocalDateTime.of(2023, 12, 3, 8, 0),
         LocalDateTime.of(2023, 12, 3, 10, 0)));
 
     persistenceSystem.startManaging(this.incidentOpened(
-        entityA, lawSchoolStation, toiletA, userA, communitiesABC,
+        entityA, lawSchoolStation, toiletA, userA, communitiesAbc,
         LocalDateTime.of(2023, 12, 4, 5, 30),
         null));
 
@@ -700,12 +696,12 @@ public class Demo {
         LocalDateTime.of(2023, 12, 1, 6, 0)));
 
     persistenceSystem.startManaging(this.incidentClosed(
-        entityB, puerreydonStation, toiletB, userL, communitiesBC,
+        entityB, puerreydonStation, toiletB, userL, communitiesBc,
         LocalDateTime.of(2023, 12, 2, 20, 20),
         LocalDateTime.of(2023, 12, 2, 22, 30)));
 
     persistenceSystem.startManaging(this.incidentClosed(
-        entityB, puerreydonStation, elevatorB, userG, communitiesBC,
+        entityB, puerreydonStation, elevatorB, userG, communitiesBc,
         LocalDateTime.of(2023, 12, 3, 14, 25),
         LocalDateTime.of(2023, 12, 3, 17, 55)));
 

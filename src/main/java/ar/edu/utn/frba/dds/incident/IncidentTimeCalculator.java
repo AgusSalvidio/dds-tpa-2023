@@ -7,12 +7,14 @@ import java.util.OptionalDouble;
 public class IncidentTimeCalculator {
 
   public List<Incident> incidentsWithMoreThan24Hours(List<Incident> incidents) {
+    /*
     List<Incident> incidentsWithMoreThan24Hours = new ArrayList<>();
 
     for (Incident incident : incidents) {
-      //if (incident.reported24HoursAgo()) { incidentsWithMoreThan24Hours.add(incident);
-      //}
+      if (incident.reported24HoursAgo()) { incidentsWithMoreThan24Hours.add(incident);
+      }
     }
+    */
 
     //return incidentsWithMoreThan24Hours;
     return null;
